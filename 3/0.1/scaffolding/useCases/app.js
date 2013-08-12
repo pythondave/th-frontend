@@ -1,6 +1,6 @@
-var app = angular.module('app', ['ui.bootstrap']);
+var thUseCasesModule = angular.module('thUseCasesModule', ['ui.bootstrap']);
 
-app.controller('mainController', function($scope) {
+thUseCasesModule.controller('mainController', function($scope) {
 
   $scope.useCases = [
     { id: 1, group: 'Admin', title: 'create an application',

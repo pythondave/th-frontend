@@ -1,6 +1,6 @@
 //*** See also settingsService in basicListServices
 
-app.factory('settingService', function($http, $q, configService) {
+thAdminDashboardAppModule.factory('settingService', function($http, $q, configService) {
   //initialise
   var o = {};
 

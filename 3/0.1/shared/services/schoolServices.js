@@ -1,4 +1,4 @@
-app.factory('schoolNamesService', function($http, configService, listService) {
+thGenericModule.factory('schoolNamesService', function($http, configService, listService) {
   var o = {};
   var getDataFromServer = $http.post(configService.requests.urls.schoolNames, undefined, configService.requests.postConfig);
   o.list = new listService.List();

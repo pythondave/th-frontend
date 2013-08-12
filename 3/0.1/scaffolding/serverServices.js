@@ -3,7 +3,9 @@
 //In theory it acts as the server in the absence of the server. It is a mock server.
 // *** ********* ***
 
-app.factory('delayResponseInterceptor', function($q, $timeout, configService) {
+var thServerModule = angular.module('thServerModule', ['thConfigModule', 'thGenericModule']);
+
+thServerModule.factory('delayResponseInterceptor', function($q, $timeout, configService) {
   //Can be used to delay all mock responses by a typical (and occasionally atypical) random amount, or fail entirely at a certain rate
   var serverSpeedMultiplier = _.firstDefined(configService.serverSpeedMultiplierOverride, configService.requests.serverSpeedMultiplier, 1); //reduce during dev so things work faster (say 0.2), increase (to say 1) when demoing
   configService.local = { //configure special values for particular requests here
@@ -82,11 +84,11 @@ app.factory('delayResponseInterceptor', function($q, $timeout, configService) {
 });
 
 //add the above factory to the responseInterceptors - this calls 'delayedHttpRequest' during every http request
-app.config(function($httpProvider) {
+thServerModule.config(function($httpProvider) {
   $httpProvider.responseInterceptors.unshift('delayResponseInterceptor');
 });
 
-app.factory('serverListsService', function(configService) {
+thServerModule.factory('serverListsService', function(configService) {
   configService.user.isLoggedIn = true; // user logged in to the mock server by default;
 
   /* To log the server out of the mock server, open the browser console and run this code:
@@ -132,7 +134,7 @@ app.factory('serverListsService', function(configService) {
   return o;
 });
 
-app.factory('randomDataService', function(serverListsService) {
+thServerModule.factory('randomDataService', function(serverListsService) {
   var capitaliseFirstLetter = function(s) { return s.charAt(0).toUpperCase() + s.slice(1); };
   var offsetDateByDays = function(days, date) {
     return new Date((date || new Date()).getTime() + days*24*60*60*1000);
@@ -277,7 +279,7 @@ var deserializeParams = function(p){ //see https://github.com/pythondave/th-admi
 };
 
 //set dummy server responses to posts and gets
-app.run(function($httpBackend, $resource, $q, $timeout, serverListsService, randomDataService, configService) {
+thServerModule.run(function($httpBackend, $resource, $q, $timeout, serverListsService, randomDataService, configService) {
   //note: $httpBackend requests are at the bottom
 
   //dummy responses (in the form of javascript objects)

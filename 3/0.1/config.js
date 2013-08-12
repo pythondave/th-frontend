@@ -1,5 +1,6 @@
+var thConfigModule = angular.module('thConfigModule', []);
 
-app.value('configService', function() {
+thConfigModule.value('configService', function() {
   var o = { user: {} };
 
   o.loginUrl = './user/logon';

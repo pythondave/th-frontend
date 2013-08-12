@@ -1,4 +1,4 @@
-app.factory('scoresService', function() {
+thGenericModule.factory('scoresService', function() {
   //useful for displaying a mark out of 10 (etc.) for something (e.g. a teacher by admin or an application by a school)
   var o = {};
   o.scoreMapping = function(score, outOf) {

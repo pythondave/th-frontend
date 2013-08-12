@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html ng-app="thSchoolDashboardAppModule">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--
+  *** NOTE: need to stick to bootstrap 2.3.1 for now until angular-ui catches up
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc1/css/bootstrap.min.css">
+  -->
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css">
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css">
+
+  <!--WIP-->
+  <link rel="stylesheet" href="http://beta.teacherhorizons.com/static/prototypes/design/registration/static/css/select2.css">
+
+  <link rel="stylesheet" href="../../../style/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <div ng-controller="NavBarCtrl" ng-include="navBarUrl" class="ng-cloak navbar navbar-inverse navbar-fixed-top"></div>
+    <div class="row-fluid" ui-view></div>
+  </div>
+  
+  <!--external scripts-->
+    <!--jquery-->
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!--lodash-->
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/1.2.1/lodash.min.js"></script>
+    <!--twitter bootstrap-->
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
+    <!--angular (official)-->
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.js"></script>
+      <script src="http://cdn.jsdelivr.net/angularjs/1.1.2/angular-resource.min.js"></script>
+    <!--angular (community)-->
+      <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.5.0.js"></script>
+      <script src="http://angular-ui.github.io/ui-router/build/angular-ui-router.min.js"></script>
+    <!--WIP-->
+      <script src="http://beta.teacherhorizons.com/static/prototypes/design/registration/static/js/select2.min.js"></script>
+
+  <!--local scripts-->
+    <!--main-->
+      <script src="app.js"></script>
+      <script src="../../../config.js"></script>
+    <!--services-->
+      <!--schools-->
+
+      <!--shared-->
+        <script src="../../../shared/generic.js"></script>
+        <script src="../../../shared/services/listService.js"></script>
+        <script src="../../../shared/services/alertServices.js"></script>
+        <script src="../../../shared/services/filterServices.js"></script>
+        <script src="../../../shared/services/schoolServices.js"></script>
+        <script src="../../../shared/services/basicListServices.js"></script>
+        <script src="../../../shared/services/scoreServices.js"></script>
+    <!--controllers-->
+      <script src="school/schoolControllers.js"></script>
+    <!--directives-->
+      <script src="../../../shared/directives.js"></script>
+
+  <!--prototype only scripts-->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular-mocks.js"></script>
+  <script src="../../../scaffolding/serverServices.js"></script>
+</body>
+
+</html>

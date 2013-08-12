@@ -1,6 +1,6 @@
-app.controller('SettingsMenuCtrl', function() { });
+thAdminDashboardAppModule.controller('SettingsMenuCtrl', function() { });
 
-app.controller('SettingsCtrl', function($scope, settingsService, settingService) {
+thAdminDashboardAppModule.controller('SettingsCtrl', function($scope, settingsService, settingService) {
   settingsService.getAndSetData().then(function() {
     $scope.settings = settingsService.list.data;
   });

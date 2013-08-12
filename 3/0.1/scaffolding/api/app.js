@@ -1,6 +1,6 @@
-var app = angular.module('app', ['ui.bootstrap', 'ngMockE2E', 'ngResource', 'ui.compat']);
+var thApiModule = angular.module('thApiModule', ['ui.bootstrap', 'ngMockE2E', 'ngResource', 'ui.compat', 'thConfigModule', 'thServerModule']);
 
-app.config(function($stateProvider, $httpProvider) {
+thApiModule.config(function($stateProvider, $httpProvider) {
   var mainView = { 'container-main': { templateUrl: 'main.html', controller: 'MainCtrl' } };
 
   $stateProvider
@@ -9,11 +9,11 @@ app.config(function($stateProvider, $httpProvider) {
     .state('query', { url: '/:requestId/:dataIndex', views: mainView });
 });
 
-app.run(function(configService) {
+thApiModule.run(function(configService) {
   configService.serverSpeedMultiplierOverride = 0;
 });
 
-app.controller('MainCtrl', function($scope, configService, $http, $state) {
+thApiModule.controller('MainCtrl', function($scope, configService, $http, $state) {
   configService.requests.serverSpeedMultiplier = 0;
   $scope.userIsLoggedIn = true;
   $scope.$watch('userIsLoggedIn', function(newValue) { configService.user.isLoggedIn = newValue; });
@@ -445,7 +445,7 @@ app.controller('MainCtrl', function($scope, configService, $http, $state) {
   $scope.processRequest($scope.request);
 });
 
-app.run(function($rootScope) {
+thApiModule.run(function($rootScope) {
   //create some new generic underscore methods
   _.mixin({ //ref: http://underscorejs.org/#mixin
     compare: function(a, b) { //compares a and b and returns 1 (a first), -1 (b first) or 0 (equal)
@@ -494,14 +494,14 @@ app.run(function($rootScope) {
   });
 });
 
-app.filter('param', function() {
+thApiModule.filter('param', function() {
   return function(input) {
     return (input === undefined ? undefined : $.param(input));
   };
 });
 
 //configure $httpProvider
-app.config(function($httpProvider) {
+thApiModule.config(function($httpProvider) {
   $httpProvider.defaults.transformRequest = function(data) { //see https://github.com/pythondave/th-admin/issues/11
     var actualRequestData = (data === undefined ? undefined : $.param(data));
     return actualRequestData;

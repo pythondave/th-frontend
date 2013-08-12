@@ -1,4 +1,4 @@
-app.controller('ApplicationsMenuCtrl', function($scope, applicationsService) {
+thAdminDashboardAppModule.controller('ApplicationsMenuCtrl', function($scope, applicationsService) {
 
   $scope.$on('applicationsChanged', function(e) {
     //populate all filters (currently used for refine only, not for searching)
@@ -15,7 +15,7 @@ app.controller('ApplicationsMenuCtrl', function($scope, applicationsService) {
   $scope.$watch(getValues, function(values) { applicationsService.refine(values); }, true);
 });
 
-app.controller('ApplicationsCtrl', function($scope, applicationsService, scoresService, alertService, applicationStatusesService) {
+thAdminDashboardAppModule.controller('ApplicationsCtrl', function($scope, applicationsService, scoresService, alertService, applicationStatusesService) {
   applicationsService.getAndSetData({ statusIds: '1' }); //applications with status of 'Applied' (i.e. not yet 'Put forward' or 'Declined')
   $scope.sort = applicationsService.list.sort;
   $scope.badgeClass = scoresService.badgeClass;

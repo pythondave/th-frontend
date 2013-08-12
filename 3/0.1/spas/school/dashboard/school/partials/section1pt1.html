@@ -1,0 +1,60 @@
+<div>
+  <h3>Sub-section 1.1</h3>
+
+  <div>
+    <p>NOTE - rough priorities and progress:</p>
+    <ol>
+      <li>Functionality of the framework (currently ~60%)
+      <li>Functionality of each field type (currently varies - average is ~40%)
+      <li>Style of the framework (currently ~60%)
+      <li>Style of each field type (currently varies - average is ~10%)
+      <li>Setting up structure according to AR's layout (currently 0%)
+      <li>Setting up each field according to AR's layout (currently 0%)
+      <li>Atypical field tweaks (currently 0%)
+    </ol>
+    <hr/>
+  </div>
+
+  <div>
+    <p>NOTE - each field has a type. These are called 'field types' or 'widget types'. There will probably be about a dozen widget types. Currently we have:</p>
+    <ul>
+      <li>rating
+      <li>date
+      <li>time
+      <li>text
+      <li>selectFromFew
+      <li>selectFromMany
+      <li>slider
+    </ul>
+    <hr/>
+  </div>
+
+  <div class="field">
+    <span class="title-block">{{ratingField1.title}}</span>
+    <span class="value">
+      <rating value="ratingField1.val" max="ratingField1.max" readonly="false" on-hover="ratingField1.hover(value)" on-leave="ratingField1.tip = null"></rating>
+      <span>{{ratingField1.description}}</span>
+      <span class="tip tip-bottom" ng-show="ratingField1.tip">{{ratingField1.tip}}</span>
+    </span>
+    <hr/>
+  </div>
+
+  <div class="field">
+    <span class="title-block">{{ratingField2.title}}</span>
+    <span class="value">
+      <rating value="ratingField2.val" max="ratingField2.max" readonly="false" on-hover="ratingField2.hover(value)" on-leave="ratingField2.tip = null"></rating>
+      <span>{{ratingField2.description}}</span>
+      <span class="tip tip-bottom" ng-show="ratingField2.tip">{{ratingField2.tip}}</span>
+    </span>
+    <hr/>
+  </div>
+
+  <div>
+    Demo of what would be sent to the server:
+    <ul>
+      <li ng-repeat="item in serverService.sentToServer track by $index">{{item}}</li>
+    </ul>
+    <button class="btn" ng-click="serverService.sentToServer = []">Clear</button>
+  </div>
+
+</div>

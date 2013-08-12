@@ -1,0 +1,25 @@
+<div class="ng-cloak span3">
+  <accordion ng-init="oneAtATime=true" close-others="oneAtATime">
+    <accordion-group heading="Section 1" is-open="section1IsOpen">
+      <a class="sub-section" ng-href="#/topMenuItem1/1/1" ng-class="getClass(1, 1)">Sub-section 1.1</a>
+      <a class="sub-section" ng-href="#/topMenuItem1/1/2" ng-class="getClass(1, 2)">Sub-section 1.2</a>
+      <a class="sub-section" ng-href="#/topMenuItem1/1/3" ng-class="getClass(1, 3)">Sub-section 1.3</a>
+    </accordion-group>
+    <accordion-group heading="Section 2" is-open="section2IsOpen">
+      <a class="sub-section" ng-href="#/topMenuItem1/2/1" ng-class="getClass(2, 1)">Sub-section 2.1</a>
+      <a class="sub-section" ng-href="#/topMenuItem1/2/2" ng-class="getClass(2, 2)">Sub-section 2.2</a>
+      <a class="sub-section" ng-href="#/topMenuItem1/2/3" ng-class="getClass(2, 3)">Sub-section 2.3</a>
+      <a class="sub-section" ng-href="#/topMenuItem1/2/4" ng-class="getClass(2, 4)">Sub-section 2.4</a>
+      <a class="sub-section" ng-href="#/topMenuItem1/2/5" ng-class="getClass(2, 5)">Sub-section 2.5</a>
+      <a class="sub-section" ng-href="#/topMenuItem1/2/6" ng-class="getClass(2, 6)">Sub-section 2.6</a>
+    </accordion-group>
+    <accordion-group heading="Section 3" is-open="section3IsOpen">
+      <a class="sub-section" ng-href="#/topMenuItem1/3/1" ng-class="getClass(3, 1)">Sub-section 3.1</a>
+      <a class="sub-section" ng-href="#/topMenuItem1/3/2" ng-class="getClass(3, 2)">Sub-section 3.2</a>
+      <a class="sub-section" ng-href="#/topMenuItem1/3/3" ng-class="getClass(3, 3)">Sub-section 3.3</a>
+    </accordion-group>
+  </accordion>
+</div>
+<div class="main-container span9">
+  <div ui-view class="main-view form-horizontal" ng-animate="'main-view'" ng-class="{ 'main-view-animation-hack1': useAnimationHack1 }"></div>
+</div>

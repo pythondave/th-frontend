@@ -1,4 +1,4 @@
-app.directive('keyboardEvent', function () { // *** WIP - ref: http://plnkr.co/edit/mCt85P?p=preview
+thGenericModule.directive('keyboardEvent', function () { // *** WIP - ref: http://plnkr.co/edit/mCt85P?p=preview
   return function ($scope, $elem, attr) {
     $elem.bind('keydown', function(e) {
       e.stopPropagation();
@@ -15,7 +15,7 @@ app.directive('keyboardEvent', function () { // *** WIP - ref: http://plnkr.co/e
   };
 });
 
-app.directive('simpleTooltip', function ($compile) {
+thGenericModule.directive('simpleTooltip', function ($compile) {
 //the angular-ui tooltip was causing many digest cycles, so I created this simpler version for the purposes needed on this project
   return {
     restrict: 'A',

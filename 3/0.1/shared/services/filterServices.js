@@ -1,4 +1,4 @@
-app.factory('FilterService', function() { //returns a constructor function
+thGenericModule.factory('FilterService', function() { //returns a constructor function
   //note: there are 2 types of filtering:
   //  1.  "refine" filtering - work with the data we already have - i.e. no need to get data from the server
   //  2.  "search" filtering - get data from the server

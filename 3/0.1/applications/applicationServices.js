@@ -1,4 +1,4 @@
-app.factory('applicationsService', function($http, $q, $rootScope, configService, applicationService, applicationStatusesService, scoresService, teacherService, listService) {
+thAdminDashboardAppModule.factory('applicationsService', function($http, $q, $rootScope, configService, applicationService, applicationStatusesService, scoresService, teacherService, listService) {
   //initialise
   var o = {};
   o.current = {};
@@ -85,7 +85,7 @@ app.factory('applicationsService', function($http, $q, $rootScope, configService
   return o;
 });
 
-app.factory('applicationService', function($http, $q, configService) {
+thAdminDashboardAppModule.factory('applicationService', function($http, $q, configService) {
   var o = {};
 
   o.process = function(application, dataToPost, successCallback) { //returns a promise
@@ -102,7 +102,7 @@ app.factory('applicationService', function($http, $q, configService) {
   return o;
 });
 
-app.factory('applicationStatusesService', function() {
+thAdminDashboardAppModule.factory('applicationStatusesService', function() {
   var o = {};
 
   //populate statuses object

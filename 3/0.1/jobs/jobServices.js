@@ -1,4 +1,4 @@
-app.factory('jobsService', function($http, $rootScope, configService, listService) {
+thAdminDashboardAppModule.factory('jobsService', function($http, $rootScope, configService, listService) {
   //initialise
   var o = {};
   o.list = new listService.List();
@@ -49,7 +49,7 @@ app.factory('jobsService', function($http, $rootScope, configService, listServic
   return o;
 });
 
-app.factory('jobService', function($http, configService, listService) {
+thAdminDashboardAppModule.factory('jobService', function($http, configService, listService) {
   //initialise
   var o = {};
 

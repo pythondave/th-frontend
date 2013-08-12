@@ -1,7 +1,7 @@
 //version 0.1
 //a helper service for working with lists (i.e. array structures)
 
-app.factory('listService', function($timeout) {
+thGenericModule.factory('listService', function($timeout) {
   var listService = {};
   listService.List = function(arr, type) {
     //type:- missing: standard array; 1: arr items assigned to val property, and an id property is added

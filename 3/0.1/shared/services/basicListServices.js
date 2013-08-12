@@ -1,6 +1,6 @@
 //*** TODO - refactor (there's a lot of duplication here)
 
-app.service('basicListsService', function($q, $http, configService, listService) {
+thGenericModule.service('basicListsService', function($q, $http, configService, listService) {
   //note: this runs once only since basicLists can be considered static
 
   var o = {};
@@ -11,7 +11,7 @@ app.service('basicListsService', function($q, $http, configService, listService)
   return o;
 });
 
-app.factory('countriesService', function(basicListsService, listService) {
+thGenericModule.factory('countriesService', function(basicListsService, listService) {
   var o = {};
   o.list = new listService.List();
 
@@ -27,7 +27,7 @@ app.factory('countriesService', function(basicListsService, listService) {
   return o;
 });
 
-app.factory('subjectsService', function(basicListsService, listService) {
+thGenericModule.factory('subjectsService', function(basicListsService, listService) {
   var o = {};
   o.list = new listService.List();
 
@@ -43,7 +43,7 @@ app.factory('subjectsService', function(basicListsService, listService) {
   return o;
 });
 
-app.factory('rolesService', function(basicListsService, listService) {
+thGenericModule.factory('rolesService', function(basicListsService, listService) {
   var o = {};
   o.list = new listService.List();
 
@@ -59,7 +59,7 @@ app.factory('rolesService', function(basicListsService, listService) {
   return o;
 });
 
-app.factory('settingsService', function(basicListsService, listService) {
+thGenericModule.factory('settingsService', function(basicListsService, listService) {
   var o = {};
   o.list = new listService.List();
 

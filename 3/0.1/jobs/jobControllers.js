@@ -1,7 +1,7 @@
 //Jobs
 //Note: the jobs page does not refresh when you come back to it (by design).
 
-app.factory('jobsFilterService', function(countriesService, FilterService) {
+thAdminDashboardAppModule.factory('jobsFilterService', function(countriesService, FilterService) {
   var o = new FilterService();
 
   o.filters = [
@@ -16,7 +16,7 @@ app.factory('jobsFilterService', function(countriesService, FilterService) {
   return o;
 });
 
-app.controller('JobsMenuCtrl', function($scope, $q, schoolNamesService, countriesService, subjectsService, rolesService, jobsService, jobsFilterService) {
+thAdminDashboardAppModule.controller('JobsMenuCtrl', function($scope, $q, schoolNamesService, countriesService, subjectsService, rolesService, jobsService, jobsFilterService) {
   $scope.filters = jobsFilterService;
 
   var refine = function() { jobsService.filter(jobsFilterService.getRefineVals()); }; //call when need to refine local data based on the filters
@@ -64,7 +64,7 @@ app.controller('JobsMenuCtrl', function($scope, $q, schoolNamesService, countrie
   jobsService.jobsMenuCtrlRanPreviously = true; //set for next time
 });
 
-app.controller('JobsCtrl', function($scope, jobsService) {
+thAdminDashboardAppModule.controller('JobsCtrl', function($scope, jobsService) {
   $scope.sort = jobsService.list.sort;
 
   //headers
@@ -108,7 +108,7 @@ app.controller('JobsCtrl', function($scope, jobsService) {
 
 
 //Job
-app.controller('JobMenuCtrl', function($scope, $timeout, $window, $dialog, $stateParams, applicationsService, $location) {
+thAdminDashboardAppModule.controller('JobMenuCtrl', function($scope, $timeout, $window, $dialog, $stateParams, applicationsService, $location) {
   $scope.back = function() { $timeout(function() { $window.history.back(); }); };
 
   $scope.addCandidate = function() {
@@ -126,7 +126,7 @@ app.controller('JobMenuCtrl', function($scope, $timeout, $window, $dialog, $stat
   if ($location.search()['add-candidate']) $scope.addCandidate();
 });
 
-app.controller('JobCtrl', function($scope, $stateParams, $dialog, jobService, applicationsService, applicationService, scoresService, applicationStatusesService, alertService, teacherService) {
+thAdminDashboardAppModule.controller('JobCtrl', function($scope, $stateParams, $dialog, jobService, applicationsService, applicationService, scoresService, applicationStatusesService, alertService, teacherService) {
   applicationsService.getAndSetData({ jobId: $stateParams.jobId, statusIds: "2,4,5,6,7,8" });
 
 
@@ -241,7 +241,7 @@ app.controller('JobCtrl', function($scope, $stateParams, $dialog, jobService, ap
   };
 });
 
-app.controller('changeApplicationStatusController', function($scope, dialog, applicationStatusesService, settingService){
+thAdminDashboardAppModule.controller('changeApplicationStatusController', function($scope, dialog, applicationStatusesService, settingService){
   $scope.application = applicationStatusesService.application;
   $scope.newStatus = applicationStatusesService.newStatus;
   $scope.currentStatus = applicationStatusesService.currentStatus;
@@ -266,7 +266,7 @@ app.controller('changeApplicationStatusController', function($scope, dialog, app
   };
 });
 
-app.controller('JobAddCandidateController', function($scope, configService, dialog, $http, $stateParams){
+thAdminDashboardAppModule.controller('JobAddCandidateController', function($scope, configService, dialog, $http, $stateParams){
   $scope.close = function(doIt) {
     var o = { doIt: doIt, teacher: $scope.teacher };
     dialog.close(o);

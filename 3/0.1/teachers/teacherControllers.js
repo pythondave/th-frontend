@@ -1,10 +1,10 @@
-app.controller('TeachersMenuCtrl', function($scope, teachersService) {
+thAdminDashboardAppModule.controller('TeachersMenuCtrl', function($scope, teachersService) {
   $scope.$watch('refine', function(newValue) {
     teachersService.refine({ refineText: $scope.refine });
   });
 });
 
-app.controller('TeachersCtrl', function($scope, listService, teachersService, teacherStatusesService, alertService) {
+thAdminDashboardAppModule.controller('TeachersCtrl', function($scope, listService, teachersService, teacherStatusesService, alertService) {
   teachersService.getAndSetData.then(function() {
     $scope.teachers = teachersService.list.data;
   });

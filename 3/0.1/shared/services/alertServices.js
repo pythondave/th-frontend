@@ -1,4 +1,4 @@
-app.factory('alertService', function(listService) {
+thGenericModule.factory('alertService', function(listService) {
   //provides a simple list which can be used to alerts the user
 
   var o = {};

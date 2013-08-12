@@ -1,4 +1,4 @@
-app.factory('teachersService', function($rootScope, $http, $q, configService, listService, teacherService) {
+thAdminDashboardAppModule.factory('teachersService', function($rootScope, $http, $q, configService, listService, teacherService) {
   var o = {};
 
   o.process = function(teacher, dataToPost) { //returns a promise
@@ -28,7 +28,7 @@ app.factory('teachersService', function($rootScope, $http, $q, configService, li
   return o;
 });
 
-app.factory('teacherService', function($http, $q, configService) {
+thAdminDashboardAppModule.factory('teacherService', function($http, $q, configService) {
   var o = {};
 
   o.process = function(teacher, dataToPost, successCallback) { //returns a promise
@@ -45,7 +45,7 @@ app.factory('teacherService', function($http, $q, configService) {
   return o;
 });
 
-app.factory('teacherStatusesService', function() {
+thAdminDashboardAppModule.factory('teacherStatusesService', function() {
   var o = {};
   o.statuses = {
     0: { title: 'Joined', shortTitle: 'J' },
