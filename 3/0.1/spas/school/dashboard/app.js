@@ -19,6 +19,7 @@ thSchoolDashboardAppModule.controller('NavBarCtrl', function($scope, $state, app
 
 //states (routes) - ref: https://github.com/angular-ui/ui-router
 thSchoolDashboardAppModule.config(function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.when('/default.html', '/');
   $urlRouterProvider.when('', '/');
   $urlRouterProvider.when('/', '/topMenuItem1');
   $urlRouterProvider.when('/topMenuItem1', '/topMenuItem1/1/1');
