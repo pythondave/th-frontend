@@ -60,6 +60,16 @@ thGenericModule.run(function($rootScope) {
     addProperty: function(arr, propertyName, propertyValue) { //adds a property to every item in an array
       _.each(arr, function(item) { item[propertyName] = propertyValue; }); return arr;
     },
-    invertString: function(s) { return (s.slice(0, 1) === '-' ? s.slice(1) : '-' + s ); } // _.invertString('abc') => '-abc'; _.invertString('-abc') => 'abc';
+    invertString: function(s) { return (s.slice(0, 1) === '-' ? s.slice(1) : '-' + s ); }, // _.invertString('abc') => '-abc'; _.invertString('-abc') => 'abc';
+    setAll: function(collection, attributeName, attributeValue, nestedCollectionName) {
+      //sets all the attributeName properties of a collection to attributeValue
+      //if optional nestedCollectionName is specified, recursively sets child collections too
+      _(collection).forEach(function(item) {
+        item[attributeName] = attributeValue;
+        if (nestedCollectionName && item[nestedCollectionName]) {
+          _.setAll(item[nestedCollectionName], attributeName, attributeValue, nestedCollectionName); //recursion
+        }
+      });
+    }
   });
 });

@@ -1,5 +1,5 @@
 var thAdminDashboardAppModule = angular.module('thAdminDashboardAppModule',
-  ['ui.bootstrap', 'ngMockE2E', 'ngResource', 'ui.compat', 'thConfigModule', 'thServerModule']);
+  ['ui.bootstrap', 'ngMockE2E', 'ngResource', 'ui.router.compat', 'thConfigModule', 'thServerModule']);
 
 //navbar (top menu)
 thAdminDashboardAppModule.controller('NavBarCtrl', function($scope, $state) {

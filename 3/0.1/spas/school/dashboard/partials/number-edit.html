@@ -1,0 +1,8 @@
+<div class="number-edit">
+  <span ng-show="!model.isEditMode" style="cursor: pointer" ng-click="model.isEditMode=true" tooltip="Click to edit number">{{model.val}}</span>
+  <input ng-show="model.isEditMode" type="text" ng-model="model.val" style="width: 50px;"
+    ng-blur="model.isEditMode=false" restrict-input="{type: 'digitsOnly'}"></input>
+  <span  ng-show="!model.val && !model.isEditMode" style="margin-left: 5px; cursor: pointer" ng-click="model.isEditMode=true" xtooltip="Click to edit number">
+    <i class="icon-edit"></i>
+  </span>
+</div>

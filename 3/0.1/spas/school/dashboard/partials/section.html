@@ -1,0 +1,48 @@
+<div class="ng-cloak span3">
+  <div class="nav-arrow-container">
+    <span>
+      <span class="nav-arrow nav-arrow-left" ng-class="hierarchy.level3.previous.path ? '' : 'nav-arrow-disabled'"
+        ng-click="!hierarchy.level3.previous.path || go(hierarchy.level3.previous.path)"
+        popover="{{hierarchy.level3.previous.title || 'At start'}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300">
+        <i class="icon-chevron-sign-left"></i>
+      </span>
+      <span class="nav-arrow nav-arrow-right"  ng-class="hierarchy.level3.next.path ? '' : 'nav-arrow-disabled'"
+        ng-click="!hierarchy.level3.next.path || go(hierarchy.level3.next.path)"
+        popover="{{hierarchy.level3.next.title || 'At end'}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300">
+        <i class="icon-chevron-sign-right"></i>
+      </span>
+    </span>
+  </div>
+  <accordion>
+    <accordion-group ng-repeat="s in hierarchy.level1.sections" is-open="s.isSelected">
+      <accordion-heading>
+        <button class="btn btn-small btn-info" ng-click="go(s.path + '/1')"
+          popover="{{s.tip}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300"
+        >
+          <span ng-show="s.icon" class="section-level2-icon"><i class="icon-{{s.icon}}"></i></span>
+          {{s.title}}
+        </button>
+      </accordion-heading>
+      <div ng-repeat="ss in s.sections">
+        <span style="display: inline-block; width: 18px; margin: 2px 0; color: rgba(0, 136, 204, 0.8);">
+          <i class="icon-{{ss.icon}}"></i>
+        </span>
+        <a class="sub-section" ng-href="#{{ss.path}}"
+          ng-class="ss.isSelected ? 'label label-info sub-section-selected' : ''">{{ss.title}}</a>
+      </div>
+    </accordion-group>
+  </accordion>
+  <div style="font-size: 11px;">
+    <hr/>
+    <b>Server log (dev/demo only)</b>
+    <button class="btn btn-small" ng-click="serverService.sentToServer = []"
+      style ="padding: 0px 3px; margin: -3px 0 0 5px;"}>Clear</button>
+    <ul>
+      <li ng-repeat="x in serverService.sentToServer track by $index">{{x}}</li>
+    </ul>
+  </div>
+</div>
+<div class="main-container span9">
+  <div ui-view class="main-view form-horizontal"></div>
+  <!-- *** TODO: get animation working again ng-animate="'main-view'" ng-class="{ 'main-view-animation-hack1': useAnimationHack1 }"-->
+</div>

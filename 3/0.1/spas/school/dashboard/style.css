@@ -1,11 +1,21 @@
+html {overflow-y: scroll;}
+
 /* left menu */
-.menu { margin: 0;  }
+.nav-arrow-container { height: 40px; width: 90%; }
+.nav-arrow-container .nav-arrow-left { margin-left: 18px; }
+.nav-arrow-container .nav-arrow-right { float: right; margin-right: 11px; }
+.nav-arrow { font-size: 40px; color: #49afcd; cursor: pointer; }
+.nav-arrow:hover { color: #2d6987; }
+.nav-arrow-disabled, .nav-arrow-disabled:hover { color: silver; cursor: default; }
+.menu { margin: 0; }
 .accordion-group { border: none; }
 .accordion-inner { padding: 0 20px; border: none; }
-.sub-section { cursor: pointer; padding: 2px; display: block; }
-.sub-section-selected { color: red; }
-/* .sub-section:hover { background-color: #F9F8F6; } */
-
+.accordion-heading button { width: 90%; text-align: left; font-size: 14px; }
+.sub-section { cursor: pointer; margin: 2px -2px; width: 75%; }
+.sub-section-selected { font-size: 14px; font-weight: normal; margin-left: -4px; padding-left: 2px; }
+.sub-section:hover { background-color: #F9F8F6; }
+.sub-section-selected:hover { background-color: #2d6987; }
+.section-level2-icon { display: inline-block; width: 18px; margin: 0 0 0 -5px; text-align: center; }
 
 /* main view animation */
 .main-view-animation-hack1 {
@@ -58,15 +68,19 @@
 /* /app loading */
 
 /* fields */
-.field .title-block { display: block; margin: 3px; }
-.field .value { }
-.field .tip-bottom { display: block; }
+.field { display: block; }
+.field-icon { display: inline-block; width: 20px; }
+.field-title { display: inline-block; margin: 3px 0; font-weight: bold; }
+.field-tip {}
+.field-description { clear: both; display: block; margin: 3px 0; }
+.field-value-tip { display: block; }
+hr { margin: 10px 0; }
 
-.icon-star, .icon-star-empty { color: gold; font-size: 20px; }
+.field-headTeacher .popover { width: 500px; max-width: 500px; }
+
+.field-value .icon-star, .field-value .icon-star-empty { color: gold; font-size: 20px; }
 
 .control-group .span1 { width: 40px !important; } /* timepicker hack *** TODO: investigate; */
-
-.field label { margin: 5px; }
 
 .flag { padding-right: 3px; }
 

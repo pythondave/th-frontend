@@ -2,10 +2,9 @@
 <html ng-app="thSchoolDashboardAppModule">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <!--
-  *** NOTE: need to stick to bootstrap 2.3.1 for now until angular-ui catches up
+  *** NOTE: need to stick to twitter bootstrap 2.3.1 for now until angular-ui catches up
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc1/css/bootstrap.min.css">
   -->
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css">
@@ -30,8 +29,8 @@
       <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <!--lodash-->
       <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/1.2.1/lodash.min.js"></script>
-    <!--twitter bootstrap-->
-      <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
+    <!--twitter bootstrap *** See note at top
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script> -->
     <!--angular (official)-->
       <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.js"></script>
       <script src="http://cdn.jsdelivr.net/angularjs/1.1.2/angular-resource.min.js"></script>
@@ -47,6 +46,7 @@
       <script src="../../../config.js"></script>
     <!--services-->
       <!--schools-->
+        <script src="services.js"></script>
 
       <!--shared-->
         <script src="../../../shared/generic.js"></script>
@@ -57,8 +57,9 @@
         <script src="../../../shared/services/basicListServices.js"></script>
         <script src="../../../shared/services/scoreServices.js"></script>
     <!--controllers-->
-      <script src="school/schoolControllers.js"></script>
+      <script src="controllers.js"></script>
     <!--directives-->
+      <script src="directives.js"></script>
       <script src="../../../shared/directives.js"></script>
 
   <!--prototype only scripts-->

@@ -1,19 +1,15 @@
 var thSchoolDashboardAppModule = angular.module('thSchoolDashboardAppModule',
-  ['ui.bootstrap', 'ngMockE2E', 'ngResource', 'ui.compat', 'thConfigModule', 'thServerModule']);
+  ['ui.bootstrap', 'ngMockE2E', 'ngResource', 'ui.router.compat', 'thConfigModule', 'thServerModule']);
 
 //navbar (top menu)
-thSchoolDashboardAppModule.controller('NavBarCtrl', function($scope, $state, appLoading) {
-  $scope.navBarUrl = "navBar.html";
-  $scope.menuItems = [
-    { name: 'topMenuItem1', title: 'Top Menu Item 1' },
-    { name: 'topMenuItem2', title: 'Top Menu Item 2' },
-    { name: 'topMenuItem3', title: 'Top Menu Item 3' }
-  ];
-  $scope.$on('$stateChangeSuccess', function() {
-    $scope.activeNavBarItem = $state.current.name.split('.', 1)[0];
-  });
+thSchoolDashboardAppModule.controller('NavBarCtrl', function($scope, $state, structureService, appLoading) {
+  $scope.navBarUrl = 'partials/nav-bar.html';
+  $scope.sections = structureService.sections;
   $scope.$on('$stateChangeStart', function(){
     appLoading.loading();
+  });
+  $scope.$on('$stateChangeSuccess', function() {
+    structureService.hierarchy.select($state.params);
   });
 });
 
@@ -21,31 +17,17 @@ thSchoolDashboardAppModule.controller('NavBarCtrl', function($scope, $state, app
 thSchoolDashboardAppModule.config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.when('/default.html', '/');
   $urlRouterProvider.when('', '/');
-  $urlRouterProvider.when('/', '/topMenuItem1');
-  $urlRouterProvider.when('/topMenuItem1', '/topMenuItem1/1/1');
+  $urlRouterProvider.when('/', '/1');
+  $urlRouterProvider.when('/1', '/1/1/1');
+  $urlRouterProvider.when('/2', '/2/1/1');
 
-  var topMenuItem1MainTemplateUrl = function (stateParams) {
-    //stateParams.sectionId = stateParams.sectionId || 1;
-    //stateParams.subSectionId = stateParams.subSectionId || 1;
-    return 'school/partials/section' + stateParams.sectionId + 'pt' + stateParams.subSectionId + '.html';
-  };
   $stateProvider
-    .state('topMenuItem1', {
-      url: '/topMenuItem1', templateUrl: 'school/menu.html', controller: 'SchoolMenuCtrl'
+    .state('level1', {
+      url: '/:level1', templateUrl: 'partials/section.html', resolve: { }, controller: 'Level1Controller'
     })
-    .state('topMenuItem1.main', {
-      url: '/:sectionId/:subSectionId', templateUrl: topMenuItem1MainTemplateUrl, controller: 'SchoolCtrl'
-    })
-    .state('topMenuItem2', {
-      url: '/topMenuItem2', templateUrl: 'school/partials/blank.html', controller: 'DummyCtrl'
-    })
-    .state('topMenuItem3', {
-      url: '/topMenuItem3', templateUrl: 'school/partials/blank.html', controller: 'DummyCtrl'
+    .state('level1.main', {
+      url: '/:level2/:level3', templateUrl: 'partials/content-items.html', controller: 'PageCtrl'
     });
-});
-
-thSchoolDashboardAppModule.controller('DummyCtrl', function(appLoading) {
-  appLoading.ready();
 });
 
 //configure $httpProvider
