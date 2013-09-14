@@ -1,7 +1,7 @@
 <div class="text-edit">
+  <input ng-show="model.isEditMode" type="text" ng-model="model.val" ng-blur="model.isEditMode=false" placeholder="Type something..."></input>
+
   <span ng-show="!model.isEditMode" style="cursor: pointer" ng-click="model.isEditMode=true" tooltip="Click to edit text">{{model.val}}</span>
-  <input ng-show="model.isEditMode" type="text" ng-model="model.val" ng-blur="model.isEditMode=false" placeholder="Example title"></input>
-  <span  ng-show="!model.val && !model.isEditMode" style="margin-left: 5px; cursor: pointer" ng-click="model.isEditMode=true" tooltip="Click to edit text">
-    <i class="icon-edit"></i>
-  </span>
+
+  <span content-item-icons model="model"></span>
 </div>

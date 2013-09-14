@@ -1,9 +1,9 @@
 <div class="url-edit">
-  <div text-edit model="model"></div>
-  <a ng-show="!model.isUrlEditMode" type="text" target="_blank" href="http://{{model.url}}" tooltip="{{model.val}}">{{model.url}}</a>
-  <input ng-show="model.isUrlEditMode" type="text" ng-model="model.url" ng-blur="model.isUrlEditMode=false" placeholder="www.example.com"></input>
-  <span style="margin-left: 5px; cursor: pointer" ng-click="model.isUrlEditMode=!model.isUrlEditMode"
-    tooltip="{{model.isUrlEditMode ? 'Click here or away finish' : 'Click to edit URL'}}">
-    <i class="icon-{{model.isUrlEditMode ? 'thumbs-up' : 'edit'}}"></i>
-  </span>
+  <div text-edit model="model.urlTitle"></div>
+
+  <a ng-show="!model.url.isEditMode" type="text" target="_blank" href="http://{{model.url.val}}" tooltip="{{model.urlTitle.val}}">{{model.url.val}}</a>
+
+  <input ng-show="model.url.isEditMode" type="text" ng-model="model.url.val" ng-blur="model.url.isEditMode=false" placeholder="www.example.com"></input>
+
+  <span content-item-icons model="model.url"></span>
 </div>

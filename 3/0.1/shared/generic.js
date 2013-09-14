@@ -70,6 +70,19 @@ thGenericModule.run(function($rootScope) {
           _.setAll(item[nestedCollectionName], attributeName, attributeValue, nestedCollectionName); //recursion
         }
       });
-    }
+    },
+    isProbablyValidEmail: function(s) {
+      //returns true if s is probably a valid email
+      //'probably' because 'definitely' is apparently not really possible
+      //see also: http://www.regular-expressions.info/email.html and http://en.wikipedia.org/wiki/Email_address          
+      var reg = new RegExp(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/);
+      return reg.test(s);
+    },
+    isProbablyValidUrl: function(s) {
+      var reg = new RegExp(/https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,}/);
+      return reg.test(s);
+    },
+    isDigitsOnly: function(s) { return new RegExp(/^[0-9]*$/).test(s); },
+    isValidMoneyValue: function(s) { return new RegExp(/^(\d*\.\d{1,2}|\d+)$/).test(s); }
   });
 });

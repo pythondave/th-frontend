@@ -26,7 +26,7 @@ thSchoolDashboardAppModule.config(function($stateProvider, $urlRouterProvider) {
       url: '/:level1', templateUrl: 'partials/section.html', resolve: { }, controller: 'Level1Controller'
     })
     .state('level1.main', {
-      url: '/:level2/:level3', templateUrl: 'partials/content-items.html', controller: 'PageCtrl'
+      url: '/:level2/:level3', templateUrl: 'partials/content-items/content-items.html', controller: 'PageCtrl'
     });
 });
 

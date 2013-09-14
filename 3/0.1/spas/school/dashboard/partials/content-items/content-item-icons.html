@@ -1,0 +1,12 @@
+<span class="content-item-icons" ng-click="model.isEditMode=true">
+  <span  ng-show="!model.isEditMode && (!model.val || model.showEditIcon)" tooltip="{{model.editIconTip || 'Click to add'}}">
+    <i class="icon-edit"></i>
+  </span>
+  <span ng-show="model.isEditMode && model.isValid" tooltip="{{model.isValidTip || 'Looks good'}}">
+    <i class="icon-thumbs-up"></i>
+  </span>
+  <span ng-show="!model.isEditMode && model.val && !model.isValid " style="color: red;"
+    tooltip="{{model.isNotValidTip || 'This doesn\'t appear to be valid. Please change it so it can be saved.'}}">
+    <i class="icon-thumbs-down"></i>
+  </span>
+</span>

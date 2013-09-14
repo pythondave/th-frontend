@@ -67,21 +67,54 @@ html {overflow-y: scroll;}
 }
 /* /app loading */
 
-/* fields */
-.field { display: block; }
-.field-icon { display: inline-block; width: 20px; }
-.field-title { display: inline-block; margin: 3px 0; font-weight: bold; }
-.field-tip {}
-.field-description { clear: both; display: block; margin: 3px 0; }
-.field-value-tip { display: block; }
+/* content-items */
+.content-item { display: block; }
+.content-item-icon { display: inline-block; width: 20px; }
+.content-item-title { display: inline-block; margin: 3px 0; font-weight: bold; }
+.content-item-tip {}
+.content-item-description { clear: both; display: block; margin: 3px 0; }
+.content-item-value-tip { display: block; }
+.content-item-icons span { margin-left: 5px; cursor: pointer; }
 hr { margin: 10px 0; }
 
-.field-headTeacher .popover { width: 500px; max-width: 500px; }
+.content-item-headTeacher .popover { width: 500px; max-width: 500px; }
 
-.field-value .icon-star, .field-value .icon-star-empty { color: gold; font-size: 20px; }
+.rating-edit .icon-star, .rating-edit .icon-star-empty { color: gold; font-size: 20px; }
 
 .control-group .span1 { width: 40px !important; } /* timepicker hack *** TODO: investigate; */
 
 .flag { padding-right: 3px; }
 
-.field .hidden { display: none !important; }
+.content-item .hidden { display: none !important; }
+/* /content-items */
+
+/* slider content item */
+.slider-main {
+  position: relative;
+  text-align: left;
+  background-color: silver;
+  height: 0.3em;
+  width: 300px;
+  display: inline-block;
+}
+
+.slider-handle {
+  position: absolute;
+  z-index: 2;
+  width: 0.4em;
+  height: 1.8em;
+  background-color: #2d6987;
+  top: -0.7em;
+  margin: 0 2em 0 -0.2em;
+  cursor: pointer;
+}
+
+.slider-range {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  background-color: #2d6987;
+  top: 0;
+  height: 100%;
+}
+/* /slider content item */

@@ -1,0 +1,6 @@
+Bootstrap 0.6.0 didn't work properly with angular 1.1.5, so I used 0.5.0, which did
+However... bootstrap datepicker 0.5.0 didn't work properly with angular 1.1.5, but 0.6.0 did
+Therefore... I've used datepicker 0.6.0 and other 0.5.0 (with angular 1.1.5)
+
+Everything should stabalise with angular 1.2.0 in the next few months
+Therefore... when that happens can update everything accordingly

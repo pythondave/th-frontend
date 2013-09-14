@@ -1,0 +1,7 @@
+<div class="date-edit">
+  <span ng-click="open()" style="cursor: pointer;" tooltip="{{tip}}">{{model.val | date:'d MMMM yyyy'}}</span>
+  <span ng-show="!model.val" ng-click="open()" style="cursor: pointer;" tooltip="{{tip}}">
+    <i class="icon-calendar"></i>
+  </span>
+  <div datepicker-popup="d MMMM yyyy" ng-model="model.val" is-open="isOpenNoConflict" min="model.min" datepicker-options="dateOptions"></div>
+</div>

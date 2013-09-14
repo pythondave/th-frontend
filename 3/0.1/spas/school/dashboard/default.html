@@ -7,13 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc1/css/bootstrap.min.css">
   -->
+  <!--external stylesheets hosted on cdns-->
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css">
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css">
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css">
 
-  <!--WIP-->
-  <link rel="stylesheet" href="http://beta.teacherhorizons.com/static/prototypes/design/registration/static/css/select2.css">
-
+  <!--local stylesheets-->
   <link rel="stylesheet" href="../../../style/style.css">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -24,7 +23,7 @@
     <div class="row-fluid" ui-view></div>
   </div>
   
-  <!--external scripts-->
+  <!--external scripts hosted on cdns-->
     <!--jquery-->
       <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <!--lodash-->
@@ -35,10 +34,13 @@
       <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.js"></script>
       <script src="http://cdn.jsdelivr.net/angularjs/1.1.2/angular-resource.min.js"></script>
     <!--angular (community)-->
-      <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.5.0.js"></script>
+      <!--<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.5.0.js"></script> (hosted locally)-->
       <script src="http://angular-ui.github.io/ui-router/build/angular-ui-router.min.js"></script>
-    <!--WIP-->
-      <script src="http://beta.teacherhorizons.com/static/prototypes/design/registration/static/js/select2.min.js"></script>
+
+  <!--external scripts hosted locally-->
+    <!--angular (community)-->
+      <script src="lib/bootstrap-custom/datepicker/ui-bootstrap-custom-tpls-0.6.0.js"></script> <!--see readme in this folder-->
+      <script src="lib/bootstrap-custom/other/ui-bootstrap-custom-tpls-0.5.0.min.js"></script>
 
   <!--local scripts-->
     <!--main-->
