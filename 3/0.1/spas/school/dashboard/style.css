@@ -7,6 +7,8 @@ html {overflow-y: scroll;}
 .nav-arrow { font-size: 40px; color: #49afcd; cursor: pointer; }
 .nav-arrow:hover { color: #2d6987; }
 .nav-arrow-disabled, .nav-arrow-disabled:hover { color: silver; cursor: default; }
+/* .nav-arrow-warning { color: red; } */
+
 .menu { margin: 0; }
 .accordion-group { border: none; }
 .accordion-inner { padding: 0 20px; border: none; }
@@ -118,3 +120,9 @@ hr { margin: 10px 0; }
   height: 100%;
 }
 /* /slider content item */
+
+/* progress bar - *** TODO */
+.progress-bar-container { margin: 0 0 0 20px; }
+.progress-bar { height: 11px; margin:9px 0; background:url(http://www.teacherhorizons.com/static/images/content/percentage-complete-sprite.png) left top no-repeat; width:174px; overflow:hidden; }
+.progress-bar-complete { background:url(http://www.teacherhorizons.com/static/images/content/percentage-complete-sprite.png) left -30px no-repeat; height:25px; width: 0; }
+/* /progress bar */

@@ -81,10 +81,10 @@
       <td ng-repeat="status in (statuses | filter: { postPF: true })" ng-click="changeStatus(a, status)"
           class="td-center" ng-class="{ toggle: a.statusId!=status.id }; getStatusClass(a, status)">
         <span ng-show="!cumulative && a.statusId==status.id" simple-tooltip="{{a.statusDate | date:'EEE dd MMM yyyy h:mma'}}">
-          <i class="icon-ok"></i>
+          <i class="icon-ok icon-ok-hack"></i>
         </span>
         <span ng-show="cumulative && a.cumulativeMap[$index+3]==1">
-          <i class="icon-ok"></i>
+          <i class="icon-ok icon-ok-hack"></i>
         </span>
       </td>
     </tr>

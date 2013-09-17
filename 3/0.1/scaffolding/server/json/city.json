@@ -1,0 +1,70 @@
+{
+    "type": 1,
+    "token": "8171e583c5340c30604f32fcdcc43a42",
+    "city": {
+        "id": 146,
+        "city": "Porto",
+        "livingCosts": [
+            {
+                "id": 4,
+                "value": 20
+            },
+            {
+                "id": 1,
+                "value": 22080
+            },
+            {
+                "id": 7,
+                "value": 1200
+            },
+            {
+                "id": 2,
+                "value": 700
+            },
+            {
+                "id": 3,
+                "value": 1.4
+            },
+            {
+                "id": 6,
+                "value": 90
+            },
+            {
+                "id": 5,
+                "value": 500
+            }
+        ],
+        "links": [
+            {
+                "id": 10,
+                "url": "www.portocityguide.com/",
+                "name": "Porto City Guide",
+                "category": 1
+            },
+            {
+                "id": 11,
+                "url": "www.10best.com/Porto,Portugal/Restaurants",
+                "name": "10 Best Restaurant Guide",
+                "category": 1
+            },
+            {
+                "id": 9,
+                "url": "www.portolazer.pt",
+                "name": "Entertainment and Leisure",
+                "category": 1
+            },
+            {
+                "id": 13,
+                "url": "www.oportocricketclub.com",
+                "name": "Oporto British Club",
+                "category": 1
+            },
+            {
+                "id": 12,
+                "url": "www.stcp.pt",
+                "name": "Public Transport",
+                "category": 1
+            }
+        ]
+    }
+}

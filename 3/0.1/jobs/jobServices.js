@@ -49,7 +49,7 @@ thAdminDashboardAppModule.factory('jobsService', function($http, $rootScope, con
   return o;
 });
 
-thAdminDashboardAppModule.factory('jobService', function($http, configService, listService) {
+thAdminDashboardAppModule.factory('jobService', function($http, configService) {
   //initialise
   var o = {};
 

@@ -1,14 +1,21 @@
 <div class="ng-cloak span3">
+  <div class="progress-bar-container">
+    <p>School profile <strong>{{percentageComplete}}%</strong> complete</p>
+    <div class="progress-bar">
+        <div class="progress-bar-complete" ng-style="getProgressBarCompleteStyle()"></div>
+    </div>
+  </div>
+
   <div class="nav-arrow-container">
     <span>
       <span class="nav-arrow nav-arrow-left" ng-class="hierarchy.level3.previous.path ? '' : 'nav-arrow-disabled'"
         ng-click="!hierarchy.level3.previous.path || go(hierarchy.level3.previous.path)"
-        popover="{{hierarchy.level3.previous.title || 'At start'}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300">
+        popover="{{'Go to previous page (' + hierarchy.level3.previous.title + ')' || 'At start'}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300">
         <i class="icon-chevron-sign-left"></i>
       </span>
       <span class="nav-arrow nav-arrow-right"  ng-class="hierarchy.level3.next.path ? '' : 'nav-arrow-disabled'"
         ng-click="!hierarchy.level3.next.path || go(hierarchy.level3.next.path)"
-        popover="{{hierarchy.level3.next.title || 'At end'}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300">
+        popover="{{'Go to next page (' + hierarchy.level3.next.title + ')' || 'At end'}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300">
         <i class="icon-chevron-sign-right"></i>
       </span>
     </span>

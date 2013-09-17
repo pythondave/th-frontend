@@ -1,5 +1,8 @@
 var thSchoolDashboardAppModule = angular.module('thSchoolDashboardAppModule',
-  ['ui.bootstrap', 'ngMockE2E', 'ngResource', 'ui.router.compat', 'thConfigModule', 'thServerModule']);
+  ['ui.bootstrap', 'ngMockE2E', 'ngResource', 'ui.router.compat', //external
+   'thConfigModule', 'thServerModule', 'thContentItemsModule', //local
+   'thShowcaseModule' //local, prototype only
+  ]);
 
 //navbar (top menu)
 thSchoolDashboardAppModule.controller('NavBarCtrl', function($scope, $state, structureService, appLoading) {
@@ -26,7 +29,7 @@ thSchoolDashboardAppModule.config(function($stateProvider, $urlRouterProvider) {
       url: '/:level1', templateUrl: 'partials/section.html', resolve: { }, controller: 'Level1Controller'
     })
     .state('level1.main', {
-      url: '/:level2/:level3', templateUrl: 'partials/content-items/content-items.html', controller: 'PageCtrl'
+      url: '/:level2/:level3', templateUrl: 'partials/content-items.html', controller: 'PageCtrl'
     });
 });
 

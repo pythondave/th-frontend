@@ -83,6 +83,7 @@ thGenericModule.run(function($rootScope) {
       return reg.test(s);
     },
     isDigitsOnly: function(s) { return new RegExp(/^[0-9]*$/).test(s); },
-    isValidMoneyValue: function(s) { return new RegExp(/^(\d*\.\d{1,2}|\d+)$/).test(s); }
+    isValidMoneyValue: function(s) { return new RegExp(/^(\d*\.\d{1,2}|\d+)$/).test(s); },
+    mergeDefaults: function(o, defaultValues) { o = o || {}; return _.defaults(o, defaultValues); } //tweak of the defaults function to allow a non-initial object
   });
 });

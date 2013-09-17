@@ -1,29 +1,23 @@
 //*** TODO: refactor - some of this can be generic
 
-thSchoolDashboardAppModule.factory('serverService', function () {
+thSchoolDashboardAppModule.factory('serverService', function ($rootScope, $q, $timeout) {
   var o = {};
   o.sentToServer = [];
   o.sendToServer = function(value) {
-    o.sentToServer.push(value);
+    var deferred = $q.defer();
+    var f = function() {
+      o.sentToServer.push(value); //*** TODO: make use of a mock server and carry on after a callback
+      $rootScope.$emit('serverService.responseReceived');
+      deferred.resolve();
+    };
+    $timeout(f, 1000);
+    return deferred.promise;
   };
+
   return o;
 });
 
-thSchoolDashboardAppModule.factory('contentItemService', function (serverService) {
-  var o = {};
-  o.ContentItem = function (initialVals) {
-    var defaultVals = { title: 'This is a title', description: undefined, systemName: '' };
-    _.assign(this, defaultVals, initialVals || {});
-  };
-  o.ContentItem.prototype.changed = function() {
-    //this.description = 'This is a description relating to ' + val + ' star' + (val===1?'':'s');
-    serverService.sendToServer(this.systemName + '=' + this.val);
-  };
-  return o;
-});
-
-
-thSchoolDashboardAppModule.factory('hierarchyService', function ($q, $timeout) { //*** TODO: refactor so more generic
+thSchoolDashboardAppModule.factory('hierarchyService', function () { //*** TODO: refactor so more generic
   //can take a hierarchy and make it more self-aware.
   //e.g. can use this service to add the following properties to each item in the hierarchy:
   //parent, depth, path, previous, next
@@ -49,8 +43,7 @@ thSchoolDashboardAppModule.factory('hierarchyService', function ($q, $timeout) {
 
   var o = {};
   o.applyHierarchy = function(object, propertyNames) {
-    propertyNames = propertyNames || {};
-    _.defaults(propertyNames, { collection: 'sections', marker: 'isSelected', previous: 'previous', next: 'next' });
+    propertyNames = _.defaults({}, propertyNames, { collection: 'sections', marker: 'isSelected', previous: 'previous', next: 'next' });
 
     //add hierarchy object
     object.hierarchy = { object: object, parent: object, propertyNames: propertyNames, resetMarkers: resetMarkers, select: select };
@@ -91,216 +84,38 @@ thSchoolDashboardAppModule.factory('hierarchyService', function ($q, $timeout) {
   return o;
 });
 
-thSchoolDashboardAppModule.factory('genericShowcaseStructureService', function (contentItemService) {
-  var o = { title: 'Generic showcase', icon: 'trophy' };
-  var CI = contentItemService.ContentItem;
-
-  var getHeader = function(object) { return { type: 'header', title: object.title, icon: object.icon }; };
-
-  o.sections = [
-    { title: 'About', tip: 'The section tells you about the \'generic showcase\' section', icon: 'book' },
-    { title: 'Edit content items', icon: 'pencil' },
-    { title: 'Other content items', icon: 'asterisk' },
-    { title: 'Section with no icon, tip, or sub-sections' }
-  ];
-
-  var about = o.sections[0];
-  about.sections = [
-    { title: 'Introduction', icon: 'lightbulb' }
-  ];
-
-  var introduction = about.sections[0];
-  introduction.contentItems = [
-    getHeader(introduction),
-    { type: 'text', val: 'The \'generic showcase\' section shows what is possible. This is useful during analysis and development.', icon: 'trophy' },
-    { type: 'text', val: 'See the \'edit content items\' section for examples of each edit content item (date-edit, email-edit, from-few, etc.).', icon: 'pencil' },
-    { type: 'text', val: 'See the \'other content items\' section for examples of other content items (text, file-upload, etc.).', icon: 'asterisk' },
-    { type: 'text', val: 'The \'generic showcase\' section will be removed during deployment.', icon: 'trophy' }
-  ];
-
-  var editCIs = o.sections[1];
-  editCIs.sections = [
-    { title: 'Date-edit', icon: 'calendar' },
-    { title: 'Email-edit', icon: 'envelope' },
-    { title: 'From-few', icon: 'ellipsis-horizontal' },
-    { title: 'From-many', icon: 'list' },
-    { title: 'Money-edit', icon: 'money' },
-    { title: 'Number-edit', icon: 'sort-by-order' },
-    { title: 'Rating-edit', icon: 'star' },
-    { title: 'Slider', icon: 'resize-horizontal' },
-    { title: 'Text-edit', icon: 'font' },
-    { title: 'Time-edit', icon: 'time' },
-    { title: 'URL-edit', icon: 'external-link' }
-  ];
-
-  var dateEditCI = editCIs.sections[0];
-  dateEditCI.contentItems = [
-    getHeader(dateEditCI),
-    { type: 'text', val: 'The date-edit content item can be used for entering and editing a date.' },
-    new CI({ systemName: 'dateEdit1', type: 'dateEdit', title: 'Basic date-edit content item', tip: 'Click the date to edit', val: '4 September 2013' }),
-    new CI({ systemName: 'dateEdit2', type: 'dateEdit', title: 'Date-edit content item with no initial value', tip: 'Click the date icon to edit' })
-  ];
-
-  var emailEditCI = editCIs.sections[1];
-  emailEditCI.contentItems = [
-    getHeader(emailEditCI),
-    { type: 'text', val: 'The email-edit content item can be used for entering and editing an email.' },
-    new CI({ systemName: 'emailEdit1', type: 'emailEdit', title: 'Basic email-edit content item', tip: '...', val: 'dave@google.com' }),
-    new CI({ systemName: 'emailEdit2', type: 'emailEdit', title: 'Email-edit content item with no initial value', tip: '...' }),
-    new CI({ systemName: 'emailEdit3', type: 'emailEdit', title: 'Email-edit content item with invalid initial value', tip: '...', val: 'unfinished@somewhere' })
-  ];
-
-  var fromFewCI = editCIs.sections[2];
-  fromFewCI.contentItems = [
-    getHeader(fromFewCI),
-    { type: 'text', val: 'The from-few content item can be used for selecting one or more values from a few values.' },
-    new CI({ systemName: 'fromFew1', type: 'fromFew', limit: 1, title: 'Basic from-few content item', listColumn: 'name',
-      items: [{id: 1, name: 'Apple'}, {id: 2, name: 'Banana', isSelected: true}, {id: 3, name: 'Orange'}, {id: 4, name: 'Pear'}],
-      val: 2 })
-  ];
-
-  var fromManyCI = editCIs.sections[3];
-  fromManyCI.contentItems = [
-    getHeader(fromManyCI),
-    { type: 'text', val: 'The from-many content item can be used for selecting one or more values from a large number of values.' },
-    { type: 'text', val: 'WIP', style: 'color: red;' },
-    new CI({ systemName: 'fromMany1', type: 'fromMany', limit: 1, title: 'Basic from-many content item', listColumn: 'name',
-      items: [{id: 1, name: 'Apple'}, {id: 2, name: 'Banana', isSelected: true}, {id: 3, name: 'Orange'}, {id: 4, name: 'Pear'}],
-      val: 2 })
-  ];
-
-  var moneyEditCI = editCIs.sections[4];
-  moneyEditCI.contentItems = [
-    getHeader(moneyEditCI),
-    { type: 'text', val: 'The money-edit content item can be used for entering and editing a currency and amount combination.' },
-    { type: 'text', val: 'WIP - this will have a mechanism for selecting both a currency and an amount', style: 'color: red;' },
-    new CI({ systemName: 'moneyEdit1', type: 'moneyEdit', title: 'Basic money-edit content item', tip: '...', currency: { val: 3, items: [{ id: 1, name: 'USD' }, { id: 2, name: 'GBP' }, { id: 3, name: 'Euro' }] }, amount: { val: 12.34 } }),
-    new CI({ systemName: 'moneyEdit2', type: 'moneyEdit', title: 'Money-edit content item with no initial values', tip: '...', currency: { items: [{ id: 1, name: 'USD' }, { id: 2, name: 'GBP' }, { id: 3, name: 'Euro' }] } })
-  ];
-
-  var numberEditCI = editCIs.sections[5];
-  numberEditCI.contentItems = [
-    getHeader(numberEditCI),
-    { type: 'text', val: 'The number-edit content item can be used for entering and editing number text.' },
-    new CI({ systemName: 'numberEdit1', type: 'numberEdit', title: 'Basic number-edit content item', tip: 'Click number to edit. Click away from number to finish.', val: '123' }),
-    new CI({ systemName: 'numberEdit2', type: 'numberEdit', title: 'Number-edit content item with no initial value', tip: 'Click edit icon to edit. Click away to finish.' }),
-    new CI({ systemName: 'numberEdit3', type: 'numberEdit', title: 'Number-edit content item with large value', val: '12345678' }),
-    new CI({ systemName: 'numberEdit4', type: 'numberEdit', title: 'Number-edit content item with full works', icon: 'music', tip: 'This is a tip', description: 'This is a description', val: '234' }),
-    new CI({ systemName: 'numberEdit5', type: 'numberEdit', title: 'Number-edit content item with decimal allowed (up to 2 d.p.)', icon: 'bell', val: '234.56', allowDecimals: true })
-  ];
-
-  var ratingEditCI = editCIs.sections[6];
-  ratingEditCI.contentItems = [
-    getHeader(ratingEditCI),
-    { type: 'text', val: 'The rating-edit content item can be used for entering and editing a rating.' },
-    new CI({ systemName: 'ratingEdit1', type: 'ratingEdit', title: 'Basic rating-edit content item', max: 5, val: 3 }),
-    new CI({ systemName: 'ratingEdit2', type: 'ratingEdit', title: 'Rating-edit content item size 7', max: 7, val: 6 }),
-    new CI({ systemName: 'ratingEdit3', type: 'ratingEdit', title: 'Rating-edit content item with icon', icon: 'umbrella', max: 5, val: 4 }),
-    new CI({ systemName: 'ratingEdit4', type: 'ratingEdit', title: 'Rating-edit content item with tip', tip: 'This is a tip', max: 5, val: 2 }),
-    new CI({ systemName: 'ratingEdit5', type: 'ratingEdit', title: 'Rating-edit content item with description', max: 5, val: 4, description: 'This is a description' }),
-    new CI({ systemName: 'ratingEdit6', type: 'ratingEdit', title: 'Rating-edit content item with value tips', max: 5, val: 3, valueTips: ['1-star tip', '2-star tip', 'This is the tip for 3 stars', 'Tip for 4 stars', '5-star tip'] }),
-    new CI({ systemName: 'ratingEdit7', type: 'ratingEdit', title: 'Standard rating-edit content item', icon: 'thumbs-up', tip: 'This is a tip', max: 5, val: 4 }),
-    new CI({ systemName: 'ratingEdit8', type: 'ratingEdit', title: 'Rating-edit content item with full works', icon: 'music', tip: 'This is a tip', max: 5, val: 2, description: 'This is a description', valueTips: ['1-star tip', '2-star tip', 'This is the tip for 3 stars', 'Tip for 4 stars', '5-star tip'] }),
-  ];
-
-  var sliderCI = editCIs.sections[7];
-  sliderCI.contentItems = [
-    getHeader(sliderCI),
-    { type: 'text', val: 'The slider content item can be used for entering and editing a value along a scale.' },
-    new CI({ systemName: 'slider1', type: 'slider', title: 'Basic slider content item', index: 3, items: [{ val: 0 }, { val: 1 }, { val: 2 }, { val: 3 }, { val: 4 }] }),
-    new CI({ systemName: 'slider2', type: 'slider', title: 'Slider non-integers', index: 0, items: [{ val: 'Apple' }, { val: 'Banana' }, { val: 'Cherry' }, { val: 'Date' }, { val: 'Elderberry' }] }),
-    new CI({ systemName: 'slider3', type: 'slider', title: 'Slider 0-100', index: 30 })
-  ];
-
-  var textEditCI = editCIs.sections[8];
-  textEditCI.contentItems = [
-    getHeader(textEditCI),
-    { type: 'text', val: 'The text-edit content item can be used for entering and editing general text.' },
-    new CI({ systemName: 'textEdit1', type: 'textEdit', title: 'Basic text-edit content item', tip: 'Click text to edit. Click away from text to finish.', val: 'Hello world' }),
-    new CI({ systemName: 'textEdit2', type: 'textEdit', title: 'Text-edit content item with no initial value', tip: 'Click edit icon to edit. Click away to finish.' }),
-    new CI({ systemName: 'textEdit3', type: 'textEdit', title: 'Text-edit content item with full works', icon: 'music', tip: 'This is a tip', description: 'This is a description', val: 'Hello world' })
-  ];
-
-  var timeEditCI = editCIs.sections[9];
-  timeEditCI.contentItems = [
-    getHeader(timeEditCI),
-    { type: 'text', val: 'The time-edit content item can be used for entering and editing a time.' },
-    new CI({ systemName: 'timeEdit1', type: 'timeEdit', title: 'Basic time-edit content item', val: undefined })
-  ];
-
-  var urlEditCI = editCIs.sections[10];
-  urlEditCI.contentItems = [
-    getHeader(urlEditCI),
-    { type: 'text', val: 'The url-edit content item can be used for entering and editing the name and value of a url.' },
-    new CI({ systemName: 'urlEdit1', type: 'urlEdit', title: 'Basic url-edit content item', tip: 'Click to edit. Click away to finish.', urlTitle: { val: 'Hello world' }, url: { val: 'www.google.com' } }),
-    new CI({ systemName: 'urlEdit2', type: 'urlEdit', title: 'Url-edit content item with no initial values' })
-  ];
-
-  var otherCIs = o.sections[2];
-  otherCIs.sections = [
-    { title: 'Header', icon: 'bookmark' },
-    { title: 'List', icon: 'list-ul' },
-    { title: 'Text', icon: 'font' },
-    { title: 'File-upload', icon: 'upload' }
-  ];
-
-  var headerCI = otherCIs.sections[0];
-  headerCI.contentItems = [
-    getHeader(headerCI),
-    { type: 'text', val: 'The header content item can be used for displaying a heading.' },
-    { type: 'header', title: 'This is a header content item', icon: 'food' }
-  ];
-
-  var listCI = otherCIs.sections[1];
-  listCI.contentItems = [
-    getHeader(listCI),
-    { type: 'text', val: 'The header content item can be used for displaying a list.' },
-    { type: 'list', title: 'This is a list content item.', items: ['Item 1', 'Item 2'] }
-  ];
-
-  var textCI = otherCIs.sections[2];
-  textCI.contentItems = [
-    getHeader(textCI),
-    { type: 'text', val: 'The header content item can be used for displaying text.' },
-    { type: 'text', val: 'This is a text content item.' }
-  ];
-
-  var fileUploadCI = otherCIs.sections[3];
-  fileUploadCI.contentItems = [
-    getHeader(fileUploadCI),
-    { type: 'text', val: 'The file-upload content item can be used for uploading a file.' },
-    { type: 'text', val: 'WIP', style: 'color: red;' }
-  ];
-
-  return o;
-});
-
-
-thSchoolDashboardAppModule.factory('structureService', function (hierarchyService, contentItemService, serverService, schoolService, listService, genericShowcaseStructureService) {
+thSchoolDashboardAppModule.factory('structureService', function (hierarchyService, contentItemService, serverService, schoolService, listService, structureContentItemsService) {
   var o = {};
   var CI = contentItemService.ContentItem;
 
-  var getHeader = function(object) { return { type: 'header', title: object.title, icon: object.icon }; };
+  o.getPercentageComplete = function() {
+    var sum = _.reduce(o.contentItemsIndex, function(sum, contentItem) {
+      return sum + (contentItem.absoluteWeight && contentItem.val !== undefined ? contentItem.absoluteWeight : 0);
+    }, 0);
+    return Math.round(sum*100, 10);
+  };
+
+  var getHeader = function(object) { return { type: 'header', title: object.title, icon: object.icon, weight: 0 }; };
 
   o.sections = [
-    { title: 'Edit school profile', icon: 'edit' },
-    { title: 'Notes', icon: 'comment' },
-    genericShowcaseStructureService
+    { weight: 1, title: 'Edit school profile', icon: 'edit' },
+    { weight: 0, title: 'Notes', icon: 'comment' },
+    structureContentItemsService
   ];
 
   //section 1
   var section1 = o.sections[0];
   section1.sections = [
-    { title: 'About [schoolNickname]', tip: 'Completing this section will ensure [schoolNickname]\'s profile is more visible to thousands of prospective teachers who browse schools every week.', icon: 'info' },
-    { title: 'Package and benefits', tip: 'This information will not be publicly displayed. Only teachers with complete profiles will have access to it. Sharing this information will encourage the right kind of teachers to apply.', icon: 'gift' },
-    { title: 'City and life', tip: 'This section inspires teachers to move to [city] and the appeal of living there. It highlights the quality of life they can enjoy, and the places they can visit during their weekends.', icon: 'heart' }
+    { weight: 5, title: 'About [schoolNickname]', tip: 'Completing this section will ensure [schoolNickname]\'s profile is more visible to thousands of prospective teachers who browse schools every week.', icon: 'info' },
+    { weight: 3, title: 'Package and benefits', tip: 'This information will not be publicly displayed. Only teachers with complete profiles will have access to it. Sharing this information will encourage the right kind of teachers to apply.', icon: 'gift' },
+    { weight: 2, title: 'City and life', tip: 'This section inspires teachers to move to [city] and the appeal of living there. It highlights the quality of life they can enjoy, and the places they can visit during their weekends.', icon: 'heart' }
   ];
 
   var section1pt1 = section1.sections[0];
   section1pt1.sections = [
-    { title: 'Key details', icon: 'key' },
-    { title: 'Students', icon: 'group' },
-    { title: 'Teachers', icon: 'user' },
+    { weight: 5, title: 'Key details', icon: 'key' },
+    { weight: 5, title: 'Students', icon: 'group' },
+    { weight: 3, title: 'Teachers', icon: 'user' },
     { title: 'Facilities and multimedia', icon: 'facetime-video' },
     { title: 'Recruitment', icon: 'thumbs-up-alt' },
     { title: 'Self-assessment', icon: 'check' }
@@ -497,10 +312,10 @@ thSchoolDashboardAppModule.factory('structureService', function (hierarchyServic
   var section1pt3pt5 = section1pt3.sections[4];
   section1pt3pt5.contentItems = [
     getHeader(section1pt3pt5),
-    { type: 'text', val: 'We have a number of recruitment services designed to support schools like [schoolNickname] and over 20,000 inspiring teachers looking to teacher overseas' },
+    { weight: 0, type: 'text', val: 'We have a number of recruitment services designed to support schools like [schoolNickname] and over 20,000 inspiring teachers looking to teacher overseas' },
     new CI({ systemName: 'toBeAdvised', type: 'fromFew', title: 'Are you interested in finding out more?', limit: 1, listName: 'yesno', listColumn: 'name' }),
     new CI({ systemName: 'toBeAdvised', type: 'fromFew', title: 'Do you have any feedback about this process?', limit: 1, listName: 'yesno', listColumn: 'name' }),
-    { type: 'text', val: 'Thanks for completing [schoolNickname]\'s profile. We hope we can help you find some inspiring teachers over the years ahead. Please do share with contacts at good schools not currently listed so that we can build this platform in collaboration with them too.' }
+    { weight: 0, type: 'text', val: 'Thanks for completing [schoolNickname]\'s profile. We hope we can help you find some inspiring teachers over the years ahead. Please do share with contacts at good schools not currently listed so that we can build this platform in collaboration with them too.' }
   ];
 
   //section 2
@@ -541,21 +356,37 @@ thSchoolDashboardAppModule.factory('structureService', function (hierarchyServic
   schoolService.school.cityName = city.name;
   schoolService.school.countryName = country.name;
 
-  //decorate structure with hierarchy, possible value lists and values from the source data
+  //decorate structure with hierarchy and weight calculations
   hierarchyService.applyHierarchy(o); //decorate o with hierarchy functions and properties (e.g. parent, next, previous)
 
+  _.each(o.hierarchy.index, function(section) { //set default weight for every section
+    section.weight = (section.weight === undefined ? 1 : section.weight);
+  });
+
+  _.each(o.hierarchy.index, function(section) { //calculate totalChildWeight for every section
+    var childCollectionName = (section.depth < 3 ? 'sections' : 'contentItems');
+    section.totalChildWeight = _.reduce(section[childCollectionName], function(sum, item) { return sum + item.weight; }, 0);
+  });
+
+  var contentItemsIndex = [];
   _.each(o.hierarchy.index, function(section) {
+    section.absoluteWeight = section.weight/section.parent.totalChildWeight * (section.parent.absoluteWeight || 1);
     _.each(section.contentItems, function(contentItem) {
-      if (contentItem.listName) { contentItem.items = _.cloneDeep(listService[contentItem.listName]); }
-      if (contentItem.systemName) {
-        contentItem.val = contentItem.val || schoolService.school[contentItem.systemName];
-        if (contentItem.type === 'slider') contentItem.index = contentItem.val; //*** WIP
-      }
+      contentItem.parent = section;
+      contentItemsIndex.push(contentItem);
+      contentItem.absoluteWeight = contentItem.weight/section.totalChildWeight * (section.absoluteWeight || 1) || 0;
     });
+  });
+  o.contentItemsIndex = contentItemsIndex;
+
+  //decorate structure with possible value lists and values from the source data
+  _.each(o.contentItemsIndex, function(contentItem) {
+    if (contentItem.listName) { contentItem.items = _.cloneDeep(listService[contentItem.listName]); }
+    if (contentItem.systemName) { contentItem.val = contentItem.val || schoolService.school[contentItem.systemName]; }
   });
 
   //special tweaks 2 (post-decoration)
-  var replaceNickname = function(o, name) { o[name] = o[name].replace('[schoolNickname]', schoolService.school.initials); };
+  var replaceNickname = function(o, name) { o[name] = o[name].replace('[schoolNickname]', schoolService.school.nickname); };
   var replaceCity = function(o, name) { o[name] = o[name].replace('[city]', schoolService.school.cityName); };
   var replaceCountry = function(o, name) { o[name] = o[name].replace('[country]', schoolService.school.countryName); };
   replaceNickname(section1pt1, 'title');
@@ -576,10 +407,31 @@ thSchoolDashboardAppModule.factory('structureService', function (hierarchyServic
   return o;
 });
 
-thSchoolDashboardAppModule.factory('schoolService', function () {
-  //*** WIP
-  var o = {"type":1,"uploadToken":"0adbb0ee55c97e656ebdbe62b27ce265","token":"5afd5cf43ad092f70e6d1e1286e05ade","school":{"id":3176,"city":571,"type":1,"religiousAffiliation":8,"genderRatio":1,"currency":1,"pensionScheme":1,"fundingType":1,"name":"American School of Durango","active":1,"alias":"/Central_America/Mexico/Durango/American_School_of_Durango","address1":"Francisco Sarabia #416 ","address2":"..","address3":"","website":"www.cadurango.edu.mx/","email":"colegio_americano@cadurango.edu.mx","phone":"(618) 813-36-36","startTime":"8:00 a.m.","endTime":"2:15 p.m.","newYearMonth":8,"headTeacher":"Mr. Joseph Castillejo","studentsCoverLessons":0,"hpwExtraCurricular":2.0,"hpwWeekDayLessons":30.0,"hpwWeekendLessons":0.0,"intStudentsTotal":493,"intStudentsPreSchool":122,"intStudentsPrimary":222,"intStudentsSecondary":149,"intAvgStudentsPreSchool":20,"intAvgStudentsPrimary":18,"intAvgStudentsSecondary":18,"pintStudents":10,"pintStaff":10,"pintCintWhiteBoards":100,"intCpRooms":3,"acceptsTeflTeachers":0,"payBoe":1,"cpd":"","contractLength":2,"fhipCountry":1,"workIncentive":"There are many benefits connected with the two-year contracts of employment with the American School of Durango. Contract days: 185 days of school for students and 200 days for teachers and staff.  Your salary will be equally divided and paid over a full twelve-month period, so there are no long gaps where you will not be paid.  We have an excellent holiday schedule giving teachers and staff ample time to visit the many historic sights and destinations of Mexico or go home to the US or Canada.  \r\nWhat we are looking for are good motivated teachers to help us grow and build for the future.\r\nThe real bonus of the school is the kids â€“ they are great!  ","selectiveYear":1,"acClassRoom":3,"supportOffered":"","verifiedBySchool":1,"completionLevel":75.0,"initials":"ASOD","accreditations":[1717],"curriculumTypes":[2019,2020],"facilities":[3934,3935,3936,3937],"acceptedTeacherQualifications":[1953,1954,1955,1956,1957,1958,1959,1960],"passportTypes":[2348,2349,2350,2351,2352,2353],"benefits":[4285,4286,4287,4288,4289,4290,4291,4292,4293],"languages":[2821,2822,2823],"academicSystems":[1813],"attractions":[2468,2469,2470,2471,2472,2473,2474],"jobs":[{"id":926,"subject":32,"position":1,"startDate":"2013-08-14","deadline":"2013-07-24","furtherInfo":"A General Science Middle to High School teacher is needed ASAP to teach at this vibrant school in Mexico. IB experience preferred. Please contact alexistoye@teacherhorizons.com if you are interested.","netSalary":0.0,"taxRate":0.0,"contractLength":0.0,"title":"Science teacher, Middle/High School"},{"id":982,"subject":39,"position":6,"startDate":"2013-08-26","deadline":"2013-07-24","furtherInfo":"To apply for this position or request more information please contact John Regan on johnregan@teacherhorizons.com","netSalary":0.0,"taxRate":0.0,"contractLength":0.0,"title":"Head of Elementary"}],"images":[{"id":2229,"resource":"/static/media/schools/3176/images/13285.jpg","reference":"Durango.jpg"},{"id":2230,"resource":"/static/media/schools/3176/images/13286.jpg","reference":"durango1.JPG"}],"ratings":[]}};
+
+thSchoolDashboardAppModule.factory('schoolService', function($http, configService) {
+  //initialise
+  var o = {};
+
+  //*** TEMP
+  o = {"type":1,"uploadToken":"0adbb0ee55c97e656ebdbe62b27ce265","token":"5afd5cf43ad092f70e6d1e1286e05ade","school":{"id":3176,"city":571,"type":1,"religiousAffiliation":8,"genderRatio":1,"currency":1,"pensionScheme":1,"fundingType":1,"name":"American School of Durango","active":1,"alias":"/Central_America/Mexico/Durango/American_School_of_Durango","address1":"Francisco Sarabia #416 ","address2":"..","address3":"","website":"www.cadurango.edu.mx/","email":"colegio_americano@cadurango.edu.mx","phone":"(618) 813-36-36","startTime":"8:00 a.m.","endTime":"2:15 p.m.","newYearMonth":8,"headTeacher":"Mr. Joseph Castillejo","studentsCoverLessons":0,"hpwExtraCurricular":2.0,"hpwWeekDayLessons":30.0,"hpwWeekendLessons":0.0,"intStudentsTotal":493,"intStudentsPreSchool":122,"intStudentsPrimary":222,"intStudentsSecondary":149,"intAvgStudentsPreSchool":20,"intAvgStudentsPrimary":18,"intAvgStudentsSecondary":18,"pintStudents":10,"pintStaff":10,"pintCintWhiteBoards":100,"intCpRooms":3,"acceptsTeflTeachers":0,"payBoe":1,"cpd":"","contractLength":2,"fhipCountry":1,"workIncentive":"There are many benefits connected with the two-year contracts of employment with the American School of Durango. Contract days: 185 days of school for students and 200 days for teachers and staff. Your salary will be equally divided and paid over a full twelve-month period, so there are no long gaps where you will not be paid. We have an excellent holiday schedule giving teachers and staff ample time to visit the many historic sights and destinations of Mexico or go home to the US or Canada. \r\nWhat we are looking for are good motivated teachers to help us grow and build for the future.\r\nThe real bonus of the school is the kids â€“ they are great! ","selectiveYear":1,"acClassRoom":3,"supportOffered":"","verifiedBySchool":1,"completionLevel":75.0,"initials":"ASOD","accreditations":[1717],"curriculumTypes":[2019,2020],"facilities":[3934,3935,3936,3937],"acceptedTeacherQualifications":[1953,1954,1955,1956,1957,1958,1959,1960],"passportTypes":[2348,2349,2350,2351,2352,2353],"benefits":[4285,4286,4287,4288,4289,4290,4291,4292,4293],"languages":[2821,2822,2823],"academicSystems":[1813],"attractions":[2468,2469,2470,2471,2472,2473,2474],"jobs":[{"id":926,"subject":32,"position":1,"startDate":"2013-08-14","deadline":"2013-07-24","furtherInfo":"A General Science Middle to High School teacher is needed ASAP to teach at this vibrant school in Mexico. IB experience preferred. Please contact alexistoye@teacherhorizons.com if you are interested.","netSalary":0.0,"taxRate":0.0,"contractLength":0.0,"title":"Science teacher, Middle/High School"},{"id":982,"subject":39,"position":6,"startDate":"2013-08-26","deadline":"2013-07-24","furtherInfo":"To apply for this position or request more information please contact John Regan on johnregan@teacherhorizons.com","netSalary":0.0,"taxRate":0.0,"contractLength":0.0,"title":"Head of Elementary"}],"images":[{"id":2229,"resource":"/static/media/schools/3176/images/13285.jpg","reference":"Durango.jpg"},{"id":2230,"resource":"/static/media/schools/3176/images/13286.jpg","reference":"durango1.JPG"}],"ratings":[]}};
   o.school.educationLevel = 2;
+  o.school.nickname = o.school.initials;
+
+  //get data
+  o.getAndSetData = function() {
+    var getDataFromServer = $http.get('school.json');
+    //var getDataFromServer = $http.post(configService.requests.urls.school, dataToPost, configService.requests.postConfig);
+    var setData = function(response) {
+      o.school = response.data.school;
+
+      //*** temp stuff
+      o.school.educationLevel = 2;
+      o.school.nickname = o.school.initials;
+      return response;
+    };
+    return getDataFromServer.then(setData);
+  };
+
   return o;
 });
 
@@ -591,5 +443,26 @@ thSchoolDashboardAppModule.factory('listService', function () {
   o.percentages = [{ id: 0, name: 0}, { id: 5, name: 5}, { id: 10, name: 10}, { id: 0, name: '...'}];
   o.teacherNationalities = [{ id: 1, name: 'Nationality 1'}, { id: 2, name: 'Nationality 2'}, { id: 3, name: 'Nationality 3'}, { id: 4, name: 'Nationality 4'}, { id: 5, name: 'Nationality 5'}, { id: 6, name: 'Nationality 6'}, { id: 7, name: 'Nationality 7'}, { id: 8, name: 'Nationality 8'} ];
   o.allWorldCurrencies = [{ id: 1, name: 'WIP'} ];
+
+  //sort all lists (ideally these would come sorted this way already)
+  o.academicSystems = _.sortBy(o.academicSystems, 'system');
+  o.acceptedTeacherQualifications = _.sortBy(o.acceptedTeacherQualifications, 'qualification');
+  o.accreditations = _.sortBy(o.accreditations, 'type');
+  o.allWorldCurrencies = _.sortBy(o.allWorldCurrencies, 'currency');
+  o.attractions = _.sortBy(o.attractions, 'attraction');
+  o.currencies = _.sortBy(o.currencies, 'currency');
+  o.curriculums = _.sortBy(o.curriculums, 'title');
+  o.educationLevels = _.sortBy(o.educationLevels, 'name');
+  o.facilities = _.sortBy(o.facilities, 'facility');
+  o.flightAllowances = _.sortBy(o.flightAllowances, 'allowance');
+  o.fundingTypes = _.sortBy(o.fundingTypes, 'type');
+  o.genderRations = _.sortBy(o.genderRations, 'ratio');
+  o.languages = _.sortBy(o.languages, 'name');
+  o.months = _.sortBy(o.months, 'val');
+  o.pensionSchemes = _.sortBy(o.pensionSchemes, 'name');
+  o.religiousAffiliations = _.sortBy(o.religiousAffiliations, 'affiliation');
+  o.rellocationAllowances = _.sortBy(o.rellocationAllowances, 'allowance');
+  o.teacherNationalities = _.sortBy(o.teacherNationalities, '(blank)');
+
   return o;
 });

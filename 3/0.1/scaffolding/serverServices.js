@@ -387,8 +387,10 @@ thServerModule.run(function($httpBackend, $resource, $q, $timeout, serverListsSe
   var basicLists = serverListsService.basicLists;
 
   //Note: url rule - all lower case, words separated with a hyphen
+
+  //pass-throughs
     $httpBackend.whenGET(/.html/).passThrough();
-    $httpBackend.whenJSONP(/.json/).passThrough();
+    $httpBackend.whenGET(/.json/).passThrough();
   //teachers
     $httpBackend.whenPOST('/admin/service/teachers').respond(teachersResponse);
     $httpBackend.whenPOST('/admin/service/process-teacher').respond(200, 'processed');

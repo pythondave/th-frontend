@@ -1,0 +1,16 @@
+<div content-item ng-repeat="contentItem in contentItems" model="contentItem"></div>
+<div class="nav-arrow-container">
+  <span>
+    <span class="nav-arrow nav-arrow-left" ng-class="hierarchy.level3.previous.path ? '' : 'nav-arrow-disabled'"
+      ng-click="!hierarchy.level3.previous.path || go(hierarchy.level3.previous.path)"
+      popover="{{'Go to previous page (' + hierarchy.level3.previous.title + ')' || 'At start'}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300">
+      <i class="icon-chevron-sign-left"></i>
+    </span>
+    <span class="nav-arrow nav-arrow-right"  ng-class="hierarchy.level3.next.path ? '' : 'nav-arrow-disabled'; pageIsValid ? '' : 'nav-arrow-warning'"
+      ng-click="!hierarchy.level3.next.path || go(hierarchy.level3.next.path)"
+      popover="{{'Go to next page (' + hierarchy.level3.next.title + ')' || 'At end'}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300">
+      <i class="icon-chevron-sign-right"></i>
+    </span>
+  </span>
+</div>
+<div>{{pageIsValid()}}</div>

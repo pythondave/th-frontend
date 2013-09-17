@@ -1,0 +1,6 @@
+<div>
+  <div ng-show="!model.items" style="color: red;">List '{{model.listName}}' not found</div>
+  <span ng-repeat="item in model.items">
+    <button ng-show="item[model.listColumn]!='-select'" class="btn" ng-class="item.isSelected ? 'btn-success' : ''" style="margin: 5px;" ng-click="tryToToggleItem(item)">{{item[model.listColumn]}}</button>
+  </span>
+</div>
