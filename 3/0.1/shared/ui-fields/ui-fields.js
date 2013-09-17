@@ -172,7 +172,7 @@ thUiFieldsModule.directive('fromFew', function(configService, helperService) {
   };
 });
 
-thUiFieldsModule.directive('slider', ['configService','$document', 'helperService', function(configService, $document, helperService) {
+thUiFieldsModule.directive('slider', ['configService','$document', 'helperService', '$timeout', function(configService, $document, helperService, $timeout) {
   return {
     restrict: 'EA',
     replace: true,
@@ -180,7 +180,7 @@ thUiFieldsModule.directive('slider', ['configService','$document', 'helperServic
     scope: { model: '=' }, //currently opinionated
     link: function postLink(scope, element, attrs) {
       //initialise
-      var dragging = false, startPointX = 0, x = 0;
+      var dragging = false, startPointX = 0, x = 0; //x: proportion along slider
       var mainElement = element.children(0);
 
       scope.model = scope.model || {};
@@ -210,12 +210,26 @@ thUiFieldsModule.directive('slider', ['configService','$document', 'helperServic
         scope.x = x;
       });
 
-      scope.mouseDown = function($event) {
+      var updateScope = function(x) {
+        x = (x < 0 ? 0 : (x > 1 ? 1 : x)); //force into 0-1 range
+        scope.model.index = Math.floor((scope.model.items.length-1) * x * 1.001);
+        scope.model.val = scope.model.items[scope.model.index].val;
+        $timeout(function() {});
+        scope.x = x;
+      };
+
+      scope.sliderMouseDown = function($event) {
+        if (dragging) return;
+        var x = $event.offsetX / mainElement.outerWidth();
+        updateScope(x);
+      };
+
+      scope.handleMouseDown = function($event) {
         dragging = true;
         startPointX = $event.pageX;
 
         $document.on('mousedown', function($event) {
-          $event.preventDefault();
+          $event.preventDefault(); //avoids some unwanted cursors in some browsers
         });
     
         // Bind to full document, to make move easier (not to lose focus on y axis)
@@ -229,10 +243,7 @@ thUiFieldsModule.directive('slider', ['configService','$document', 'helperServic
           else if (x > 1) { x = 1; }
           else { startPointX = $event.pageX; }
 
-          scope.model.index = Math.floor((scope.model.items.length-1) * x * 1.001);
-          scope.model.val = scope.model.items[scope.model.index].val;
-          scope.$apply();
-          scope.x = x;
+          updateScope(x);
         });
 
         $document.mouseup(function(){

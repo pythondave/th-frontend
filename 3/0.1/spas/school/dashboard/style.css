@@ -91,6 +91,10 @@ hr { margin: 10px 0; }
 /* /content-items */
 
 /* slider content item */
+.slider {
+  cursor: pointer;
+}
+
 .slider-main {
   position: relative;
   text-align: left;
@@ -108,7 +112,7 @@ hr { margin: 10px 0; }
   background-color: #2d6987;
   top: -0.7em;
   margin: 0 2em 0 -0.2em;
-  cursor: pointer;
+  cursor: e-resize;
 }
 
 .slider-range {

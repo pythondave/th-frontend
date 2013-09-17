@@ -1,7 +1,7 @@
-<div class="slider">
+<div class="slider" ng-mousedown="sliderMouseDown($event)">
   <div class="slider-main">
     <div class="slider-range" ng-style="{ width: x*100 + '%' }"></div>
-    <a class="slider-handle" ng-style="{ left: x*100 + '%' }" ng-mousedown="mouseDown($event)"></a>
+    <a class="slider-handle" ng-style="{ left: x*100 + '%' }" ng-mousedown="handleMouseDown($event)"></a>
   </div>
   <span style="display: inline-block; margin: 0 0 0 5px;">{{model.val}}{{model.val==undefined ? '' : model.suffix}}</span>
 </div>
