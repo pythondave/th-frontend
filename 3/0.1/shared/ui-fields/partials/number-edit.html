@@ -3,7 +3,8 @@
     ng-blur="model.isEditMode=false" restrict-input="{{model.restrictInputSettings}}"></input>
 
   <span ng-show="!model.isEditMode" style="cursor: pointer" ng-click="model.isEditMode=true"
-    tooltip="{{model.tip || 'Click to edit number'}}">{{model.val | number}}</span>
+    tooltip="{{model.tip || 'Click to edit number'}}">{{model.val | fieldFormat:model}}
+  </span>
 
   <span content-item-icons model="model"></span>
 </div>

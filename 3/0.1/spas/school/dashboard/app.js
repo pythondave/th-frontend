@@ -4,32 +4,31 @@ var thSchoolDashboardAppModule = angular.module('thSchoolDashboardAppModule',
    'thShowcaseModule' //local, prototype only
   ]);
 
-//navbar (top menu)
-thSchoolDashboardAppModule.controller('NavBarCtrl', function($scope, $state, structureService, appLoading) {
-  $scope.navBarUrl = 'partials/nav-bar.html';
-  $scope.sections = structureService.sections;
-  $scope.$on('$stateChangeStart', function(){
-    appLoading.loading();
-  });
-  $scope.$on('$stateChangeSuccess', function() {
-    structureService.hierarchy.select($state.params);
-  });
-});
-
 //states (routes) - ref: https://github.com/angular-ui/ui-router
 thSchoolDashboardAppModule.config(function($stateProvider, $urlRouterProvider) {
+
   $urlRouterProvider.when('/default.html', '/');
   $urlRouterProvider.when('', '/');
   $urlRouterProvider.when('/', '/1');
   $urlRouterProvider.when('/1', '/1/1/1');
   $urlRouterProvider.when('/2', '/2/1/1');
 
+  var structure;
+  var getStructure = function(initService) {
+    structure = structure || initService.init();
+    return structure;
+  };
+
   $stateProvider
     .state('level1', {
-      url: '/:level1', templateUrl: 'partials/section.html', resolve: { }, controller: 'Level1Controller'
+      url: '/:level1', templateUrl: 'partials/level1.html', controller: 'Level1Controller',
+      resolve: { structure: getStructure } //ensures initial data is all to go ready before the page loads
     })
-    .state('level1.main', {
-      url: '/:level2/:level3', templateUrl: 'partials/content-items.html', controller: 'PageCtrl'
+    .state('level1.level2', { //*** TODO: level 2 menu is reloading on change within it - see if I can rework this
+      url: '/:level2', templateUrl: 'partials/level2.html', controller: 'Level2Controller'
+    })
+    .state('level1.level2.level3', {
+      url: '/:level3', templateUrl: 'partials/level3.html', controller: 'Level3Controller'
     });
 });
 

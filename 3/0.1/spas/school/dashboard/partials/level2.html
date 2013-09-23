@@ -39,9 +39,15 @@
       </div>
     </accordion-group>
   </accordion>
-  <div style="font-size: 11px;">
+  <div ng-show="isDevMode" style="font-size: 11px; word-wrap: break-word;">
     <hr/>
-    <b>Server log (dev/demo only)</b>
+    <b>Links</b>
+    <a href="/th-frontend/3/0.1/scaffolding/server/json/lists.json" target="_blank">lists.json</a>
+    <a href="/th-frontend/3/0.1/scaffolding/server/json/school.json" target="_blank">school.json</a>
+    <a href="/th-frontend/3/0.1/scaffolding/server/json/city.json" target="_blank">city.json</a>
+
+    <hr/>
+    <b>Server log</b>
     <button class="btn btn-small" ng-click="serverService.sentToServer = []"
       style ="padding: 0px 3px; margin: -3px 0 0 5px;"}>Clear</button>
     <ul>
@@ -50,6 +56,6 @@
   </div>
 </div>
 <div class="main-container span9">
-  <div ui-view class="main-view form-horizontal"></div>
+  <div ui-view class="level3-view form-horizontal"></div>
   <!-- *** TODO: get animation working again ng-animate="'main-view'" ng-class="{ 'main-view-animation-hack1': useAnimationHack1 }"-->
 </div>

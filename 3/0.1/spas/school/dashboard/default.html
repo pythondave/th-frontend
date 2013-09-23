@@ -18,20 +18,25 @@
 </head>
 
 <body>
-  <div class="container">
-    <div ng-controller="NavBarCtrl" ng-include="navBarUrl" class="ng-cloak navbar navbar-inverse navbar-fixed-top"></div>
-    <div class="row-fluid" ui-view></div>
+  <div ui-view class="container">
+    <div style="width: 40%; min-width: 200px; margin:50px auto;">
+      <p style="color: silver; font-size: 30px;">Loading...</p>
+      <div style="width: 40%; min-width: 50px; margin: 30px auto;">
+        <img src="../../../style/spinner2.gif"></img>
+      </div>
+      <p>As a team of former Heads and leaders of international schools, we are building a community of inspiring teachers to connect with the best schools around the world.</p>
+    </div>
   </div>
-  
+
   <!--external scripts hosted on cdns-->
     <!--jquery-->
       <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <!--lodash-->
-      <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/1.2.1/lodash.min.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.0.0/lodash.min.js"></script>
     <!--twitter bootstrap *** See note at top
       <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script> -->
     <!--angular (official)-->
-      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
       <script src="http://cdn.jsdelivr.net/angularjs/1.1.2/angular-resource.min.js"></script>
     <!--angular (community)-->
       <!--<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.5.0.js"></script> (hosted locally)-->
@@ -68,7 +73,7 @@
 
   <!--prototype only scripts-->
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular-mocks.js"></script>
-  <script src="../../../scaffolding/serverServices.js"></script>
+  <script src="../../../scaffolding/server/serverServices.js"></script>
   <script src="../../../shared/showcase.js"></script>
 </body>
 

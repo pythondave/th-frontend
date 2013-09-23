@@ -108,7 +108,7 @@ thAdminDashboardAppModule.controller('JobsCtrl', function($scope, jobsService) {
 
 
 //Job
-thAdminDashboardAppModule.controller('JobMenuCtrl', function($scope, $timeout, $window, $dialog, $stateParams, applicationsService, $location) {
+thAdminDashboardAppModule.controller('JobMenuCtrl', function($scope, $timeout, $window, $dialog, $stateParams, applicationsService, $location, configService) {
   $scope.back = function() { $timeout(function() { $window.history.back(); }); };
 
   $scope.addCandidate = function() {
@@ -119,7 +119,7 @@ thAdminDashboardAppModule.controller('JobMenuCtrl', function($scope, $timeout, $
       applicationsService.addApplication({ jobId: $stateParams.jobId, teacherId: response.teacher.id });
     };
 
-    _.extend(opts, { templateUrl: 'jobs/job/addCandidate.html?c', controller: 'JobAddCandidateController' });
+    _.extend(opts, { templateUrl: configService.root + '/jobs/job/addCandidate.html', controller: 'JobAddCandidateController' });
     $dialog.dialog(opts).open().then(afterClose);
   };
 

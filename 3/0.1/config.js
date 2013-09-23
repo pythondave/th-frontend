@@ -30,7 +30,22 @@ thConfigModule.value('configService', function() {
 
     //shared
       basicLists: requestUrlRoot + 'basic-lists',
-      schoolNames: requestUrlRoot + 'school-names'
+      schoolNames: requestUrlRoot + 'school-names',
+
+    //lists
+      lists: '/school/service/lists',
+
+    //schools
+      school: '/school/service/school',
+      processSchool: '/school/service/process-school',
+      processSchoolRating: '/school/service/process-school-rating',
+      processSchoolBenefit: '/school/service/process-school-benefit',
+
+    //cities
+      city: '/school/service/city',
+      processCity: '/school/service/process-city',
+      processCityLivingCost: '/school/service/process-city-living-cost',
+      processCityLink: '/school/service/process-city-link'
   };
   return o; // function() { return o; };
 }());

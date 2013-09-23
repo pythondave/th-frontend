@@ -1,12 +1,13 @@
 <div class="content-item-header">
   <span class="content-item-icon" ng-show="model.icon"><i class="icon-{{model.icon}}"></i></span>
-  <span class="content-item-title">{{model.title}}</span>
+  <span class="content-item-title" style="display: inline;">{{model.title}}</span>
+
   <span class="content-item-tip" ng-show="model.tip"
     popover="{{model.tip}}" popover-placement="top" popover-trigger="mouseenter">
     <i class="icon-info-sign"></i>
   </span>
   <span class="content-item-flag" ng-show="model.isDirty"
-    popover="{{model.isDirtyTip}}" popover-placement="top" popover-trigger="mouseenter">
+    popover="{{model.isValid ? model.isDirtyTip : (model.isNotValidTip || 'This doesn\'t appear to be valid. Please change it so it can be saved.')}}" popover-placement="top" popover-trigger="mouseenter">
     <i class="icon-flag"></i>
   </span>
   <span class="content-item-being-processed" ng-show="!model.isDirty && model.isBeingProcessed"
@@ -17,5 +18,8 @@
     popover="{{model.isRecentlyProcessedTip}}" popover-placement="top" popover-trigger="mouseenter">
     <i class="icon-ok" style="color: #468847;"></i>
   </span>
+
+  <span ng-show="model.isDevMode" style="font-size: 10px; color: red;">{{model.val}}</span>
+
   <span class="content-item-description">{{model.description}}</span>
 </div>

@@ -7,7 +7,7 @@ var thServerModule = angular.module('thServerModule', ['thConfigModule', 'thGene
 
 thServerModule.factory('delayResponseInterceptor', function($q, $timeout, configService) {
   //Can be used to delay all mock responses by a typical (and occasionally atypical) random amount, or fail entirely at a certain rate
-  var serverSpeedMultiplier = _.firstDefined(configService.serverSpeedMultiplierOverride, configService.requests.serverSpeedMultiplier, 1); //reduce during dev so things work faster (say 0.2), increase (to say 1) when demoing
+  var serverSpeedMultiplier = _.firstDefined(configService.serverSpeedMultiplierOverride, configService.requests.serverSpeedMultiplier, 0.5); //reduce during dev so things work faster (say 0.2), increase (to say 1) when demoing
   configService.local = { //configure special values for particular requests here
     //delayLengthMultiplier: standard random server response delay will be multiplied by this (e.g. for requests which are normally longer, say)
     //errorRate: 0: no errors; 1 error every time;
@@ -54,7 +54,7 @@ thServerModule.factory('delayResponseInterceptor', function($q, $timeout, config
     var responseInfo;
     var getResponseInfo = function(response) {
       if (configService.local.logRequestsToConsole && response.config.method === 'POST') {
-        console.log('SERVER REQUEST: ', response.config.url, 'PARAMS: ', response.config.data);
+        console.log('SERVER REQUEST: ', response.config.url, 'PARAMS: ', response.config.data, response.config.url.slice(-5));
       }
       responseInfo = response;
       return httpRequest; //use the same promise
@@ -279,8 +279,12 @@ var deserializeParams = function(p){ //see https://github.com/pythondave/th-admi
 };
 
 //set dummy server responses to posts and gets
-thServerModule.run(function($httpBackend, $resource, $q, $timeout, serverListsService, randomDataService, configService) {
-  //note: $httpBackend requests are at the bottom
+thServerModule.run(function($httpBackend, $resource, $q, $timeout, serverListsService, randomDataService, configService, $http, $rootScope) {
+  //pass-throughs
+    $httpBackend.whenGET(/.html/).passThrough();
+    $httpBackend.whenGET(/.json/).passThrough();
+
+  //note: custom $httpBackend requests are at the bottom
 
   //dummy responses (in the form of javascript objects)
 
@@ -386,11 +390,25 @@ thServerModule.run(function($httpBackend, $resource, $q, $timeout, serverListsSe
 
   var basicLists = serverListsService.basicLists;
 
+  //lists
+  var mockLists;
+  $http.get('/th-frontend/3/0.1/scaffolding/server/json/lists.json').then(function(response) { mockLists = response; });
+  var listsResponse = function() { return [200, ($rootScope.server ? $rootScope.server.mockLists : mockLists.data)]; };
+
+  //schools
+  var mockSchool;
+  $http.get('/th-frontend/3/0.1/scaffolding/server/json/school.json').then(function(response) { mockSchool = response; });
+  var schoolResponse = function() { return [200, ($rootScope.server ? $rootScope.server.mockSchool : mockSchool.data)]; };
+  //*** TODO - change the above line to the below line and remove the 'mock' stuff from services.js (just realised at 5:45am the below might work, but need to test)
+  //var schoolResponse = function() { return [200, mockSchool.data]; };
+
+  //cities
+  var mockCity;
+  $http.get('/th-frontend/3/0.1/scaffolding/server/json/city.json').then(function(response) { mockCity = response; });
+  var cityResponse = function() { return [200, ($rootScope.server ? $rootScope.server.mockCity : mockCity.data)]; };
+
   //Note: url rule - all lower case, words separated with a hyphen
 
-  //pass-throughs
-    $httpBackend.whenGET(/.html/).passThrough();
-    $httpBackend.whenGET(/.json/).passThrough();
   //teachers
     $httpBackend.whenPOST('/admin/service/teachers').respond(teachersResponse);
     $httpBackend.whenPOST('/admin/service/process-teacher').respond(200, 'processed');
@@ -407,4 +425,20 @@ thServerModule.run(function($httpBackend, $resource, $q, $timeout, serverListsSe
   //shared
     $httpBackend.whenPOST('/admin/service/basic-lists').respond(200, basicLists);
     $httpBackend.whenPOST('/admin/service/school-names').respond(200, schoolNames);
+  //lists
+    $httpBackend.whenPOST('/school/service/lists').respond(listsResponse);
+  //schools
+    $httpBackend.whenPOST('/school/service/school').respond(schoolResponse);
+    $httpBackend.whenPOST('/school/service/process-school').respond(200, 'processed');
+    $httpBackend.whenPOST('/school/service/process-school-rating').respond(200, 'processed');
+    $httpBackend.whenPOST('/school/service/process-school-benefit').respond(200, 'processed');
+  //city
+    $httpBackend.whenPOST('/school/service/city').respond(cityResponse);
+    $httpBackend.whenPOST('/school/service/process-city').respond(200, 'processed');
+    $httpBackend.whenPOST('/school/service/process-city-living-cost').respond(200, 'processed');
+    $httpBackend.whenPOST('/school/service/add-city-link').respond(200, { "id": 7 });
+    $httpBackend.whenPOST('/school/service/process-city-link').respond(200, 'processed');
+
+  //dummy
+    $httpBackend.whenPOST('dummy').respond(200, 'processed');
 });

@@ -3,7 +3,20 @@
     "token": "8171e583c5340c30604f32fcdcc43a42",
     "city": {
         "id": 146,
-        "city": "Porto",
+        "name": "Porto",
+        "country": 54,
+        "currency": 4,
+        "internationalCurrency": 4,
+        "population": 120000,
+        "language": 6,
+        "attractions": [
+            1,
+            3,
+            5,
+            7,
+            9,
+            11
+        ],
         "livingCosts": [
             {
                 "id": 4,
@@ -36,34 +49,46 @@
         ],
         "links": [
             {
-                "id": 10,
-                "url": "www.portocityguide.com/",
-                "name": "Porto City Guide",
+                "id": 101,
+                "url": "www.lonelyplanet.com/portugal/the-north/porto",
+                "name": "Lonely Planet Guide",
                 "category": 1
             },
             {
-                "id": 11,
-                "url": "www.10best.com/Porto,Portugal/Restaurants",
-                "name": "10 Best Restaurant Guide",
-                "category": 1
-            },
-            {
-                "id": 9,
+                "id": 102,
                 "url": "www.portolazer.pt",
                 "name": "Entertainment and Leisure",
-                "category": 1
+                "category": 2
             },
             {
-                "id": 13,
-                "url": "www.oportocricketclub.com",
-                "name": "Oporto British Club",
-                "category": 1
-            },
-            {
-                "id": 12,
+                "id": 103,
                 "url": "www.stcp.pt",
                 "name": "Public Transport",
-                "category": 1
+                "category": 3
+            },
+            {
+                "id": 104,
+                "url": "www.10best.com/Porto,Portugal/Restaurants",
+                "name": "10 Best Restaurant Guide",
+                "category": 4
+            },
+            {
+                "id": 105,
+                "url": "www.portocityguide.com/",
+                "name": "Porto City Guide",
+                "category": 5
+            },
+            {
+                "id": 201,
+                "url": "www.oportocricketclub.com",
+                "name": "Oporto British Club",
+                "category": 2
+            },
+            {
+                "id": 202,
+                "url": "www.google.com",
+                "name": "Google",
+                "category": 3
             }
         ]
     }

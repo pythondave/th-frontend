@@ -84,6 +84,24 @@ thGenericModule.run(function($rootScope) {
     },
     isDigitsOnly: function(s) { return new RegExp(/^[0-9]*$/).test(s); },
     isValidMoneyValue: function(s) { return new RegExp(/^(\d*\.\d{1,2}|\d+)$/).test(s); },
-    mergeDefaults: function(o, defaultValues) { o = o || {}; return _.defaults(o, defaultValues); } //tweak of the defaults function to allow a non-initial object
+    mergeDefaults: function(o, defaultValues) { o = o || {}; return _.defaults(o, defaultValues); }, //tweak of the defaults function to allow a non-initial object
+    nestedForEach: function(collection1, collection2, fn) { //syntactic sugar for a forEach within a forEach
+      _.forEach(collection1, function(item1) { _.forEach(collection2, function(item2) { fn(item1, item2); }); });
+    },
+    mapToInts: function(arr) { return _.map(arr, function(item) { return _.parseInt(item); }); },
+    convertToArray: function(x, mapToInts) { //converts x to an array
+      if (_.isArray(x)) return x;
+      if (_.isString(x)) return (mapToInts ? _.mapToInts(x.split(',')) : x.split(','));
+      if (_.isNumber(x)) return [x];
+    },
+    markMatchingCollectionItems: function(collection, valuesToMark, propertyToMatch, markerPropertyName) {
+      //e.g. f([{id:4},{id:5},{id:6}], 5) => f([{id:4},{id:5,isSelected:true},{id:6}], 5)
+      propertyToMatch = propertyToMatch || 'id';
+      markerPropertyName = markerPropertyName || 'isSelected';
+      _.setAll(collection, markerPropertyName, false);
+      _.nestedForEach(collection, _.convertToArray(valuesToMark, true), function(item1, item2) {
+        if (item1[propertyToMatch] === item2) item1[markerPropertyName] = true;
+      });
+    }
   });
 });

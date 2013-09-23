@@ -9,10 +9,15 @@ Content item:
   * See spas/school/dashboard for a good example of edit pages built using these directives
 */
 
-thContentItemsModule.factory('contentItemService', function ($timeout, serverService) {
+thContentItemsModule.factory('contentItemService', function ($timeout, serverService, helperService) {
   var o = {};
 
-  var contentItemTypes = { //possible content item types and useful properties (throttling wait times)
+  var globalDefaultVals = { title: 'This is a title', description: undefined, systemName: '', weight: 1 };
+
+  var contentItemTypes = { //possible content item types and defaults (weight, throttling wait times)
+    header: { weight: 0 },
+    list: { weight: 0 },
+    text: { weight: 0 },
     dateEdit: { wait: 1 },
     emailEdit: { wait: 2000 },
     fileUpload: { wait: 1 },
@@ -29,11 +34,16 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
   };
 
   o.ContentItem = function (initialVals) {
-    var defaultVals = { title: 'This is a title', description: undefined, systemName: '', weight: 1 };
-    _.assign(this, defaultVals, initialVals || {});
-    if (!contentItemTypes[this.type]) { console.log('Content item type not found: ', this.type); return; }
-    var wait = contentItemTypes[this.type].wait;
-    this.processChangeUsingThrottle = _.throttle(this.processChange, wait, {leading: false});
+    var typeObject = contentItemTypes[initialVals.type];
+    if (!typeObject) { console.log('Content item type not found: ', initialVals.type); return; }
+    _.assign(this, globalDefaultVals, typeObject, initialVals || {});
+    this.processChangeUsingThrottle = _.throttle(this.processChange, this.wait, {leading: false});
+  };
+
+  o.ContentItem.prototype.getDataToPost = function() {
+    var o = this.fixedData || {};
+    o[this.systemName] = this.val;
+    return o;
   };
 
   o.ContentItem.prototype.processChange = function() {
@@ -42,15 +52,64 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
     this.isDirty = false; //not dirty as soon as processing starts
     $timeout(function() {});
     var contentItem = this;
-    serverService.sendToServer(this.systemName + '=' + this.val).then(function() {
+    var dataToPost = this.getDataToPost();
+    serverService.sendToServer(this.systemType, dataToPost).then(function() {
       if (contentItem.isDirty) return; //re-dirtied since process started, so can't finish off yet
       contentItem.isBeingProcessed = false;
       contentItem.isRecentlyProcessed = true;
+      $timeout(function() {});
       $timeout(function() { contentItem.isRecentlyProcessed = false; }, 3000); //not recently processed after 3 seconds
     });
   };
 
-  o.ContentItem.prototype.changed = function() {
+  o.ContentItem.prototype.getIsValid = function(val) {
+    if (val === '' || val === undefined) return true;
+    if (this.type === 'dateEdit') { return true; } //*** WIP
+    if (this.type === 'emailEdit') return _.isProbablyValidEmail(val);
+    if (this.type === 'fileUpload') { return true; } //*** WIP
+    if (this.type === 'fromFew') { return true; } //*** WIP
+    if (this.type === 'fromMany') { return true; } //*** WIP
+    if (this.type === 'latLongEdit') { return true; } //*** WIP
+    if (this.type === 'moneyEdit') { return true; } //*** WIP
+    if (this.type === 'numberEdit') {
+      if (this.min && this.val < this.min) return false;
+      if (this.max && this.val > this.max) return false;
+      return (this.allowDecimals ? _.isValidMoneyValue(val) : _.isDigitsOnly(val));
+    } //*** WIP
+    if (this.type === 'ratingEdit') { return true; } //*** WIP
+    if (this.type === 'slider') { return true; } //*** WIP
+    if (this.type === 'textEdit') { return true; } //*** WIP
+    if (this.type === 'timeEdit') { return true; } //*** WIP
+    if (this.type === 'urlEdit') { return true; } //*** WIP
+  };
+
+  o.ContentItem.prototype.init = function(newVal) {
+    this.val = this.val || newVal; //don't change if val already set
+    if (this.type === 'ratingEdit' && this.valueTips) { this.selectionDescription = this.valueTips[this.val-1]; } //*** Not DRY
+    if (this.subType === 'money') {
+      this.allowDecimals = true;
+      this.currencySymbol = this.currencySymbol || '\u00A3';
+    }
+    if (this.type === 'slider') {
+      if (!this.items) {
+        _.defaults(this, { min: 0, max: 100, step: 1 });
+        this.items = helperService.generateList(this.min, this.max, this.step, 'val');
+      }
+      this.index = _.findIndex(this.items, function(item) { return item.val === this.val; }, this);
+    }
+    if (this.type === 'fromFew') {
+      _.markMatchingCollectionItems(this.items, this.val);
+    }
+    this.isValid = this.getIsValid(this.val);
+    if (this.type === 'urlEdit') {
+      //WIP
+    }
+  };
+
+  o.ContentItem.prototype.update = function(newVal) { //set val (if passed) and process the change
+    if (arguments.length > 0) this.val = newVal; //update val if passed
+    if (this.type === 'ratingEdit' && this.valueTips) { this.selectionDescription = this.valueTips[this.val-1]; } //*** Not DRY
+    this.isValid = this.getIsValid(this.val);
     this.isDirty = true;
     this.processChangeUsingThrottle();
   };

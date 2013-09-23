@@ -1,4 +1,5 @@
 <span class="rating-edit">
   <rating value="model.val" max="model.max" readonly="false" on-hover="model.hoverVal=value" on-leave="model.hoverVal=null"></rating>
+  <span style="margin: 0 0 0 15px">{{model.selectionDescription}}</span>
   <div class="content-item-value-tip" ng-show="model.valueTips" style="min-height: 20px;">{{model.valueTips[model.hoverVal-1]}}</div>
 </span>

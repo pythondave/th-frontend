@@ -1,5 +1,9 @@
 <div class="text-edit">
-  <input ng-show="model.isEditMode" type="text" ng-model="model.val" ng-blur="model.isEditMode=false" placeholder="Type something..."></input>
+  <input ng-show="model.isEditMode && (!model.maxLength || model.maxLength <= 80)" type="text"
+    ng-model="model.val" ng-blur="model.isEditMode=false" placeholder="Type something..." maxlength="{{model.maxLength || 80}}"></input>
+
+  <textarea ng-show="model.isEditMode && model.maxLength > 80" rows="5" cols="150" style="width: 80%;"
+    ng-model="model.val" ng-blur="model.isEditMode=false" placeholder="Type something..." maxlength="{{model.maxLength}}"></textarea>
 
   <span ng-show="!model.isEditMode" style="cursor: pointer" ng-click="model.isEditMode=true" tooltip="Click to edit text">{{model.val}}</span>
 

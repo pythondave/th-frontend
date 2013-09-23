@@ -1,5 +1,21 @@
 var thUiFieldsModule = angular.module('thUiFieldsModule', ['thConfigModule']);
 
+thUiFieldsModule.filter('fieldFormat', function(numberFilter, currencyFilter) {
+  return function(val, model) {
+    if (model.type === 'numberEdit') {
+      if (model.subType === 'money') { return currencyFilter(val, model.currencySymbol); }
+      if (model.subType === 'plain') { return val; }
+      if (val === '') return '';
+      return numberFilter(val);
+    }
+    if (model.type === 'slider') {
+      var selectedItem = model.items[model.index];
+      if (selectedItem) return (selectedItem.description || (selectedItem.val + (model.suffix ? model.suffix : '')));
+    }
+    return val;
+  };
+});
+
 thUiFieldsModule.directive('timeEdit', function(configService) {
   return {
     restrict: 'A',
@@ -24,7 +40,6 @@ thUiFieldsModule.directive('moneyEdit', function(configService) {
       scope.model.amount.editIconTip = 'Click to add amount';
       scope.model.amount.tip = 'Click to edit amount';
       scope.model.amount.allowDecimals = true;
-      scope.model.amount.changed = scope.model.changed;
     }
   };
 });
@@ -37,8 +52,7 @@ thUiFieldsModule.directive('dateEdit', function(configService, $timeout) {
     scope: { model: '=' },
     link: function(scope, element, attr, ctrl) {
       scope.$watch('model.val', function(newVal, oldVal) {
-        scope.model.isValid = true;
-        if (newVal !== oldVal) scope.model.changed();
+        if (newVal !== oldVal) scope.model.update();
       });
       scope.open = function() {
         $timeout(function() { scope.isOpenNoConflict = true; });
@@ -60,8 +74,7 @@ thUiFieldsModule.directive('emailEdit', function(configService, $timeout) {
       var input = element[0].children[0];
       scope.model.editIconTip = 'Click to add email';
       scope.$watch('model.val', function(newVal, oldVal) {
-        scope.model.isValid = _.isProbablyValidEmail(newVal);
-        if (newVal !== oldVal) { scope.model.changed(); }
+        if (newVal !== oldVal) { scope.model.update(); }
       });
       scope.$watch('model.isEditMode', function(isEditMode) {
         if (isEditMode) $timeout(function() { input.focus(); });
@@ -78,14 +91,16 @@ thUiFieldsModule.directive('urlEdit', function(configService, $timeout) {
     scope: { model: '=' },
     link: function(scope, element, attr, ctrl) {
       scope.model.urlTitle = scope.model.urlTitle || {};
-      scope.model.urlTitle.changed = scope.model.changed;
+      scope.model.urlTitle.update = function() { return scope.model.update(); };
       scope.model.url = scope.model.url || {};
       scope.model.url.showEditIcon = true;
       scope.model.url.isNotValidTip = 'This doesn\'t appear to be a valid URL. Please change it so it can be saved.';
+      scope.model.url.update = function() { return scope.model.update(); };
       scope.$watch('model.url.val', function(newVal, oldVal) {
         scope.model.url.editIconTip = (newVal ? 'Click to edit URL' : 'Click to add URL');
-        scope.model.url.isValid = _.isProbablyValidUrl(newVal);
-        if (newVal !== oldVal) scope.model.changed();
+        scope.model.url.isValid = _.isProbablyValidUrl(newVal) || newVal === '' || newVal === undefined;
+        scope.model.isValid = scope.model.url.isValid && scope.model.urlTitle.isValid;
+        if (newVal !== oldVal) scope.model.update(newVal);
       });
       scope.$watch('model.url.isEditMode', function(isUrlEditMode) {
         if (isUrlEditMode) $timeout(function() { element[0].children[2].focus(); });
@@ -108,8 +123,7 @@ thUiFieldsModule.directive('numberEdit', function(configService, $timeout) {
       scope.model.restrictInputSettings.type = (scope.model.allowDecimals ? 'validMoneyCharsOnly' : 'digitsOnly');
 
       scope.$watch('model.val', function(newVal, oldVal) {
-        scope.model.isValid = (scope.model.allowDecimals ? _.isValidMoneyValue(newVal) : _.isDigitsOnly(newVal)) && newVal!=='';
-        if (newVal !== oldVal) scope.model.changed();
+        if (newVal !== oldVal) scope.model.update();
       });
       scope.$watch('model.isEditMode', function(isEditMode) {
         if (isEditMode) $timeout(function() { input.focus(); });
@@ -125,14 +139,14 @@ thUiFieldsModule.directive('textEdit', function(configService, $timeout) {
     templateUrl: configService.root + '/shared/ui-fields/partials/text-edit.html',
     scope: { model: '=' },
     link: function(scope, element, attr, ctrl) {
-      var input = element[0].children[0];
+      var input1 = element[0].children[0], input2 = element[0].children[1];
       scope.$watch('model.val', function(newVal, oldVal) {
         scope.model.editIconTip = (newVal ? 'Click to edit text' : 'Click to add text');
         scope.model.isValid = true;
-        if (newVal !== oldVal) scope.model.changed();
+        if (newVal !== oldVal) scope.model.update();
       });
       scope.$watch('model.isEditMode', function(isEditMode) {
-        if (isEditMode) $timeout(function() { input.focus(); });
+        if (isEditMode) $timeout(function() { input1.focus(); input2.focus(); });
       });
     }
   };
@@ -146,8 +160,7 @@ thUiFieldsModule.directive('ratingEdit', function(configService) {
     scope: { model: '=' },
     link: function(scope, element, attr, ctrl) {
       scope.$watch('model.val', function(newVal, oldVal) {
-        scope.model.isValid = true;
-        if (newVal !== oldVal) scope.model.changed();
+        if (newVal !== oldVal) scope.model.update();
       });
     }
   };
@@ -164,8 +177,7 @@ thUiFieldsModule.directive('fromFew', function(configService, helperService) {
       scope.tryToToggleItem = function(item) {
         var toggled = helperService.toggleLimitedListItem(scope.model.items, item, {limit: scope.model.limit});
         if (toggled) {
-          scope.model.val = helperService.getListVal(scope.model.items);
-          scope.model.changed();
+          scope.model.update(helperService.getListVal(scope.model.items));
         }
       };
     }
@@ -183,37 +195,19 @@ thUiFieldsModule.directive('slider', ['configService','$document', 'helperServic
       var dragging = false, startPointX = 0, x = 0; //x: proportion along slider
       var mainElement = element.children(0);
 
-      scope.model = scope.model || {};
-
-      if (!scope.model.items) { //initialise items if not already set
-        scope.model.min = scope.model.min || 0;
-        scope.model.max = scope.model.max || 100;
-        scope.model.step = scope.model.step || 1;
-        scope.model.items = helperService.generateList(scope.model.min, scope.model.max, scope.model.step, 'val');
-      }
-
-      //initialise index based on val
-      scope.model.index = _.findIndex(scope.model.items, function(item) { return item.val === scope.model.val; });
-
       //watches and events
-      scope.$watch('model.val', function(newVal, oldVal) {
-        scope.model.isValid = true;
-        if (newVal !== oldVal) scope.model.changed();
-      });
-
       scope.$watch('model.index', function(newVal, oldVal) {
         if (dragging) return;
         if (!helperService.isInPositiveIntegerRange(0, scope.model.items.length-1, newVal)) return;
-
-        scope.model.val = scope.model.items[scope.model.index].val;
         x = newVal / (scope.model.items.length-1);
         scope.x = x;
+        if (newVal !== oldVal) scope.model.update(scope.model.items[scope.model.index].val);
       });
 
       var updateScope = function(x) {
         x = (x < 0 ? 0 : (x > 1 ? 1 : x)); //force into 0-1 range
         scope.model.index = Math.floor((scope.model.items.length-1) * x * 1.001);
-        scope.model.val = scope.model.items[scope.model.index].val;
+        scope.model.update(scope.model.items[scope.model.index].val);
         $timeout(function() {});
         scope.x = x;
       };
@@ -264,8 +258,7 @@ thUiFieldsModule.directive('fromMany', function (configService, $timeout) {
     transclude: false,
     link: function(scope, element, attr, ctrl) {
       scope.$watch('model.val', function(newVal, oldVal) {
-        scope.model.isValid = true;
-        if (newVal !== oldVal) scope.model.changed();
+        if (newVal !== oldVal) scope.model.update();
       });
     }
   };
