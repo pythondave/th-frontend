@@ -1,5 +1,6 @@
 //Level1Controller (everything on the page)
 thSchoolDashboardAppModule.controller('Level1Controller', function($rootScope, $scope, $state, appLoading, serverService, structure) {
+  $scope.isDevMode = true; //*** TEMP
   $scope.$watch('isDevMode', function() { $rootScope.$broadcast('devModeChanged', $scope.isDevMode); }); //*** TEMP
 
   $scope.sections = structure.sections;

@@ -23,7 +23,7 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
     fileUpload: { wait: 1 },
     fromFew: { wait: 1 },
     fromMany: { wait: 1 },
-    latLongEdit: { wait: 2000 },
+    locationEdit: { wait: 1 },
     moneyEdit: { wait: 2000 },
     numberEdit: { wait: 2000 },
     ratingEdit: { wait: 1 },
@@ -35,9 +35,9 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
 
   o.ContentItem = function (initialVals) {
     var typeObject = contentItemTypes[initialVals.type];
-    if (!typeObject) { console.log('Content item type not found: ', initialVals.type); return; }
     _.assign(this, globalDefaultVals, typeObject, initialVals || {});
     this.processChangeUsingThrottle = _.throttle(this.processChange, this.wait, {leading: false});
+    if (!typeObject) console.log('Content item type not found: ', initialVals.type);
   };
 
   o.ContentItem.prototype.getDataToPost = function() {
@@ -69,7 +69,7 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
     if (this.type === 'fileUpload') { return true; } //*** WIP
     if (this.type === 'fromFew') { return true; } //*** WIP
     if (this.type === 'fromMany') { return true; } //*** WIP
-    if (this.type === 'latLongEdit') { return true; } //*** WIP
+    if (this.type === 'locationEdit') { return true; } //*** WIP
     if (this.type === 'moneyEdit') { return true; } //*** WIP
     if (this.type === 'numberEdit') {
       if (this.min && this.val < this.min) return false;
@@ -100,10 +100,17 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
     if (this.type === 'fromFew') {
       _.markMatchingCollectionItems(this.items, this.val);
     }
-    this.isValid = this.getIsValid(this.val);
     if (this.type === 'urlEdit') {
       //WIP
     }
+    if (this.type === 'locationEdit' && this.val) {
+      this.lat = this.val.split(',')[0];
+      this.lng = this.val.split(',')[1];
+      this.isSelected = true;
+      this.zoom = 8;
+    }
+
+    this.isValid = this.getIsValid(this.val);
   };
 
   o.ContentItem.prototype.update = function(newVal) { //set val (if passed) and process the change
@@ -112,6 +119,12 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
     this.isValid = this.getIsValid(this.val);
     this.isDirty = true;
     this.processChangeUsingThrottle();
+  };
+
+  o.ContentItem.prototype.getWeight = function() {
+    if (this.absoluteWeight === undefined || this.absoluteWeight === 0) return 0;
+    if (this.val === undefined || this.val === '') return 0;
+    return this.absoluteWeight;
   };
 
   return o;
@@ -132,6 +145,7 @@ thContentItemsModule.directive('contentItem', function ($compile) {
     emailEdit: getStandardContentItem('email-edit'),
     fromFew: getStandardContentItem('from-few'),
     fromMany: getStandardContentItem('from-many'),
+    locationEdit: getStandardContentItem('location-edit'),
     moneyEdit: getStandardContentItem('money-edit'),
     numberEdit: getStandardContentItem('number-edit'),
     ratingEdit: getStandardContentItem('rating-edit'),

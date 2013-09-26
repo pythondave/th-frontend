@@ -198,99 +198,99 @@ thSchoolDashboardAppModule.factory('editSchoolProfileStructureSectionService', f
     getHeader(section1pt1pt1),
     new CI({ weight: 0, type: 'text', style: 'color: red;', val: 'Note - AR/AT need to supply tip information for all fields + additional display information for some fields (e.g. ratings)' }),
     new CI({ systemName: 'headTeacher', type: 'textEdit', title: 'Head teacher / Principal', icon: 'user', tip: 'This tip and the icon at the start of this line are here as an illustration. These are easy to add on any content item. To see more of what\'s currently easy, see the \'Generic showcase\' main section.' }),
-    new CI({ systemName: 'yearFounded', type: 'numberEdit', subType: 'plain', title: 'Year founded', tip: '1500-' + new Date().getFullYear(), min: 1500, max: new Date().getFullYear() }),
-    new CI({ systemName: 'educationLevels', type: 'fromFew', title: 'Education level', listName: 'educationLevels', listColumn: 'name' }),
-    new CI({ systemName: 'academicSystems', type: 'fromFew', title: 'Academic system', listName: 'academicSystems', listColumn: 'system' }),
-    new CI({ systemName: 'fundingType', type: 'fromFew', title: 'Type of funding', limit: 1, listName: 'fundingTypes', listColumn: 'type' }),
-    new CI({ systemName: 'religiousAffiliation', type: 'fromFew', title: 'Religious affiliation', limit: 1, listName: 'religiousAffiliations', listColumn: 'affiliation' }),
-    new CI({ systemName: 'accreditations', type: 'fromFew', title: 'Full accreditation', listName: 'accreditations', listColumn: 'type' }),
-    new CI({ systemName: 'curriculumTypes', type: 'fromFew', title: 'Curricula taught', listName: 'curriculums', listColumn: 'title' }),
-    new CI({ systemName: 'selectiveYear', type: 'fromFew', title: 'Academically selective', limit: 1, listName: 'yesno', listColumn: 'name' }),
-    new CI({ systemName: 'newYearMonth', type: 'fromMany', title: 'Month school year begins', limit: 1, listName: 'months', listColumn: 'val' })
+    new CI({ systemName: 'yearFounded', type: 'numberEdit', subType: 'plain', title: 'Year founded', icon: 'calendar', tip: '1500-' + new Date().getFullYear(), min: 1500, max: new Date().getFullYear() }),
+    new CI({ systemName: 'educationLevels', type: 'fromFew', title: 'Education level', icon: 'signal', listName: 'ageLevels', listColumn: 'name' }),
+    new CI({ systemName: 'academicSystems', type: 'fromFew', title: 'Academic system', icon: 'cogs', listName: 'academicSystems', listColumn: 'system' }),
+    new CI({ systemName: 'fundingType', type: 'fromFew', title: 'Type of funding', icon: 'money', limit: 1, listName: 'fundingTypes', listColumn: 'type' }),
+    new CI({ systemName: 'religiousAffiliation', type: 'fromFew', title: 'Religious affiliation', icon: 'compass', limit: 1, listName: 'religiousAffiliations', listColumn: 'affiliation' }),
+    new CI({ systemName: 'accreditations', type: 'fromFew', title: 'Full accreditation', icon: 'thumbs-up-alt', listName: 'accreditations', listColumn: 'type' }),
+    new CI({ systemName: 'curriculumTypes', type: 'fromFew', title: 'Curricula taught', icon: 'road', listName: 'curriculums', listColumn: 'title' }),
+    new CI({ systemName: 'selectiveYear', type: 'fromFew', title: 'Academically selective',  icon: 'filter', limit: 1, listName: 'yesno', listColumn: 'name' }),
+    new CI({ systemName: 'newYearMonth', type: 'fromMany', title: 'Month school year begins', icon: 'calendar', limit: 1, listName: 'months', listColumn: 'val' })
   ];
 
   var section1pt1pt2 = section1pt1.sections[1];
   section1pt1pt2.contentItems = [
     getHeader(section1pt1pt2),
-    new CI({ systemName: 'intStudentsTotal', type: 'numberEdit', title: 'Total number of students' }),
-    new CI({ systemName: 'pintStudents', type: 'slider', title: 'Percentage of international students', suffix: '%' }),
-    new CI({ systemName: 'genderRatio', type: 'fromFew', title: 'Student gender ratio', limit: 1, listName: 'genderRations', listColumn: 'ratio' }),
-    new CI({ systemName: 'intStudentsPreSchool', type: 'numberEdit', title: 'Number in Nursery / Pre-School' }),
-    new CI({ systemName: 'intStudentsPrimary', type: 'numberEdit', title: 'Number in Primary / Elementary' }),
-    new CI({ systemName: 'intStudentsSecondary', type: 'numberEdit', title: 'Number in Secondary / High School' }),
-    new CI({ systemName: 'intStudentsPost16', type: 'numberEdit', title: 'Number in Post 16' }),
-    new CI({ systemName: 'intAvgStudentsPreSchool', type: 'numberEdit', title: 'Average class size in Nursery / Pre-School / KG' }),
-    new CI({ systemName: 'intAvgStudentsPrimary', type: 'numberEdit', title: 'Average class size in Primary / Elementary' }),
-    new CI({ systemName: 'intAvgStudentsSecondary', type: 'numberEdit', title: 'Average class size in Secondary / High School' }),
-    new CI({ systemName: 'intAvgStudentsPost16', type: 'numberEdit', title: 'Average class size at Post 16 level' })
+    new CI({ systemName: 'intStudentsTotal', type: 'numberEdit', title: 'Total number of students', icon: 'group' }),
+    new CI({ systemName: 'pintStudents', type: 'slider', title: 'Percentage of international students', icon: 'globe', suffix: '%' }),
+    new CI({ systemName: 'genderRatio', type: 'fromFew', title: 'Student gender ratio', icon: 'adjust', limit: 1, listName: 'genderRations', listColumn: 'ratio' }),
+    new CI({ systemName: 'intStudentsPreSchool', type: 'numberEdit', title: 'Number in Nursery / Pre-School', icon: 'linux' }),
+    new CI({ systemName: 'intStudentsPrimary', type: 'numberEdit', title: 'Number in Primary / Elementary', icon: 'bug' }),
+    new CI({ systemName: 'intStudentsSecondary', type: 'numberEdit', title: 'Number in Secondary / High School', icon: 'fire' }),
+    new CI({ systemName: 'intStudentsPost16', type: 'numberEdit', title: 'Number in Post 16', icon: 'leaf' }),
+    new CI({ systemName: 'intAvgStudentsPreSchool', type: 'numberEdit', title: 'Average class size in Nursery / Pre-School / KG', icon: 'linux' }),
+    new CI({ systemName: 'intAvgStudentsPrimary', type: 'numberEdit', title: 'Average class size in Primary / Elementary', icon: 'bug' }),
+    new CI({ systemName: 'intAvgStudentsSecondary', type: 'numberEdit', title: 'Average class size in Secondary / High School', icon: 'fire' }),
+    new CI({ systemName: 'intAvgStudentsPost16', type: 'numberEdit', title: 'Average class size at Post 16 level', icon: 'leaf' })
   ];
 
   var section1pt1pt3 = section1pt1.sections[2];
   section1pt1pt3.contentItems = [
     getHeader(section1pt1pt3),
-    new CI({ systemName: 'intStaff', type: 'numberEdit', title: 'Number of staff' }),
-    new CI({ systemName: 'pOverseasStaff', type: 'slider', title: 'Percentage of overseas teachers', suffix: '%' }),
-    new CI({ systemName: 'mainTeacherNationalities', type: 'fromFew', title: 'Main teacher nationalities', listName: 'teacherNationalities', listColumn: 'name' }),
-    new CI({ systemName: 'annualTeacherTurnover', type: 'slider', title: 'Annual teacher turnover', suffix: '%' }),
-    new CI({ systemName: 'intOverseasTeachers', type: 'numberEdit', title: 'Number of overseas teachers recruited per year (approx)' }),
-    new CI({ systemName: 'languages', type: 'fromFew', title: 'Teaching languages', listName: 'languages', listColumn: 'name' }),
-    new CI({ systemName: 'acceptsTeflTeachers', type: 'fromFew', title: 'Employs TEFL teachers', limit: 1, listName: 'yesno', listColumn: 'name' })
+    new CI({ systemName: 'intStaff', type: 'numberEdit', title: 'Number of staff', icon: 'user' }),
+    new CI({ systemName: 'pOverseasStaff', type: 'slider', title: 'Percentage of overseas teachers', icon: 'adjust', suffix: '%' }),
+    new CI({ systemName: 'mainTeacherNationalities', type: 'fromFew', title: 'Main teacher nationalities', icon: 'globe', listName: 'teacherNationalities', listColumn: 'name' }),
+    new CI({ systemName: 'annualTeacherTurnover', type: 'slider', title: 'Annual teacher turnover', icon: 'adjust', suffix: '%' }),
+    new CI({ systemName: 'intOverseasTeachers', type: 'numberEdit', title: 'Number of overseas teachers recruited per year (approx)', icon: 'globe' }),
+    new CI({ systemName: 'languages', type: 'fromFew', title: 'Teaching languages', icon: 'comments-alt', listName: 'languages', listColumn: 'name' }),
+    new CI({ systemName: 'acceptsTeflTeachers', type: 'fromFew', title: 'Employs TEFL teachers', icon: 'comment-alt', limit: 1, listName: 'yesno', listColumn: 'name' })
   ];
 
   var section1pt1pt4 = section1pt1.sections[3];
   section1pt1pt4.contentItems = [
     getHeader(section1pt1pt4),
-    new CI({ weight: 0, type: 'text', style: 'color: red;', val: 'WIP - File upload; Lat Long' }),
-    new CI({ systemName: 'facilities', type: 'fromFew', title: 'School facilities', listName: 'facilities', listColumn: 'facility' }),
-    new CI({ systemName: 'images', type: 'fileUpload', title: '{{school.nickname}}\'s profile photo' }),
-    new CI({ systemName: 'images', type: 'fileUpload', title: 'Additional photos' }),
-    new CI({ systemName: 'latLong', type: 'latLongEdit', title: '{{school.nickname}}\'s location' }),
-    new CI({ systemName: 'urlPromotionalVideo', type: 'urlEdit', title: '{{school.nickname}}\'s promotional video', urlTitle: false }),
-    new CI({ systemName: 'images', type: 'fileUpload', title: '{{school.nickname}}\'s logo' }),
+    new CI({ weight: 0, type: 'text', style: 'color: red;', val: 'WIP - File upload' }),
+    new CI({ systemName: 'facilities', type: 'fromFew', title: 'School facilities', icon: 'building', listName: 'facilities', listColumn: 'facility' }),
+    new CI({ systemName: 'images', type: 'fileUpload', title: '{{school.nickname}}\'s profile photo', icon: 'camera' }),
+    new CI({ systemName: 'images', type: 'fileUpload', title: 'Additional photos', icon: 'picture' }),
+    new CI({ systemName: 'location', type: 'locationEdit', title: '{{school.nickname}}\'s location', icon: 'map-marker' }),
+    new CI({ systemName: 'urlPromotionalVideo', type: 'urlEdit', title: '{{school.nickname}}\'s promotional video', icon: 'facetime-video', urlTitle: false }),
+    new CI({ systemName: 'images', type: 'fileUpload', title: '{{school.nickname}}\'s logo', icon: 'apple' }),
   ];
 
   var section1pt1pt5 = section1pt1.sections[4];
   section1pt1pt5.contentItems = [
     getHeader(section1pt1pt5),
-    new CI({ systemName: 'recruitmentStartMonth', type: 'fromMany', limit: 1, title: 'Recruitment start month', listName: 'months' }),
-    new CI({ systemName: 'acceptedTeacherQualifications', type: 'fromFew', title: 'Minimum qualifications accepted', listName: 'acceptedTeacherQualifications', listColumn: 'qualification' }),
-    new CI({ systemName: 'minYearsExperience', type: 'slider', title: 'Minimum experience required', max: 10, suffix: ' years' }),
-    new CI({ systemName: 'teacherNationalitiesAccepted', type: 'fromFew', title: 'Teacher nationalities accepted', listName: 'teacherNationalities', listColumn: 'name' }),
-    new CI({ systemName: 'leadRecruitmentContactName', type: 'textEdit', title: 'Lead recruitment contact name' }),
-    new CI({ systemName: 'leadRecruitmentContactEmail', type: 'emailEdit', title: 'Lead recruitment contact email address' }),
-    new CI({ systemName: 'workIncentive', type: 'textEdit', title: 'Why work at {{school.nickname}}?', maxLength: 1000 })
+    new CI({ systemName: 'recruitmentStartMonth', type: 'fromMany', limit: 1, title: 'Recruitment start month', icon: 'calendar', listName: 'months' }),
+    new CI({ systemName: 'acceptedTeacherQualifications', type: 'fromFew', title: 'Minimum qualifications accepted', icon: 'signal', listName: 'educationLevels', listColumn: 'name' }),
+    new CI({ systemName: 'minYearsExperience', type: 'slider', title: 'Minimum experience required', icon: 'road', max: 10, suffix: ' years' }),
+    new CI({ systemName: 'teacherNationalitiesAccepted', type: 'fromFew', title: 'Teacher nationalities accepted', icon: 'globe', listName: 'teacherNationalities', listColumn: 'name' }),
+    new CI({ systemName: 'leadRecruitmentContactName', type: 'textEdit', title: 'Lead recruitment contact name', icon: 'user' }),
+    new CI({ systemName: 'leadRecruitmentContactEmail', type: 'emailEdit', title: 'Lead recruitment contact email address', icon: 'envelope' }),
+    new CI({ systemName: 'workIncentive', type: 'textEdit', title: 'Why work at {{school.nickname}}?', icon: 'microphone', maxLength: 1000 })
   ];
 
   var section1pt1pt6 = section1pt1.sections[5];
   section1pt1pt6.contentItems = [
     getHeader(section1pt1pt6),
-    new CI({ systemType: 'schoolRating', ratingId: 1, type: 'ratingEdit', title: 'Accreditation', max: 5 }),
-    new CI({ systemType: 'schoolRating', ratingId: 2, type: 'ratingEdit', title: 'Memberships', max: 5 }),
-    new CI({ systemType: 'schoolRating', ratingId: 3, type: 'ratingEdit', title: 'Facilities', max: 5 }),
-    new CI({ systemType: 'schoolRating', ratingId: 4, type: 'ratingEdit', title: 'Professional development', max: 5 }),
-    new CI({ systemType: 'schoolRating', ratingId: 5, type: 'ratingEdit', title: 'Ability to save', max: 5 })
+    new CI({ systemType: 'schoolRating', ratingId: 1, type: 'ratingEdit', title: 'Accreditation', icon: 'thumbs-up-alt', max: 5 }),
+    new CI({ systemType: 'schoolRating', ratingId: 2, type: 'ratingEdit', title: 'Memberships', icon: 'link', max: 5 }),
+    new CI({ systemType: 'schoolRating', ratingId: 3, type: 'ratingEdit', title: 'Facilities', icon: 'building', max: 5 }),
+    new CI({ systemType: 'schoolRating', ratingId: 4, type: 'ratingEdit', title: 'Professional development', icon: 'signal', max: 5 }),
+    new CI({ systemType: 'schoolRating', ratingId: 5, type: 'ratingEdit', title: 'Ability to save', icon: 'money', max: 5 })
   ];
 
   var section1pt2pt1 = section1pt2.sections[0];
   section1pt2pt1.contentItems = [
     getHeader(section1pt2pt1),
     new CI({ weight: 0, type: 'text', style: 'color: red;', val: 'WIP - Changes to \'International working currency\' will have a big warning in certain circumstances. The app will also be updated in several places when it changes.' }),
-    new CI({ systemName: 'currency', type: 'fromFew', title: 'International working currency', limit: 1, listName: 'currencies', listColumn: 'currency' }),
-    new CI({ systemType: 'schoolBenefit', benefitId: 101, type: 'numberEdit', subType: 'money', title: 'Typical gross annual salary (before tax and deductions) of a newly qualified teacher with no management responsibilities (new arrival, in {{school.currencyName}})' }),
-    new CI({ systemType: 'schoolBenefit', benefitId: 102, type: 'slider', title: 'Approximate tax and deductions', max: 60, suffix: '%' }),
-    new CI({ systemType: 'schoolBenefit', benefitId: 103, type: 'numberEdit', subType: 'money', title: 'Typical gross annual salary (before tax and deductions) of a teacher with no management responsibilities at top of the pay scale (in {{school.currencyName}})' }),
-    new CI({ systemType: 'schoolBenefit', benefitId: 104, type: 'slider', title: 'Approximate tax and deductions', max: 60, suffix: '%' })
+    new CI({ systemName: 'currency', type: 'fromFew', title: 'International working currency', icon: 'money', limit: 1, listName: 'currencies', listColumn: 'currency' }),
+    new CI({ systemType: 'schoolBenefit', benefitId: 101, type: 'numberEdit', subType: 'money', title: 'Typical gross annual salary (before tax and deductions) of a newly qualified teacher with no management responsibilities (new arrival, in {{school.currencyName}})', icon: 'check-empty' }),
+    new CI({ systemType: 'schoolBenefit', benefitId: 102, type: 'slider', title: 'Approximate tax and deductions', icon: 'adjust', max: 60, suffix: '%' }),
+    new CI({ systemType: 'schoolBenefit', benefitId: 103, type: 'numberEdit', subType: 'money', title: 'Typical gross annual salary (before tax and deductions) of a teacher with no management responsibilities at top of the pay scale (in {{school.currencyName}})', icon: 'sign-blank' }),
+    new CI({ systemType: 'schoolBenefit', benefitId: 104, type: 'slider', title: 'Approximate tax and deductions', icon: 'adjust', max: 60, suffix: '%' })
   ];
 
   var section1pt2pt2 = section1pt2.sections[1];
   section1pt2pt2.contentItems = [
     getHeader(section1pt2pt2),
-    new CI({ systemType: 'schoolBenefit', benefitId: 105, type: 'numberEdit', subType: 'money', title: 'National average income per person (in {{school.currencyName}})' }),
-    new CI({ systemName: 'contractLength', type: 'slider', title: 'Contract Period', items: [ { val: 0, description: 'None' }, { val: 1, description: '1 year' }, { val: 2, description: '2 years' }, { val: 3, description: '3 years' }, { val: 4, description: '4 years' }, { val: 5, description: '5 years' } ] }),
-    new CI({ systemType: 'schoolBenefit', benefitId: 107, type: 'numberEdit', subType: 'money', title: 'Average yearly saving made (for single teacher, in {{school.currencyName}})' }),
-    new CI({ systemType: 'schoolBenefit', benefitId: 108, type: 'fromFew', title: 'Salary can support a family of four', limit: 1, listName: 'yesno', listColumn: 'name' }),
-    new CI({ systemType: 'schoolBenefit', benefitId: 109, type: 'fromFew', title: 'Pay scale based on experience', limit: 1, listName: 'yesno', listColumn: 'name' }),
-    new CI({ systemType: 'schoolBenefit', benefitId: 110, type: 'fromFew', title: 'Teacher saving scheme', limit: 1, listName: 'yesno', listColumn: 'name' })
+    new CI({ systemType: 'schoolBenefit', benefitId: 105, type: 'numberEdit', subType: 'money', title: 'National average income per person per year (in {{school.currencyName}})', icon: 'money' }),
+    new CI({ systemName: 'contractLength', type: 'slider', title: 'Contract Period', icon: 'legal', items: [ { val: 0, description: 'None' }, { val: 1, description: '1 year' }, { val: 2, description: '2 years' }, { val: 3, description: '3 years' }, { val: 4, description: '4 years' }, { val: 5, description: '5 years' } ] }),
+    new CI({ systemType: 'schoolBenefit', benefitId: 107, type: 'numberEdit', subType: 'money', title: 'Average yearly saving made (for single teacher, in {{school.currencyName}})', icon: 'briefcase' }),
+    new CI({ systemType: 'schoolBenefit', benefitId: 108, type: 'fromFew', title: 'Salary can support a family of four', icon: 'group', limit: 1, listName: 'yesno', listColumn: 'name' }),
+    new CI({ systemType: 'schoolBenefit', benefitId: 109, type: 'fromFew', title: 'Pay scale based on experience', icon: 'signal', limit: 1, listName: 'yesno', listColumn: 'name' }),
+    new CI({ systemType: 'schoolBenefit', benefitId: 110, type: 'fromFew', title: 'Teacher saving scheme', icon: 'road', limit: 1, listName: 'yesno', listColumn: 'name' })
   ];
 
   var section1pt2pt3 = section1pt2.sections[2];
@@ -312,8 +312,8 @@ thSchoolDashboardAppModule.factory('editSchoolProfileStructureSectionService', f
     new CI({ systemType: 'schoolBenefit', benefitId: 201, type: 'fromFew', title: 'Flight allowance', limit: 1, listName: 'flightAllowances', listColumn: 'allowance' }),
     new CI({ systemType: 'schoolBenefit', benefitId: 202, type: 'fromFew', title: 'Relocation allowance', limit: 1, listName: 'rellocationAllowances', listColumn: 'allowance' }),
     new CI({ systemType: 'schoolBenefit', benefitId: 6, type: 'fromFew', title: 'Laptop allowance', limit: 1, listName: 'yesno', listColumn: 'name' }),
-    new CI({ systemType: 'schoolBenefit', benefitId: 4, type: 'fromFew', title: 'Language lesson allowance', limit: 1, listName: 'yesno', listColumn: 'name' }),
-    new CI({ systemType: 'schoolBenefit', benefitId: 7, type: 'textEdit', title: 'Other benefits or allowances offered' })
+    new CI({ systemType: 'schoolBenefit', benefitId: 4, type: 'fromFew', title: 'Language lesson allowance', limit: 1, listName: 'yesno', listColumn: 'name', maxLength: '500' }),
+    new CI({ systemType: 'schoolBenefit', benefitId: 7, type: 'textEdit', title: 'Other benefits or allowances offered', maxLength: 500 })
   ];
 
   var section1pt2pt5 = section1pt2.sections[4];
@@ -379,7 +379,7 @@ thSchoolDashboardAppModule.factory('editSchoolProfileStructureSectionService', f
 });
 
 
-thSchoolDashboardAppModule.factory('initService', function ($rootScope, $q, $http, configService, hierarchyService,
+thSchoolDashboardAppModule.factory('initService', function ($rootScope, $q, $http, $timeout, configService, hierarchyService,
   editSchoolProfileStructureSectionService, notesStructureSectionService, showcaseStructureSectionService) {
   //initService: use to get and set initial data and structure
   //Note: there are loads of ways of doing this: relative efficiency and the output of the init function is what matters
@@ -391,27 +391,6 @@ thSchoolDashboardAppModule.factory('initService', function ($rootScope, $q, $htt
     notesStructureSectionService,
     showcaseStructureSectionService
   ];
-
-  //Note: get & set MockJson was the only way I've been able to get fixed json files working with ui-router and $httpBackend
-  //      these aren't needed for the live version
-  var getMockJson = function() {
-    return $q.all([
-      $http.get('/th-frontend/3/0.1/scaffolding/server/json/lists.json'),
-      $http.get('/th-frontend/3/0.1/scaffolding/server/json/school.json'),
-      $http.get('/th-frontend/3/0.1/scaffolding/server/json/city.json')
-    ]);
-  };
-
-  var setMockJson = function(response) {
-    $rootScope.server = $rootScope.server || {}; //needs to be attached to rootScope so the mock server can use it
-    $rootScope.server.mockLists = response[0].data;
-    $rootScope.server.mockSchool = response[1].data;
-    $rootScope.server.mockCity = response[2].data;
-    $rootScope.server.mockDataSet = true;
-    return $q;
-  };
-
-  var getAndSetMockJson = function() { return getMockJson().then(setMockJson); };
 
   var getServerData = function() {
     return $q.all([
@@ -460,10 +439,19 @@ thSchoolDashboardAppModule.factory('initService', function ($rootScope, $q, $htt
     var school = o.schoolData.school;
     var city = o.cityData.city;
 
+    var derivedSchoolNickname = function() {
+      if (school.nickname) return school.nickname;
+      if (school.name && school.name.length <= 10) return school.name;
+      if (school.initials) return school.initials;
+      if (school.name) return school.name.match(/\b\w/g).join('');
+      return '?';
+    };
+
     //special tweaks 1 (pre-decoration of hierarchy)
     var internationalCurrencySymbols = { EUR: '\u20AC', USD: '$', AUD: '$', GBP: '\u00A3', JPY: '\u00A5' };
     school.currencyName = _.find(o.lists.currencies, { id: school.currency || 1 }).code;
     school.currencySymbol = internationalCurrencySymbols[school.currencyName];
+    school.nickname = derivedSchoolNickname();
     city.countryName = _.find(o.lists.countries, { id: city.country }).name;
     city.internationalCurrencyName = _.find(o.lists.currencies, { id: city.internationalCurrency || 1 }).code;
     city.internationalCurrencySymbol = internationalCurrencySymbols[city.internationalCurrencyName];
@@ -554,6 +542,9 @@ thSchoolDashboardAppModule.factory('initService', function ($rootScope, $q, $htt
         ci.systemName = 'value';
         if (ci.subType === 'money') ci.currencySymbol = school.currencySymbol;
       }
+      if (ci.systemName === 'location' && !ci.val) {
+        ci.address = city.name + ', ' + city.countryName;
+      }
     });
 
     return o;
@@ -569,15 +560,22 @@ thSchoolDashboardAppModule.factory('initService', function ($rootScope, $q, $htt
 
   o.getPercentageComplete = function() {
     var sum = _.reduce(o.contentItemsIndex, function(sum, ci) {
-      return sum + (ci.parent.path[0] === '1' ? (ci.absoluteWeight && ci.val !== undefined ? ci.absoluteWeight : 0) : 0);
+      var weight = (ci.parent.path[0] === '1' ? ci.getWeight() : 0);
+      return sum + weight;
     }, 0);
     return Math.round(sum*100, 10);
   };
 
+  var delay = function(ms) {
+    var deferred = $q.defer();
+    $timeout(deferred.resolve, ms);
+    return deferred.promise;
+  };
+
   o.init = function() {
-    return getAndSetMockJson().then(getAndSetServerData).then(combineStructureAndServerData);
+    //delay(100) allows .json files to be loaded to the mock server. It's not strictly needed for the a non-mock version, but shouldn't do any harm.
+    return (configService.isDev ? delay(500) : $q).then(getAndSetServerData).then(combineStructureAndServerData);
   };
 
   return o;
 });
-

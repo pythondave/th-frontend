@@ -132,3 +132,16 @@ hr { margin: 10px 0; }
 .progress-bar { height: 11px; margin:9px 0; background:url(http://www.teacherhorizons.com/static/images/content/percentage-complete-sprite.png) left top no-repeat; width:174px; overflow:hidden; }
 .progress-bar-complete { background:url(http://www.teacherhorizons.com/static/images/content/percentage-complete-sprite.png) left -30px no-repeat; height:25px; width: 0; }
 /* /progress bar */
+
+/* location-edit content item */
+.location-edit-main {
+  margin: 10px;
+  padding: 0;
+  width: 500px;
+  height: 200px;
+}
+
+.location-edit-main img {
+  max-width:none;
+}
+/* /location-edit content item */

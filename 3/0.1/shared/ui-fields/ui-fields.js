@@ -27,6 +27,107 @@ thUiFieldsModule.directive('timeEdit', function(configService) {
   };
 });
 
+thUiFieldsModule.directive('locationEdit', function(configService) {
+  return {
+    restrict: 'A',
+    replace: true,
+    templateUrl: configService.root + '/shared/ui-fields/partials/location-edit.html',
+    scope: { model: '=' },
+    link: function(scope, element, attr, ctrl) {
+      if (!window.google) return;
+      var mainElement = element[0].children[0];
+
+      //set model defaults
+      scope.model = scope.model || {};
+      var defaults = { lat: 26, lng: 14, isSelected: false, zoom: (scope.model.lat ? 8 : 0) };
+      _.defaults(scope.model, defaults);
+
+      //set up initial map
+      var center = new google.maps.LatLng(scope.model.lat, scope.model.lng);
+      var options = {
+        zoom: scope.model.zoom,
+        center: center,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: false,
+        streetViewControl: false
+      };
+      var map = new google.maps.Map(mainElement, options);
+      var marker = new google.maps.Marker({ map: map, position: center, draggable: true });
+      marker.setVisible(scope.model.isSelected);
+
+      //events
+      scope.$watch(function() { return scope.model.lat + scope.model.lng; }, function(newVal, oldVal) {
+        var latLng = new google.maps.LatLng(scope.model.lat, scope.model.lng);
+        map.setCenter(latLng);
+        marker.setPosition(latLng);
+        scope.model.val = (scope.model.isSelected ? scope.model.lat + ',' + scope.model.lng : undefined);
+      });
+      scope.$watch('model.val', function(newVal, oldVal) {
+        scope.model.isSelected = !!newVal;
+        if (newVal === oldVal) return;
+        scope.model.update();
+      });
+      scope.$watch('model.isSelected', function(newVal, oldVal) {
+        marker.setVisible(newVal);
+        if (!newVal) scope.model.val = undefined;
+      });
+      scope.$watch('model.zoom', function(newVal, oldVal) {
+        if (newVal === oldVal) return;
+        map.setZoom(newVal);
+      });
+
+      var updateLocation = function(lat, lng, isSelected) {
+        scope.model.lat = lat;
+        scope.model.lng = lng;
+        scope.model.isSelected = (isSelected === undefined ? true : isSelected);
+        scope.$apply();
+      };
+
+      google.maps.event.addListener(map, 'zoom_changed', function() {
+        var zoom = map.getZoom();
+        if (scope.model.zoom === zoom) return; //not actually changed
+        scope.model.zoom = zoom;
+        scope.$apply();
+      });
+
+      google.maps.event.addListener(map, 'click', function(location) {
+        updateLocation(location.latLng.lat(), location.latLng.lng());
+      });
+
+      google.maps.event.addListener(marker, 'dragend', function(location) {
+        updateLocation(location.latLng.lat(), location.latLng.lng());
+      });
+      
+      google.maps.event.addListener(marker, 'dblclick', function() {
+        scope.model.isSelected = false;
+        scope.$apply();
+      });
+
+      //geolocation
+      scope.setBasedOnGeolocation = function() {
+        var success = function(geoposition) {
+          scope.model.zoom = 10;
+          updateLocation(geoposition.coords.latitude, geoposition.coords.longitude);
+        };
+        navigator.geolocation.getCurrentPosition(success);
+      };
+
+      scope.setBasedOnAddress = function(address) {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (!(results && results.length > 0)) return;
+          scope.model.zoom = 10;
+          var latLng = results[0].geometry.location;
+          updateLocation(latLng.lat(), latLng.lng(), false);
+        });
+      };
+
+      //
+      if (scope.model.address) { scope.setBasedOnAddress(scope.model.address); }
+    }
+  };
+});
+
 thUiFieldsModule.directive('moneyEdit', function(configService) {
   return {
     restrict: 'A',
@@ -193,7 +294,7 @@ thUiFieldsModule.directive('slider', ['configService','$document', 'helperServic
     link: function postLink(scope, element, attrs) {
       //initialise
       var dragging = false, startPointX = 0, x = 0; //x: proportion along slider
-      var mainElement = element.children(0);
+      var mainElement = element.children(0); //use jquery wrapper to get outerWidth
 
       //watches and events
       scope.$watch('model.index', function(newVal, oldVal) {
@@ -214,7 +315,7 @@ thUiFieldsModule.directive('slider', ['configService','$document', 'helperServic
 
       scope.sliderMouseDown = function($event) {
         if (dragging) return;
-        var x = $event.offsetX / mainElement.outerWidth();
+        var x = ($event.offsetX || $event.originalEvent.layerX) / mainElement.outerWidth();
         updateScope(x);
       };
 

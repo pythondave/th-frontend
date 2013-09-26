@@ -1,4 +1,5 @@
 {
+    "__note": "Full",
     "type": 1,
     "uploadToken": "0adbb0ee55c97e656ebdbe62b27ce265",
     "token": "5afd5cf43ad092f70e6d1e1286e05ade",
@@ -178,7 +179,7 @@
             6
         ],
         "annualTeacherTurnover": 50,
-        "location": "-34.397, 150.644",
+        "location": "41.2530,-8.5707",
         "urlPromotionalVideo": "http://yahoo.com/myvideo",
         "recruitmentStartMonth": 3,
         "minYearsExperience": 5,

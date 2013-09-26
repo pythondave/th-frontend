@@ -36,6 +36,7 @@ thShowcaseModule.factory('showcaseStructureSectionService', function (contentIte
     { title: 'Email-edit', icon: 'envelope' },
     { title: 'From-few', icon: 'ellipsis-horizontal' },
     { title: 'From-many', icon: 'list' },
+    { title: 'Location-edit', icon: 'map-marker' },
     { title: 'Money-edit', icon: 'money' },
     { title: 'Number-edit', icon: 'sort-by-order' },
     { title: 'Rating-edit', icon: 'star' },
@@ -88,7 +89,14 @@ thShowcaseModule.factory('showcaseStructureSectionService', function (contentIte
       val: 2 })
   ];
 
-  var moneyEditCI = editCIs.sections[4];
+  var locationEditCI = editCIs.sections[4];
+  locationEditCI.contentItems = [
+    getHeader(locationEditCI),
+    new CI({ type: 'text', val: 'The location-edit content item can be used for selecting a location in the world.' }),
+    new CI({ systemName: 'locationEdit1', type: 'locationEdit', title: 'Basic location-edit content item' })
+  ];
+
+  var moneyEditCI = editCIs.sections[5];
   moneyEditCI.contentItems = [
     getHeader(moneyEditCI),
     new CI({ type: 'text', val: 'WIP - No longer needed for the SPEP project (types fromMany and number can be used instead)', style: 'color: red;' }),
@@ -98,7 +106,7 @@ thShowcaseModule.factory('showcaseStructureSectionService', function (contentIte
     new CI({ systemName: 'moneyEdit2', type: 'moneyEdit', title: 'Money-edit content item with no initial values', tip: '...', currency: { items: [{ id: 1, name: 'USD' }, { id: 2, name: 'GBP' }, { id: 3, name: 'Euro' }] } })
   ];
 
-  var numberEditCI = editCIs.sections[5];
+  var numberEditCI = editCIs.sections[6];
   numberEditCI.contentItems = [
     getHeader(numberEditCI),
     new CI({ type: 'text', val: 'The number-edit content item can be used for entering and editing number text.' }),
@@ -114,7 +122,7 @@ thShowcaseModule.factory('showcaseStructureSectionService', function (contentIte
     new CI({ systemName: 'numberEdit8', type: 'numberEdit', subType: 'plain', title: 'Number-edit content item for year in range 1500-2013', val: '1823', min: 1500, max: 2013 })
   ];
 
-  var ratingEditCI = editCIs.sections[6];
+  var ratingEditCI = editCIs.sections[7];
   ratingEditCI.contentItems = [
     getHeader(ratingEditCI),
     new CI({ type: 'text', val: 'The rating-edit content item can be used for entering and editing a rating.' }),
@@ -128,7 +136,7 @@ thShowcaseModule.factory('showcaseStructureSectionService', function (contentIte
     new CI({ systemName: 'ratingEdit8', type: 'ratingEdit', title: 'Rating-edit content item with full works', icon: 'music', tip: 'This is a tip', max: 5, val: 2, description: 'This is a description', valueTips: ['1-star tip', '2-star tip', 'This is the tip for 3 stars', 'Tip for 4 stars', '5-star tip'] }),
   ];
 
-  var sliderCI = editCIs.sections[7];
+  var sliderCI = editCIs.sections[8];
   sliderCI.contentItems = [
     getHeader(sliderCI),
     new CI({ type: 'text', val: 'The slider content item can be used for entering and editing a value along a scale.' }),
@@ -137,7 +145,7 @@ thShowcaseModule.factory('showcaseStructureSectionService', function (contentIte
     new CI({ systemName: 'slider3', type: 'slider', title: 'Slider 0-100', val: 30 })
   ];
 
-  var textEditCI = editCIs.sections[8];
+  var textEditCI = editCIs.sections[9];
   textEditCI.contentItems = [
     getHeader(textEditCI),
     new CI({ type: 'text', val: 'WIP - maxLength needs a bit of tweaking; could also easily add characters used and/or remaining',  }),
@@ -148,7 +156,7 @@ thShowcaseModule.factory('showcaseStructureSectionService', function (contentIte
     new CI({ systemName: 'textEdit4', type: 'textEdit', title: 'Text-edit content item for long text', maxLength: 1000, val: 'Hello world' })
   ];
 
-  var timeEditCI = editCIs.sections[9];
+  var timeEditCI = editCIs.sections[10];
   timeEditCI.contentItems = [
     getHeader(timeEditCI),
     new CI({ type: 'text', val: 'WIP - Not needed for the SPEP project', style: 'color: red;' }),
@@ -156,7 +164,7 @@ thShowcaseModule.factory('showcaseStructureSectionService', function (contentIte
     new CI({ systemName: 'timeEdit1', type: 'timeEdit', title: 'Basic time-edit content item', val: undefined })
   ];
 
-  var urlEditCI = editCIs.sections[10];
+  var urlEditCI = editCIs.sections[11];
   urlEditCI.contentItems = [
     getHeader(urlEditCI),
     new CI({ type: 'text', val: 'The url-edit content item can be used for entering and editing the name and value of a url.' }),

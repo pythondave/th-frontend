@@ -3,6 +3,8 @@ var thConfigModule = angular.module('thConfigModule', []);
 thConfigModule.value('configService', function() {
   var o = { user: {} };
 
+  o.isDev = true; /* production -> set to false */
+
   o.loginUrl = './user/logon';
   o.root = '/th-frontend/3/0.1'; //*** TODO: refactor when functionality becomes available in angular (see https://github.com/angular/angular.js/issues/2805)
 

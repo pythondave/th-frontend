@@ -7,7 +7,7 @@ var thServerModule = angular.module('thServerModule', ['thConfigModule', 'thGene
 
 thServerModule.factory('delayResponseInterceptor', function($q, $timeout, configService) {
   //Can be used to delay all mock responses by a typical (and occasionally atypical) random amount, or fail entirely at a certain rate
-  var serverSpeedMultiplier = _.firstDefined(configService.serverSpeedMultiplierOverride, configService.requests.serverSpeedMultiplier, 0.5); //reduce during dev so things work faster (say 0.2), increase (to say 1) when demoing
+  var serverSpeedMultiplier = _.firstDefined(configService.serverSpeedMultiplierOverride, configService.requests.serverSpeedMultiplier, 0.2); //reduce during dev so things work faster (say 0.2), increase (to say 1) when demoing
   configService.local = { //configure special values for particular requests here
     //delayLengthMultiplier: standard random server response delay will be multiplied by this (e.g. for requests which are normally longer, say)
     //errorRate: 0: no errors; 1 error every time;
@@ -19,8 +19,8 @@ thServerModule.factory('delayResponseInterceptor', function($q, $timeout, config
   };
   var getConfigValue = function(requestUrl, attributeName, defaultValue) { //use to ease the process of getting config values
     defaultValue = defaultValue || configService.local.attributeDefaults[attributeName];
-    if (!configService.local[requestUrl]) return defaultValue;
-    if (!configService.local[requestUrl][attributeName]) return defaultValue;
+    if (configService.local[requestUrl] === undefined) return defaultValue;
+    if (configService.local[requestUrl][attributeName] === undefined) return defaultValue;
     return configService.local[requestUrl][attributeName];
   };
   var randomLogNormalValue = function(mu, sigma) { //server responses can be roughly modelled by a lognormal distribution
@@ -60,7 +60,9 @@ thServerModule.factory('delayResponseInterceptor', function($q, $timeout, config
       return httpRequest; //use the same promise
     };
     var delayForRandomDuration = function() {
-      var delayLength = getRandomServerResponseDelayLengthForRequestUrl(responseInfo.config.url);
+      var delayLength;
+      if (responseInfo.config.url.slice(-5) === '.json') { delayLength = 0; }
+      else { delayLength = getRandomServerResponseDelayLengthForRequestUrl(responseInfo.config.url); }
       return delay(delayLength);
     };
     var getHttpRequest = function() {
@@ -280,11 +282,16 @@ var deserializeParams = function(p){ //see https://github.com/pythondave/th-admi
 
 //set dummy server responses to posts and gets
 thServerModule.run(function($httpBackend, $resource, $q, $timeout, serverListsService, randomDataService, configService, $http, $rootScope) {
-  //pass-throughs
-    $httpBackend.whenGET(/.html/).passThrough();
-    $httpBackend.whenGET(/.json/).passThrough();
+  //pass-throughs (custom $httpBackend requests are at the bottom)
+  $httpBackend.whenGET(/.html/).passThrough();
+  $httpBackend.whenGET(/.json/).passThrough();
 
-  //note: custom $httpBackend requests are at the bottom
+  //json files (these are loaded to local variables so that when the normal request comes through, they're ready to go - this was tricky to figure out in the first place)
+  var json = {};
+  var dataSetId = randomDataService.getRandomInteger(1, 2);
+  $http.get('/th-frontend/3/0.1/scaffolding/server/json/lists.json').then(function(response) { json.lists = response.data; });
+  $http.get('/th-frontend/3/0.1/scaffolding/server/json/school' + dataSetId + '.json').then(function(response) { json.school = response.data; });
+  $http.get('/th-frontend/3/0.1/scaffolding/server/json/city' + dataSetId + '.json').then(function(response) { json.city = response.data; });
 
   //dummy responses (in the form of javascript objects)
 
@@ -391,21 +398,14 @@ thServerModule.run(function($httpBackend, $resource, $q, $timeout, serverListsSe
   var basicLists = serverListsService.basicLists;
 
   //lists
-  var mockLists;
-  $http.get('/th-frontend/3/0.1/scaffolding/server/json/lists.json').then(function(response) { mockLists = response; });
-  var listsResponse = function() { return [200, ($rootScope.server ? $rootScope.server.mockLists : mockLists.data)]; };
+  var listsResponse = function() { return [200, json.lists]; };
 
   //schools
-  var mockSchool;
-  $http.get('/th-frontend/3/0.1/scaffolding/server/json/school.json').then(function(response) { mockSchool = response; });
-  var schoolResponse = function() { return [200, ($rootScope.server ? $rootScope.server.mockSchool : mockSchool.data)]; };
-  //*** TODO - change the above line to the below line and remove the 'mock' stuff from services.js (just realised at 5:45am the below might work, but need to test)
-  //var schoolResponse = function() { return [200, mockSchool.data]; };
+  var schoolResponse = function() { return [200, json.school]; };
 
   //cities
-  var mockCity;
-  $http.get('/th-frontend/3/0.1/scaffolding/server/json/city.json').then(function(response) { mockCity = response; });
-  var cityResponse = function() { return [200, ($rootScope.server ? $rootScope.server.mockCity : mockCity.data)]; };
+  var cityResponse = function() { return [200, json.city]; };
+
 
   //Note: url rule - all lower case, words separated with a hyphen
 

@@ -8,14 +8,14 @@
 
   <div class="nav-arrow-container">
     <span>
-      <span class="nav-arrow nav-arrow-left" ng-class="hierarchy.level3.previous.path ? '' : 'nav-arrow-disabled'"
-        ng-click="!hierarchy.level3.previous.path || go(hierarchy.level3.previous.path)"
-        popover="{{'Go to previous page (' + hierarchy.level3.previous.title + ')' || 'At start'}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300">
+      <span class="nav-arrow nav-arrow-left" ng-class="hierarchy.level3.previous ? '' : 'nav-arrow-disabled'"
+        ng-click="!hierarchy.level3.previous || go(hierarchy.level3.previous.path)"
+        popover="{{hierarchy.level3.previous ? 'Go to previous page (' + hierarchy.level3.previous.title + ')' : 'At start'}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300">
         <i class="icon-chevron-sign-left"></i>
       </span>
-      <span class="nav-arrow nav-arrow-right"  ng-class="hierarchy.level3.next.path ? '' : 'nav-arrow-disabled'"
-        ng-click="!hierarchy.level3.next.path || go(hierarchy.level3.next.path)"
-        popover="{{'Go to next page (' + hierarchy.level3.next.title + ')' || 'At end'}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300">
+      <span class="nav-arrow nav-arrow-right"  ng-class="hierarchy.level3.next ? '' : 'nav-arrow-disabled'"
+        ng-click="!hierarchy.level3.next || go(hierarchy.level3.next.path)"
+        popover="{{hierarchy.level3.next ? 'Go to next page (' + hierarchy.level3.next.title + ')' : 'At end'}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300">
         <i class="icon-chevron-sign-right"></i>
       </span>
     </span>
@@ -42,9 +42,20 @@
   <div ng-show="isDevMode" style="font-size: 11px; word-wrap: break-word;">
     <hr/>
     <b>Links</b>
+    <br/>
     <a href="/th-frontend/3/0.1/scaffolding/server/json/lists.json" target="_blank">lists.json</a>
-    <a href="/th-frontend/3/0.1/scaffolding/server/json/school.json" target="_blank">school.json</a>
-    <a href="/th-frontend/3/0.1/scaffolding/server/json/city.json" target="_blank">city.json</a>
+    <br/>
+    Full: <a href="/th-frontend/3/0.1/scaffolding/server/json/school1.json" target="_blank">school.json</a> | 
+    <a href="/th-frontend/3/0.1/scaffolding/server/json/city1.json" target="_blank">city.json</a>
+    <br/>
+    Minimum: <a href="/th-frontend/3/0.1/scaffolding/server/json/school2.json" target="_blank">school.json</a> | 
+    <a href="/th-frontend/3/0.1/scaffolding/server/json/city2.json" target="_blank">city.json</a>
+    <br/>
+    <a href="/th-frontend/3/0.1/scaffolding/api/api.json" target="_blank">api.json</a> | 
+    <a href="/th-frontend/3/0.1/scaffolding/api/default.html" target="_blank">api viewer</a>
+    <br/>
+    <a href="http://beta.teacherhorizons.com/Europe/Portugal/Porto/Oporto_British_School" target="_blank">OBS (beta)</a> | 
+    <a href="http://www.teacherhorizons.com/Asia/China/Suzhou/Dulwich_College_Suzhou" target="_blank">DCS (live)</a>
 
     <hr/>
     <b>Server log</b>

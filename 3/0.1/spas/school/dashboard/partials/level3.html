@@ -2,7 +2,7 @@
 <div class="nav-arrow-container">
   <span class="nav-arrow nav-arrow-left" ng-class="hierarchy.level3.previous.path ? '' : 'nav-arrow-disabled'"
     ng-click="!hierarchy.level3.previous.path || go(hierarchy.level3.previous.path)"
-    popover="{{'Go to previous page (' + hierarchy.level3.previous.title + ')' || 'At start'}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300">
+    popover="{{hierarchy.level3.previous ? 'Go to previous page (' + hierarchy.level3.previous.title + ')' : 'At start'}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300">
     <i class="icon-chevron-sign-left"></i>
   </span>
 
@@ -12,9 +12,9 @@
       <span style="font-weight: bold; ">Everything is saved</span>
     </span>
 
-    <span class="nav-arrow nav-arrow-right" ng-class="hierarchy.level3.next.path ? '' : 'nav-arrow-disabled'; pageIsValid ? '' : 'nav-arrow-warning'"
+    <span class="nav-arrow nav-arrow-right" ng-class="[hierarchy.level3.next ? '' : 'nav-arrow-disabled', pageIsValid ? '' : 'nav-arrow-warning']"
       ng-click="!hierarchy.level3.next.path || go(hierarchy.level3.next.path)"
-      popover="{{'Go to next page (' + hierarchy.level3.next.title + ')' || 'At end'}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300">
+      popover="{{hierarchy.level3.next ? 'Go to next page (' + hierarchy.level3.next.title + ')' : 'At end'}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300">
       <i class="icon-chevron-sign-right"></i>
     </span>
   </span>
