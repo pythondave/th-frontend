@@ -1,6 +1,6 @@
 var thConfigModule = angular.module('thConfigModule', []);
 
-thConfigModule.value('configService', function() {
+thConfigModule.constant('configService', function() {
   var o = { user: {} };
 
   o.isDev = true; /* production -> set to false */
@@ -13,6 +13,7 @@ thConfigModule.value('configService', function() {
     postConfig: { "headers": { "Content-Type": "application/x-www-form-urlencoded" } }
   };
   o.requests.urls = {
+
     //teachers
       teachers: requestUrlRoot + 'teachers',
       processTeacher: requestUrlRoot + 'process-teacher',
@@ -34,6 +35,11 @@ thConfigModule.value('configService', function() {
       basicLists: requestUrlRoot + 'basic-lists',
       schoolNames: requestUrlRoot + 'school-names',
 
+    //app data
+      spepStructure: '/school-dashboard/service/spep-structure',
+      spepNotesStructure: '/school-dashboard/service/spep-notes-structure',
+      contentItemShowcaseStructure:  '/shared/service/content-item-showcase-structure',
+
     //lists
       lists: '/school/service/lists',
 
@@ -47,7 +53,10 @@ thConfigModule.value('configService', function() {
       city: '/school/service/city',
       processCity: '/school/service/process-city',
       processCityLivingCost: '/school/service/process-city-living-cost',
-      processCityLink: '/school/service/process-city-link'
+      processCityLink: '/school/service/process-city-link',
+
+    //route error handling
+      invalidSchoolDashboardUrlRedirect: 'error.html'
   };
   return o; // function() { return o; };
 }());

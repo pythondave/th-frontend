@@ -12,7 +12,7 @@ Content item:
 thContentItemsModule.factory('contentItemService', function ($timeout, serverService, helperService) {
   var o = {};
 
-  var globalDefaultVals = { title: 'This is a title', description: undefined, systemName: '', weight: 1 };
+  var globalDefaultVals = { weight: 1 };
 
   var contentItemTypes = { //possible content item types and defaults (weight, throttling wait times)
     header: { weight: 0 },

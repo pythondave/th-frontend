@@ -4,6 +4,8 @@
     "token": "5afd5cf43ad092f70e6d1e1286e05ade",
     "school": {
         "id": 1234,
-        "name": "American School of Durango"
+        "name": "American School of Durango",
+        "city": 25,
+        "url": "wip..."
     }
 }

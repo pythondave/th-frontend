@@ -1,0 +1,1177 @@
+{
+  "weight": 1,
+  "title": "Edit school profile",
+  "icon": "edit",
+  "sections": [
+    {
+      "weight": 5,
+      "title": "About {{school.nickname}}",
+      "tip": "Completing this section will ensure {{school.nickname}}'s profile is more visible to thousands of prospective teachers who browse schools every week.",
+      "icon": "info",
+      "sections": [
+        {
+          "weight": 5,
+          "title": "Key details",
+          "icon": "key",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Key details",
+              "icon": "key"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "style": "color: red;",
+              "val": "Note - AR/AT need to supply tip information for all fields + additional display information for some fields (e.g. ratings)"
+            },
+            {
+              "weight": 1,
+              "wait": 3000,
+              "systemName": "headTeacher",
+              "type": "textEdit",
+              "title": "Head teacher / Principal",
+              "icon": "user",
+              "tip": "This tip and the icon at the start of this line are here as an illustration. These are easy to add on any content item. To see more of what's currently easy, see the 'Generic showcase' main section."
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "yearFounded",
+              "type": "numberEdit",
+              "subType": "plain",
+              "title": "Year founded",
+              "icon": "calendar",
+              "tip": "1500-2013",
+              "min": 1500,
+              "max": 2013
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "educationLevels",
+              "type": "fromFew",
+              "title": "Education level",
+              "icon": "signal",
+              "listName": "ageLevels",
+              "listColumn": "name"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "academicSystems",
+              "type": "fromFew",
+              "title": "Academic system",
+              "icon": "cogs",
+              "listName": "academicSystems",
+              "listColumn": "system"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "fundingType",
+              "type": "fromFew",
+              "title": "Type of funding",
+              "icon": "money",
+              "limit": 1,
+              "listName": "fundingTypes",
+              "listColumn": "type"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "religiousAffiliation",
+              "type": "fromFew",
+              "title": "Religious affiliation",
+              "icon": "compass",
+              "limit": 1,
+              "listName": "religiousAffiliations",
+              "listColumn": "affiliation"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "accreditations",
+              "type": "fromFew",
+              "title": "Full accreditation",
+              "icon": "thumbs-up-alt",
+              "listName": "accreditations",
+              "listColumn": "type"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "curriculumTypes",
+              "type": "fromFew",
+              "title": "Curricula taught",
+              "icon": "road",
+              "listName": "curriculums",
+              "listColumn": "title"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "selectiveYear",
+              "type": "fromFew",
+              "title": "Academically selective",
+              "icon": "filter",
+              "limit": 1,
+              "listName": "yesNo",
+              "listColumn": "name"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "newYearMonth",
+              "type": "fromMany",
+              "title": "Month school year begins",
+              "icon": "calendar",
+              "limit": 1,
+              "listName": "months",
+              "listColumn": "val"
+            }
+          ]
+        },
+        {
+          "weight": 5,
+          "title": "Students",
+          "icon": "group",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Students",
+              "icon": "group"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "intStudentsTotal",
+              "type": "numberEdit",
+              "title": "Total number of students",
+              "icon": "group"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "pintStudents",
+              "type": "slider",
+              "title": "Percentage of international students",
+              "icon": "globe",
+              "suffix": "%"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "genderRatio",
+              "type": "fromFew",
+              "title": "Student gender ratio",
+              "icon": "adjust",
+              "limit": 1,
+              "listName": "genderRations",
+              "listColumn": "ratio"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "intStudentsPreSchool",
+              "type": "numberEdit",
+              "title": "Number in Nursery / Pre-School",
+              "icon": "linux"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "intStudentsPrimary",
+              "type": "numberEdit",
+              "title": "Number in Primary / Elementary",
+              "icon": "bug"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "intStudentsSecondary",
+              "type": "numberEdit",
+              "title": "Number in Secondary / High School",
+              "icon": "fire"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "intStudentsPost16",
+              "type": "numberEdit",
+              "title": "Number in Post 16",
+              "icon": "leaf"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "intAvgStudentsPreSchool",
+              "type": "numberEdit",
+              "title": "Average class size in Nursery / Pre-School / KG",
+              "icon": "linux"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "intAvgStudentsPrimary",
+              "type": "numberEdit",
+              "title": "Average class size in Primary / Elementary",
+              "icon": "bug"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "intAvgStudentsSecondary",
+              "type": "numberEdit",
+              "title": "Average class size in Secondary / High School",
+              "icon": "fire"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "intAvgStudentsPost16",
+              "type": "numberEdit",
+              "title": "Average class size at Post 16 level",
+              "icon": "leaf"
+            }
+          ]
+        },
+        {
+          "weight": 3,
+          "title": "Teachers",
+          "icon": "user",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Teachers",
+              "icon": "user"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "intStaff",
+              "type": "numberEdit",
+              "title": "Number of staff",
+              "icon": "user"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "pOverseasStaff",
+              "type": "slider",
+              "title": "Percentage of overseas teachers",
+              "icon": "adjust",
+              "suffix": "%"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "mainTeacherNationalities",
+              "type": "fromFew",
+              "title": "Main teacher nationalities",
+              "icon": "globe",
+              "listName": "teacherNationalities",
+              "listColumn": "name"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "annualTeacherTurnover",
+              "type": "slider",
+              "title": "Annual teacher turnover",
+              "icon": "adjust",
+              "suffix": "%"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "intOverseasTeachers",
+              "type": "numberEdit",
+              "title": "Number of overseas teachers recruited per year (approx)",
+              "icon": "globe"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "languages",
+              "type": "fromFew",
+              "title": "Teaching languages",
+              "icon": "comments-alt",
+              "listName": "languages",
+              "listColumn": "name"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "acceptsTeflTeachers",
+              "type": "fromFew",
+              "title": "Employs TEFL teachers",
+              "icon": "comment-alt",
+              "limit": 1,
+              "listName": "yesNo",
+              "listColumn": "name"
+            }
+          ]
+        },
+        {
+          "title": "Facilities and multimedia",
+          "icon": "facetime-video",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Facilities and multimedia",
+              "icon": "facetime-video"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "style": "color: red;",
+              "val": "WIP - File upload"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "facilities",
+              "type": "fromFew",
+              "title": "School facilities",
+              "icon": "building",
+              "listName": "facilities",
+              "listColumn": "facility"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "images",
+              "type": "fileUpload",
+              "title": "{{school.nickname}}'s profile photo",
+              "icon": "camera"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "images",
+              "type": "fileUpload",
+              "title": "Additional photos",
+              "icon": "picture"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "location",
+              "type": "locationEdit",
+              "title": "{{school.nickname}}'s location",
+              "icon": "map-marker"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "urlPromotionalVideo",
+              "type": "urlEdit",
+              "title": "{{school.nickname}}'s promotional video",
+              "icon": "facetime-video",
+              "urlTitle": false
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "images",
+              "type": "fileUpload",
+              "title": "{{school.nickname}}'s logo",
+              "icon": "apple"
+            }
+          ]
+        },
+        {
+          "title": "Recruitment",
+          "icon": "thumbs-up-alt",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Recruitment",
+              "icon": "thumbs-up-alt"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "recruitmentStartMonth",
+              "type": "fromMany",
+              "limit": 1,
+              "title": "Recruitment start month",
+              "icon": "calendar",
+              "listName": "months"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "acceptedTeacherQualifications",
+              "type": "fromFew",
+              "title": "Minimum qualifications accepted",
+              "icon": "signal",
+              "listName": "educationLevels",
+              "listColumn": "name"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "minYearsExperience",
+              "type": "slider",
+              "title": "Minimum experience required",
+              "icon": "road",
+              "max": 10,
+              "suffix": " years"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "teacherNationalitiesAccepted",
+              "type": "fromFew",
+              "title": "Teacher nationalities accepted",
+              "icon": "globe",
+              "listName": "teacherNationalities",
+              "listColumn": "name"
+            },
+            {
+              "weight": 1,
+              "wait": 3000,
+              "systemName": "leadRecruitmentContactName",
+              "type": "textEdit",
+              "title": "Lead recruitment contact name",
+              "icon": "user"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "leadRecruitmentContactEmail",
+              "type": "emailEdit",
+              "title": "Lead recruitment contact email address",
+              "icon": "envelope"
+            },
+            {
+              "weight": 1,
+              "wait": 3000,
+              "systemName": "workIncentive",
+              "type": "textEdit",
+              "title": "Why work at {{school.nickname}}?",
+              "icon": "microphone",
+              "maxLength": 1000
+            }
+          ]
+        },
+        {
+          "title": "Self-assessment",
+          "icon": "check",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Self-assessment",
+              "icon": "check"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemType": "schoolRating",
+              "ratingId": 1,
+              "type": "ratingEdit",
+              "title": "Accreditation",
+              "icon": "thumbs-up-alt",
+              "max": 5
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemType": "schoolRating",
+              "ratingId": 2,
+              "type": "ratingEdit",
+              "title": "Memberships",
+              "icon": "link",
+              "max": 5
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemType": "schoolRating",
+              "ratingId": 3,
+              "type": "ratingEdit",
+              "title": "Facilities",
+              "icon": "building",
+              "max": 5
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemType": "schoolRating",
+              "ratingId": 4,
+              "type": "ratingEdit",
+              "title": "Professional development",
+              "icon": "signal",
+              "max": 5
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemType": "schoolRating",
+              "ratingId": 5,
+              "type": "ratingEdit",
+              "title": "Ability to save",
+              "icon": "money",
+              "max": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "weight": 3,
+      "title": "Package and benefits",
+      "tip": "This information will not be publicly displayed. Only teachers with complete profiles will have access to it. Sharing this information will encourage the right kind of teachers to apply.",
+      "icon": "gift",
+      "sections": [
+        {
+          "title": "Salary and tax",
+          "icon": "money",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Salary and tax",
+              "icon": "money"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "style": "color: red;",
+              "val": "WIP - Changes to 'International working currency' will have a big warning in certain circumstances. The app will also be updated in several places when it changes."
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "currency",
+              "type": "fromFew",
+              "title": "International working currency",
+              "icon": "money",
+              "limit": 1,
+              "listName": "currencies",
+              "listColumn": "currency"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "schoolBenefit",
+              "benefitId": 101,
+              "type": "numberEdit",
+              "subType": "money",
+              "title": "Typical gross annual salary (before tax and deductions) of a newly qualified teacher with no management responsibilities (new arrival, in {{school.currencyName}})",
+              "icon": "check-empty"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "schoolBenefit",
+              "benefitId": 102,
+              "type": "slider",
+              "title": "Approximate tax and deductions",
+              "icon": "adjust",
+              "max": 60,
+              "suffix": "%"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "schoolBenefit",
+              "benefitId": 103,
+              "type": "numberEdit",
+              "subType": "money",
+              "title": "Typical gross annual salary (before tax and deductions) of a teacher with no management responsibilities at top of the pay scale (in {{school.currencyName}})",
+              "icon": "sign-blank"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "schoolBenefit",
+              "benefitId": 104,
+              "type": "slider",
+              "title": "Approximate tax and deductions",
+              "icon": "adjust",
+              "max": 60,
+              "suffix": "%"
+            }
+          ]
+        },
+        {
+          "title": "Ability to save",
+          "icon": "archive",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Ability to save",
+              "icon": "archive"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "schoolBenefit",
+              "benefitId": 105,
+              "type": "numberEdit",
+              "subType": "money",
+              "title": "National average income per person per year (in {{school.currencyName}})",
+              "icon": "money"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "contractLength",
+              "type": "slider",
+              "title": "Contract Period",
+              "icon": "legal",
+              "items": [
+                {
+                  "val": 0,
+                  "description": "None"
+                },
+                {
+                  "val": 1,
+                  "description": "1 year"
+                },
+                {
+                  "val": 2,
+                  "description": "2 years"
+                },
+                {
+                  "val": 3,
+                  "description": "3 years"
+                },
+                {
+                  "val": 4,
+                  "description": "4 years"
+                },
+                {
+                  "val": 5,
+                  "description": "5 years"
+                }
+              ]
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "schoolBenefit",
+              "benefitId": 107,
+              "type": "numberEdit",
+              "subType": "money",
+              "title": "Average yearly saving made (for single teacher, in {{school.currencyName}})",
+              "icon": "briefcase"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemType": "schoolBenefit",
+              "benefitId": 108,
+              "type": "fromFew",
+              "title": "Salary can support a family of four",
+              "icon": "group",
+              "limit": 1,
+              "listName": "yesNo",
+              "listColumn": "name"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemType": "schoolBenefit",
+              "benefitId": 109,
+              "type": "fromFew",
+              "title": "Pay scale based on experience",
+              "icon": "signal",
+              "limit": 1,
+              "listName": "yesNo",
+              "listColumn": "name"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemType": "schoolBenefit",
+              "benefitId": 110,
+              "type": "fromFew",
+              "title": "Teacher saving scheme",
+              "icon": "road",
+              "limit": 1,
+              "listName": "yesNo",
+              "listColumn": "name"
+            }
+          ]
+        },
+        {
+          "title": "Other contractual details",
+          "icon": "legal",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Other contractual details",
+              "icon": "legal"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "schoolBenefit",
+              "benefitId": 111,
+              "type": "numberEdit",
+              "subType": "money",
+              "title": "Annual professional development budget per teacher (in {{school.currencyName}})"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "schoolBenefit",
+              "benefitId": 112,
+              "type": "numberEdit",
+              "title": "Number of school days per year"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "hpwWeekDayLessons",
+              "type": "numberEdit",
+              "title": "Number of teaching hours per week"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "hpwExtraCurricular",
+              "type": "numberEdit",
+              "title": "Number of extra-curricular hours per week"
+            }
+          ]
+        },
+        {
+          "title": "Benefits",
+          "icon": "plus",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Benefits",
+              "icon": "plus"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "schoolBenefit",
+              "benefitId": 1,
+              "type": "slider",
+              "title": "Discount on school fees for staff children",
+              "suffix": "%"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemType": "schoolBenefit",
+              "benefitId": 2,
+              "type": "fromFew",
+              "title": "Guaranteed places for staff children",
+              "limit": 1,
+              "listName": "yesNo",
+              "listColumn": "name"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "schoolBenefit",
+              "benefitId": 3,
+              "type": "numberEdit",
+              "subType": "money",
+              "title": "Monthly accommodation allowance (in {{school.currencyName}})"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemType": "schoolBenefit",
+              "benefitId": 8,
+              "type": "fromFew",
+              "title": "Accommodation provided by school",
+              "limit": 1,
+              "listName": "yesNo",
+              "listColumn": "name"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemType": "schoolBenefit",
+              "benefitId": 201,
+              "type": "fromFew",
+              "title": "Flight allowance",
+              "limit": 1,
+              "listName": "flightAllowances",
+              "listColumn": "allowance"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemType": "schoolBenefit",
+              "benefitId": 202,
+              "type": "fromFew",
+              "title": "Relocation allowance",
+              "limit": 1,
+              "listName": "relocationAllowances",
+              "listColumn": "allowance"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemType": "schoolBenefit",
+              "benefitId": 6,
+              "type": "fromFew",
+              "title": "Laptop allowance",
+              "limit": 1,
+              "listName": "yesNo",
+              "listColumn": "name"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemType": "schoolBenefit",
+              "benefitId": 4,
+              "type": "fromFew",
+              "title": "Language lesson allowance",
+              "limit": 1,
+              "listName": "yesNo",
+              "listColumn": "name",
+              "maxLength": "500"
+            },
+            {
+              "weight": 1,
+              "wait": 3000,
+              "systemType": "schoolBenefit",
+              "benefitId": 7,
+              "type": "textEdit",
+              "title": "Other benefits or allowances offered",
+              "maxLength": 500
+            }
+          ]
+        },
+        {
+          "title": "Health and pension",
+          "icon": "medkit",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Health and pension",
+              "icon": "medkit"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "pensionScheme",
+              "type": "fromFew",
+              "title": "Type of pension scheme",
+              "limit": 1,
+              "listName": "pensionSchemes",
+              "listColumn": "name"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "pensionTeacherContrib",
+              "type": "slider",
+              "title": "Teacher contribution per year (approx)",
+              "step": 10,
+              "suffix": "%"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "pensionSchoolContrib",
+              "type": "slider",
+              "title": "School contribution per year (approx)",
+              "step": 10,
+              "suffix": "%"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "fhipCountry",
+              "type": "fromFew",
+              "title": "Is there free healthcare in {{city.country.name}}?",
+              "limit": 1,
+              "listName": "yesNo",
+              "listColumn": "name"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "fhipSchool",
+              "type": "fromFew",
+              "title": "Does {{school.nickname}} have a free private healthcare scheme?",
+              "limit": 1,
+              "listName": "yesNo",
+              "listColumn": "name"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "weight": 2,
+      "title": "City and life",
+      "tip": "This section inspires teachers to move to {{city.name}} and the appeal of living there. It highlights the quality of life they can enjoy, and the places they can visit during their weekends.",
+      "icon": "heart",
+      "sections": [
+        {
+          "title": "{{city.name}}",
+          "icon": "bullseye",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "{{city.name}}",
+              "icon": "bullseye"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "city",
+              "systemName": "population",
+              "type": "numberEdit",
+              "title": "Population"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemType": "city",
+              "systemName": "language",
+              "type": "fromMany",
+              "title": "Language",
+              "limit": 1,
+              "listName": "languages",
+              "listColumn": "name"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemType": "city",
+              "systemName": "attractions",
+              "type": "fromFew",
+              "title": "Attractions and activities within a two hour drive of {{school.nickname}}",
+              "listName": "attractions",
+              "listColumn": "attraction"
+            }
+          ]
+        },
+        {
+          "title": "Cost of living",
+          "icon": "money",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Cost of living",
+              "icon": "money"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "cityLivingCost",
+              "livingCostId": 1,
+              "type": "numberEdit",
+              "subType": "money",
+              "title": "Expected monthly rent for a two bedroom flat (in {{city.internationalCurrencyName}})"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "cityLivingCost",
+              "livingCostId": 2,
+              "type": "numberEdit",
+              "subType": "money",
+              "title": "Average cost of litre of petrol / gas (in {{city.internationalCurrencyName}})"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "cityLivingCost",
+              "livingCostId": 3,
+              "type": "numberEdit",
+              "subType": "money",
+              "title": "Cost of a coffee in local cafe (in {{city.internationalCurrencyName}})"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "cityLivingCost",
+              "livingCostId": 4,
+              "type": "numberEdit",
+              "subType": "money",
+              "title": "Typical two course restaurant meal (in {{city.internationalCurrencyName}})"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "cityLivingCost",
+              "livingCostId": 5,
+              "type": "numberEdit",
+              "subType": "money",
+              "title": "Cost of flights during the Summer holiday season to New York (in {{city.internationalCurrencyName}})"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "cityLivingCost",
+              "livingCostId": 6,
+              "type": "numberEdit",
+              "subType": "money",
+              "title": "Cost of flights during the Summer holiday season to London (in {{city.internationalCurrencyName}})"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "cityLivingCost",
+              "livingCostId": 7,
+              "type": "numberEdit",
+              "subType": "money",
+              "title": "Cost of flights during the Summer holiday season to Sydney (in {{city.internationalCurrencyName}})"
+            }
+          ]
+        },
+        {
+          "title": "City attractions",
+          "icon": "camera",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "City attractions",
+              "icon": "camera"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "style": "color: red;",
+              "val": "WIP - Not quite there yet."
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "cityLink",
+              "linkId": 1,
+              "type": "urlEdit",
+              "title": "Lonely Planet city guide",
+              "urlTitle": false
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "cityLink",
+              "linkId": 2,
+              "type": "urlEdit",
+              "title": "Leisure"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "cityLink",
+              "linkId": 3,
+              "type": "urlEdit",
+              "title": "Travel"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "cityLink",
+              "linkId": 4,
+              "type": "urlEdit",
+              "title": "Housing"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "cityLink",
+              "linkId": 5,
+              "type": "urlEdit",
+              "title": "Services"
+            }
+          ]
+        },
+        {
+          "title": "Other useful links",
+          "icon": "ellipsis-horizontal",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Other useful links",
+              "icon": "ellipsis-horizontal"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "style": "color: red;",
+              "val": "WIP - This will have a dynamic number of link fields (with a add/delete possibilities)."
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "cityLink",
+              "linkId": 101,
+              "type": "urlEdit",
+              "title": "Website 1"
+            }
+          ]
+        },
+        {
+          "title": "Services",
+          "icon": "cogs",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Services",
+              "icon": "cogs"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "This page is with AR/AT. It'll probably not have any actual fields on it.",
+              "style": "color: red;"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "We have a number of recruitment services designed to support schools like {{school.nickname}} and over 20,000 inspiring teachers looking to teacher overseas"
+            },
+            {
+              "weight": 0,
+              "wait": 1,
+              "systemName": "ignoreForNow",
+              "type": "fromFew",
+              "title": "Are you interested in finding out more?",
+              "limit": 1,
+              "listName": "yesNo",
+              "listColumn": "name"
+            },
+            {
+              "weight": 0,
+              "wait": 1,
+              "systemName": "ignoreForNow",
+              "type": "fromFew",
+              "title": "Do you have any feedback about this process?",
+              "limit": 1,
+              "listName": "yesNo",
+              "listColumn": "name"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "Thanks for completing {{school.nickname}}'s profile. We hope we can help you find some inspiring teachers over the years ahead. Please do share with contacts at good schools not currently listed so that we can build this platform in collaboration with them too."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

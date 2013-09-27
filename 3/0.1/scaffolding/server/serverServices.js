@@ -288,10 +288,14 @@ thServerModule.run(function($httpBackend, $resource, $q, $timeout, serverListsSe
 
   //json files (these are loaded to local variables so that when the normal request comes through, they're ready to go - this was tricky to figure out in the first place)
   var json = {};
-  var dataSetId = randomDataService.getRandomInteger(1, 2);
-  $http.get('/th-frontend/3/0.1/scaffolding/server/json/lists.json').then(function(response) { json.lists = response.data; });
-  $http.get('/th-frontend/3/0.1/scaffolding/server/json/school' + dataSetId + '.json').then(function(response) { json.school = response.data; });
-  $http.get('/th-frontend/3/0.1/scaffolding/server/json/city' + dataSetId + '.json').then(function(response) { json.city = response.data; });
+  json.filenames = [ 'lists', 'school101', 'school1234', 'city146', 'city25',
+    'spepStructure', 'spepNotesStructure', 'contentItemShowcaseStructure' ];
+
+  _.forEach(json.filenames, function(filename) {
+    $http
+      .get('/th-frontend/3/0.1/scaffolding/server/json/' + filename + '.json')
+      .then(function(response) { json[filename] = response.data; });
+  });
 
   //dummy responses (in the form of javascript objects)
 
@@ -401,13 +405,23 @@ thServerModule.run(function($httpBackend, $resource, $q, $timeout, serverListsSe
   var listsResponse = function() { return [200, json.lists]; };
 
   //schools
-  var schoolResponse = function() { return [200, json.school]; };
+  var schoolResponse = function(method, url, data, headers) {
+    var params = deserializeParams(data);
+    return [200, json['school' + params.schoolId]];
+  };
 
   //cities
-  var cityResponse = function() { return [200, json.city]; };
-
+  var cityResponse = function(method, url, data, headers) {
+    var params = deserializeParams(data);
+    return [200, json['city' + params.cityId]];
+  };
 
   //Note: url rule - all lower case, words separated with a hyphen
+
+  //app structure data
+    $httpBackend.whenPOST('/school-dashboard/service/spep-structure').respond(function() { return [200, json.spepStructure]; });
+    $httpBackend.whenPOST('/school-dashboard/service/spep-notes-structure').respond(function() { return [200, json.spepNotesStructure]; });
+    $httpBackend.whenPOST('/shared/service/content-item-showcase-structure').respond(function() { return [200, json.contentItemShowcaseStructure]; });
 
   //teachers
     $httpBackend.whenPOST('/admin/service/teachers').respond(teachersResponse);

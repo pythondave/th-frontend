@@ -5,31 +5,30 @@ var thSchoolDashboardAppModule = angular.module('thSchoolDashboardAppModule',
   ]);
 
 //states (routes) - ref: https://github.com/angular-ui/ui-router
-thSchoolDashboardAppModule.config(function($stateProvider, $urlRouterProvider) {
+thSchoolDashboardAppModule.config(function($stateProvider, $urlRouterProvider, configService) {
+  //routes are of the form: '#/{schoolId}/{level1}/{level2}/{level3}'
+  //  where... level1: top menu item; level2: side menu section; level3: page
 
-  $urlRouterProvider.when('/default.html', '/');
-  $urlRouterProvider.when('', '/');
-  $urlRouterProvider.when('/', '/1');
-  $urlRouterProvider.when('/1', '/1/1/1');
-  $urlRouterProvider.when('/2', '/2/1/1');
+  //force to 4 parameters if it has fewer
+  $urlRouterProvider.when('/{schoolId}', '/{schoolId}/1/1/1');
+  $urlRouterProvider.when('/{schoolId}/{level1}', '/{schoolId}/{level1}/1/1');
+  $urlRouterProvider.when('/{schoolId}/{level1}/{level2}', '/{schoolId}/{level1}/{level2}/1');
+  $urlRouterProvider.otherwise(function () { //redirect if route is invalid
+    window.location.href = configService.requests.urls.invalidSchoolDashboardUrlRedirect;
+  });
 
-  var structure;
-  var getStructure = function(initService) {
-    structure = structure || initService.init();
-    return structure;
+  var getStructure = function(initService, $stateParams) {
+    return initService.init($stateParams.schoolId);
   };
 
-  $stateProvider
-    .state('level1', {
-      url: '/:level1', templateUrl: 'partials/level1.html', controller: 'Level1Controller',
-      resolve: { structure: getStructure } //ensures initial data is all to go ready before the page loads
-    })
-    .state('level1.level2', { //*** TODO: level 2 menu is reloading on change within it - see if I can rework this
-      url: '/:level2', templateUrl: 'partials/level2.html', controller: 'Level2Controller'
-    })
-    .state('level1.level2.level3', {
-      url: '/:level3', templateUrl: 'partials/level3.html', controller: 'Level3Controller'
-    });
+  var level1 = { name: 'level1', url: '/{schoolId:[0-9]{1,6}}/{level1:[0-9]}', templateUrl: 'partials/level1.html', controller: 'Level1Controller',
+    resolve: { structure: getStructure } //ensures initial data is all loaded and ready to go before the page loads
+  };
+  //*** TODO: level 2 menu is reloading on change within it - see if I can rework this
+  var level2 = { name: 'level2', url: '/{level2:[0-9]}', parent: level1, templateUrl: 'partials/level2.html', controller: 'Level2Controller' };
+  var level3 = { name: 'level3', url: '/{level3:[0-9]{1,2}}', parent: level2, templateUrl: 'partials/level3.html', controller: 'Level3Controller' };
+
+  $stateProvider.state(level1).state(level2).state(level3);
 });
 
 //configure $httpProvider

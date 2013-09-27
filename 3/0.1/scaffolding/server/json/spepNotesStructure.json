@@ -1,0 +1,80 @@
+{
+  "weight": 0,
+  "title": "Notes",
+  "icon": "comment",
+  "sections": [
+    {
+      "title": "Read Me",
+      "tip": "Section 2.1 tip",
+      "icon": "book",
+      "sections": [
+        {
+          "title": "Information",
+          "icon": "comment",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Information",
+              "icon": "comment"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The 'notes' section contains information about the framework in general and the SPEP project.",
+              "icon": "comment"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "See the 'edit school profile' section for the SPEPs.",
+              "icon": "edit"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "See the 'generic showcase' section to see what is possible.",
+              "icon": "trophy"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The 'notes' section will be removed during deployment.",
+              "icon": "comment"
+            }
+          ]
+        },
+        {
+          "title": "Priorities and progress",
+          "icon": "signal",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Priorities and progress",
+              "icon": "signal"
+            },
+            {
+              "weight": 0,
+              "type": "list",
+              "title": "NOTE - rough priorities and progress:",
+              "icon": "pushpin",
+              "description": "description",
+              "items": [
+                "Functionality of the framework (currently ~90%)",
+                "Functionality of each content item type (currently varies - average is ~80%)",
+                "Style of the framework (currently ~80%)",
+                "Style of each content item type (currently varies - average is ~80%)",
+                "Setting up structure according to AR's layout (currently 100%)",
+                "Setting up each content item according to AR's layout (currently 100%)",
+                "Setting up each content item to display data received from server (currently ~80%)",
+                "Setting up each content item to send update data to server (currently ~80%)",
+                "Atypical content item tweaks (currently ~50%)"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

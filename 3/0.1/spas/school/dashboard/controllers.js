@@ -3,7 +3,7 @@ thSchoolDashboardAppModule.controller('Level1Controller', function($rootScope, $
   $scope.isDevMode = true; //*** TEMP
   $scope.$watch('isDevMode', function() { $rootScope.$broadcast('devModeChanged', $scope.isDevMode); }); //*** TEMP
 
-  $scope.sections = structure.sections;
+  $scope.structure = structure;
   $scope.serverService = serverService;
 
   $scope.$on('$locationChangeStart', function(event, nextUrl) {
