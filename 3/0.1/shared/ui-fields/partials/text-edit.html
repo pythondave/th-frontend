@@ -7,5 +7,11 @@
 
   <span ng-show="!model.isEditMode" style="cursor: pointer" ng-click="model.isEditMode=true" tooltip="Click to edit text">{{model.val}}</span>
 
+  <span ng-show="model.showClear && model.isEditMode && model.val" style="" ng-mousedown="model.val=undefined">
+    <span popover="Click to clear text" popover-trigger="mouseenter">
+      <i class="icon-remove" style="margin-left: -20px;"></i>
+    </span>
+  </span>
+
   <span content-item-icons model="model"></span>
 </div>

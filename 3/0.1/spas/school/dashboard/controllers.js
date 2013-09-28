@@ -1,10 +1,20 @@
-//Level1Controller (everything on the page)
-thSchoolDashboardAppModule.controller('Level1Controller', function($rootScope, $scope, $state, appLoading, serverService, structure) {
-  $scope.isDevMode = true; //*** TEMP
-  $scope.$watch('isDevMode', function() { $rootScope.$broadcast('devModeChanged', $scope.isDevMode); }); //*** TEMP
+/*
+  SchoolController
+  Level1Controller
+  Level2Controller
+  Level3Controller
+  TransitionWarningController
+*/
 
-  $scope.structure = structure;
+//SchoolController
+thSchoolDashboardAppModule.controller('SchoolController', function($rootScope, $scope, $state, appLoading, serverService, structure, configService) {
+  if (configService.isDevMode) {
+    $scope.isDevMode = configService.isDevMode;
+    $scope.$watch('isDevMode', function() { $rootScope.$broadcast('devModeChanged', $scope.isDevMode); });
+  }
+
   $scope.serverService = serverService;
+  $scope.structure = structure;
 
   $scope.$on('$locationChangeStart', function(event, nextUrl) {
     if (structure.getLevel3IsOkay() === false) { //cancel transition to nextUrl if the page is not okay
@@ -23,31 +33,37 @@ thSchoolDashboardAppModule.controller('Level1Controller', function($rootScope, $
   });
 });
 
-//Level2Controller (side menu and main page)
-thSchoolDashboardAppModule.controller('Level2Controller', function($rootScope, $scope, $state, $timeout, $location, appLoading, serverService, structure) {
-  $scope.$on('devModeChanged', function(e, isDevMode) { $scope.isDevMode = isDevMode; }); //*** TEMP
+//Level1Controller
+thSchoolDashboardAppModule.controller('Level1Controller', function($rootScope, $scope, $state, $timeout, $location, appLoading, serverService, structure, configService) {
+  $scope.hierarchy = structure.hierarchy;
+  $scope.serverService = serverService;
+
+  $scope.$on('devModeChanged', function(e, isDevMode) { $scope.isDevMode = isDevMode; });
 
   $scope.$on('$viewContentLoaded', function(){
     $scope.useAnimationHack1 = true;
     $timeout(function() { $scope.useAnimationHack1 = false; appLoading.ready(); }, 500 );
   });
 
+  $scope.$on('$stateChangeSuccess', function() {
+    $scope.percentageComplete = structure.getLevel1PercentageComplete();
+    $scope.getProgressBarCompleteStyle = function() { return { width: $scope.percentageComplete + '%' }; };
+  });
+
   $rootScope.$$listeners['serverService.responseReceived'] = undefined; //remove listener (in case it already exists)
   $rootScope.$on('serverService.responseReceived', function() { //add listener
-    $scope.percentageComplete = structure.getPercentageComplete();
+    $scope.percentageComplete = structure.getLevel1PercentageComplete();
     if (!$rootScope.$$phase) $scope.$apply();
   });
 
-  $scope.hierarchy = structure.hierarchy;
-  $scope.serverService = serverService;
-
-  $scope.percentageComplete = structure.getPercentageComplete();
-  $scope.getProgressBarCompleteStyle = function () { return { width: $scope.percentageComplete + '%' }; };
-
-  $scope.go = function (path) { $location.path(path); };
+  $scope.go = function(path) { $location.path(path); };
 });
 
-//Level3Controller (main page)
+//Level2Controller
+thSchoolDashboardAppModule.controller('Level2Controller', function() {
+});
+
+//Level3Controller
 thSchoolDashboardAppModule.controller('Level3Controller', function($scope, $state, $modal, configService, $location, structure) {
   $scope.$on('devModeChanged', function(e, isDevMode) { _.setAll(structure.contentItemsIndex, 'isDevMode', isDevMode); }); //*** TEMP
 
@@ -72,6 +88,7 @@ thSchoolDashboardAppModule.controller('Level3Controller', function($scope, $stat
   });
 });
 
+//TransitionWarningController
 thSchoolDashboardAppModule.controller('TransitionWarningController', function($scope, $modalInstance, nextRoute) {
   $scope.nextRoute = nextRoute;
   $scope.close = $modalInstance.close;

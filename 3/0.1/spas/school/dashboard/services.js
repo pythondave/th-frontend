@@ -3,7 +3,6 @@
 /*
   serverService
   hierarchyService - *** move
-  notesStructureSectionService
   initService
 */
 
@@ -113,17 +112,29 @@ thSchoolDashboardAppModule.factory('initService', function ($rootScope, $q, $htt
 
   var o = {};
 
-  var urls = configService.requests.urls;
-  var postConfig = configService.requests.postConfig;
+  var delay = function(ms) {
+    var deferred = $q.defer();
+    $timeout(deferred.resolve, ms);
+    return deferred.promise;
+  };
 
   var getIndependentServerData = function() { //queries which are independent of each other
-    return $q.all([
-      $http.post(urls.lists, undefined, postConfig),
-      $http.post(urls.school, { schoolId: o.schoolId }, postConfig),
-      $http.post(urls.spepStructure, undefined, postConfig),
-      $http.post(urls.spepNotesStructure, undefined, postConfig),
-      $http.post(urls.contentItemShowcaseStructure, undefined, postConfig)
-    ]);
+    var urls = configService.requests.urls;
+    var getFromServer = function(url, data) {
+      if (!url) return;
+      return $http.post(url, data, configService.requests.postConfig);
+    };
+
+    var a = [
+      getFromServer(urls.lists),
+      getFromServer(urls.school, { schoolId: o.schoolId }),
+      getFromServer(urls.spepStructure),
+      getFromServer(urls.spepNotesStructure),
+      getFromServer(urls.contentItemShowcaseStructure)
+    ];
+
+    _.remove(a, function(val) { return val === undefined; });
+    return $q.all(a);
   };
 
   var sortLists = function(o) {
@@ -153,11 +164,10 @@ thSchoolDashboardAppModule.factory('initService', function ($rootScope, $q, $htt
     o.lists = sortLists(response[0].data);
     o.schoolData = response[1].data;
 
-    o.sections = [
-      response[2].data,
-      response[3].data,
-      response[4].data
-    ];
+    o.sections = [];
+    for (var i = 2; i < response.length; i++) {
+      o.sections.push(response[i].data);
+    }
 
     //additional hard-coded list data (*** WIP - move to lists?)
     o.lists.months = [{ id: 1, name: 'January'}, { id: 2, name: 'February'}, { id: 3, name: 'March'}, { id: 4, name: 'April'}, { id: 5, name: 'May'}, { id: 6, name: 'June'}, { id: 7, name: 'July'}, { id: 8, name: 'August'}, { id: 9, name: 'September'}, { id: 10, name: 'October'}, { id: 11, name: 'November'}, { id: 12, name: 'December'}];
@@ -310,7 +320,8 @@ thSchoolDashboardAppModule.factory('initService', function ($rootScope, $q, $htt
     });
   };
 
-  o.getPercentageComplete = function() { //*** todo - consider attaching to hierarchy object / sub-objects
+  o.getLevel1PercentageComplete = function() {
+    if (o.hierarchy.level1.index !== 0) return;
     var sum = _.reduce(o.contentItemsIndex, function(sum, ci) {
       var weight = (ci.parent.parent.parent.index === 0 ? ci.getWeight() : 0);
       return sum + weight;
@@ -318,16 +329,10 @@ thSchoolDashboardAppModule.factory('initService', function ($rootScope, $q, $htt
     return Math.round(sum*100, 10);
   };
 
-  var delay = function(ms) {
-    var deferred = $q.defer();
-    $timeout(deferred.resolve, ms);
-    return deferred.promise;
-  };
-
   o.init = function(schoolId) {
     o.schoolId = schoolId;
-    //delay(100) allows .json files to be loaded to the mock server. It's not strictly needed for the a non-mock version, but shouldn't do any harm.
-    return (configService.isDev ? delay(500) : $q).then(getAndSetServerData).then(combineStructureAndServerData);
+    var ms = (configService.isDevMode ? 500 : 500);
+    return delay(ms).then(getAndSetServerData).then(combineStructureAndServerData);
   };
 
   return o;

@@ -305,6 +305,36 @@
                 }
               ],
               "val": 2
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "fromMany1",
+              "type": "fromMany",
+              "limit": 1,
+              "showClear": true,
+              "title": "From-many content item with clear",
+              "listColumn": "name",
+              "items": [
+                {
+                  "id": 1,
+                  "name": "Apple"
+                },
+                {
+                  "id": 2,
+                  "name": "Banana",
+                  "isSelected": true
+                },
+                {
+                  "id": 3,
+                  "name": "Orange"
+                },
+                {
+                  "id": 4,
+                  "name": "Pear"
+                }
+              ],
+              "val": 3
             }
           ]
         },
@@ -556,6 +586,14 @@
               "wait": 1,
               "systemName": "ratingEdit2",
               "type": "ratingEdit",
+              "title": "Rating-edit content item with no value",
+              "max": 5
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "ratingEdit3",
+              "type": "ratingEdit",
               "title": "Rating-edit content item size 7",
               "max": 7,
               "val": 6
@@ -563,17 +601,18 @@
             {
               "weight": 1,
               "wait": 1,
-              "systemName": "ratingEdit3",
+              "systemName": "ratingEdit4",
               "type": "ratingEdit",
-              "title": "Rating-edit content item with icon",
+              "title": "Rating-edit content item with icon and clear",
               "icon": "umbrella",
               "max": 5,
-              "val": 4
+              "val": 4,
+              "showClear": true
             },
             {
               "weight": 1,
               "wait": 1,
-              "systemName": "ratingEdit4",
+              "systemName": "ratingEdit5",
               "type": "ratingEdit",
               "title": "Rating-edit content item with tip",
               "tip": "This is a tip",
@@ -583,7 +622,7 @@
             {
               "weight": 1,
               "wait": 1,
-              "systemName": "ratingEdit5",
+              "systemName": "ratingEdit6",
               "type": "ratingEdit",
               "title": "Rating-edit content item with description",
               "max": 5,
@@ -593,7 +632,7 @@
             {
               "weight": 1,
               "wait": 1,
-              "systemName": "ratingEdit6",
+              "systemName": "ratingEdit7",
               "type": "ratingEdit",
               "title": "Rating-edit content item with value tips",
               "max": 5,
@@ -609,7 +648,7 @@
             {
               "weight": 1,
               "wait": 1,
-              "systemName": "ratingEdit7",
+              "systemName": "ratingEdit8",
               "type": "ratingEdit",
               "title": "Standard rating-edit content item",
               "icon": "thumbs-up",
@@ -620,7 +659,7 @@
             {
               "weight": 1,
               "wait": 1,
-              "systemName": "ratingEdit8",
+              "systemName": "ratingEdit9",
               "type": "ratingEdit",
               "title": "Rating-edit content item with full works",
               "icon": "music",

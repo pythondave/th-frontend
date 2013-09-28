@@ -14,6 +14,7 @@ thSchoolDashboardAppModule.config(function($stateProvider, $urlRouterProvider, c
   $urlRouterProvider.when('/{schoolId}/{level1}', '/{schoolId}/{level1}/1/1');
   $urlRouterProvider.when('/{schoolId}/{level1}/{level2}', '/{schoolId}/{level1}/{level2}/1');
   $urlRouterProvider.otherwise(function () { //redirect if route is invalid
+    if (configService.isDevMode) return '/101/1/1/1';
     window.location.href = configService.requests.urls.invalidSchoolDashboardUrlRedirect;
   });
 
@@ -21,14 +22,14 @@ thSchoolDashboardAppModule.config(function($stateProvider, $urlRouterProvider, c
     return initService.init($stateParams.schoolId);
   };
 
-  var level1 = { name: 'level1', url: '/{schoolId:[0-9]{1,6}}/{level1:[0-9]}', templateUrl: 'partials/level1.html', controller: 'Level1Controller',
+  var school = { name: 'school', url: '/{schoolId:[0-9]{1,6}}', templateUrl: 'partials/school.html', controller: 'SchoolController',
     resolve: { structure: getStructure } //ensures initial data is all loaded and ready to go before the page loads
   };
-  //*** TODO: level 2 menu is reloading on change within it - see if I can rework this
+  var level1 = { name: 'level1', url: '/{level1:[0-9]}', parent: school, templateUrl: 'partials/level1.html', controller: 'Level1Controller' };
   var level2 = { name: 'level2', url: '/{level2:[0-9]}', parent: level1, templateUrl: 'partials/level2.html', controller: 'Level2Controller' };
   var level3 = { name: 'level3', url: '/{level3:[0-9]{1,2}}', parent: level2, templateUrl: 'partials/level3.html', controller: 'Level3Controller' };
 
-  $stateProvider.state(level1).state(level2).state(level3);
+  $stateProvider.state(school).state(level1).state(level2).state(level3);
 });
 
 //configure $httpProvider

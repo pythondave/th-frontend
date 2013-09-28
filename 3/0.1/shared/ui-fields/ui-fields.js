@@ -260,8 +260,15 @@ thUiFieldsModule.directive('ratingEdit', function(configService) {
     templateUrl: configService.root + '/shared/ui-fields/partials/rating-edit.html',
     scope: { model: '=' },
     link: function(scope, element, attr, ctrl) {
+      scope.localVal = scope.model.val || 0;
       scope.$watch('model.val', function(newVal, oldVal) {
-        if (newVal !== oldVal) scope.model.update();
+        if (newVal === oldVal) return;
+        localVal = newVal || 0;
+        scope.model.update();
+      });
+      scope.$watch('localVal', function(newVal, oldVal) { //localVal is unfortunately needed since rating uses '0' for 'undefined'
+        if (newVal === oldVal) return;
+        scope.model.val = newVal || undefined;
       });
     }
   };

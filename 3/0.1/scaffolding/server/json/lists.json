@@ -4299,6 +4299,32 @@
             "facility": "Teacher Workspaces"
         }
     ],
+    "ageLevels": [
+        {
+            "id": 1,
+            "name": "Pre-school"
+        },
+        {
+            "id": 2,
+            "name": "Primary"
+        },
+        {
+            "id": 3,
+            "name": "Elementary"
+        },
+        {
+            "id": 4,
+            "name": "Middle School"
+        },
+        {
+            "id": 5,
+            "name": "Secondary"
+        },
+        {
+            "id": 6,
+            "name": "High School"
+        }
+    ],
     "subjects": [
         {
             "id": 1,
@@ -5372,20 +5398,20 @@
             "category": "Ability to save"
         },
         {
+            "id": 1,
+            "category": "Accreditation"
+        },
+        {
             "id": 3,
             "category": "Facilities"
         },
         {
             "id": 2,
-            "category": "Leadership"
+            "category": "Memberships"
         },
         {
             "id": 4,
-            "category": "Lifestyle"
-        },
-        {
-            "id": 1,
-            "category": "Student Behaviour"
+            "category": "Professional development"
         }
     ],
     "relocationAllowances": [
@@ -5482,27 +5508,31 @@
     "educationLevels": [
         {
             "id": 1,
-            "name": "Pre-school"
+            "name": "PhD"
         },
         {
             "id": 2,
-            "name": "Primary"
+            "name": "Bachelors"
         },
         {
             "id": 3,
-            "name": "Elementary"
+            "name": "Masters"
         },
         {
             "id": 4,
-            "name": "Middle School"
+            "name": "Teaching Qualification / Certification"
         },
         {
             "id": 5,
-            "name": "Secondary"
+            "name": "Secondary / High School"
         },
         {
             "id": 6,
-            "name": "High School"
+            "name": "CELTA / TEFL"
+        },
+        {
+            "id": 7,
+            "name": "Other"
         }
     ],
     "yesNo": [

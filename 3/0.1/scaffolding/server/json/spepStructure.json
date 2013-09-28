@@ -169,7 +169,7 @@
               "title": "Student gender ratio",
               "icon": "adjust",
               "limit": 1,
-              "listName": "genderRations",
+              "listName": "genderRatios",
               "listColumn": "ratio"
             },
             {

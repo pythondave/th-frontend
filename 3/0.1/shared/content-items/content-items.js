@@ -12,7 +12,7 @@ Content item:
 thContentItemsModule.factory('contentItemService', function ($timeout, serverService, helperService) {
   var o = {};
 
-  var globalDefaultVals = { weight: 1 };
+  var globalDefaultVals = { weight: 1, showClear: true };
 
   var contentItemTypes = { //possible content item types and defaults (weight, throttling wait times)
     header: { weight: 0 },
@@ -26,7 +26,7 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
     locationEdit: { wait: 1 },
     moneyEdit: { wait: 2000 },
     numberEdit: { wait: 2000 },
-    ratingEdit: { wait: 1 },
+    ratingEdit: { wait: 1, showClear: false },
     slider: { wait: 2000 },
     textEdit: { wait: 3000 }, //longer because has no validation and can be more data
     timeEdit: { wait: 2000 },
@@ -99,6 +99,8 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
     }
     if (this.type === 'fromFew') {
       _.markMatchingCollectionItems(this.items, this.val);
+    }
+    if (this.type === 'ratingEdit') {
     }
     if (this.type === 'urlEdit') {
       //WIP
