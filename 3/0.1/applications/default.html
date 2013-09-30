@@ -61,7 +61,7 @@
         {{a.dateApplied | date:'dd MMM yyyy'}} <!-- h:mma -->
       </td>
       <td class="td-center">
-        <img ng-show="a.processing" src="http://img.cdn.tl/loading1.gif" />
+        <img ng-show="a.processing" src="http://img.cdn.tl/loading1.gif" alt="processing" />
       </td>
       <td class="td-center">
         <button class="btn btn-success btn-small" ng-click="process(a, 2)" ng-disabled="a.processing" style="white-space: nowrap">Put forward</button>

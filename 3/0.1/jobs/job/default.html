@@ -58,7 +58,7 @@
   <tbody ng-repeat="a in applications">
     <tr ng-class="{ 0:'tr-odd', 1:'tr-even' }[$index%2]">
       <td ng-click="a.expanded=!a.expanded">
-        <img ng-src="{{a.teacher.avatarUrl}}" style=" width: 24px; " />
+        <img ng-src="{{a.teacher.avatarUrl}}" style=" width: 24px; " alt="avatar" />
         <a class="point">{{a.teacher.fullName}}</a>
         <span simple-tooltip="{{a.coverMessage}}" simple-tooltip-options="{ placement: 'right', class: 'tooltip-wide', heading: 'Cover Message' }" class="point">
           <i ng-show="a.coverMessage" class="icon-comment"></i>
@@ -66,7 +66,7 @@
         <span simple-tooltip="Put forward {{a.datePutForward | date:'EEE dd MMM yyyy h:mma'}}" ng-show="a.daysSincePutForward < 3" class="new">new<span>
       </td>
       <td style="width: 20px;">
-        <img ng-show="a.processing || a.teacher.processing" src="http://img.cdn.tl/loading1.gif" />
+        <img ng-show="a.processing || a.teacher.processing" src="http://img.cdn.tl/loading1.gif" alt="processing" />
         <span ng-hide="a.processing || a.teacher.processing" ng-click="a.expanded=!a.expanded" class="point">
           <i ng-show="a.dirty" class="icon-flag"></i>
           <span ng-hide="a.dirty">
@@ -103,7 +103,7 @@
           </div>
           <textarea style="margin: 5px; width: 100%; min-height: 70px;" ng-model="a.teacher.adminNote" ng-change="processWithThrottle(a, { adminNote: a.teacher.adminNote })"></textarea>
         </div>
-        <img ng-src="{{a.teacher.avatarUrl}}" style=" width: 120px; float: right; " />
+        <img ng-src="{{a.teacher.avatarUrl}}" style=" width: 120px; float: right; " alt="avatar" />
       <td>
     </tr>
   </tbody>

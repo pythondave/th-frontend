@@ -6,7 +6,7 @@
   <i class="icon-remove" ng-hide="!settingName" ng-click="settingName=undefined"></i>
 </div>
 
-<img ng-show="processing" src="http://img.cdn.tl/loading1.gif" />
+<img ng-show="processing" src="http://img.cdn.tl/loading1.gif" alt="processing" />
 
 <div ng-show="!!settingName && !processing">
   <textarea ng-change="dirty=true" ng-model="settingValue" style="margin-top: 10px; width: 486px; height: 200px;"></textarea>
