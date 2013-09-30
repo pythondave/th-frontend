@@ -27,7 +27,7 @@
               "type": "textEdit",
               "title": "Head teacher / Principal",
               "icon": "user",
-              "tip": "This tip and the icon at the start of this line are here as an illustration. These are easy to add on any content item. To see more of what's currently easy, see the 'Generic showcase' main section."
+              "tip": "Please enter the Head teacher's name here."
             },
             {
               "weight": 1,
@@ -37,7 +37,7 @@
               "subType": "plain",
               "title": "Year founded",
               "icon": "calendar",
-              "tip": "1500-2013",
+              "tip": "Please enter any values between 1500-2013",
               "min": 1500,
               "max": 2013
             },
@@ -90,6 +90,7 @@
               "type": "fromFew",
               "title": "Full accreditation",
               "icon": "thumbs-up-alt",
+              "tip": "Please only select organisations below that you have achieved full accreditation from",
               "listName": "accreditations",
               "listColumn": "type"
             },
@@ -475,6 +476,13 @@
               "type": "ratingEdit",
               "title": "Accreditation",
               "icon": "thumbs-up-alt",
+              "valueTips": [
+                "No accreditation plans",
+                "2-star tip",
+                "This is the tip for 3 stars",
+                "Tip for 4 stars",
+                "5-star tip"
+              ],
               "max": 5
             },
             {
@@ -1067,7 +1075,7 @@
               "weight": 1,
               "wait": 2000,
               "systemType": "cityLink",
-              "category": 3,
+              "category": 4,
               "type": "urlEdit",
               "title": "Housing"
             },
@@ -1075,7 +1083,7 @@
               "weight": 1,
               "wait": 2000,
               "systemType": "cityLink",
-              "category": 4,
+              "category": 3,
               "type": "urlEdit",
               "title": "Services"
             }
