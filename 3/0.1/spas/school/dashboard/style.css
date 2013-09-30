@@ -83,7 +83,9 @@ hr { margin: 10px 0; }
 .content-item-headTeacher .content-item-header .popover { width: 500px; max-width: 500px; }
 
 .from-many .popover { margin-left: 11px; }
-.text-edit .popover { margin-left: -8px; }
+.text-edit-small .icon-remove { margin-left: -20px; }
+.text-edit-small .popover { margin-left: -8px; }
+.text-edit-large .icon-remove { margin-left: 3px; }
 
 .rating-edit .icon-star, .rating-edit .icon-star-empty { color: gold; font-size: 20px; }
 

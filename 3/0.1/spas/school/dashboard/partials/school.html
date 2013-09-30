@@ -26,7 +26,7 @@
         </span>
       </div>
     </div>
-    <div ng-show="isDevMode" style="background-color: white; line-height: 15px;">
+    <div ng-if="isDevMode" style="background-color: white; line-height: 15px;">
       &nbsp;{{serverService.sentToServer[serverService.sentToServer.length-1]}}
     </div>
   </div>

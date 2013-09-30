@@ -1,5 +1,16 @@
 var thGenericModule = angular.module('thGenericModule', []);
 
+/*
+  thGenericModule
+    * A module encapsulating services which are independent of any business model or logic
+
+  lodash extensions
+  hierarchyFunctionsService
+  isFunctionsService
+  listFunctionsService
+  promiseFunctionsService
+*/
+
 thGenericModule.run(function($rootScope) {
   _.templateSettings = { 'interpolate': /{{([\s\S]+?)}}/g }; //allow double-moustache syntax in message templates
   //create some new generic underscore methods
@@ -104,4 +115,137 @@ thGenericModule.run(function($rootScope) {
       });
     }
   });
+});
+
+thGenericModule.factory('hierarchyFunctionsService', function () {
+  //hierarchyFunctionsService: use to create a more self-aware hierarchy
+  //e.g. can use this service to add the following properties to each item in the hierarchy:
+  //index, parent, depth, path, previous, next
+
+  var resetMarkers = function() {
+    _.setAll(this.parent[this.propertyNames.collection], this.propertyNames.marker, false, this.propertyNames.collection);
+  };
+
+  var select = function(params) {
+    this.resetMarkers();
+
+    var collectionName = this.propertyNames.collection;
+    var markerName = this.propertyNames.marker;
+    this.level1 = this.parent[collectionName][params.level1-1];
+    this.level2 = (this.level1[collectionName] && this.level1[collectionName][params.level2-1]);
+    this.level3 = (this.level2 && this.level2[collectionName] && this.level2[collectionName][params.level3-1]);
+    this.level1[markerName] = true;
+    if (this.level2) this.level2[markerName] = true;
+    if (this.level3) this.level3[markerName] = true;
+
+    return;
+  };
+
+  var o = {};
+  o.applyHierarchy = function(object, propertyNames) {
+    propertyNames = _.defaults({}, propertyNames, { collection: 'sections', marker: 'isSelected', previous: 'previous', next: 'next' });
+
+    //add hierarchy object
+    object.hierarchy = { object: object, parent: object, propertyNames: propertyNames, resetMarkers: resetMarkers, select: select };
+
+    //add index to hierarchy; add parent, depth and path to each hierarchy item
+    object.hierarchy.index = [];
+    var iterate = function(parent) {
+      _.each(parent[propertyNames.collection], function(item, index) {
+        object.hierarchy.index.push(item);
+        item.index = index;
+        item.parent = parent;
+        item.depth = (parent.depth || 0) + 1;
+        item.path = (parent.path ? parent.path + '/' : '') + (index+1);
+        iterate(item);
+      });
+    };
+    iterate(object);
+
+    //add previous and next to each hierarchy item
+    var index = object.hierarchy.index, previous, next, i;
+    for (i = 0; i < index.length; i++) { //add previous
+      if (index[i].depth === 3) {
+        if (previous && previous.parent.parent === index[i].parent.parent) {
+          index[i][propertyNames.previous] = previous;
+        }
+        previous = index[i];
+      }
+    }
+    for (i = index.length - 1; i >= 0; i--) { //add next
+      if (index[i].depth === 3) {
+        if (next && index[i].parent.parent === next.parent.parent) {
+          index[i][propertyNames.next] = next;
+        }
+        next = index[i];
+      }
+    }
+  };
+
+  return o;
+});
+
+thGenericModule.factory('isFunctionsService', function () {
+  var o = {};
+
+  o.isPositiveInteger = function(s) { return new RegExp(/^[0-9]*$/).test(s) && s !== ''; };
+  o.isPositiveDecimal = function(s) { return new RegExp(/^(\d*\.\d{1,2}|\d+)$/).test(s) && s !== ''; };
+  o.isInRange = function(min, max, val) { return (val >= min && val <= max); };
+  o.isInPositiveIntegerRange = function(min, max, val) {
+    return o.isPositiveInteger(val) && o.isInRange(min, max, val);
+  };
+  o.isInPositiveDecimalRange = function(min, max, val) {
+    return o.isPositiveDecimal(val) && o.isInRange(min, max, val);
+  };
+
+  return o;
+});
+
+thGenericModule.factory('listFunctionsService', function () {
+  var o = {};
+
+  o.toggleLimitedListItem = function(listItems, item, options) {
+    //returns true if the listItems were changed
+    options = _.defaults({}, options, { limit: 10, markerAttributeName: 'isSelected' });
+    var numSelected = _.filter(listItems, options.markerAttributeName).length;
+    if (item.isSelected) { item.isSelected = false; return true; } //deselecting is always okay
+    if (options.limit === 1) { _.setAll(listItems, options.markerAttributeName, false); numSelected = 0; } //reset for limit 1
+    if (numSelected < options.limit) { item.isSelected = true; return true; } //select if under limit
+  };
+
+  o.getListVal = function(listItems, options) {
+    options = _.defaults({}, options, { markerAttributeName: 'isSelected', idAttributeName: 'id' });
+    return _(listItems).filter(function(item) { return item[options.markerAttributeName]; }).pluck(options.idAttributeName).join();
+  };
+
+  o.generateList = function(min, max, step, valPropertyName) {
+    var list = [];
+    for (var i = min; i <= max; i+=step) {
+      var item = {};
+      if (valPropertyName) { item[valPropertyName] = i; } else item = i;
+      list.push(item);
+    }
+    return list;
+  };
+
+  o.generateListFromArray = function(array) {
+    //e.g. of use: console.log(JSON.stringify(generateListFromArray(['z','y','x'].sort())));
+    return _.map(array, function(val, index) { return { id: index+1, name: val }; });
+  };
+
+  return o;
+});
+
+thGenericModule.factory('$qDecoratorService', function ($q, $timeout) {
+  var o = {};
+
+  o.decorate = function($q) {
+    $q.delay = $q.delay || function(ms) {
+      var deferred = $q.defer();
+      $timeout(deferred.resolve, ms);
+      return deferred.promise;
+    };
+  };
+
+  return o;
 });

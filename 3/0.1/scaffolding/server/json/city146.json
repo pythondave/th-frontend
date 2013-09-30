@@ -53,43 +53,43 @@
                 "id": 101,
                 "url": "www.lonelyplanet.com/portugal/the-north/porto",
                 "name": "Lonely Planet Guide",
-                "category": 1
+                "category": 0
             },
             {
                 "id": 102,
                 "url": "www.portolazer.pt",
-                "name": "Entertainment and Leisure",
-                "category": 2
+                "name": "Some leisure",
+                "category": 1
             },
             {
                 "id": 103,
                 "url": "www.stcp.pt",
-                "name": "Public Transport",
-                "category": 3
+                "name": "Some travel",
+                "category": 2
             },
             {
                 "id": 104,
                 "url": "www.10best.com/Porto,Portugal/Restaurants",
-                "name": "10 Best Restaurant Guide",
-                "category": 4
+                "name": "Some services",
+                "category": 3
             },
             {
                 "id": 105,
                 "url": "www.portocityguide.com/",
-                "name": "Porto City Guide",
-                "category": 5
+                "name": "Some housing",
+                "category": 4
             },
             {
                 "id": 201,
                 "url": "www.oportocricketclub.com",
-                "name": "Oporto British Club",
-                "category": 2
+                "name": "Some other leisure",
+                "category": 1
             },
             {
                 "id": 202,
                 "url": "www.google.com",
-                "name": "Google",
-                "category": 3
+                "name": "Some other housing",
+                "category": 4
             }
         ]
     }

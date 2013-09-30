@@ -10,10 +10,10 @@
 thSchoolDashboardAppModule.controller('SchoolController', function($rootScope, $scope, $state, appLoading, serverService, structure, configService) {
   if (configService.isDevMode) {
     $scope.isDevMode = configService.isDevMode;
+    $scope.serverService = serverService;
     $scope.$watch('isDevMode', function() { $rootScope.$broadcast('devModeChanged', $scope.isDevMode); });
   }
 
-  $scope.serverService = serverService;
   $scope.structure = structure;
 
   $scope.$on('$locationChangeStart', function(event, nextUrl) {
@@ -35,10 +35,12 @@ thSchoolDashboardAppModule.controller('SchoolController', function($rootScope, $
 
 //Level1Controller
 thSchoolDashboardAppModule.controller('Level1Controller', function($rootScope, $scope, $state, $timeout, $location, appLoading, serverService, structure, configService) {
-  $scope.hierarchy = structure.hierarchy;
-  $scope.serverService = serverService;
+  if (configService.isDevMode) {
+    $scope.$on('devModeChanged', function(e, isDevMode) { $scope.isDevMode = isDevMode; });
+  }
 
-  $scope.$on('devModeChanged', function(e, isDevMode) { $scope.isDevMode = isDevMode; });
+  $scope.serverService = serverService;
+  $scope.hierarchy = structure.hierarchy;
 
   $scope.$on('$viewContentLoaded', function(){
     $scope.useAnimationHack1 = true;
@@ -65,10 +67,14 @@ thSchoolDashboardAppModule.controller('Level2Controller', function() {
 
 //Level3Controller
 thSchoolDashboardAppModule.controller('Level3Controller', function($scope, $state, $modal, configService, $location, structure) {
-  $scope.$on('devModeChanged', function(e, isDevMode) { _.setAll(structure.contentItemsIndex, 'isDevMode', isDevMode); }); //*** TEMP
+  if (!structure.hierarchy.level3) return;
 
-  structure.hierarchy.select($state.params); //*** TODO: move this to the router (perhaps with a resolve)
-  $scope.contentItems = (structure.hierarchy.level3 ? structure.hierarchy.level3.contentItems : undefined);
+  if (configService.isDevMode) {
+    $scope.$on('devModeChanged', function(e, isDevMode) { _.setAll(structure.contentItemsIndex, 'isDevMode', isDevMode); });
+  }
+
+  $scope.contentItems = structure.hierarchy.level3.contentItems;
+
   $scope.$watch(structure.getLevel3IsOkay, function(newVal, oldVal) { $scope.pageIsOkay = newVal; });
 
   $scope.$on('transitionCancelled', function(event, nextRoute) {
@@ -79,7 +85,7 @@ thSchoolDashboardAppModule.controller('Level3Controller', function($scope, $stat
 
     var opts = { backdrop: true, keyboard: true, backdropFade: true, backdropClick: true };
     _.extend(opts, {
-      templateUrl: configService.root + '/shared/partials/transition-warning.html?c',
+      templateUrl: configService.root + '/shared/partials/transition-warning.html',
       controller: 'TransitionWarningController',
       resolve: { nextRoute: function () { return nextRoute; } }
     });

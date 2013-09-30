@@ -5,6 +5,11 @@
 
 var thServerModule = angular.module('thServerModule', ['thConfigModule', 'thGenericModule']);
 
+/*
+  thServerModule
+    * A module encapsulating the mock server
+*/
+
 thServerModule.factory('delayResponseInterceptor', function($q, $timeout, configService) {
   //Can be used to delay all mock responses by a typical (and occasionally atypical) random amount, or fail entirely at a certain rate
   var serverSpeedMultiplier = _.firstDefined(configService.serverSpeedMultiplierOverride, configService.requests.serverSpeedMultiplier, 0.2); //reduce during dev so things work faster (say 0.2), increase (to say 1) when demoing
@@ -415,6 +420,10 @@ thServerModule.run(function($httpBackend, $resource, $q, $timeout, serverListsSe
     var params = deserializeParams(data);
     return [200, json['city' + params.cityId]];
   };
+  var addCityLinkResponse = function(method, url, data, headers) {
+    var json = { "id": _.random(10, 1000) };
+    return [200, json];
+  };
 
   //Note: url rule - all lower case, words separated with a hyphen
 
@@ -450,7 +459,7 @@ thServerModule.run(function($httpBackend, $resource, $q, $timeout, serverListsSe
     $httpBackend.whenPOST('/school/service/city').respond(cityResponse);
     $httpBackend.whenPOST('/school/service/process-city').respond(200, 'processed');
     $httpBackend.whenPOST('/school/service/process-city-living-cost').respond(200, 'processed');
-    $httpBackend.whenPOST('/school/service/add-city-link').respond(200, { "id": 7 });
+    $httpBackend.whenPOST('/school/service/add-city-link').respond(addCityLinkResponse);
     $httpBackend.whenPOST('/school/service/process-city-link').respond(200, 'processed');
 
   //dummy

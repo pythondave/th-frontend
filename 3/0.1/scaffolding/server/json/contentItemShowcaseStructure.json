@@ -150,6 +150,7 @@
               "limit": 1,
               "title": "Basic from-few content item (limit of 1)",
               "listColumn": "name",
+              "val": 2,
               "items": [
                 {
                   "id": 1,
@@ -178,6 +179,7 @@
               "limit": 3,
               "title": "From-few content item with limit of 3",
               "listColumn": "name",
+              "val": "1,3",
               "items": [
                 {
                   "id": 1,
@@ -185,78 +187,15 @@
                 },
                 {
                   "id": 2,
-                  "name": "Banana",
-                  "isSelected": true
+                  "name": "Banana"
                 },
                 {
                   "id": 3,
-                  "name": "Orange",
-                  "isSelected": true
+                  "name": "Orange"
                 },
                 {
                   "id": 4,
                   "name": "Pear"
-                }
-              ]
-            },
-            {
-              "weight": 1,
-              "wait": 1,
-              "systemName": "fromFew3",
-              "type": "fromFew",
-              "limit": 1,
-              "title": "From-few content item with limit of 1 and a merged model value",
-              "listColumn": "name",
-              "items": [
-                {
-                  "id": 1,
-                  "name": "Yes",
-                  "isSelected": true
-                },
-                {
-                  "id": 0,
-                  "name": "No",
-                  "isSelected": false
-                }
-              ]
-            },
-            {
-              "weight": 1,
-              "wait": 1,
-              "systemName": "fromFew4",
-              "type": "fromFew",
-              "title": "From-few content item with no limit and merged model values",
-              "listColumn": "name",
-              "items": [
-                {
-                  "id": 1,
-                  "name": "A",
-                  "isSelected": false
-                },
-                {
-                  "id": 2,
-                  "name": "B",
-                  "isSelected": false
-                },
-                {
-                  "id": 3,
-                  "name": "C",
-                  "isSelected": true
-                },
-                {
-                  "id": 5,
-                  "name": "D",
-                  "isSelected": false
-                },
-                {
-                  "id": 8,
-                  "name": "E",
-                  "isSelected": true
-                },
-                {
-                  "id": 13,
-                  "name": "F",
-                  "isSelected": true
                 }
               ]
             }
@@ -858,30 +797,23 @@
             },
             {
               "weight": 0,
-              "type": "text",
-              "val": "WIP",
-              "style": "color: red;"
-            },
-            {
-              "weight": 1,
-              "wait": 2000,
-              "systemName": "urlEdit1",
+              "systemName": { "title": "titleSystemName", "url": "urlSystemName" },
               "type": "urlEdit",
               "title": "Basic url-edit content item",
               "tip": "Click to edit. Click away to finish.",
-              "urlTitle": {
-                "val": "Hello world"
-              },
-              "url": {
-                "val": "www.google.com"
-              }
+              "val": "www.google.com",
+              "urlTitle": "Hello world"
             },
             {
-              "weight": 1,
-              "wait": 2000,
-              "systemName": "urlEdit2",
               "type": "urlEdit",
               "title": "Url-edit content item with no initial values"
+            },
+            {
+              "type": "urlEdit",
+              "title": "Url-edit content item with no title",
+              "urlTitle": "Hidden title",
+              "val": "http://pythondave.github.io/th-frontend/3/0.1/spas/school/dashboard/default.html#/1234/1/1/1",
+              "showUrlTitle": false
             }
           ]
         }

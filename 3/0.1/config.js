@@ -9,9 +9,11 @@ thConfigModule.constant('configService', function() {
   o.root = '/th-frontend/3/0.1'; //*** TODO: refactor when functionality becomes available in angular (see https://github.com/angular/angular.js/issues/2805)
 
   var requestUrlRoot = '/admin/service/';
+
   o.requests = {
     postConfig: { "headers": { "Content-Type": "application/x-www-form-urlencoded" } }
   };
+
   o.requests.urls = {
 
     //teachers
@@ -52,6 +54,7 @@ thConfigModule.constant('configService', function() {
       processCity: '/school/service/process-city',
       processCityLivingCost: '/school/service/process-city-living-cost',
       processCityLink: '/school/service/process-city-link',
+      addCityLink: '/school/service/add-city-link',
 
     //route error handling
       invalidSchoolDashboardUrlRedirect: 'error.html'

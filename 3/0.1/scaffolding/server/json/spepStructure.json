@@ -21,12 +21,6 @@
               "icon": "key"
             },
             {
-              "weight": 0,
-              "type": "text",
-              "style": "color: red;",
-              "val": "Note - AR/AT need to supply tip information for all fields + additional display information for some fields (e.g. ratings)"
-            },
-            {
               "weight": 1,
               "wait": 3000,
               "systemName": "headTeacher",
@@ -330,7 +324,7 @@
               "weight": 0,
               "type": "text",
               "style": "color: red;",
-              "val": "WIP - File upload"
+              "val": "WIP - File upload (with OV)"
             },
             {
               "weight": 1,
@@ -343,7 +337,8 @@
               "listColumn": "facility"
             },
             {
-              "weight": 1,
+              "__NOTE": "*** WIP change fileUpload weights back to 1",
+              "weight": 0,
               "wait": 1,
               "systemName": "images",
               "type": "fileUpload",
@@ -351,7 +346,7 @@
               "icon": "camera"
             },
             {
-              "weight": 1,
+              "weight": 0,
               "wait": 1,
               "systemName": "images",
               "type": "fileUpload",
@@ -376,7 +371,7 @@
               "urlTitle": false
             },
             {
-              "weight": 1,
+              "weight": 0,
               "wait": 1,
               "systemName": "images",
               "type": "fileUpload",
@@ -541,12 +536,6 @@
               "type": "header",
               "title": "Salary and tax",
               "icon": "money"
-            },
-            {
-              "weight": 0,
-              "type": "text",
-              "style": "color: red;",
-              "val": "WIP - Changes to 'International working currency' will have a big warning in certain circumstances. The app will also be updated in several places when it changes."
             },
             {
               "weight": 1,
@@ -1049,25 +1038,20 @@
               "icon": "camera"
             },
             {
-              "weight": 0,
-              "type": "text",
-              "style": "color: red;",
-              "val": "WIP - Not quite there yet."
-            },
-            {
               "weight": 1,
               "wait": 2000,
               "systemType": "cityLink",
-              "linkId": 1,
+              "category": 0,
               "type": "urlEdit",
               "title": "Lonely Planet city guide",
-              "urlTitle": false
+              "urlTitle": "Lonely Planet Guide",
+              "showUrlTitle": false
             },
             {
               "weight": 1,
               "wait": 2000,
               "systemType": "cityLink",
-              "linkId": 2,
+              "category": 1,
               "type": "urlEdit",
               "title": "Leisure"
             },
@@ -1075,7 +1059,7 @@
               "weight": 1,
               "wait": 2000,
               "systemType": "cityLink",
-              "linkId": 3,
+              "category": 2,
               "type": "urlEdit",
               "title": "Travel"
             },
@@ -1083,7 +1067,7 @@
               "weight": 1,
               "wait": 2000,
               "systemType": "cityLink",
-              "linkId": 4,
+              "category": 3,
               "type": "urlEdit",
               "title": "Housing"
             },
@@ -1091,13 +1075,15 @@
               "weight": 1,
               "wait": 2000,
               "systemType": "cityLink",
-              "linkId": 5,
+              "category": 4,
               "type": "urlEdit",
               "title": "Services"
             }
           ]
         },
         {
+          "__NOTE": "*** WIP - change the weight here once worked on",
+          "weight": 0,
           "title": "Other useful links",
           "icon": "ellipsis-horizontal",
           "contentItems": [
@@ -1111,21 +1097,14 @@
               "weight": 0,
               "type": "text",
               "style": "color: red;",
-              "val": "WIP - This will have a dynamic number of link fields (with a add/delete possibilities)."
-            },
-            {
-              "weight": 1,
-              "wait": 2000,
-              "systemType": "cityLink",
-              "linkId": 101,
-              "type": "urlEdit",
-              "title": "Website 1"
+              "val": "WIP (with RR) - This will have a dynamic number of select-from-many + link fields (with add/delete possibilities)."
             }
           ]
         },
         {
           "title": "Services",
           "icon": "cogs",
+          "weight": 0,
           "contentItems": [
             {
               "weight": 0,
@@ -1136,38 +1115,8 @@
             {
               "weight": 0,
               "type": "text",
-              "val": "This page is with AR/AT. It'll probably not have any actual fields on it.",
+              "val": "WIP (with AR/AT)",
               "style": "color: red;"
-            },
-            {
-              "weight": 0,
-              "type": "text",
-              "val": "We have a number of recruitment services designed to support schools like {{school.nickname}} and over 20,000 inspiring teachers looking to teacher overseas"
-            },
-            {
-              "weight": 0,
-              "wait": 1,
-              "systemName": "ignoreForNow",
-              "type": "fromFew",
-              "title": "Are you interested in finding out more?",
-              "limit": 1,
-              "listName": "yesNo",
-              "listColumn": "name"
-            },
-            {
-              "weight": 0,
-              "wait": 1,
-              "systemName": "ignoreForNow",
-              "type": "fromFew",
-              "title": "Do you have any feedback about this process?",
-              "limit": 1,
-              "listName": "yesNo",
-              "listColumn": "name"
-            },
-            {
-              "weight": 0,
-              "type": "text",
-              "val": "Thanks for completing {{school.nickname}}'s profile. We hope we can help you find some inspiring teachers over the years ahead. Please do share with contacts at good schools not currently listed so that we can build this platform in collaboration with them too."
             }
           ]
         }

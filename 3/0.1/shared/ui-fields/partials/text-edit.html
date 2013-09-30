@@ -1,4 +1,4 @@
-<div class="text-edit">
+<div class="text-edit" ng-class="model.maxLength > 80 ? 'text-edit-large' : 'text-edit-small'">
   <input ng-show="model.isEditMode && (!model.maxLength || model.maxLength <= 80)" type="text"
     ng-model="model.val" ng-blur="model.isEditMode=false" placeholder="Type something..." maxlength="{{model.maxLength || 80}}"></input>
 
@@ -9,7 +9,7 @@
 
   <span ng-show="model.showClear && model.isEditMode && model.val" style="" ng-mousedown="model.val=undefined">
     <span popover="Click to clear text" popover-trigger="mouseenter">
-      <i class="icon-remove" style="margin-left: -20px;"></i>
+      <i class="icon-remove"></i>
     </span>
   </span>
 

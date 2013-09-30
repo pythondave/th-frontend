@@ -9,7 +9,7 @@ Content item:
   * See spas/school/dashboard for a good example of edit pages built using these directives
 */
 
-thContentItemsModule.factory('contentItemService', function ($timeout, serverService, helperService) {
+thContentItemsModule.factory('contentItemService', function ($timeout, serverService, listFunctionsService) {
   var o = {};
 
   var globalDefaultVals = { weight: 1, showClear: true };
@@ -42,7 +42,12 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
 
   o.ContentItem.prototype.getDataToPost = function() {
     var o = this.fixedData || {};
-    o[this.systemName] = this.val;
+    if (this.type === 'urlEdit') {
+      o[this.systemName.title] = this.urlTitle.val;
+      o[this.systemName.url] = this.val;
+    } else {
+      o[this.systemName] = this.val;
+    }
     return o;
   };
 
@@ -51,14 +56,16 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
     this.isBeingProcessed = true;
     this.isDirty = false; //not dirty as soon as processing starts
     $timeout(function() {});
-    var contentItem = this;
+    var ci = this;
     var dataToPost = this.getDataToPost();
-    serverService.sendToServer(this.systemType, dataToPost).then(function() {
-      if (contentItem.isDirty) return; //re-dirtied since process started, so can't finish off yet
-      contentItem.isBeingProcessed = false;
-      contentItem.isRecentlyProcessed = true;
+    serverService.sendToServer(this.systemType, dataToPost).then(function(response) {
+      if (ci.type === 'urlEdit' && !ci.fixedData.linkId) { ci.fixedData.linkId = response.data.id; } //*** TODO make 'linkId' dynamic; TODO if the server takes longer than 2 seconds to add, we could end up adding twice
+      if (ci.isDirty) return; //re-dirtied since process started, so can't finish off yet
+      if (ci.onChangeCallback) ci.onChangeCallback();
+      ci.isBeingProcessed = false;
+      ci.isRecentlyProcessed = true;
       $timeout(function() {});
-      $timeout(function() { contentItem.isRecentlyProcessed = false; }, 3000); //not recently processed after 3 seconds
+      $timeout(function() { ci.isRecentlyProcessed = false; }, 3000); //not recently processed after 3 seconds
     });
   };
 
@@ -80,11 +87,12 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
     if (this.type === 'slider') { return true; } //*** WIP
     if (this.type === 'textEdit') { return true; } //*** WIP
     if (this.type === 'timeEdit') { return true; } //*** WIP
-    if (this.type === 'urlEdit') { return true; } //*** WIP
+    if (this.type === 'urlEdit') {
+      return _.isProbablyValidUrl(val) || val === ''; }
   };
 
-  o.ContentItem.prototype.init = function(newVal) {
-    this.val = this.val || newVal; //don't change if val already set
+  o.ContentItem.prototype.init = function(newVal, newVal2) {
+    this.val = newVal;
     if (this.type === 'ratingEdit' && this.valueTips) { this.selectionDescription = this.valueTips[this.val-1]; } //*** Not DRY
     if (this.subType === 'money') {
       this.allowDecimals = true;
@@ -93,7 +101,7 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
     if (this.type === 'slider') {
       if (!this.items) {
         _.defaults(this, { min: 0, max: 100, step: 1 });
-        this.items = helperService.generateList(this.min, this.max, this.step, 'val');
+        this.items = listFunctionsService.generateList(this.min, this.max, this.step, 'val');
       }
       this.index = _.findIndex(this.items, function(item) { return item.val === this.val; }, this);
     }
@@ -103,7 +111,9 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
     if (this.type === 'ratingEdit') {
     }
     if (this.type === 'urlEdit') {
-      //WIP
+      this.fixedData = this.fixedData || {};
+      this.systemName = _.defaults({}, this.systemName, { title: 'title', url: 'url' });
+      this.urlTitle = _.defaults({}, { val: newVal2 });
     }
     if (this.type === 'locationEdit' && this.val) {
       this.lat = this.val.split(',')[0];

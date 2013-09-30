@@ -1,13 +1,18 @@
 var thSchoolDashboardAppModule = angular.module('thSchoolDashboardAppModule',
   ['ui.bootstrap', 'ngMockE2E', 'ngResource', 'ui.router.compat', //external
-   'thConfigModule', 'thServerModule', 'thContentItemsModule', //local
-   'thShowcaseModule' //local, prototype only
+   'thConfigModule', 'thContentItemsModule', //local
+   'thServerModule' //local, prototype only
   ]);
+
+/*
+  thSchoolDashboardAppModule
+    * The top-level module of the app
+*/
 
 //states (routes) - ref: https://github.com/angular-ui/ui-router
 thSchoolDashboardAppModule.config(function($stateProvider, $urlRouterProvider, configService) {
   //routes are of the form: '#/{schoolId}/{level1}/{level2}/{level3}'
-  //  where... level1: top menu item; level2: side menu section; level3: page
+  //  where... levelX is for html which needs to be reloaded when the levelX parameter changes
 
   //force to 4 parameters if it has fewer
   $urlRouterProvider.when('/{schoolId}', '/{schoolId}/1/1/1');
@@ -22,12 +27,18 @@ thSchoolDashboardAppModule.config(function($stateProvider, $urlRouterProvider, c
     return initService.init($stateParams.schoolId);
   };
 
+  var setStructureHierarchy = function(structure, $stateParams) {
+    structure.hierarchy.select($stateParams);
+  };
+
   var school = { name: 'school', url: '/{schoolId:[0-9]{1,6}}', templateUrl: 'partials/school.html', controller: 'SchoolController',
-    resolve: { structure: getStructure } //ensures initial data is all loaded and ready to go before the page loads
+    resolve: { structure: getStructure } //ensures initial data is all loaded and ready to go before the app loads
   };
   var level1 = { name: 'level1', url: '/{level1:[0-9]}', parent: school, templateUrl: 'partials/level1.html', controller: 'Level1Controller' };
   var level2 = { name: 'level2', url: '/{level2:[0-9]}', parent: level1, templateUrl: 'partials/level2.html', controller: 'Level2Controller' };
-  var level3 = { name: 'level3', url: '/{level3:[0-9]{1,2}}', parent: level2, templateUrl: 'partials/level3.html', controller: 'Level3Controller' };
+  var level3 = { name: 'level3', url: '/{level3:[0-9]{1,2}}', parent: level2, templateUrl: 'partials/level3.html', controller: 'Level3Controller',
+    resolve: { ready: setStructureHierarchy } //ensures structure hierarchy is ready to go
+  };
 
   $stateProvider.state(school).state(level1).state(level2).state(level3);
 });

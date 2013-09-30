@@ -1,28 +1,130 @@
 var thUiFieldsModule = angular.module('thUiFieldsModule', ['thConfigModule']);
 
-thUiFieldsModule.filter('fieldFormat', function(numberFilter, currencyFilter) {
-  return function(val, model) {
-    if (model.type === 'numberEdit') {
-      if (model.subType === 'money') { return currencyFilter(val, model.currencySymbol); }
-      if (model.subType === 'plain') { return val; }
-      if (val === '') return '';
-      return numberFilter(val);
-    }
-    if (model.type === 'slider') {
-      var selectedItem = model.items[model.index];
-      if (selectedItem) return (selectedItem.description || (selectedItem.val + (model.suffix ? model.suffix : '')));
-    }
-    return val;
-  };
-});
+/*
+  thUiFieldsModule
+    * A module encapsulating generic UI fields
 
-thUiFieldsModule.directive('timeEdit', function(configService) {
+  dateEdit
+  emailEdit
+  fromFew
+  fromMany
+  locationEdit
+  numberEdit
+  ratingEdit
+  slider
+  textEdit
+  timeEdit
+  urlEdit
+
+  fieldFormat
+  restrictInput
+  ngBlur
+*/
+
+
+thUiFieldsModule.directive('urlEdit', function(configService, $timeout) {
   return {
     restrict: 'A',
     replace: true,
-    templateUrl: configService.root + '/shared/ui-fields/partials/time-edit.html',
+    templateUrl: configService.root + '/shared/ui-fields/partials/url-edit.html',
     scope: { model: '=' },
     link: function(scope, element, attr, ctrl) {
+      var input = element[0].children[(scope.model.showUrlTitle  ? 2 : 1)];
+
+      scope.model.showEditIcon = true;
+      scope.model.isNotValidTip = 'This doesn\'t appear to be a valid URL. Please change it so it can be saved.';
+
+      scope.model.urlTitle.update = function() {
+        scope.model.update();
+      };
+
+      var getHref = function(url) {
+        if (!url) return;
+        return (url.slice(0, 7) === 'http://' ? url : 'http://' + url);
+      };
+
+      scope.$watch('model.val', function(newVal, oldVal) {
+        scope.model.href = getHref(scope.model.val);
+        scope.model.editIconTip = (newVal ? 'Click to edit URL' : 'Click to add URL');
+        if (newVal === oldVal) return;
+        scope.model.update();
+      });
+
+      scope.$watch('model.isEditMode', function(isUrlEditMode) {
+        if (isUrlEditMode) $timeout(function() { input.focus(); });
+      });
+    }
+  };
+});
+
+thUiFieldsModule.directive('dateEdit', function(configService, $timeout) {
+  return {
+    restrict: 'A',
+    replace: true,
+    templateUrl: configService.root + '/shared/ui-fields/partials/date-edit.html',
+    scope: { model: '=' },
+    link: function(scope, element, attr, ctrl) {
+      scope.$watch('model.val', function(newVal, oldVal) {
+        if (newVal !== oldVal) scope.model.update();
+      });
+      scope.open = function() {
+        $timeout(function() { scope.isOpenNoConflict = true; });
+      };
+      scope.$watch('isOpenNoConflict', function(newVal) {
+        scope.tip = (newVal ? 'Select a date' : 'Click to edit date');
+      });
+    }
+  };
+});
+
+thUiFieldsModule.directive('emailEdit', function(configService, $timeout) {
+  return {
+    restrict: 'A',
+    replace: true,
+    templateUrl: configService.root + '/shared/ui-fields/partials/email-edit.html',
+    scope: { model: '=' },
+    link: function(scope, element, attr, ctrl) {
+      var input = element[0].children[0];
+      scope.model.editIconTip = 'Click to add email';
+      scope.$watch('model.val', function(newVal, oldVal) {
+        if (newVal !== oldVal) { scope.model.update(); }
+      });
+      scope.$watch('model.isEditMode', function(isEditMode) {
+        if (isEditMode) $timeout(function() { input.focus(); });
+      });
+    }
+  };
+});
+
+thUiFieldsModule.directive('fromFew', function(configService, listFunctionsService) {
+  return {
+    restrict: 'A',
+    replace: true,
+    templateUrl: configService.root + '/shared/ui-fields/partials/from-few.html',
+    scope: { model: '=' },
+    link: function(scope, element, attr, ctrl) {
+      scope.model.isValid = true;
+      scope.tryToToggleItem = function(item) {
+        if (scope.model.preChangeConfirm && !scope.model.preChangeConfirm()) return;
+        var toggled = listFunctionsService.toggleLimitedListItem(scope.model.items, item, {limit: scope.model.limit});
+        if (toggled) {
+          scope.model.update(listFunctionsService.getListVal(scope.model.items));
+        }
+      };
+    }
+  };
+});
+
+thUiFieldsModule.directive('fromMany', function (configService, $timeout) {
+  return {
+    restrict: 'A',
+    templateUrl: configService.root + '/shared/ui-fields/partials/from-many.html',
+    scope: { model: '=' },
+    transclude: false,
+    link: function(scope, element, attr, ctrl) {
+      scope.$watch('model.val', function(newVal, oldVal) {
+        if (newVal !== oldVal) scope.model.update();
+      });
     }
   };
 });
@@ -145,71 +247,6 @@ thUiFieldsModule.directive('moneyEdit', function(configService) {
   };
 });
 
-thUiFieldsModule.directive('dateEdit', function(configService, $timeout) {
-  return {
-    restrict: 'A',
-    replace: true,
-    templateUrl: configService.root + '/shared/ui-fields/partials/date-edit.html',
-    scope: { model: '=' },
-    link: function(scope, element, attr, ctrl) {
-      scope.$watch('model.val', function(newVal, oldVal) {
-        if (newVal !== oldVal) scope.model.update();
-      });
-      scope.open = function() {
-        $timeout(function() { scope.isOpenNoConflict = true; });
-      };
-      scope.$watch('isOpenNoConflict', function(newVal) {
-        scope.tip = (newVal ? 'Select a date' : 'Click to edit date');
-      });
-    }
-  };
-});
-
-thUiFieldsModule.directive('emailEdit', function(configService, $timeout) {
-  return {
-    restrict: 'A',
-    replace: true,
-    templateUrl: configService.root + '/shared/ui-fields/partials/email-edit.html',
-    scope: { model: '=' },
-    link: function(scope, element, attr, ctrl) {
-      var input = element[0].children[0];
-      scope.model.editIconTip = 'Click to add email';
-      scope.$watch('model.val', function(newVal, oldVal) {
-        if (newVal !== oldVal) { scope.model.update(); }
-      });
-      scope.$watch('model.isEditMode', function(isEditMode) {
-        if (isEditMode) $timeout(function() { input.focus(); });
-      });
-    }
-  };
-});
-
-thUiFieldsModule.directive('urlEdit', function(configService, $timeout) {
-  return {
-    restrict: 'A',
-    replace: true,
-    templateUrl: configService.root + '/shared/ui-fields/partials/url-edit.html',
-    scope: { model: '=' },
-    link: function(scope, element, attr, ctrl) {
-      scope.model.urlTitle = scope.model.urlTitle || {};
-      scope.model.urlTitle.update = function() { return scope.model.update(); };
-      scope.model.url = scope.model.url || {};
-      scope.model.url.showEditIcon = true;
-      scope.model.url.isNotValidTip = 'This doesn\'t appear to be a valid URL. Please change it so it can be saved.';
-      scope.model.url.update = function() { return scope.model.update(); };
-      scope.$watch('model.url.val', function(newVal, oldVal) {
-        scope.model.url.editIconTip = (newVal ? 'Click to edit URL' : 'Click to add URL');
-        scope.model.url.isValid = _.isProbablyValidUrl(newVal) || newVal === '' || newVal === undefined;
-        scope.model.isValid = scope.model.url.isValid && scope.model.urlTitle.isValid;
-        if (newVal !== oldVal) scope.model.update(newVal);
-      });
-      scope.$watch('model.url.isEditMode', function(isUrlEditMode) {
-        if (isUrlEditMode) $timeout(function() { element[0].children[2].focus(); });
-      });
-    }
-  };
-});
-
 thUiFieldsModule.directive('numberEdit', function(configService, $timeout) {
   return {
     restrict: 'A',
@@ -228,26 +265,6 @@ thUiFieldsModule.directive('numberEdit', function(configService, $timeout) {
       });
       scope.$watch('model.isEditMode', function(isEditMode) {
         if (isEditMode) $timeout(function() { input.focus(); });
-      });
-    }
-  };
-});
-
-thUiFieldsModule.directive('textEdit', function(configService, $timeout) {
-  return {
-    restrict: 'A',
-    replace: true,
-    templateUrl: configService.root + '/shared/ui-fields/partials/text-edit.html',
-    scope: { model: '=' },
-    link: function(scope, element, attr, ctrl) {
-      var input1 = element[0].children[0], input2 = element[0].children[1];
-      scope.$watch('model.val', function(newVal, oldVal) {
-        scope.model.editIconTip = (newVal ? 'Click to edit text' : 'Click to add text');
-        scope.model.isValid = true;
-        if (newVal !== oldVal) scope.model.update();
-      });
-      scope.$watch('model.isEditMode', function(isEditMode) {
-        if (isEditMode) $timeout(function() { input1.focus(); input2.focus(); });
       });
     }
   };
@@ -274,25 +291,7 @@ thUiFieldsModule.directive('ratingEdit', function(configService) {
   };
 });
 
-thUiFieldsModule.directive('fromFew', function(configService, helperService) {
-  return {
-    restrict: 'A',
-    replace: true,
-    templateUrl: configService.root + '/shared/ui-fields/partials/from-few.html',
-    scope: { model: '=' },
-    link: function(scope, element, attr, ctrl) {
-      scope.model.isValid = true;
-      scope.tryToToggleItem = function(item) {
-        var toggled = helperService.toggleLimitedListItem(scope.model.items, item, {limit: scope.model.limit});
-        if (toggled) {
-          scope.model.update(helperService.getListVal(scope.model.items));
-        }
-      };
-    }
-  };
-});
-
-thUiFieldsModule.directive('slider', ['configService','$document', 'helperService', '$timeout', function(configService, $document, helperService, $timeout) {
+thUiFieldsModule.directive('slider', ['configService','$document', 'isFunctionsService', '$timeout', function(configService, $document, isFunctionsService, $timeout) {
   return {
     restrict: 'EA',
     replace: true,
@@ -306,7 +305,7 @@ thUiFieldsModule.directive('slider', ['configService','$document', 'helperServic
       //watches and events
       scope.$watch('model.index', function(newVal, oldVal) {
         if (dragging) return;
-        if (!helperService.isInPositiveIntegerRange(0, scope.model.items.length-1, newVal)) return;
+        if (!isFunctionsService.isInPositiveIntegerRange(0, scope.model.items.length-1, newVal)) return;
         x = newVal / (scope.model.items.length-1);
         scope.x = x;
         if (newVal !== oldVal) scope.model.update(scope.model.items[scope.model.index].val);
@@ -358,17 +357,51 @@ thUiFieldsModule.directive('slider', ['configService','$document', 'helperServic
   };
 }]);
 
-thUiFieldsModule.directive('fromMany', function (configService, $timeout) {
+thUiFieldsModule.directive('textEdit', function(configService, $timeout) {
   return {
     restrict: 'A',
-    templateUrl: configService.root + '/shared/ui-fields/partials/from-many.html',
+    replace: true,
+    templateUrl: configService.root + '/shared/ui-fields/partials/text-edit.html',
     scope: { model: '=' },
-    transclude: false,
     link: function(scope, element, attr, ctrl) {
+      var input1 = element[0].children[0], input2 = element[0].children[1];
       scope.$watch('model.val', function(newVal, oldVal) {
+        scope.model.editIconTip = (newVal ? 'Click to edit text' : 'Click to add text');
+        scope.model.isValid = true;
         if (newVal !== oldVal) scope.model.update();
       });
+      scope.$watch('model.isEditMode', function(isEditMode) {
+        if (isEditMode) $timeout(function() { input1.focus(); input2.focus(); });
+      });
     }
+  };
+});
+
+thUiFieldsModule.directive('timeEdit', function(configService) {
+  return {
+    restrict: 'A',
+    replace: true,
+    templateUrl: configService.root + '/shared/ui-fields/partials/time-edit.html',
+    scope: { model: '=' },
+    link: function(scope, element, attr, ctrl) {
+    }
+  };
+});
+
+//other stuff
+thUiFieldsModule.filter('fieldFormat', function(numberFilter, currencyFilter) {
+  return function(val, model) {
+    if (model.type === 'numberEdit') {
+      if (model.subType === 'money') { return currencyFilter(val, model.currencySymbol); }
+      if (model.subType === 'plain') { return val; }
+      if (val === '') return '';
+      return numberFilter(val);
+    }
+    if (model.type === 'slider') {
+      var selectedItem = model.items[model.index];
+      if (selectedItem) return (selectedItem.description || (selectedItem.val + (model.suffix ? model.suffix : '')));
+    }
+    return val;
   };
 });
 
@@ -415,44 +448,3 @@ thUiFieldsModule.directive('ngBlur', ['$parse', function($parse) {
     });
   };
 }]);
-
-thUiFieldsModule.factory('helperService', function () { //*** TODO: MOVE!
-  var o = {};
-
-  o.toggleLimitedListItem = function(listItems, item, options) {
-    //returns true if the listItems were changed
-    options = _.defaults({}, options, { limit: 10, markerAttributeName: 'isSelected' });
-    var numSelected = _.filter(listItems, options.markerAttributeName).length;
-    if (item.isSelected) { item.isSelected = false; return true; } //deselecting is always okay
-    if (options.limit === 1) { _.setAll(listItems, options.markerAttributeName, false); numSelected = 0; } //reset for limit 1
-    if (numSelected < options.limit) { item.isSelected = true; return true; } //select if under limit
-  };
-
-  o.getListVal = function(listItems, options) {
-    options = _.defaults({}, options, { markerAttributeName: 'isSelected', idAttributeName: 'id' });
-    return _(listItems).filter(function(item) { return item[options.markerAttributeName]; }).pluck(options.idAttributeName).join();
-  };
-
-  o.generateList = function(min, max, step, valPropertyName) {
-    var list = [];
-    for (var i = min; i <= max; i+=step) {
-      var item = {};
-      if (valPropertyName) { item[valPropertyName] = i; } else item = i;
-      list.push(item);
-    }
-    return list;
-  };
-
-  o.isPositiveInteger = function(s) { return new RegExp(/^[0-9]*$/).test(s) && s !== ''; };
-  o.isPositiveDecimal = function(s) { return new RegExp(/^(\d*\.\d{1,2}|\d+)$/).test(s) && s !== ''; };
-  o.isInRange = function(min, max, val) { return (val >= min && val <= max); };
-  o.isInPositiveIntegerRange = function(min, max, val) {
-    return o.isPositiveInteger(val) && o.isInRange(min, max, val);
-  };
-  o.isInPositiveDecimalRange = function(min, max, val) {
-    return o.isPositiveDecimal(val) && o.isInRange(min, max, val);
-  };
-
-  return o;
-});
-
