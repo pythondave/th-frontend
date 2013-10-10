@@ -3,14 +3,14 @@
 //In theory it acts as the server in the absence of the server. It is a mock server.
 // *** ********* ***
 
-var thServerModule = angular.module('thServerModule', ['thConfigModule', 'thGenericModule']);
+var thMockServerModule = angular.module('thMockServerModule', ['thConfigModule', 'thGenericModule']);
 
 /*
-  thServerModule
+  thMockServerModule
     * A module encapsulating the mock server
 */
 
-thServerModule.factory('delayResponseInterceptor', function($q, $timeout, configService) {
+thMockServerModule.factory('delayResponseInterceptor', function($q, $timeout, configService) {
   //Can be used to delay all mock responses by a typical (and occasionally atypical) random amount, or fail entirely at a certain rate
   var serverSpeedMultiplier = _.firstDefined(configService.serverSpeedMultiplierOverride, configService.requests.serverSpeedMultiplier, 0.2); //reduce during dev so things work faster (say 0.2), increase (to say 1) when demoing
   configService.local = { //configure special values for particular requests here
@@ -91,11 +91,11 @@ thServerModule.factory('delayResponseInterceptor', function($q, $timeout, config
 });
 
 //add the above factory to the responseInterceptors - this calls 'delayedHttpRequest' during every http request
-thServerModule.config(function($httpProvider) {
+thMockServerModule.config(function($httpProvider) {
   $httpProvider.responseInterceptors.unshift('delayResponseInterceptor');
 });
 
-thServerModule.factory('serverListsService', function(configService) {
+thMockServerModule.factory('serverListsService', function(configService) {
   configService.user.isLoggedIn = true; // user logged in to the mock server by default;
 
   /* To log the server out of the mock server, open the browser console and run this code:
@@ -141,7 +141,7 @@ thServerModule.factory('serverListsService', function(configService) {
   return o;
 });
 
-thServerModule.factory('randomDataService', function(serverListsService) {
+thMockServerModule.factory('randomDataService', function(serverListsService) {
   var capitaliseFirstLetter = function(s) { return s.charAt(0).toUpperCase() + s.slice(1); };
   var offsetDateByDays = function(days, date) {
     return new Date((date || new Date()).getTime() + days*24*60*60*1000);
@@ -175,6 +175,7 @@ thServerModule.factory('randomDataService', function(serverListsService) {
       case 'role': return getRandomArrayItem(serverListsService.basicLists.roles).name;
       case 'schoolName': return getRandomArrayItem(['School', 'Ecole']) + ' ' + getRandomArrayItem(['of', 'de', 'de la']) + ' ' + getRandomArrayItem(serverListsService.schoolSuffixes);
       case 'country': return getRandomArrayItem(serverListsService.basicLists.countries).name;
+      case 'city': return 'City' + getRandomInteger(10, 99);
       //jobs
       case 'dateCreated': return getRandomIsoDate(offsetDateByDays(-60), offsetDateByDays(0));
       case 'numApplied': return getRandomInteger(0, 40);
@@ -260,6 +261,20 @@ thServerModule.factory('randomDataService', function(serverListsService) {
     }
     return a;
   };
+  var getRandomSchool = function(params) {
+    var s = {};
+    s.id = getRandomInteger(1, 10000);
+    s.name = getRandomDataItem('schoolName');
+    if (!params.countryId) {
+      s.countryId = getRandomInteger(1, 100);
+      s.country = getRandomDataItem('country');
+    }
+    if (!params.cityId) {
+      s.cityId = getRandomInteger(1, 1000);
+      s.city = getRandomDataItem('city');
+    }
+    return s;
+  };
   var o = {};
   o.getRandomInteger = getRandomInteger;
   o.getRandomDataItem = getRandomDataItem;
@@ -271,6 +286,7 @@ thServerModule.factory('randomDataService', function(serverListsService) {
   o.getRandomParagraph = getRandomParagraph;
   o.getRandomApplicationForStatusId1 = getRandomApplicationForStatusId1;
   o.getRandomApplicationForSpecificJob = getRandomApplicationForSpecificJob;
+  o.getRandomSchool = getRandomSchool;
   return o;
 });
 
@@ -286,7 +302,9 @@ var deserializeParams = function(p){ //see https://github.com/pythondave/th-admi
 };
 
 //set dummy server responses to posts and gets
-thServerModule.run(function($httpBackend, $resource, $q, $timeout, serverListsService, randomDataService, configService, $http, $rootScope) {
+thMockServerModule.run(function($httpBackend, $resource, $q, $timeout, $http,
+  serverListsService, randomDataService, configService) {
+
   //pass-throughs (custom $httpBackend requests are at the bottom)
   $httpBackend.whenGET(/.html/).passThrough();
   $httpBackend.whenGET(/.json/).passThrough();
@@ -294,7 +312,7 @@ thServerModule.run(function($httpBackend, $resource, $q, $timeout, serverListsSe
   //json files (these are loaded to local variables so that when the normal request comes through, they're ready to go - this was tricky to figure out in the first place)
   var json = {};
   json.filenames = [ 'lists', 'school101', 'school1234', 'city146', 'city25',
-    'spepStructure', 'spepNotesStructure', 'contentItemShowcaseStructure' ];
+    'spepStructure', 'spepNotesStructure', 'contentItemShowcaseStructure', 'adminSchoolStructure' ];
 
   _.forEach(json.filenames, function(filename) {
     $http
@@ -410,6 +428,16 @@ thServerModule.run(function($httpBackend, $resource, $q, $timeout, serverListsSe
   var listsResponse = function() { return [200, json.lists]; };
 
   //schools
+  var schoolsResponse = function(method, url, data, headers) {
+    var schools;
+    var params = deserializeParams(data);
+    console.log(params);
+    var fn = function() { return randomDataService.getRandomSchool(params); };
+    schools = randomDataService.getRandomArrayOfObjects({ fn: fn, length: randomDataService.getRandomInteger(0, 100) });
+    var json = { "schools": schools };
+    console.log(json);
+    return [200, json];
+  };
   var schoolResponse = function(method, url, data, headers) {
     var params = deserializeParams(data);
     return [200, json['school' + params.schoolId]];
@@ -432,6 +460,8 @@ thServerModule.run(function($httpBackend, $resource, $q, $timeout, serverListsSe
     $httpBackend.whenPOST('/school-dashboard/service/spep-notes-structure').respond(function() { return [200, json.spepNotesStructure]; });
     $httpBackend.whenPOST('/shared/service/content-item-showcase-structure').respond(function() { return [200, json.contentItemShowcaseStructure]; });
 
+    $httpBackend.whenPOST('/TEMP/admin-school-structure').respond(function() { return [200, json.adminSchoolStructure]; });
+
   //teachers
     $httpBackend.whenPOST('/admin/service/teachers').respond(teachersResponse);
     $httpBackend.whenPOST('/admin/service/process-teacher').respond(200, 'processed');
@@ -451,6 +481,7 @@ thServerModule.run(function($httpBackend, $resource, $q, $timeout, serverListsSe
   //lists
     $httpBackend.whenPOST('/school/service/lists').respond(listsResponse);
   //schools
+    $httpBackend.whenPOST('/school/service/schools').respond(schoolsResponse);
     $httpBackend.whenPOST('/school/service/school').respond(schoolResponse);
     $httpBackend.whenPOST('/school/service/process-school').respond(200, 'processed');
     $httpBackend.whenPOST('/school/service/process-school-rating').respond(200, 'processed');

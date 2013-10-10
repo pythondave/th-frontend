@@ -6,7 +6,6 @@
     {
       "weight": 5,
       "title": "About {{school.nickname}}",
-      "tip": "Completing this section will ensure {{school.nickname}}'s profile is more visible to thousands of prospective teachers who browse schools every week.",
       "icon": "info",
       "sections": [
         {
@@ -15,11 +14,22 @@
           "icon": "key",
           "contentItems": [
             {
-              "weight": 0,
+              "type": "header",
+              "title": "About {{school.nickname}}",
+              "icon": "info",
+              "style": "color: #282737;"
+            },
+            {
+              "type": "text",
+              "val": "Completing the 'About {{school.nickname}}' section will ensure your profile is more visible to thousands of prospective teachers who browse schools every week.",
+              "style": "width: 72%"
+            },
+            {
               "type": "header",
               "title": "Key details",
-              "icon": "key"
-            },
+              "icon": "key",
+              "style": "color: #3487be"
+            },            
             {
               "weight": 1,
               "wait": 3000,
@@ -27,7 +37,7 @@
               "type": "textEdit",
               "title": "Head teacher / Principal",
               "icon": "user",
-              "tip": "Please enter the Head teacher's name here."
+              "tip": "Please enter the Head teacher's name here"
             },
             {
               "weight": 1,
@@ -134,7 +144,6 @@
           "icon": "group",
           "contentItems": [
             {
-              "weight": 0,
               "type": "header",
               "title": "Students",
               "icon": "group"
@@ -203,7 +212,8 @@
               "weight": 1,
               "wait": 2000,
               "systemName": "intAvgStudentsPreSchool",
-              "type": "numberEdit",
+              "type": "slider",
+              "max": 50,
               "title": "Average class size in Nursery / Pre-School / KG",
               "icon": "linux"
             },
@@ -211,7 +221,8 @@
               "weight": 1,
               "wait": 2000,
               "systemName": "intAvgStudentsPrimary",
-              "type": "numberEdit",
+              "type": "slider",
+              "max": 50,
               "title": "Average class size in Primary / Elementary",
               "icon": "bug"
             },
@@ -219,7 +230,8 @@
               "weight": 1,
               "wait": 2000,
               "systemName": "intAvgStudentsSecondary",
-              "type": "numberEdit",
+              "type": "slider",
+              "max": 50,
               "title": "Average class size in Secondary / High School",
               "icon": "fire"
             },
@@ -227,7 +239,8 @@
               "weight": 1,
               "wait": 2000,
               "systemName": "intAvgStudentsPost16",
-              "type": "numberEdit",
+              "type": "slider",
+              "max": 50,
               "title": "Average class size at Post 16 level",
               "icon": "leaf"
             }
@@ -239,7 +252,6 @@
           "icon": "user",
           "contentItems": [
             {
-              "weight": 0,
               "type": "header",
               "title": "Teachers",
               "icon": "user"
@@ -316,13 +328,11 @@
           "icon": "facetime-video",
           "contentItems": [
             {
-              "weight": 0,
               "type": "header",
               "title": "Facilities and multimedia",
               "icon": "facetime-video"
             },
             {
-              "weight": 0,
               "type": "text",
               "style": "color: red;",
               "val": "WIP - File upload (with OV)"
@@ -338,7 +348,7 @@
               "listColumn": "facility"
             },
             {
-              "__NOTE": "*** WIP change fileUpload weights back to 1",
+              "__NOTE": "*** WIP change fileUpload weights back to 1 (there are 3 fileUpload fields)",
               "weight": 0,
               "wait": 1,
               "systemName": "images",
@@ -359,6 +369,7 @@
               "wait": 1,
               "systemName": "location",
               "type": "locationEdit",
+              "tip": "Click the map to put a marker of where you are. You can zoom in and out and drag-and-drop the marker. If you click 'Set to my approximate location', your browser may ask you for to confirm that's okay.",
               "title": "{{school.nickname}}'s location",
               "icon": "map-marker"
             },
@@ -369,7 +380,7 @@
               "type": "urlEdit",
               "title": "{{school.nickname}}'s promotional video",
               "icon": "facetime-video",
-              "urlTitle": false
+              "showUrlTitle": false
             },
             {
               "weight": 0,
@@ -386,7 +397,6 @@
           "icon": "thumbs-up-alt",
           "contentItems": [
             {
-              "weight": 0,
               "type": "header",
               "title": "Recruitment",
               "icon": "thumbs-up-alt"
@@ -448,6 +458,13 @@
               "icon": "envelope"
             },
             {
+              "systemName": "website",
+              "type": "urlEdit",
+              "title": "Website",
+              "icon": "link",
+              "showUrlTitle": false
+            },
+            {
               "weight": 1,
               "wait": 3000,
               "systemName": "workIncentive",
@@ -463,7 +480,6 @@
           "icon": "check",
           "contentItems": [
             {
-              "weight": 0,
               "type": "header",
               "title": "Self-assessment",
               "icon": "check"
@@ -476,12 +492,13 @@
               "type": "ratingEdit",
               "title": "Accreditation",
               "icon": "thumbs-up-alt",
+              "tip": "Please state your accreditation status, with fully recognised international bodies (accreditation bodies such as the Council of International Schools, not examination bodies such as the Cambridge International Examinations)",
               "valueTips": [
-                "No accreditation plans",
-                "2-star tip",
-                "This is the tip for 3 stars",
-                "Tip for 4 stars",
-                "5-star tip"
+                "No status in accreditation",
+                "Planning to go through the accreditation process",
+                "Going through the accreditation process",
+                "Fully accredited by one body",
+                "Fully accredited by more than one body"
               ],
               "max": 5
             },
@@ -493,6 +510,14 @@
               "type": "ratingEdit",
               "title": "Memberships",
               "icon": "link",
+              "tip": "Please state your membership status, with fully recognised international bodies",
+              "valueTips": [
+                "No status in membership",
+                "Planning to apply for membership",
+                "Membership pending",
+                "Full membership of only one association",
+                "Full membership of more than one association"
+              ],
               "max": 5
             },
             {
@@ -503,6 +528,14 @@
               "type": "ratingEdit",
               "title": "Facilities",
               "icon": "building",
+              "tip": "How many of the following facilities does the school have? Auditorium/theatre, library, sports facilities, swimming pool, and interactive whiteboards in at least 50% of the classrooms.",
+              "valueTips": [
+                "At least 1 of these facilities",
+                "At least 2 of these facilities",
+                "At least 3 of these facilities",
+                "At least 4 of these facilities",
+                "All of these facilities"
+              ],
               "max": 5
             },
             {
@@ -513,6 +546,14 @@
               "type": "ratingEdit",
               "title": "Professional development",
               "icon": "signal",
+              "tip": "What percentage of overseas teachers attend externally provided professional development training per year?",
+              "valueTips": [
+                "Less than 20%",
+                "Between 20 and 39%",
+                "Between 40 and 59%",
+                "Between 60 and 79%",
+                "More than 80%"
+              ],
               "max": 5
             },
             {
@@ -523,6 +564,14 @@
               "type": "ratingEdit",
               "title": "Ability to save",
               "icon": "money",
+              "tip": "How much of their salary could a single teacher comfortably save?",
+              "valueTips": [
+                "Ability to save more than US$20,000 per year",
+                "Ability to save between US$15,000 and $20,000 per year",
+                "Ability to save between US$10,000 and $15,000 per year",
+                "Ability to save between US$5,000 and $10,000 per year",
+                "Ability to save less than US$5,000 per year"
+              ],
               "max": 5
             }
           ]
@@ -532,7 +581,6 @@
     {
       "weight": 3,
       "title": "Package and benefits",
-      "tip": "This information will not be publicly displayed. Only teachers with complete profiles will have access to it. Sharing this information will encourage the right kind of teachers to apply.",
       "icon": "gift",
       "sections": [
         {
@@ -540,7 +588,17 @@
           "icon": "money",
           "contentItems": [
             {
-              "weight": 0,
+              "type": "header",
+              "title": "Package and benefits",
+              "icon": "gift",
+              "style": "color: #282737;"
+            },
+            {
+              "type": "text",
+              "val": "The information in the 'Package and benefits' section will not be publicly displayed. Only teachers with complete profiles will have access to it. Sharing this information will encourage the right kind of teachers to apply.",
+              "style": "width: 72%"
+            },
+            {
               "type": "header",
               "title": "Salary and tax",
               "icon": "money"
@@ -559,8 +617,7 @@
             {
               "weight": 1,
               "wait": 2000,
-              "systemType": "schoolBenefit",
-              "benefitId": 101,
+              "systemName": "grossSalaryJnr",
               "type": "numberEdit",
               "subType": "money",
               "title": "Typical gross annual salary (before tax and deductions) of a newly qualified teacher with no management responsibilities (new arrival, in {{school.currencyName}})",
@@ -569,8 +626,7 @@
             {
               "weight": 1,
               "wait": 2000,
-              "systemType": "schoolBenefit",
-              "benefitId": 102,
+              "systemName": "taxRateJnr",
               "type": "slider",
               "title": "Approximate tax and deductions",
               "icon": "adjust",
@@ -580,8 +636,7 @@
             {
               "weight": 1,
               "wait": 2000,
-              "systemType": "schoolBenefit",
-              "benefitId": 103,
+              "systemName": "grossSalarySnr",
               "type": "numberEdit",
               "subType": "money",
               "title": "Typical gross annual salary (before tax and deductions) of a teacher with no management responsibilities at top of the pay scale (in {{school.currencyName}})",
@@ -590,8 +645,7 @@
             {
               "weight": 1,
               "wait": 2000,
-              "systemType": "schoolBenefit",
-              "benefitId": 104,
+              "systemName": "taxRateSnr",
               "type": "slider",
               "title": "Approximate tax and deductions",
               "icon": "adjust",
@@ -605,7 +659,6 @@
           "icon": "archive",
           "contentItems": [
             {
-              "weight": 0,
               "type": "header",
               "title": "Ability to save",
               "icon": "archive"
@@ -657,8 +710,7 @@
             {
               "weight": 1,
               "wait": 2000,
-              "systemType": "schoolBenefit",
-              "benefitId": 107,
+              "systemName": "tyssingle",
               "type": "numberEdit",
               "subType": "money",
               "title": "Average yearly saving made (for single teacher, in {{school.currencyName}})",
@@ -667,8 +719,7 @@
             {
               "weight": 1,
               "wait": 1,
-              "systemType": "schoolBenefit",
-              "benefitId": 108,
+              "systemName": "teacherSalaryFcover",
               "type": "fromFew",
               "title": "Salary can support a family of four",
               "icon": "group",
@@ -679,8 +730,7 @@
             {
               "weight": 1,
               "wait": 1,
-              "systemType": "schoolBenefit",
-              "benefitId": 109,
+              "systemName": "payBoe",
               "type": "fromFew",
               "title": "Pay scale based on experience",
               "icon": "signal",
@@ -691,8 +741,7 @@
             {
               "weight": 1,
               "wait": 1,
-              "systemType": "schoolBenefit",
-              "benefitId": 110,
+              "systemName": "teacherSs",
               "type": "fromFew",
               "title": "Teacher saving scheme",
               "icon": "road",
@@ -707,41 +756,44 @@
           "icon": "legal",
           "contentItems": [
             {
-              "weight": 0,
               "type": "header",
               "title": "Other contractual details",
               "icon": "legal"
             },
             {
+              "__NOTE": "*** WIP a proper systemName is needed here",
               "weight": 1,
               "wait": 2000,
-              "systemType": "schoolBenefit",
-              "benefitId": 111,
-              "type": "numberEdit",
+              "systemName": "wipAnnualProfessionalDevelopmentBudgetPerTeacher",
+              "type": "slider",
               "subType": "money",
-              "title": "Annual professional development budget per teacher (in {{school.currencyName}})"
+              "items": [ { "val": 1, "description": "0 - 499"}, { "val": 2, "description": "500 - 999"}, { "val": 3, "description": "1000+"} ],
+              "title": "Annual professional development budget per teacher (in {{school.currencyName}})",
+              "icon": "money"
             },
             {
               "weight": 1,
               "wait": 2000,
-              "systemType": "schoolBenefit",
-              "benefitId": 112,
+              "systemName": "schoolDaysPerYear",
               "type": "numberEdit",
-              "title": "Number of school days per year"
+              "title": "Number of school days per year",
+              "icon": "calendar"
             },
             {
               "weight": 1,
               "wait": 2000,
               "systemName": "hpwWeekDayLessons",
               "type": "numberEdit",
-              "title": "Number of teaching hours per week"
+              "title": "Number of teaching hours per week",
+              "icon": "time"
             },
             {
               "weight": 1,
               "wait": 2000,
               "systemName": "hpwExtraCurricular",
               "type": "numberEdit",
-              "title": "Number of extra-curricular hours per week"
+              "title": "Number of extra-curricular hours per week",
+              "icon": "plus"
             }
           ]
         },
@@ -750,7 +802,6 @@
           "icon": "plus",
           "contentItems": [
             {
-              "weight": 0,
               "type": "header",
               "title": "Benefits",
               "icon": "plus"
@@ -762,6 +813,7 @@
               "benefitId": 1,
               "type": "slider",
               "title": "Discount on school fees for staff children",
+              "icon": "percent",
               "suffix": "%"
             },
             {
@@ -771,6 +823,7 @@
               "benefitId": 2,
               "type": "fromFew",
               "title": "Guaranteed places for staff children",
+              "icon": "group",
               "limit": 1,
               "listName": "yesNo",
               "listColumn": "name"
@@ -782,7 +835,8 @@
               "benefitId": 3,
               "type": "numberEdit",
               "subType": "money",
-              "title": "Monthly accommodation allowance (in {{school.currencyName}})"
+              "title": "Monthly accommodation allowance (in {{school.currencyName}})",
+              "icon": "home"
             },
             {
               "weight": 1,
@@ -791,6 +845,7 @@
               "benefitId": 8,
               "type": "fromFew",
               "title": "Accommodation provided by school",
+              "icon": "home",
               "limit": 1,
               "listName": "yesNo",
               "listColumn": "name"
@@ -798,10 +853,10 @@
             {
               "weight": 1,
               "wait": 1,
-              "systemType": "schoolBenefit",
-              "benefitId": 201,
+              "systemName": "flightAllowance",
               "type": "fromFew",
               "title": "Flight allowance",
+              "icon": "plane",
               "limit": 1,
               "listName": "flightAllowances",
               "listColumn": "allowance"
@@ -809,10 +864,10 @@
             {
               "weight": 1,
               "wait": 1,
-              "systemType": "schoolBenefit",
-              "benefitId": 202,
+              "systemName": "relocationAllowance",
               "type": "fromFew",
               "title": "Relocation allowance",
+              "icon": "truck",
               "limit": 1,
               "listName": "relocationAllowances",
               "listColumn": "allowance"
@@ -824,6 +879,7 @@
               "benefitId": 6,
               "type": "fromFew",
               "title": "Laptop allowance",
+              "icon": "laptop",
               "limit": 1,
               "listName": "yesNo",
               "listColumn": "name"
@@ -835,6 +891,7 @@
               "benefitId": 4,
               "type": "fromFew",
               "title": "Language lesson allowance",
+              "icon": "comments-alt",
               "limit": 1,
               "listName": "yesNo",
               "listColumn": "name",
@@ -847,6 +904,7 @@
               "benefitId": 7,
               "type": "textEdit",
               "title": "Other benefits or allowances offered",
+              "icon": "plus",
               "maxLength": 500
             }
           ]
@@ -856,7 +914,6 @@
           "icon": "medkit",
           "contentItems": [
             {
-              "weight": 0,
               "type": "header",
               "title": "Health and pension",
               "icon": "medkit"
@@ -867,6 +924,7 @@
               "systemName": "pensionScheme",
               "type": "fromFew",
               "title": "Type of pension scheme",
+              "icon": "signal",
               "limit": 1,
               "listName": "pensionSchemes",
               "listColumn": "name"
@@ -877,6 +935,7 @@
               "systemName": "pensionTeacherContrib",
               "type": "slider",
               "title": "Teacher contribution per year (approx)",
+              "icon": "percent",
               "step": 10,
               "suffix": "%"
             },
@@ -886,6 +945,7 @@
               "systemName": "pensionSchoolContrib",
               "type": "slider",
               "title": "School contribution per year (approx)",
+              "icon": "percent",
               "step": 10,
               "suffix": "%"
             },
@@ -895,6 +955,7 @@
               "systemName": "fhipCountry",
               "type": "fromFew",
               "title": "Is there free healthcare in {{city.country.name}}?",
+              "icon": "ambulance",
               "limit": 1,
               "listName": "yesNo",
               "listColumn": "name"
@@ -905,6 +966,7 @@
               "systemName": "fhipSchool",
               "type": "fromFew",
               "title": "Does {{school.nickname}} have a free private healthcare scheme?",
+              "icon": "stethoscope",
               "limit": 1,
               "listName": "yesNo",
               "listColumn": "name"
@@ -914,9 +976,8 @@
       ]
     },
     {
-      "weight": 2,
+      "weight": 0,
       "title": "City and life",
-      "tip": "This section inspires teachers to move to {{city.name}} and the appeal of living there. It highlights the quality of life they can enjoy, and the places they can visit during their weekends.",
       "icon": "heart",
       "sections": [
         {
@@ -924,7 +985,17 @@
           "icon": "bullseye",
           "contentItems": [
             {
-              "weight": 0,
+              "type": "header",
+              "title": "City and life",
+              "icon": "heart",
+              "style": "color: #282737;"
+            },
+            {
+              "type": "text",
+              "val": "The 'City and life' section inspires teachers to move to {{city.name}} and the appeal of living there. It highlights the quality of life they can enjoy, and the places they can visit during their weekends.",
+              "style": "width: 72%"
+            },
+            {
               "type": "header",
               "title": "{{city.name}}",
               "icon": "bullseye"
@@ -935,7 +1006,8 @@
               "systemType": "city",
               "systemName": "population",
               "type": "numberEdit",
-              "title": "Population"
+              "title": "Population",
+              "icon": "group"
             },
             {
               "weight": 1,
@@ -944,6 +1016,7 @@
               "systemName": "language",
               "type": "fromMany",
               "title": "Language",
+              "icon": "comments",
               "limit": 1,
               "listName": "languages",
               "listColumn": "name"
@@ -955,6 +1028,7 @@
               "systemName": "attractions",
               "type": "fromFew",
               "title": "Attractions and activities within a two hour drive of {{school.nickname}}",
+              "icon": "camera",
               "listName": "attractions",
               "listColumn": "attraction"
             }
@@ -965,7 +1039,6 @@
           "icon": "money",
           "contentItems": [
             {
-              "weight": 0,
               "type": "header",
               "title": "Cost of living",
               "icon": "money"
@@ -977,7 +1050,8 @@
               "livingCostId": 1,
               "type": "numberEdit",
               "subType": "money",
-              "title": "Expected monthly rent for a two bedroom flat (in {{city.internationalCurrencyName}})"
+              "title": "Expected monthly rent for a two bedroom flat (in {{city.internationalCurrencyName}})",
+              "icon": "home"
             },
             {
               "weight": 1,
@@ -986,7 +1060,8 @@
               "livingCostId": 2,
               "type": "numberEdit",
               "subType": "money",
-              "title": "Average cost of litre of petrol / gas (in {{city.internationalCurrencyName}})"
+              "title": "Average cost of litre of petrol / gas (in {{city.internationalCurrencyName}})",
+              "icon": "truck"
             },
             {
               "weight": 1,
@@ -995,7 +1070,8 @@
               "livingCostId": 3,
               "type": "numberEdit",
               "subType": "money",
-              "title": "Cost of a coffee in local cafe (in {{city.internationalCurrencyName}})"
+              "title": "Cost of a coffee in local cafe (in {{city.internationalCurrencyName}})",
+              "icon": "coffee"
             },
             {
               "weight": 1,
@@ -1004,7 +1080,8 @@
               "livingCostId": 4,
               "type": "numberEdit",
               "subType": "money",
-              "title": "Typical two course restaurant meal (in {{city.internationalCurrencyName}})"
+              "title": "Typical two course restaurant meal (in {{city.internationalCurrencyName}})",
+              "icon": "food"
             },
             {
               "weight": 1,
@@ -1013,7 +1090,8 @@
               "livingCostId": 5,
               "type": "numberEdit",
               "subType": "money",
-              "title": "Cost of flights during the Summer holiday season to New York (in {{city.internationalCurrencyName}})"
+              "title": "Cost of flights during the Summer holiday season to New York (in {{city.internationalCurrencyName}})",
+              "icon": "plane"
             },
             {
               "weight": 1,
@@ -1022,7 +1100,8 @@
               "livingCostId": 6,
               "type": "numberEdit",
               "subType": "money",
-              "title": "Cost of flights during the Summer holiday season to London (in {{city.internationalCurrencyName}})"
+              "title": "Cost of flights during the Summer holiday season to London (in {{city.internationalCurrencyName}})",
+              "icon": "plane"
             },
             {
               "weight": 1,
@@ -1031,7 +1110,8 @@
               "livingCostId": 7,
               "type": "numberEdit",
               "subType": "money",
-              "title": "Cost of flights during the Summer holiday season to Sydney (in {{city.internationalCurrencyName}})"
+              "title": "Cost of flights during the Summer holiday season to Sydney (in {{city.internationalCurrencyName}})",
+              "icon": "plane"
             }
           ]
         },
@@ -1040,7 +1120,7 @@
           "icon": "camera",
           "contentItems": [
             {
-              "weight": 0,
+
               "type": "header",
               "title": "City attractions",
               "icon": "camera"
@@ -1052,6 +1132,7 @@
               "category": 0,
               "type": "urlEdit",
               "title": "Lonely Planet city guide",
+              "icon": "globe",
               "urlTitle": "Lonely Planet Guide",
               "showUrlTitle": false
             },
@@ -1061,7 +1142,8 @@
               "systemType": "cityLink",
               "category": 1,
               "type": "urlEdit",
-              "title": "Leisure"
+              "title": "Leisure",
+              "icon": "smile"
             },
             {
               "weight": 1,
@@ -1069,7 +1151,8 @@
               "systemType": "cityLink",
               "category": 2,
               "type": "urlEdit",
-              "title": "Travel"
+              "title": "Travel",
+              "icon": "suitcase"
             },
             {
               "weight": 1,
@@ -1077,7 +1160,8 @@
               "systemType": "cityLink",
               "category": 4,
               "type": "urlEdit",
-              "title": "Housing"
+              "title": "Housing",
+              "icon": "home"
             },
             {
               "weight": 1,
@@ -1085,27 +1169,18 @@
               "systemType": "cityLink",
               "category": 3,
               "type": "urlEdit",
-              "title": "Services"
-            }
-          ]
-        },
-        {
-          "__NOTE": "*** WIP - change the weight here once worked on",
-          "weight": 0,
-          "title": "Other useful links",
-          "icon": "ellipsis-horizontal",
-          "contentItems": [
-            {
-              "weight": 0,
-              "type": "header",
-              "title": "Other useful links",
-              "icon": "ellipsis-horizontal"
+              "title": "Services",
+              "icon": "gears"
             },
             {
-              "weight": 0,
-              "type": "text",
-              "style": "color: red;",
-              "val": "WIP (with RR) - This will have a dynamic number of select-from-many + link fields (with add/delete possibilities)."
+              "weight": 1,
+              "wait": 3000,
+              "systemType": "city",
+              "systemName": "localTouristAttractions",
+              "type": "textEdit",
+              "title": "Local tourist attractions",
+              "icon": "camera",
+              "maxLength": 1000
             }
           ]
         },
@@ -1115,16 +1190,44 @@
           "weight": 0,
           "contentItems": [
             {
-              "weight": 0,
               "type": "header",
               "title": "Services",
               "icon": "cogs"
             },
             {
-              "weight": 0,
               "type": "text",
               "val": "WIP (with AR/AT)",
               "style": "color: red;"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "weight": 0,
+      "title": "Tools",
+      "icon": "wrench",
+      "sections": [{
+          "id": "emptyFields",
+          "title": "Empty fields",
+          "icon": "check-empty",
+          "contentItems": [
+            {
+              "type": "header",
+              "title": "Empty fields (up to 10)",
+              "icon": "check-empty"
+            }
+          ]
+        },
+        {
+          "id": "randomEmptyField",
+          "title": "Random empty field",
+          "icon": "random",
+          "contentItems": [
+            {
+              "type": "header",
+              "title": "Random empty field",
+              "icon": "random"
             }
           ]
         }

@@ -53,6 +53,17 @@
         "completionLevel": 75,
         "initials": "ASOD",
         "nickname": "ABCD",
+        "grossSalaryJnr": 12345,
+        "grossSalarySnr": 23456,
+        "taxRateJnr": 12,
+        "taxRateSnr": 23,
+        "tyssingle": 1234,
+        "teacherSalaryFcover": 1,
+        "teacherSs": 0,
+        "wipAnnualProfessionalDevelopmentBudgetPerTeacher": 2,
+        "schoolDaysPerYear": 180,
+        "flightAllowance": 3,
+        "relocationAllowance": 2,
         "accreditations": [
             3,
             5
@@ -74,40 +85,16 @@
             6,
             8
         ],
-        "passportTypes": [
-            2348,
-            2349,
-            2350,
-            2351,
-            2352,
-            2353
-        ],
         "benefits": [
             { "id": 1, "value": 45 },
             { "id": 2, "value": 1 },
             { "id": 3, "value": 3 },
             { "id": 4, "value": 0 },
-            { "id": 5, "value": 5 },
             { "id": 6, "value": 1 },
             { "id": 7, "value": 7 },
             { "id": 8, "value": 0 },
-            { "id": 9, "value": 9 },
 
-            { "id": 101, "value": 123.45 },
-            { "id": 102, "value": 2 },
-            { "id": 103, "value": 3 },
-            { "id": 104, "value": 4 },
-            { "id": 105, "value": 5 },
-            { "id": 106, "value": 6 },
-            { "id": 107, "value": 7 },
-            { "id": 108, "value": 1 },
-            { "id": 109, "value": 0 },
-            { "id": 110, "value": 1 },
-            { "id": 111, "value": 11 },
-            { "id": 112, "value": 12 },
-
-            { "id": 201, "value": 6 },
-            { "id": 202, "value": 1 }
+            { "id": 105, "value": 5 }
         ],
         "languages": [
             2,

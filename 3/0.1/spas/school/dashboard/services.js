@@ -1,16 +1,27 @@
 /*
   initService
+  emptyFieldsHelperService
   serverService
 */
 
-thSchoolDashboardAppModule.factory('initService', function ($http, $q, $qDecoratorService,
-  configService, hierarchyFunctionsService, contentItemService) {
+thSchoolDashboardAppModule.factory('initService', function ($http, $q, $qDecoratorService, $location,
+  configService, hierarchyFunctionsService, contentItemService, emptyFieldsHelperService) {
   //initService: use to get and set initial data and structure
   //Note: there are loads of ways of doing this: relative efficiency and the output of the init function is what matters
 
   $qDecoratorService.decorate($q);
 
   var o = {};
+
+  //error handler
+  var handleError = function(reason) {
+    window.location.href = configService.requests.urls.invalidSchoolDashboardUrlRedirect + '?reason=' + reason;
+  };
+
+  //empty fields
+  emptyFieldsHelperService.structure = o;
+  o.setEmptyFields = emptyFieldsHelperService.setEmptyFields;
+  o.setRandomEmptyField = emptyFieldsHelperService.setRandomEmptyField;
 
   //getIndependentServerData (models and presentation structures)
   var getIndependentServerData = function() { //queries which are independent of each other
@@ -34,11 +45,14 @@ thSchoolDashboardAppModule.factory('initService', function ($http, $q, $qDecorat
 
   //setIndependentServerData
   var setIndependentServerData = function(response) {
+    if (!response || !response[0].data || !response[1].data) return $q.reject('no list or school data');
+
     o.lists = sortLists(response[0].data);
     o.schoolData = response[1].data;
 
     o.sections = [];
     for (var i = 2; i < response.length; i++) {
+      if (!response[i].data) return $q.reject('no section data');
       o.sections.push(response[i].data);
     }
 
@@ -83,6 +97,7 @@ thSchoolDashboardAppModule.factory('initService', function ($http, $q, $qDecorat
 
   //setDependentServerData
   var setDependentServerData = function(response) {
+    if (!response || !response[0] || !response[0].data) return $q.reject('no city');
     o.cityData = response[0].data;
   };
   //
@@ -123,30 +138,29 @@ thSchoolDashboardAppModule.factory('initService', function ($http, $q, $qDecorat
     //decorate structure with hierarchy and weight calculations
     hierarchyFunctionsService.applyHierarchy(o); //decorate o with hierarchy functions and properties (e.g. parent, next, previous)
 
-    _.each(o.hierarchy.index, function(section) { //set default weight for every section
-      section.weight = (section.weight === undefined ? 1 : section.weight);
+    _.each(o.hierarchy.contentItemsIndex, function(ci, index) { //ensure each contentItems member is a contentItem
+      if (ci instanceof contentItemService.ContentItem) return;
+      var newCi = new contentItemService.ContentItem(ci);
+      ci.parent.contentItems[ci.index] = newCi;
+      hierarchyFunctionsService.updateIndexes(o.hierarchy, newCi, ci);
+    });
+    o.contentItemsIndex = o.hierarchy.contentItemsIndex;
+
+
+    _.each(o.hierarchy.index, function(item) { //set some defaults for sections and contentItems
+      item.weight = _.firstDefined(item.weight, item.collectionName === 'sections' ? 1 : 0);
+      if (item.depth < 2) item.absoluteWeight = 1;
     });
 
-    _.each(o.hierarchy.index, function(section) { //calculate totalChildWeight for every section
+    _.each(o.hierarchy.sectionsIndex, function(section) { //set totalChildWeight for every section
       var childCollectionName = (section.depth < 3 ? 'sections' : 'contentItems');
       section.totalChildWeight = _.reduce(section[childCollectionName], function(sum, item) { return sum + item.weight; }, 0);
     });
 
-    var contentItemsIndex = []; //an index holding every content item
-    _.each(o.hierarchy.index, function(section) {
-      section.absoluteWeight = section.weight/section.parent.totalChildWeight * (section.parent.absoluteWeight || 1);
-      _.each(section.contentItems, function(ci, index) {
-        if (!(ci instanceof contentItemService.ContentItem)) {
-          section.contentItems[index] = new contentItemService.ContentItem(ci);
-          ci = section.contentItems[index];
-        }
-        ci.parent = section;
-        contentItemsIndex.push(ci);
-        ci.absoluteWeight = ci.weight/section.totalChildWeight * (section.absoluteWeight || 1) || 0;
-      });
+    _.each(o.hierarchy.index, function(item) { //set absoluteWeight for every section and contentItem
+      if (item.depth < 2) return;
+      item.absoluteWeight = (!item.weight ? 0 : item.weight/item.parent.totalChildWeight * item.parent.absoluteWeight);
     });
-    o.contentItemsIndex = contentItemsIndex;
-
 
     var getVal = function(ci) {
       if (ci.systemType === 'school' && ci.systemName) return school[ci.systemName];
@@ -171,8 +185,8 @@ thSchoolDashboardAppModule.factory('initService', function ($http, $q, $qDecorat
     _.each(o.contentItemsIndex, function(ci) {
       if (ci.listName) { ci.items = _.cloneDeep(o.lists[ci.listName]); }
       if (!ci.systemType && ci.parent.parent.parent.index === 0) ci.systemType = 'school';
-      if (ci.systemType && ci.systemType.substring(0, 6) === 'school') ci.fixedData = { schoolId: school.id, token: o.schoolData.token };
-      if (ci.systemType && ci.systemType.substring(0, 4) === 'city') ci.fixedData = { cityId: city.id, token: o.cityData.token };
+      if (ci.systemType && ci.systemType.slice(0, 6) === 'school') ci.fixedData = { schoolId: school.id, token: o.schoolData.token };
+      if (ci.systemType && ci.systemType.slice(0, 4) === 'city') ci.fixedData = { cityId: city.id, token: o.cityData.token };
       var val = getVal(ci), val2;
       if (ci.type === 'urlEdit') { val2 = (ci.serverObject ? ci.serverObject.name : ci.urlTitle); }
       ci.init(val, val2);
@@ -180,7 +194,7 @@ thSchoolDashboardAppModule.factory('initService', function ($http, $q, $qDecorat
 
     //special tweaks 2 (post-decoration)
     var templateData = { school: school, city: city };
-    _.each(o.hierarchy.index, function(section) { //all sections in hierarchy
+    _.each(o.hierarchy.sectionsIndex, function(section) { //all sections in hierarchy
       saveTemplates(section);
       applyTemplates(section, templateData);
     });
@@ -190,6 +204,10 @@ thSchoolDashboardAppModule.factory('initService', function ($http, $q, $qDecorat
       applyTemplates(ci, templateData);
 
       //different systemTypes
+      if (ci.systemType && ci.systemType.slice(0, 6) === 'school') {
+        ci.getExternalDataToPost = function() { return { progress: o.getLevel1PercentageComplete() }; };
+      }
+
       if (ci.systemType === 'schoolRating') {
         ci.fixedData.ratingId = ci.ratingId;
         ci.systemName = 'value';
@@ -246,7 +264,7 @@ thSchoolDashboardAppModule.factory('initService', function ($http, $q, $qDecorat
   //functions for dynamically inter-dependent fields
   var internationalWorkingCurrencyPreChangeConfirm = function() {
     var hasMoneyValue = _.some(o.contentItemsIndex, function(ci) {
-      return (ci.systemType === 'schoolBenefit' && ci.subType === 'money' && !(ci.val === undefined || ci.val === 0 || ci.val === ''));
+      return (ci.systemType && ci.systemType.slice(0, 6) === 'school' && ci.subType === 'money' && !(ci.val === undefined || ci.val === 0 || ci.val === ''));
     });
     var message = 'WARNING \n\nSome money values are set in ' + o.schoolData.school.currencyName + '. Changing your currency will change the meaning of those values. \n\nClick OK to continue with the change, or Cancel if you\'re not sure.';
     return (hasMoneyValue ? confirm(message) : true);
@@ -263,9 +281,9 @@ thSchoolDashboardAppModule.factory('initService', function ($http, $q, $qDecorat
     var templateData = { school: school, city: city };
 
     _.each(o.contentItemsIndex, function(ci) {
-      if (ci.systemType === 'schoolBenefit' && ci.subType === 'money') {
+      if (ci.systemType && ci.systemType.slice(0, 6) === 'school' && ci.subType === 'money') {
         applyTemplates(ci, templateData);
-        ci.currencySymbol = school.currencySymbol;
+        if (ci.currencySymbol) ci.currencySymbol = school.currencySymbol;
       }
     });
   };
@@ -274,8 +292,15 @@ thSchoolDashboardAppModule.factory('initService', function ($http, $q, $qDecorat
   //additional helper values and functions
   o.getLevel3IsOkay = function() {
     if (!o.hierarchy.level3) return;
-    return _.all(o.hierarchy.level3.contentItems, function(item) {
-      return item.isValid !== false && !item.isDirty && !item.isBeingProcessed;
+    return !_.some(o.hierarchy.level3.contentItems, function(ci) {
+      return ci.isValid === false || ci.isDirty || ci.isBeingProcessed;
+    });
+  };
+
+  o.getLevel3AllFieldsEmpty = function() {
+    if (!o.hierarchy.level3) return;
+    return _.all(o.hierarchy.level3.contentItems, function(ci) {
+      return (ci.val === undefined || ci.val === '');
     });
   };
 
@@ -292,8 +317,121 @@ thSchoolDashboardAppModule.factory('initService', function ($http, $q, $qDecorat
   o.init = function(schoolId) {
     //returns a (promise of a) presentation model (essentially by combining models with presentation structures)
     o.schoolId = schoolId;
-    var ms = (configService.isDevMode ? 500 : 0);
-    return $q.delay(ms).then(getAndSetServerData).then(combineModelsAndPresentationStructures);
+    var ms = (configService.mode < 3 ? 500 : 0);
+    return $q.delay(ms).then(getAndSetServerData).then(combineModelsAndPresentationStructures, handleError);
+  };
+
+  return o;
+});
+
+thSchoolDashboardAppModule.factory('emptyFieldsHelperService', function () {
+  var o = {};
+
+  var getFilteredContentItems = function(options) {
+    options = options || {};
+    return _.filter(o.structure.contentItemsIndex, function(ci) {
+      if (ci.parent.parent.parent.path !== o.structure.hierarchy.level1.path) return; //not same level1
+      if (ci.parent.path === o.structure.hierarchy.level3.path) return; //same level3
+      if (options.keepHeaders && ci.type === 'header') return true;
+      return ci.getIsMissing();
+    });
+  };
+
+  var getLevel1HeaderContentItem = function(ci) {
+    return { type: 'header', title: ci.parent.parent.title, icon: ci.parent.parent.icon, style: 'color: #282737;' };
+  };
+
+  var getLevel2HeaderContentItem = function(ci) {
+    return { type: 'header', title: ci.parent.title, icon: ci.parent.icon };
+  };
+
+  var getNoFieldsMessage = function(ci) {
+    return { type: 'custom', html: '<div><span class="content-item-icon"><i class="icon-check"></i></span>Looks like you\'re done!</div><hr/>' };
+  };
+
+  var addLevel1Header = function(contentItems, ci, index) {
+    if (!ci) return;
+    contentItems.splice(index, 0, getLevel1HeaderContentItem(ci));
+  };
+
+  var getClearedContentItems = function() {
+    var contentItems = o.structure.hierarchy.level3.contentItems;
+    contentItems.length = 1;
+    return contentItems;
+  };
+
+  o.setRandomEmptyField = function() {
+    var click = function() { o.setRandomEmptyField(); };
+    var popover = '';
+    var buttonCi = { type: 'custom', html: '<button ng-disabled="!$parent.pageIsOkay" style="float: right; margin: -44px 100px 0 0;" class="btn btn-info" ng-click="model.click()">Get another!</button>', click: click };
+    var messageCi = { type: 'custom', html: '<div style="float: right; margin: -38px 140px 0 0;" >Last one!</div>' };
+    //var button2Ci = { type: 'custom', html: '<div style="height: 100px; width: 94%"><button ng-disabled="!$parent.pageIsOkay" style="margin: 40px 0 20px 40%;" class="btn btn-large btn-info" ng-click="model.click()">Get another</button></div>', click: click };
+    //var message2Ci = { type: 'custom', html: '<div style="text-align: center; width: 86%" >Last one!</div>' };
+    var emptyCis = getFilteredContentItems();
+
+    var ci, i = 0;
+    do {
+      i++; //in case of unexpected infinite loops
+      ci = emptyCis[_.random(emptyCis.length-1)];
+    } while (i < 10  && ci && o.previousRandomContentItem === ci);
+    o.previousRandomContentItem = ci;
+
+    var contentItems = getClearedContentItems();
+    if (!ci) {
+      contentItems.push(getNoFieldsMessage());
+    } else {
+      contentItems.push(emptyCis.length === 1 ? messageCi : buttonCi);
+      contentItems.push(getLevel1HeaderContentItem(ci));
+      contentItems.push(getLevel2HeaderContentItem(ci));
+      contentItems.push(ci);
+      //contentItems.push(emptyCis.length === 1 ? message2Ci : button2Ci);
+    }
+  };
+
+  o.setEmptyFields = function() {
+    var click = function() { o.setEmptyFields(); };
+    var buttonCi = { type: 'custom', html: '<button ng-hide="$parent.allFieldsEmpty" ng-disabled="!$parent.pageIsOkay" style="float: right; margin: -44px 100px 0 0;" class="btn btn-info" ng-click="model.click()">Show me more empty fields</button>', click: click };
+    var messageCi = { type: 'custom', html: '<div style="float: right; margin: -38px 140px 0 0;" >These are your final fields!</div>' };
+    var button2Ci = { type: 'custom', html: '<div style="height: 100px; width: 94%"><button ng-hide="$parent.allFieldsEmpty" ng-disabled="!$parent.pageIsOkay" style="margin: 40px 0 20px 30%;" class="btn btn-large btn-info" ng-click="model.click()">Show me more empty fields</button></div>', click: click };
+    var message2Ci = { type: 'custom', html: '<div style="text-align: center; width: 86%" >These are your final fields!</div>' };
+
+    var removeHeadersWithNoChildren = function() {
+      var next = true;
+      for (var i = filteredContentItems.length-1; i >= 0; i--) {
+        var current = (filteredContentItems[i].type === 'header');
+        if (current && next) filteredContentItems.splice(i, 1);
+        next = current;
+      }
+    };
+
+    var addLevel1Headers = function() {
+      var current, next;
+      for (var i = filteredContentItems.length-1; i >= 0; i--) {
+        current = filteredContentItems[i];
+        if (next && current.parent.parent.path !== next.parent.parent.path) {
+          addLevel1Header(filteredContentItems, next, i+1);
+        }
+        next = current;
+      }
+      addLevel1Header(filteredContentItems, current, 0);
+    };
+
+    var resetContentItems = function() {
+      var contentItems = getClearedContentItems();
+      if (filteredContentItems.length === 0) { contentItems.push(getNoFieldsMessage()); return; }
+
+      contentItems.push(filteredContentItems.length < 10 ? messageCi : buttonCi);
+      _.each(filteredContentItems, function(ci, index) {
+        contentItems.push(ci);
+        if (index > 10 && ci.type !== 'header') return false;
+      });
+      contentItems.push(filteredContentItems.length < 10 ? message2Ci : button2Ci);
+    };
+
+    var filteredContentItems = getFilteredContentItems({ keepHeaders: true });
+    removeHeadersWithNoChildren();
+    addLevel1Headers();
+    resetContentItems();
   };
 
   return o;

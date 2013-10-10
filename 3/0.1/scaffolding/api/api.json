@@ -235,6 +235,29 @@
     },
     {
       "group": "Schools",
+      "url": "/school/service/schools",
+      "description": "Get an array of schools",
+      "sprintAdded": 3, "sprintLastUpdated": 3,
+      "queries": [
+        {
+          "description": "No parameters. Note the 200 max."
+        },
+        {
+          "dataToPost": { "countryId": 123 },
+          "description": "With a particular countryId"
+        },
+        {
+          "dataToPost": { "cityId": 123 },
+          "description": "With a particular cityId"
+        },
+        {
+          "dataToPost": { "search": "ab" },
+          "description": "Schools matching 'ab' (i.e. containing this sequence of letters anywhere in schoolName)"
+        }
+      ]
+    },
+    {
+      "group": "Schools",
       "url": "/school/service/school",
       "description": "Get data relating to a school",
       "sprintAdded": 3, "sprintLastUpdated": 3,

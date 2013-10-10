@@ -1,0 +1,138 @@
+{
+  "title": "Admin WIP",
+  "icon": "beaker",
+  "sections": [
+    {
+      "title": "{{school.nickname}}",
+      "icon": "info",
+      "sections": [
+        {
+          "title": "Main",
+          "icon": "key",
+          "contentItems": [
+            {
+              "type": "header",
+              "title": "Main",
+              "icon": "key"
+            },
+            {
+              "type": "text",
+              "style": "color: red;",
+              "val": "WIP - will be in the ADMIN dashboard rather than the school dashboard."
+            },
+            {
+              "systemName": "name",
+              "type": "textEdit",
+              "title": "School name",
+              "icon": ""
+            },
+            {
+              "systemName": "address1",
+              "type": "textEdit",
+              "title": "Address 1",
+              "icon": ""
+            },
+            {
+              "systemName": "address1",
+              "type": "textEdit",
+              "title": "Address 2",
+              "icon": ""
+            },
+            {
+              "systemName": "address1",
+              "type": "textEdit",
+              "title": "Address 3",
+              "icon": ""
+            },
+            {
+              "systemName": "website",
+              "type": "urlEdit",
+              "title": "Website",
+              "icon": "",
+              "showUrlTitle": false
+            },
+            {
+              "systemName": "phone",
+              "type": "textEdit",
+              "title": "Telephone number",
+              "icon": ""
+            },
+            {
+              "systemName": "leadRecruitmentContactName",
+              "type": "textEdit",
+              "title": "Lead recruitment contact name",
+              "icon": ""
+            },
+            {
+              "systemName": "leadRecruitmentContactEmail",
+              "type": "textEdit",
+              "subType": "email",
+              "title": "Lead recruitment contact email",
+              "icon": ""
+            },
+            {
+              "systemName": "password",
+              "type": "textEdit",
+              "title": "Password",
+              "icon": ""
+            },
+            {
+              "systemName": "nickname",
+              "type": "textEdit",
+              "title": "School nickname",
+              "icon": ""
+            },
+            {
+              "systemName": "approvedByTeacherhorizons",
+              "type": "fromFew",
+              "title": "Approved by Teacherhorizons",
+              "icon": "",
+              "limit": 1,
+              "listName": "yesNo",
+              "listColumn": "name"
+            },
+            {
+              "systemName": "visitedByTeacherhorizons",
+              "type": "fromFew",
+              "title": "Visited by Teacherhorizons",
+              "icon": "",
+              "limit": 1,
+              "listName": "yesNo",
+              "listColumn": "name"
+            },
+            {
+              "systemName": "",
+              "type": "textEdit",
+              "title": "Cost of living index",
+              "icon": ""
+            },
+            {
+              "systemName": "",
+              "type": "fileUpload",
+              "title": "{{school.nickname}}'s profile photo",
+              "icon": ""
+            },
+            {
+              "systemName": "currency",
+              "type": "fromFew",
+              "title": "International working currency",
+              "icon": "money",
+              "limit": 1,
+              "listName": "currencies",
+              "listColumn": "currency"
+            },
+            {
+              "systemType": "cityLink",
+              "category": 0,
+              "type": "urlEdit",
+              "title": "Lonely Planet city guide",
+              "icon": "globe",
+              "urlTitle": "Lonely Planet Guide",
+              "showUrlTitle": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

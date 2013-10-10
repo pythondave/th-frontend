@@ -1,5 +1,8 @@
-var thAdminDashboardAppModule = angular.module('thAdminDashboardAppModule',
-  ['ui.bootstrap', 'ngMockE2E', 'ngResource', 'ui.router.compat', 'thConfigModule', 'thServerModule']);
+var thAdminDashboardAppModule = angular.module('thAdminDashboardAppModule', [
+  'ui.bootstrap', 'ngResource', 'ui.router.compat', //external
+  'ngMockE2E', 'thMockServerModule', //prototype only (comment out/remove this whole line in production)
+  'thConfigModule', 'thContentItemsModule', 'thGenericModule' //local
+]);
 
 //navbar (top menu)
 thAdminDashboardAppModule.controller('NavBarCtrl', function($scope, $state) {
@@ -8,6 +11,7 @@ thAdminDashboardAppModule.controller('NavBarCtrl', function($scope, $state) {
     { name: 'teachers', title: 'Teachers' },
     { name: 'jobs', title: 'Jobs' },
     { name: 'applications', title: 'Applications' },
+    { name: 'schools', title: 'Schools' },
     { name: 'settings', title: 'Settings' }
   ];
   $scope.$on('$stateChangeSuccess', function() {
@@ -21,36 +25,50 @@ thAdminDashboardAppModule.config(function($stateProvider) {
     .state('teachers', {
       url: '/teachers',
       views: {
-        'container-left': { templateUrl: '../../../teachers/menu.html', controller: 'TeachersMenuCtrl' },
-        'container-main': { templateUrl: '../../../teachers/default.html', controller: 'TeachersCtrl' }
+        'container-left': { templateUrl: 'teachers/menu.html', controller: 'TeachersMenuCtrl' },
+        'container-main': { templateUrl: 'teachers/default.html', controller: 'TeachersCtrl' }
       }
     })
     .state('jobs', {
       url: '/jobs',
       views: {
-        'container-left': { templateUrl: '../../../jobs/menu.html', controller: 'JobsMenuCtrl' },
-        'container-main': { templateUrl: '../../../jobs/default.html', controller: 'JobsCtrl' }
+        'container-left': { templateUrl: 'jobs/menu.html', controller: 'JobsMenuCtrl' },
+        'container-main': { templateUrl: 'jobs/default.html', controller: 'JobsCtrl' }
       }
     })
     .state('job', {
       url: '/jobs/:jobId',
       views: {
-        'container-left': { templateUrl: '../../../jobs/job/menu.html', controller: 'JobMenuCtrl' },
-        'container-main': { templateUrl: '../../../jobs/job/default.html', controller: 'JobCtrl' }
+        'container-left': { templateUrl: 'jobs/job/menu.html', controller: 'JobMenuCtrl' },
+        'container-main': { templateUrl: 'jobs/job/default.html', controller: 'JobCtrl' }
       }
     })
     .state('applications', {
       url: '/applications',
       views: {
-        'container-left': { templateUrl: '../../../applications/menu.html', controller: 'ApplicationsMenuCtrl' },
-        'container-main': { templateUrl: '../../../applications/default.html', controller: 'ApplicationsCtrl' }
+        'container-left': { templateUrl: 'applications/menu.html', controller: 'ApplicationsMenuCtrl' },
+        'container-main': { templateUrl: 'applications/default.html', controller: 'ApplicationsCtrl' }
+      }
+    })
+    .state('schools', {
+      url: '/schools',
+      views: {
+        'container-left': { templateUrl: 'schools/menu.html', controller: 'SchoolsMenuCtrl' },
+        'container-main': { templateUrl: 'schools/default.html', controller: 'SchoolsCtrl' }
+      }
+    })
+    .state('school', {
+      url: '/schools/:schoolId',
+      views: {
+        'container-left': { templateUrl: 'schools/school/menu.html', controller: 'SchoolMenuCtrl' },
+        'container-main': { templateUrl: 'schools/school/default.html', controller: 'SchoolCtrl' }
       }
     })
     .state('settings', {
       url: '/settings',
       views: {
-        'container-left': { templateUrl: '../../../settings/menu.html', controller: 'SettingsMenuCtrl' },
-        'container-main': { templateUrl: '../../../settings/default.html', controller: 'SettingsCtrl' }
+        'container-left': { templateUrl: 'settings/menu.html', controller: 'SettingsMenuCtrl' },
+        'container-main': { templateUrl: 'settings/default.html', controller: 'SettingsCtrl' }
       }
     });
 });

@@ -31,21 +31,27 @@
       <!--<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.2.0/ui-bootstrap-tpls.js"></script> replaced with line below-->
       <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.js"></script>
       <!--<script src="http://angular-ui.github.io/ui-router/build/angular-ui-states.min.js"></script> stopped working => replaced with line below-->
-      <script src="//angular-ui.github.io/ui-router/build/angular-ui-router.min.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.0/angular-ui-router.min.js"></script>
 
   <!--local scripts-->
     <!--main-->
       <script src="app.js"></script>
       <script src="../../../config.js"></script>
+    <!--shared modules-->
+      <script src="../../../shared/ui-fields/ui-fields.js"></script>
+      <script src="../../../shared/content-items/content-items.js"></script>
+
     <!--services-->
       <!--teachers-->
-        <script src="../../../teachers/teacherServices.js"></script>
+        <script src="teachers/teacherServices.js"></script>
       <!--jobs-->
-        <script src="../../../jobs/jobServices.js"></script>
+        <script src="jobs/jobServices.js"></script>
       <!--applications-->
-        <script src="../../../applications/applicationServices.js"></script>
+        <script src="applications/applicationServices.js"></script>
+      <!--schools-->
+        <script src="schools/schoolServices.js"></script>
       <!--settings-->
-        <script src="../../../settings/settingServices.js"></script>
+        <script src="settings/settingServices.js"></script>
       <!--shared-->
         <script src="../../../shared/generic.js"></script>
         <script src="../../../shared/services/listService.js"></script>
@@ -55,10 +61,11 @@
         <script src="../../../shared/services/basicListServices.js"></script>
         <script src="../../../shared/services/scoreServices.js"></script>
     <!--controllers-->
-      <script src="../../../teachers/teacherControllers.js"></script>
-      <script src="../../../applications/applicationControllers.js"></script>
-      <script src="../../../jobs/jobControllers.js"></script>
-      <script src="../../../settings/settingControllers.js"></script>
+      <script src="teachers/teacherControllers.js"></script>
+      <script src="applications/applicationControllers.js"></script>
+      <script src="jobs/jobControllers.js"></script>
+      <script src="schools/schoolControllers.js"></script>
+      <script src="settings/settingControllers.js"></script>
     <!--directives-->
       <script src="../../../shared/directives.js"></script>
 

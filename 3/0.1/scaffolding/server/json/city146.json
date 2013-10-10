@@ -10,6 +10,7 @@
         "internationalCurrency": 4,
         "population": 120000,
         "language": 6,
+        "localTouristAttractions": "Something; Something else; Another thing; This thing is also here",
         "attractions": [
             1,
             3,

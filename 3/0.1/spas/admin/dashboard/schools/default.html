@@ -1,0 +1,66 @@
+<h3 style="float: left; ">Schools</h3>
+
+<div class="summary" style="float: right; margin-top: 12px; " ng-init="cumulative=true; wrap=true; compact=true;">
+  <span style="padding: 0 10px;">Display type: </span>
+  <button class="btn btn-small" ng-click="wrap=true; compact=true;" ng-class="{'btn-success':wrap}">
+    <span simple-tooltip="With text wrapping and compact headers">Wrap</span>
+  </button>
+  <button class="btn btn-small" ng-click="wrap=false; compact=false;" ng-class="{'btn-success':!wrap}">
+    <span simple-tooltip="Without text wrapping and compact headers">No wrap</span>
+  </button>
+</div>
+
+<div style="clear: both;" ng-show="schools.length==0">
+  <p>No schools found</p>
+</div>
+
+<div style="clear: both;" ng-show="schools.length>0" class="summary">
+  <span ng-show="unrefinedschools.length==200">Latest</span>
+  <span>{{schools.length}} schools</span><span ng-show="unrefinedschools.length==200">*</span>
+  <span ng-show="unrefinedschools.length==200" style="color: silver; margin-left: 30px; ">
+    <span ng-show="schools.length==200">* there may be more, but 200 is the limit. Use the filters to narrow down your search.</span>
+    <span ng-hide="schools.length==200">* there may be more, but the original request was limited. Use the filters to narrow down your search.</span>
+  </span>
+</div>
+<div class="table-container">
+  <table ng-show="schools.length>0" class="table table-striped table-schools"
+         ng-style="{true: { 'white-space': 'nowrap' }}[!wrap]">
+    <thead>
+      <tr>
+        <th ng-hide="fields.count==0" class="th-left float-immediate-child-spans">
+          <span ng-show="fields.name">
+            <span class="sort" ng-click="sort('name')">School</span>
+          </span>
+          <span ng-show="fields.country">
+            <span ng-hide="fields.country.index==0">, </span>
+            <span class="sort" ng-click="sort('country')">Country</span>
+          </span>
+          <span ng-show="fields.city">
+            <span ng-hide="fields.city.index==0">, </span>
+            <span class="sort" ng-click="sort('city')">City</span>
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="s in schools" ng-class-odd="'tr-odd'" ng-class-even="'tr-even'" class="tr-narrow">
+        <td ng-hide="fields.count==0" class="td-left">
+          <a ng-href="#/schools/{{s.id}}" class="float-immediate-child-spans">
+            <span ng-show="fields.name">
+              <span ng-style="{true: { 'font-weight': 'bold' }}[fields.name.index % 2 == 0]">{{s.name}}</span>
+            </span>
+            <span ng-show="fields.country">
+              <span ng-hide="fields.country.index==0">, </span>
+              <span ng-style="{true: { 'font-weight': 'bold' }}[fields.country.index % 2 == 0]">{{s.country}}</span>
+            </span>
+            <span ng-show="fields.city">
+              <span ng-hide="fields.city.index==0">, </span>
+              <span ng-style="{true: { 'font-weight': 'bold' }}[fields.city.index % 2 == 0]">{{s.city}}</span>
+            </span>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div ng-show="schools.length>0" class="summary">{{schools.length}} schools</div>

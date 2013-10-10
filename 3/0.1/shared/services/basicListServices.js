@@ -27,6 +27,22 @@ thGenericModule.factory('countriesService', function(basicListsService, listServ
   return o;
 });
 
+thGenericModule.factory('citiesService', function(basicListsService, listService) {
+  var o = {};
+  o.list = new listService.List();
+
+  //get data
+  o.getAndSetData = function() {
+    o.list.setSortOrderPaths(['name']);
+    var setData = function() {
+      o.list.setData(basicListsService.basicLists.data.cities || []); //*** WIP
+    };
+    return basicListsService.getAndSetData().then(setData);
+  };
+
+  return o;
+});
+
 thGenericModule.factory('subjectsService', function(basicListsService, listService) {
   var o = {};
   o.list = new listService.List();

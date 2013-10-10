@@ -3,12 +3,15 @@ var thConfigModule = angular.module('thConfigModule', []);
 thConfigModule.constant('configService', function() {
   var o = { user: {} };
 
-  o.isDevMode = true; /* production -> set to false */
+  o.modes = { 1: 'dev', 2: 'demo', 3: 'production' };
+  o.mode = 2; /* change to 3 in production */
 
   o.loginUrl = './user/logon';
   o.root = '/th-frontend/3/0.1'; //*** TODO: refactor when functionality becomes available in angular (see https://github.com/angular/angular.js/issues/2805)
 
   var requestUrlRoot = '/admin/service/';
+
+  o.setModeToDevIfDemoAndLocal = function() { if (o.mode === 2 && window.location.host === 'localhost') o.mode = 1; };
 
   o.requests = {
     postConfig: { "headers": { "Content-Type": "application/x-www-form-urlencoded" } }
@@ -44,6 +47,7 @@ thConfigModule.constant('configService', function() {
       lists: '/school/service/lists',
 
     //schools
+      schools: '/school/service/schools',
       school: '/school/service/school',
       processSchool: '/school/service/process-school',
       processSchoolRating: '/school/service/process-school-rating',
@@ -60,7 +64,7 @@ thConfigModule.constant('configService', function() {
       invalidSchoolDashboardUrlRedirect: 'error.html'
   };
 
-  if (o.isDevMode) {
+  if (o.mode < 3) {
     o.requests.urls.spepNotesStructure = '/school-dashboard/service/spep-notes-structure';
     o.requests.urls.contentItemShowcaseStructure = '/shared/service/content-item-showcase-structure';
   }

@@ -1,4 +1,4 @@
-var thApiModule = angular.module('thApiModule', ['ui.bootstrap', 'ngMockE2E', 'ngResource', 'ui.router.compat', 'thConfigModule', 'thServerModule']);
+var thApiModule = angular.module('thApiModule', ['ui.bootstrap', 'ngMockE2E', 'ngResource', 'ui.router.compat', 'thConfigModule', 'thMockServerModule']);
 
 thApiModule.config(function($stateProvider, $httpProvider) {
   var mainView = { 'container-main': { templateUrl: 'main.html', controller: 'MainCtrl' } };

@@ -1,4 +1,4 @@
-<div class="ng-cloak span3">
+<div class="ng-cloak span3" ng-style="{ position: (mode===1 ? 'absolute' : '') }">
   <div ng-show="hierarchy.level1.index===0" class="progress-bar-container">
     <p>School profile <strong>{{percentageComplete}}%</strong> complete</p>
     <div class="progress-bar">
@@ -10,12 +10,12 @@
     <span>
       <span class="nav-arrow nav-arrow-left" ng-class="hierarchy.level3.previous ? '' : 'nav-arrow-disabled'"
         ng-click="!hierarchy.level3.previous || go(hierarchy.level3.previous.path)"
-        popover="{{hierarchy.level3.previous ? 'Go to previous page (' + hierarchy.level3.previous.title + ')' : 'At start'}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300">
+        popover="{{hierarchy.level3.previous ? 'Go to previous page: &nbsp; &nbsp; ' + hierarchy.level3.previous.title : 'At start'}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300">
         <i class="icon-chevron-sign-left"></i>
       </span>
       <span class="nav-arrow nav-arrow-right"  ng-class="hierarchy.level3.next ? '' : 'nav-arrow-disabled'"
         ng-click="!hierarchy.level3.next || go(hierarchy.level3.next.path)"
-        popover="{{hierarchy.level3.next ? 'Go to next page (' + hierarchy.level3.next.title + ')' : 'At end'}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300">
+        popover="{{hierarchy.level3.next ? 'Go to next page: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ' + hierarchy.level3.next.title : 'At end'}}" popover-placement="left" popover-trigger="mouseenter" popover-popup-delay="300">
         <i class="icon-chevron-sign-right"></i>
       </span>
     </span>
@@ -23,8 +23,8 @@
   <accordion>
     <accordion-group ng-repeat="s in hierarchy.level1.sections" is-open="s.isSelected">
       <accordion-heading>
-        <button class="btn btn-small btn-info" ng-click="go(s.path + '/1')"
-          popover="{{s.tip}}" popover-placement="right" popover-trigger="mouseenter" popover-popup-delay="300"
+        <button class="btn btn-small btn-primary" ng-click="go(s.path + '/1')"
+          popover="{{s.tip}}" popover-placement="top" popover-trigger="mouseenter" popover-popup-delay="300"
         >
           <span ng-show="s.icon" class="section-level2-icon"><i class="icon-{{s.icon}}"></i></span>
           {{s.title}}
@@ -39,7 +39,7 @@
       </div>
     </accordion-group>
   </accordion>
-  <div ng-show="isDevMode" style="font-size: 11px; word-wrap: break-word;">
+  <div ng-show="mode===1" style="font-size: 11px; word-wrap: break-word;">
     <hr/>
     <b>Links</b>
     <br/>

@@ -21,42 +21,6 @@ var thUiFieldsModule = angular.module('thUiFieldsModule', ['thConfigModule']);
   ngBlur
 */
 
-
-thUiFieldsModule.directive('urlEdit', function(configService, $timeout) {
-  return {
-    restrict: 'A',
-    replace: true,
-    templateUrl: configService.root + '/shared/ui-fields/partials/url-edit.html',
-    scope: { model: '=' },
-    link: function(scope, element, attr, ctrl) {
-      var input = element[0].children[(scope.model.showUrlTitle  ? 2 : 1)];
-
-      scope.model.showEditIcon = true;
-      scope.model.isNotValidTip = 'This doesn\'t appear to be a valid URL. Please change it so it can be saved.';
-
-      scope.model.urlTitle.update = function() {
-        scope.model.update();
-      };
-
-      var getHref = function(url) {
-        if (!url) return;
-        return (url.slice(0, 7) === 'http://' ? url : 'http://' + url);
-      };
-
-      scope.$watch('model.val', function(newVal, oldVal) {
-        scope.model.href = getHref(scope.model.val);
-        scope.model.editIconTip = (newVal ? 'Click to edit URL' : 'Click to add URL');
-        if (newVal === oldVal) return;
-        scope.model.update();
-      });
-
-      scope.$watch('model.isEditMode', function(isUrlEditMode) {
-        if (isUrlEditMode) $timeout(function() { input.focus(); });
-      });
-    }
-  };
-});
-
 thUiFieldsModule.directive('dateEdit', function(configService, $timeout) {
   return {
     restrict: 'A',
@@ -384,6 +348,41 @@ thUiFieldsModule.directive('timeEdit', function(configService) {
     templateUrl: configService.root + '/shared/ui-fields/partials/time-edit.html',
     scope: { model: '=' },
     link: function(scope, element, attr, ctrl) {
+    }
+  };
+});
+
+thUiFieldsModule.directive('urlEdit', function(configService, $timeout) {
+  return {
+    restrict: 'A',
+    replace: true,
+    templateUrl: configService.root + '/shared/ui-fields/partials/url-edit.html',
+    scope: { model: '=' },
+    link: function(scope, element, attr, ctrl) {
+      var input = element[0].children[(scope.model.showUrlTitle  ? 2 : 1)];
+
+      scope.model.showEditIcon = true;
+      scope.model.isNotValidTip = 'This doesn\'t appear to be a valid URL. Please change it so it can be saved.';
+
+      scope.model.urlTitle.update = function() {
+        scope.model.update();
+      };
+
+      var getHref = function(url) {
+        if (!url) return;
+        return (url.slice(0, 7) === 'http://' ? url : 'http://' + url);
+      };
+
+      scope.$watch('model.val', function(newVal, oldVal) {
+        scope.model.href = getHref(scope.model.val);
+        scope.model.editIconTip = (newVal ? 'Click to edit URL' : 'Click to add URL');
+        if (newVal === oldVal) return;
+        scope.model.update();
+      });
+
+      scope.$watch('model.isEditMode', function(isUrlEditMode) {
+        if (isUrlEditMode) $timeout(function() { input.focus(); });
+      });
     }
   };
 });

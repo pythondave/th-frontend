@@ -1,8 +1,8 @@
-var thSchoolDashboardAppModule = angular.module('thSchoolDashboardAppModule',
-  ['ui.bootstrap', 'ngMockE2E', 'ngResource', 'ui.router.compat', //external
-   'thConfigModule', 'thContentItemsModule', //local
-   'thServerModule' //local, prototype only
-  ]);
+var thSchoolDashboardAppModule = angular.module('thSchoolDashboardAppModule', [
+  'ui.bootstrap', 'ngResource', 'ui.router.compat', //external
+  'ngMockE2E', 'thMockServerModule', //prototype only (comment out/remove this whole line in production)
+  'thConfigModule', 'thContentItemsModule', 'thGenericModule' //local
+]);
 
 /*
   thSchoolDashboardAppModule
@@ -18,8 +18,8 @@ thSchoolDashboardAppModule.config(function($stateProvider, $urlRouterProvider, c
   $urlRouterProvider.when('/{schoolId}', '/{schoolId}/1/1/1');
   $urlRouterProvider.when('/{schoolId}/{level1}', '/{schoolId}/{level1}/1/1');
   $urlRouterProvider.when('/{schoolId}/{level1}/{level2}', '/{schoolId}/{level1}/{level2}/1');
-  $urlRouterProvider.otherwise(function () { //redirect if route is invalid
-    if (configService.isDevMode) return '/101/1/1/1';
+  $urlRouterProvider.otherwise(function ($stateParams) { //redirect if route is invalid
+    if (configService.mode < 3) return '/101/1/1/1';
     window.location.href = configService.requests.urls.invalidSchoolDashboardUrlRedirect;
   });
 
@@ -32,7 +32,7 @@ thSchoolDashboardAppModule.config(function($stateProvider, $urlRouterProvider, c
   };
 
   var school = { name: 'school', url: '/{schoolId:[0-9]{1,6}}', templateUrl: 'partials/school.html', controller: 'SchoolController',
-    resolve: { structure: getStructure } //ensures initial data is all loaded and ready to go before the app loads
+    resolve: { modeReady: configService.setModeToDevIfDemoAndLocal, structure: getStructure } //ensures initial data is all loaded and ready to go before the app loads
   };
   var level1 = { name: 'level1', url: '/{level1:[0-9]}', parent: school, templateUrl: 'partials/level1.html', controller: 'Level1Controller' };
   var level2 = { name: 'level2', url: '/{level2:[0-9]}', parent: level1, templateUrl: 'partials/level2.html', controller: 'Level2Controller' };

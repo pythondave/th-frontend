@@ -8,10 +8,12 @@
 
 //SchoolController
 thSchoolDashboardAppModule.controller('SchoolController', function($rootScope, $scope, $state, appLoading, serverService, structure, configService) {
-  if (configService.isDevMode) {
-    $scope.isDevMode = configService.isDevMode;
+  $scope.mode = configService.mode;
+  if (configService.mode < 3) {
+    $scope.isDevMode = (configService.mode === 1);
     $scope.serverService = serverService;
-    $scope.$watch('isDevMode', function() { $rootScope.$broadcast('devModeChanged', $scope.isDevMode); });
+    $scope.$watch('isDevMode', function(isDevMode) { $rootScope.$broadcast('modeChanged', (isDevMode ? 1 : 2)); });
+    $scope.$on('modeChanged', function(e, mode) { $scope.mode = mode; });
   }
 
   $scope.structure = structure;
@@ -35,8 +37,8 @@ thSchoolDashboardAppModule.controller('SchoolController', function($rootScope, $
 
 //Level1Controller
 thSchoolDashboardAppModule.controller('Level1Controller', function($rootScope, $scope, $state, $timeout, $location, appLoading, serverService, structure, configService) {
-  if (configService.isDevMode) {
-    $scope.$on('devModeChanged', function(e, isDevMode) { $scope.isDevMode = isDevMode; });
+  if (configService.mode < 3) {
+    $scope.$on('modeChanged', function(e, mode) { $scope.mode = mode; });
   }
 
   $scope.serverService = serverService;
@@ -66,16 +68,20 @@ thSchoolDashboardAppModule.controller('Level2Controller', function() {
 });
 
 //Level3Controller
-thSchoolDashboardAppModule.controller('Level3Controller', function($scope, $state, $modal, configService, $location, structure) {
+thSchoolDashboardAppModule.controller('Level3Controller', function($scope, $state, $modal, $location, configService, structure) {
   if (!structure.hierarchy.level3) return;
 
-  if (configService.isDevMode) {
-    $scope.$on('devModeChanged', function(e, isDevMode) { _.setAll(structure.contentItemsIndex, 'isDevMode', isDevMode); });
+  if (configService.mode < 3) {
+    $scope.$on('modeChanged', function(e, mode) { _.setAll(structure.contentItemsIndex, 'mode', mode); });
   }
+
+  if (structure.hierarchy.level3.id === 'emptyFields') { structure.setEmptyFields(); }
+  if (structure.hierarchy.level3.id === 'randomEmptyField') { structure.setRandomEmptyField(); }
 
   $scope.contentItems = structure.hierarchy.level3.contentItems;
 
   $scope.$watch(structure.getLevel3IsOkay, function(newVal, oldVal) { $scope.pageIsOkay = newVal; });
+  $scope.$watch(structure.getLevel3AllFieldsEmpty, function(newVal, oldVal) { $scope.allFieldsEmpty = newVal; });
 
   $scope.$on('transitionCancelled', function(event, nextRoute) {
     var afterClose = function(ignoreIssues) {

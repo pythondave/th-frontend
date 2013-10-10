@@ -15,6 +15,7 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
   var globalDefaultVals = { weight: 1, showClear: true };
 
   var contentItemTypes = { //possible content item types and defaults (weight, throttling wait times)
+    custom: {},
     header: { weight: 0 },
     list: { weight: 0 },
     text: { weight: 0 },
@@ -37,11 +38,14 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
     var typeObject = contentItemTypes[initialVals.type];
     _.assign(this, globalDefaultVals, typeObject, initialVals || {});
     this.processChangeUsingThrottle = _.throttle(this.processChange, this.wait, {leading: false});
-    if (!typeObject) console.log('Content item type not found: ', initialVals.type);
+    if (!typeObject) console.log('Content item type not found: ', initialVals, initialVals.type);
   };
 
+  //this function can be overridden so that the content item can post external dynamic data
+  o.ContentItem.prototype.getExternalDataToPost = function() { return {}; };
+
   o.ContentItem.prototype.getDataToPost = function() {
-    var o = this.fixedData || {};
+    var o = _.assign({}, this.fixedData, this.getExternalDataToPost());
     if (this.type === 'urlEdit') {
       o[this.systemName.title] = this.urlTitle.val;
       o[this.systemName.url] = this.val;
@@ -113,7 +117,7 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
     if (this.type === 'urlEdit') {
       this.fixedData = this.fixedData || {};
       this.systemName = _.defaults({}, this.systemName, { title: 'title', url: 'url' });
-      this.urlTitle = _.defaults({}, { val: newVal2 });
+      this.urlTitle = _.defaults({}, (_.isObject(newVal2) ? newVal2 : { val: newVal2 }));
     }
     if (this.type === 'locationEdit' && this.val) {
       this.lat = this.val.split(',')[0];
@@ -139,19 +143,29 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
     return this.absoluteWeight;
   };
 
+  o.ContentItem.prototype.getIsEmpty = function() {
+    return (this.val === undefined || this.val === '');
+  };
+
+  o.ContentItem.prototype.getIsMissing = function() {
+    if (this.absoluteWeight === undefined || this.absoluteWeight === 0) return false;
+    return this.getIsEmpty();
+  };
+
   return o;
 });
 
 thContentItemsModule.directive('contentItem', function ($compile) {
-  var devTemp = ''; //<div>model.val: {{model.val}}; model.absoluteWeight: {{model.absoluteWeight}}</div>';
+  var devTemp = ''; //'<div>model.val: {{model.val}}; model.absoluteWeight: {{model.absoluteWeight}}</div>'; //use to show some value during development
   var contentItemHeader = '<div content-item-header model="model"></div>';
   var getStandardContentItem = function(contentItemType) {
     return '<div class="content-item content-item-{{model.systemName}}">' + devTemp + contentItemHeader + '<div ' + contentItemType + ' model="model"><span style="color: red;">WIP (' + contentItemType + ')</span></div><hr/></div>';
   };
+
   var templates = {
-    header: '<h3><i class="icon-{{model.icon}}"></i> {{model.title}}</h3>',
+    header: '<h3 class="header" style="{{model.style}}"><i class="icon-{{model.icon}}"></i> {{model.title}}</h3>',
     list: '<div><p><span class="content-item-icon"><i class="icon-{{model.icon}}"></i></span>{{model.title}}</p><ul><li ng-repeat="item in model.items">{{item}}</li></ul><hr/></div>',
-    text: '<div style={{model.style}}><span class="content-item-icon" ng-show="model.icon"><i class="icon-{{model.icon}}"></i></span>{{model.val}}<hr/></div>',
+    text: '<div style={{model.style}}><span class="content-item-icon" ng-show="model.icon"><i class="icon-{{model.icon}}"></i></span>{{model.val}}</div><hr/>',
     fileUpload: getStandardContentItem('file-upload'),
     dateEdit: getStandardContentItem('date-edit'),
     emailEdit: getStandardContentItem('email-edit'),
@@ -170,7 +184,7 @@ thContentItemsModule.directive('contentItem', function ($compile) {
   var linker = function(scope, element, attrs) {
     var model = scope.model;
     if (!model) return;
-    var html = templates[scope.model.type] || '<div>' + contentItemHeader + '<div style="color: red">Content item type \'{{model.type}}\' not found<hr/></div></div>';
+    var html = model.html || templates[model.type] || '<div>' + contentItemHeader + '<div style="color: red">Content item type \'{{model.type}}\' not found<hr/></div></div>';
     element.html(html).show();
     $compile(element.contents())(scope);
   };

@@ -57,7 +57,8 @@ thGenericModule.run(function($rootScope) {
     addUniqueIds: function(arr, newPropertyName) {
       return _.map(arr, function(item) { return _(item).addUniqueId(newPropertyName).value(); });
     },
-    firstDefined: function() { return _.find(arguments, function(x) { return !_.isUndefined(x); }); },
+    isDefined: function(x) { return !_.isUndefined(x); },
+    firstDefined: function() { return _.find(arguments, function(x) { return _.isDefined(x); }); },
     eachRight: function(arr, callback) {
       for (var i = arr.length-1; i >= 0; i--) { callback(arr[i], i, arr); }
       return arr;
@@ -67,7 +68,7 @@ thGenericModule.run(function($rootScope) {
     },
     toTitleCase: function(s) { return s.toLowerCase().replace(/^(.)|\s(.)/g, function($1) { return $1.toUpperCase(); }); },
     toPascalCase: function(s) { return _.toTitleCase(s).replace(/ /g, ''); },
-    toCamelCase: function(s) { var x = _.toPascalCase(s); return x[0].toLowerCase() + x.substring(1); },
+    toCamelCase: function(s) { var x = _.toPascalCase(s); return x[0].toLowerCase() + x.slice(1); },
     addProperty: function(arr, propertyName, propertyValue) { //adds a property to every item in an array
       _.each(arr, function(item) { item[propertyName] = propertyValue; }); return arr;
     },
@@ -113,7 +114,11 @@ thGenericModule.run(function($rootScope) {
       _.nestedForEach(collection, _.convertToArray(valuesToMark, true), function(item1, item2) {
         if (item1[propertyToMatch] === item2) item1[markerPropertyName] = true;
       });
-    }
+    },
+    getFirstOwnPropertyName: function(o, propertyNamesArray) {
+      return _.find(propertyNamesArray, function(propertyName) { return o.hasOwnProperty(propertyName); });
+    },
+    getFirstOwnProperty: function(o, propertyNamesArray) { return o[_.getFirstOwnPropertyName(o, propertyNamesArray)]; }
   });
 });
 
@@ -123,13 +128,14 @@ thGenericModule.factory('hierarchyFunctionsService', function () {
   //index, parent, depth, path, previous, next
 
   var resetMarkers = function() {
-    _.setAll(this.parent[this.propertyNames.collection], this.propertyNames.marker, false, this.propertyNames.collection);
+    var collectionName = this.propertyNames.childCollectionNames[0]; //could be made more general later
+    _.setAll(this.parent[collectionName], this.propertyNames.marker, false, collectionName);
   };
 
   var select = function(params) {
     this.resetMarkers();
 
-    var collectionName = this.propertyNames.collection;
+    var collectionName = this.propertyNames.childCollectionNames[0]; //could be made more general later
     var markerName = this.propertyNames.marker;
     this.level1 = this.parent[collectionName][params.level1-1];
     this.level2 = (this.level1[collectionName] && this.level1[collectionName][params.level2-1]);
@@ -143,16 +149,22 @@ thGenericModule.factory('hierarchyFunctionsService', function () {
 
   var o = {};
   o.applyHierarchy = function(object, propertyNames) {
-    propertyNames = _.defaults({}, propertyNames, { collection: 'sections', marker: 'isSelected', previous: 'previous', next: 'next' });
+    var defaults = { childCollectionNames: ['sections', 'contentItems'], marker: 'isSelected', previous: 'previous', next: 'next' };
+    propertyNames = _.defaults({}, propertyNames, defaults);
 
     //add hierarchy object
     object.hierarchy = { object: object, parent: object, propertyNames: propertyNames, resetMarkers: resetMarkers, select: select };
 
     //add index to hierarchy; add parent, depth and path to each hierarchy item
+    _.each(propertyNames.childCollectionNames, function(collectionName) { object.hierarchy[collectionName + 'Index'] = []; });
     object.hierarchy.index = [];
+
     var iterate = function(parent) {
-      _.each(parent[propertyNames.collection], function(item, index) {
+      var childCollectionName = _.getFirstOwnPropertyName(parent, propertyNames.childCollectionNames);
+      _.each(parent[childCollectionName], function(item, index) {
+        object.hierarchy[childCollectionName + 'Index'].push(item);
         object.hierarchy.index.push(item);
+        item.collectionName = childCollectionName;
         item.index = index;
         item.parent = parent;
         item.depth = (parent.depth || 0) + 1;
@@ -180,6 +192,15 @@ thGenericModule.factory('hierarchyFunctionsService', function () {
         next = index[i];
       }
     }
+  };
+
+  o.updateIndexes = function(hierarchy, newItem, oldItem, indexNames) {
+    //updates all indexes so that any index item which pointed at oldItem now points at newItem (allowing an indexed item to be changed)
+    indexNames = indexNames || ['index', 'sectionsIndex', 'contentItemsIndex'];
+    _.each(indexNames, function(indexName) {
+      var i = _.findIndex(hierarchy[indexName], oldItem);
+      if (i > -1) hierarchy[indexName][i] = newItem;
+    });
   };
 
   return o;
