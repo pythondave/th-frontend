@@ -1027,7 +1027,7 @@
               "systemType": "city",
               "systemName": "attractions",
               "type": "fromFew",
-              "title": "Attractions and activities within a two hour drive of {{city.name}}",
+              "title": "Attractions and activities within a two-hour drive of {{city.name}}",
               "icon": "camera",
               "listName": "attractions",
               "listColumn": "attraction"
