@@ -237,11 +237,11 @@ input[type="color"],
   min-height: 38px;
   height: 38px;
   background-color: #29283D;
-  background-image: -moz-linear-gradient(top, red, red);
-  background-image: -ms-linear-gradient(top, red, red);
+  background-image: -moz-linear-gradient(top, #29283D, #29283D);
+  background-image: -ms-linear-gradient(top, #29283D, #29283D);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#312e63), to(#312e63));
   background-image: -webkit-linear-gradient(top, #29283D, #29283D);
-  background-image: -o-linear-gradient(top, red, red);
+  background-image: -o-linear-gradient(top, #29283D, #29283D);
   background-image: linear-gradient(top, #312e63, #312e63);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#'282737, endColorstr='#'282737, GradientType=0);
 }
@@ -254,8 +254,8 @@ input[type="color"],
 
 .navbar .divider-vertical {
   height: 31px;
-  background-color: red;
-  border-right: 1px solid red;
+  background-color: #29283D;
+  border-right: 1px solid #29283D;
 }
 
 .navbar .nav > li > a {
