@@ -19,6 +19,8 @@ var thUiFieldsModule = angular.module('thUiFieldsModule', ['thConfigModule']);
   fieldFormat
   restrictInput
   ngBlur
+
+  fileUpload
 */
 
 thUiFieldsModule.directive('dateEdit', function(configService, $timeout) {
@@ -447,3 +449,86 @@ thUiFieldsModule.directive('ngBlur', ['$parse', function($parse) {
     });
   };
 }]);
+
+thUiFieldsModule.directive('fileUpload', function($http, configService) {
+  //*** TODO - consider refactoring - see note in default.html
+  var seed = Math.floor(Math.random()*100);
+  return {
+    restrict: 'AC',
+    templateUrl: configService.root + '/shared/ui-fields/partials/file-upload.html',
+    scope: { model: '='},
+    link: function($scope, element, attr, ctrl) {
+      $scope.el = element;
+      $scope.processing = false;
+      if ($scope.model.val === undefined) { $scope.model.val = []; }
+
+      $scope.update = function(e,data) {
+        $.blueimp.fileupload.resetProgress(e);
+        $scope.processing = false;
+        $scope.model.val.push(data._response.result);
+        $scope.$apply();
+      };
+
+      $scope.uploader = $(element).find(".uploaderInput")[0];
+
+      $scope.fileAddedEvent = function(e,data) {
+        $.each(data.files, function (index, file) {
+          if (file.error !== undefined)
+            $scope.model.error = file.name + ' - ' + file.error;
+          else
+            delete $scope.model["error"];
+        });
+        $scope.processing = false;
+        $scope.$apply();
+      };
+
+      $scope.fileSendEvent = function (e, data) {
+        $scope.processing = true;
+        $scope.$apply();
+      };
+
+      $scope.uploadFailedEvent = function (e, data) {
+        $scope.processing = false;
+        if (data.result === undefined) {
+          $scope.model.error = data.errorThrown;
+          $scope.$apply();
+          return;
+        }
+        $.each(data.result.files, function (index, file) {
+          $scope.model.error = file.name + ' - ' + file.error;
+        });
+        $scope.$apply();
+      };
+
+      $($scope.uploader).fileupload({
+        type: 'POST',
+        url: $scope.model.uploadUrl,
+        dataType: 'json',
+        autoUpload: true,
+        maxFileSize: 2097152, // 5 MB
+        maxNumberOfFiles: $scope.model.maxFiles,
+        paramName: 'file',
+        acceptFileTypes: /(\.|\/)(jpg|gif|png)$/i
+      })
+
+      .on('fileuploadprogress', $.blueimp.fileupload.uploadProgressEvent)
+      .on('fileuploaddone', $scope.update)
+      .on('fileuploadfail', $scope.uploadFailedEvent)
+      .on('fileuploadadded', $scope.fileAddedEvent)
+      .on('fileuploadsend',$scope.fileSendEvent);
+
+      $scope.deleteFile = function(file,index) {
+        $http.post($scope.model.deleteUrl + file.id, {}, configService.requests.postConfig.headers);
+        $scope.model.val = _.without($scope.model.val,file);
+      };
+
+      $scope.$on("$destroy", function() { delete $scope.model["error"]; });
+
+      $scope.rand = function() { return seed; };
+
+      //bind events
+      $scope.mouseenter = function() { $scope.$emit('mouseenter', $scope.model); };
+      $scope.mouseleave = function() { $scope.$emit('mouseleave', $scope.model); };
+    }
+  };
+});

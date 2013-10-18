@@ -93,6 +93,7 @@
             { "id": 6, "value": 1 },
             { "id": 7, "value": 7 },
             { "id": 8, "value": 0 },
+            { "id": 9, "value": 2 },
 
             { "id": 105, "value": 5 }
         ],
@@ -132,13 +133,14 @@
         ],
         "images": [
             {
+                "__note": "http://beta.teacherhorizons.com at the start of resource is for prototype demo only",
                 "id": 2229,
-                "resource": "/static/media/schools/3176/images/13285.jpg",
+                "resource": "http://beta.teacherhorizons.com/static/media/schools/3176/images/13285.jpg",
                 "reference": "Durango.jpg"
             },
             {
                 "id": 2230,
-                "resource": "/static/media/schools/3176/images/13286.jpg",
+                "resource": "http://beta.teacherhorizons.com/static/media/schools/3176/images/13286.jpg",
                 "reference": "durango1.JPG"
             }
         ],
@@ -161,9 +163,9 @@
         "pOverseasStaff": 20,
         "intOverseasTeachers": 123,
         "mainTeacherNationalities": [
-            1,
-            2,
-            6
+            205,
+            209,
+            210
         ],
         "annualTeacherTurnover": 50,
         "location": "41.2530,-8.5707",
@@ -171,10 +173,10 @@
         "recruitmentStartMonth": 3,
         "minYearsExperience": 5,
         "teacherNationalitiesAccepted": [
-            1,
-            3,
-            5,
-            7
+            207,
+            206,
+            208,
+            209
         ],
         "leadRecruitmentContactName": "Cuco Valdez",
         "leadRecruitmentContactEmail": "ok@ok.biz",

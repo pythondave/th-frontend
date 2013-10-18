@@ -14,6 +14,12 @@
       </span>
       <div class="nav-collapse collapse">
         <ul class="nav">
+          <li>
+            <a href="{{structure.schoolData.school.alias}}" target="_blank">
+              <span style="margin: 0 3px 0 -3px;"><i class="icon-eye-open" style="font-size: 18px;"></i></span>
+              View school profile
+            </a>
+          </li>
           <li ng-repeat="s in structure.sections" ng-class="s.isSelected ? 'active' : ''">
             <a ng-href="#/{{structure.schoolId}}/{{$index+1}}/1/1">
               <span style="margin: 0 3px 0 -3px;"><i class="icon-{{s.icon}}" style="font-size: 18px;"></i></span>

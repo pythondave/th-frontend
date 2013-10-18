@@ -156,7 +156,7 @@
             "country": 5
         },
         {
-            "name": "Isa ",
+            "name": "Isa ",
             "id": 331,
             "country": 5
         },
@@ -1066,7 +1066,7 @@
             "country": 35
         },
         {
-            "name": "Amman ",
+            "name": "Amman ",
             "id": 222,
             "country": 35
         },
@@ -2881,6 +2881,48 @@
             "country": 163
         }
     ],
+    "teachingLanguages": [
+        {
+            "id": 1,
+            "name": "English"
+        },
+        {
+            "id": 2,
+            "name": "Spanish"
+        },
+        {
+            "id": 3,
+            "name": "French"
+        },
+        {
+            "id": 4,
+            "name": "German"
+        },
+        {
+            "id": 5,
+            "name": "Italian"
+        },
+        {
+            "id": 6,
+            "name": "Portuguese"
+        },
+        {
+            "id": 7,
+            "name": "Chinese"
+        },
+        {
+            "id": 8,
+            "name": "Japanese"
+        },
+        {
+            "id": 9,
+            "name": "Arabic"
+        },
+        {
+            "id": 10,
+            "name": "Other"
+        }
+    ],
     "curriculums": [
         {
             "id": 1,
@@ -2973,12 +3015,24 @@
             "name": "Average Cost of Litre of Petrol / Gas"
         },
         {
+            "id": 9,
+            "name": "Consumer Price Index"
+        },
+        {
+            "id": 10,
+            "name": "Cost of a coffee in local cafe"
+        },
+        {
             "id": 6,
             "name": "Cost of flights during the Summer holiday season to London"
         },
         {
             "id": 5,
             "name": "Cost of flights during the Summer holiday season to New York"
+        },
+        {
+            "id": 7,
+            "name": "Cost of flights during the Summer holiday season to Sydney"
         },
         {
             "id": 2,
@@ -2993,8 +3047,8 @@
             "name": "National Average Income (GNP/capita)"
         },
         {
-            "id": 7,
-            "name": "Summer flight ticket to Sydney"
+            "id": 8,
+            "name": "Population"
         }
     ],
     "flightAllowances": [
@@ -3027,48 +3081,6 @@
             "id": 9,
             "allowance": "None",
             "type": 2
-        }
-    ],
-    "languages": [
-        {
-            "id": 1,
-            "name": "English"
-        },
-        {
-            "id": 2,
-            "name": "Spanish"
-        },
-        {
-            "id": 3,
-            "name": "French"
-        },
-        {
-            "id": 4,
-            "name": "German"
-        },
-        {
-            "id": 5,
-            "name": "Italian"
-        },
-        {
-            "id": 6,
-            "name": "Portuguese"
-        },
-        {
-            "id": 7,
-            "name": "Chinese"
-        },
-        {
-            "id": 8,
-            "name": "Japanese"
-        },
-        {
-            "id": 9,
-            "name": "Arabic"
-        },
-        {
-            "id": 10,
-            "name": "Other"
         }
     ],
     "countries": [
@@ -4451,8 +4463,8 @@
             "name": "Music"
         },
         {
-            "id": 37,
-            "name": "Not applicable"
+            "id": null,
+            "name": null
         },
         {
             "id": 30,
@@ -4533,794 +4545,332 @@
             "category": "Housing"
         }
     ],
-    "nationalities": [
+    "worldLanguages": [
         {
-            "id": 198,
-            "name": ""
+            "id": 1,
+            "name": "Afrikanns\r"
+        },
+        {
+            "id": 2,
+            "name": "Albanian\r"
+        },
+        {
+            "id": 3,
+            "name": "Arabic\r"
         },
         {
             "id": 4,
-            "name": "Afghan"
+            "name": "Armenian\r"
         },
         {
             "id": 5,
-            "name": "Albanian"
+            "name": "Basque\r"
         },
         {
             "id": 6,
-            "name": "Algerian"
+            "name": "Bengali\r"
         },
         {
             "id": 7,
-            "name": "American"
-        },
-        {
-            "id": 8,
-            "name": "Andorran"
+            "name": "Bulgarian\r"
         },
         {
             "id": 9,
-            "name": "Angolan"
+            "name": "Cambodian\r"
+        },
+        {
+            "id": 8,
+            "name": "Catalan\r"
         },
         {
             "id": 10,
-            "name": "Antiguans"
+            "name": "Chinese (Mandarin)\r"
         },
         {
             "id": 11,
-            "name": "Argentinean"
+            "name": "Croation\r"
         },
         {
             "id": 12,
-            "name": "Armenian"
+            "name": "Czech\r"
         },
         {
             "id": 13,
-            "name": "Australian"
+            "name": "Danish\r"
         },
         {
             "id": 14,
-            "name": "Austrian"
+            "name": "Dutch\r"
         },
         {
             "id": 15,
-            "name": "Azerbaijani"
+            "name": "English\r"
         },
         {
             "id": 16,
-            "name": "Bahamian"
+            "name": "Estonian\r"
         },
         {
             "id": 17,
-            "name": "Bahraini"
+            "name": "Fiji\r"
         },
         {
             "id": 18,
-            "name": "Bangladeshi"
+            "name": "Finnish\r"
         },
         {
             "id": 19,
-            "name": "Barbadian"
+            "name": "French\r"
         },
         {
             "id": 20,
-            "name": "Barbudans"
+            "name": "Georgian\r"
         },
         {
             "id": 21,
-            "name": "Batswana"
+            "name": "German\r"
         },
         {
             "id": 22,
-            "name": "Belarusian"
+            "name": "Greek\r"
         },
         {
             "id": 23,
-            "name": "Belgian"
+            "name": "Gujarati\r"
         },
         {
             "id": 24,
-            "name": "Belizean"
+            "name": "Hebrew\r"
         },
         {
             "id": 25,
-            "name": "Beninese"
+            "name": "Hindi\r"
         },
         {
             "id": 26,
-            "name": "Bhutanese"
+            "name": "Hungarian\r"
         },
         {
             "id": 27,
-            "name": "Bolivian"
+            "name": "Icelandic\r"
         },
         {
             "id": 28,
-            "name": "Bosnian"
+            "name": "Indonesian\r"
         },
         {
             "id": 29,
-            "name": "Brazilian"
+            "name": "Irish\r"
         },
         {
             "id": 30,
-            "name": "British"
+            "name": "Italian\r"
         },
         {
             "id": 31,
-            "name": "Bruneian"
+            "name": "Japanese\r"
         },
         {
             "id": 32,
-            "name": "Bulgarian"
+            "name": "Javanese\r"
         },
         {
             "id": 33,
-            "name": "Burkinabe"
+            "name": "Korean\r"
         },
         {
             "id": 34,
-            "name": "Burmese"
+            "name": "Latin\r"
         },
         {
             "id": 35,
-            "name": "Burundian"
+            "name": "Latvian\r"
         },
         {
             "id": 36,
-            "name": "Cambodian"
+            "name": "Lithuanian\r"
         },
         {
             "id": 37,
-            "name": "Cameroonian"
+            "name": "Macedonian\r"
         },
         {
             "id": 38,
-            "name": "Canadian"
+            "name": "Malay\r"
         },
         {
             "id": 39,
-            "name": "Cape Verdean"
+            "name": "Malayalam\r"
         },
         {
             "id": 40,
-            "name": "Central African"
+            "name": "Maltese\r"
         },
         {
             "id": 41,
-            "name": "Chadian"
+            "name": "Maori\r"
         },
         {
             "id": 42,
-            "name": "Chilean"
+            "name": "Marathi\r"
         },
         {
             "id": 43,
-            "name": "Chinese"
+            "name": "Mongolian\r"
         },
         {
             "id": 44,
-            "name": "Colombian"
+            "name": "Nepali\r"
         },
         {
             "id": 45,
-            "name": "Comoran"
+            "name": "Norwegian\r"
         },
         {
             "id": 46,
-            "name": "Congolese"
+            "name": "Persian\r"
         },
         {
             "id": 47,
-            "name": "Costa Rican"
+            "name": "Polish\r"
         },
         {
             "id": 48,
-            "name": "Croatian"
+            "name": "Portuguese\r"
         },
         {
             "id": 49,
-            "name": "Cuban"
+            "name": "Punjabi\r"
         },
         {
             "id": 50,
-            "name": "Cypriot"
+            "name": "Quechua\r"
         },
         {
             "id": 51,
-            "name": "Czech"
+            "name": "Romanian\r"
         },
         {
             "id": 52,
-            "name": "Danish"
+            "name": "Russian\r"
         },
         {
             "id": 53,
-            "name": "Djibouti"
+            "name": "Samoan\r"
         },
         {
             "id": 54,
-            "name": "Dominican"
+            "name": "Serbian\r"
         },
         {
             "id": 55,
-            "name": "Dutch"
+            "name": "Slovak\r"
         },
         {
             "id": 56,
-            "name": "East Timorese"
+            "name": "Slovenian\r"
         },
         {
             "id": 57,
-            "name": "Ecuadorean"
+            "name": "Spanish\r"
         },
         {
             "id": 58,
-            "name": "Egyptian"
+            "name": "Swahili\r"
         },
         {
             "id": 59,
-            "name": "Emirian"
-        },
-        {
-            "id": 199,
-            "name": "English"
+            "name": "Swedish \r"
         },
         {
             "id": 60,
-            "name": "Equatorial Guinean"
+            "name": "Tamil\r"
         },
         {
             "id": 61,
-            "name": "Eritrean"
+            "name": "Tatar\r"
         },
         {
             "id": 62,
-            "name": "Estonian"
+            "name": "Telugu\r"
         },
         {
             "id": 63,
-            "name": "Ethiopian"
+            "name": "Thai\r"
         },
         {
             "id": 64,
-            "name": "Fijian"
+            "name": "Tibetan\r"
         },
         {
             "id": 65,
-            "name": "Filipino"
+            "name": "Tonga\r"
         },
         {
             "id": 66,
-            "name": "Finnish"
+            "name": "Turkish\r"
         },
         {
             "id": 67,
-            "name": "French"
+            "name": "Ukranian\r"
         },
         {
             "id": 68,
-            "name": "Gabonese"
+            "name": "Urdu\r"
         },
         {
             "id": 69,
-            "name": "Gambian"
+            "name": "Uzbek\r"
         },
         {
             "id": 70,
-            "name": "Georgian"
+            "name": "Vietnamese\r"
         },
         {
             "id": 71,
-            "name": "German"
+            "name": "Welsh\r"
         },
         {
             "id": 72,
-            "name": "Ghanaian"
+            "name": "Xhosa\r"
+        }
+    ],
+    "nationalities": [
+        {
+            "id": 205,
+            "name": "American"
         },
         {
-            "id": 73,
-            "name": "Greek"
+            "id": 207,
+            "name": "Australian"
         },
         {
-            "id": 197,
-            "name": "Greenlandic"
+            "id": 209,
+            "name": "British"
         },
         {
-            "id": 74,
-            "name": "Grenadian"
+            "id": 206,
+            "name": "Canadian"
         },
         {
-            "id": 75,
-            "name": "Guatemalan"
+            "id": 211,
+            "name": "Continental European (EU)"
         },
         {
-            "id": 76,
-            "name": "Guinea-Bissauan"
-        },
-        {
-            "id": 77,
-            "name": "Guinean"
-        },
-        {
-            "id": 78,
-            "name": "Guyanese"
-        },
-        {
-            "id": 79,
-            "name": "Haitian"
-        },
-        {
-            "id": 80,
-            "name": "Herzegovinian"
-        },
-        {
-            "id": 81,
-            "name": "Honduran"
-        },
-        {
-            "id": 82,
-            "name": "Hungarian"
-        },
-        {
-            "id": 83,
-            "name": "I-Kiribati"
-        },
-        {
-            "id": 84,
-            "name": "Icelander"
-        },
-        {
-            "id": 85,
-            "name": "Indian"
-        },
-        {
-            "id": 86,
-            "name": "Indonesian"
-        },
-        {
-            "id": 87,
-            "name": "Iranian"
-        },
-        {
-            "id": 88,
-            "name": "Iraqi"
-        },
-        {
-            "id": 89,
+            "id": 210,
             "name": "Irish"
         },
         {
-            "id": 90,
-            "name": "Israeli"
+            "id": 213,
+            "name": "Local"
         },
         {
-            "id": 91,
-            "name": "Italian"
-        },
-        {
-            "id": 92,
-            "name": "Ivorian"
-        },
-        {
-            "id": 93,
-            "name": "Jamaican"
-        },
-        {
-            "id": 94,
-            "name": "Japanese"
-        },
-        {
-            "id": 95,
-            "name": "Jordanian"
-        },
-        {
-            "id": 96,
-            "name": "Kazakhstani"
-        },
-        {
-            "id": 97,
-            "name": "Kenyan"
-        },
-        {
-            "id": 98,
-            "name": "Kittian and Nevisian"
-        },
-        {
-            "id": 99,
-            "name": "Kuwaiti"
-        },
-        {
-            "id": 100,
-            "name": "Kyrgyz"
-        },
-        {
-            "id": 101,
-            "name": "Laotian"
-        },
-        {
-            "id": 102,
-            "name": "Latvian"
-        },
-        {
-            "id": 103,
-            "name": "Lebanese"
-        },
-        {
-            "id": 104,
-            "name": "Liberian"
-        },
-        {
-            "id": 105,
-            "name": "Libyan"
-        },
-        {
-            "id": 106,
-            "name": "Liechtensteiner"
-        },
-        {
-            "id": 107,
-            "name": "Lithuanian"
-        },
-        {
-            "id": 108,
-            "name": "Luxembourger"
-        },
-        {
-            "id": 200,
-            "name": "Macedonian"
-        },
-        {
-            "id": 109,
-            "name": "Macedonian"
-        },
-        {
-            "id": 110,
-            "name": "Malagasy"
-        },
-        {
-            "id": 111,
-            "name": "Malawian"
-        },
-        {
-            "id": 112,
-            "name": "Malaysian"
-        },
-        {
-            "id": 113,
-            "name": "Maldivan"
-        },
-        {
-            "id": 114,
-            "name": "Malian"
-        },
-        {
-            "id": 115,
-            "name": "Maltese"
-        },
-        {
-            "id": 116,
-            "name": "Marshallese"
-        },
-        {
-            "id": 117,
-            "name": "Mauritanian"
-        },
-        {
-            "id": 118,
-            "name": "Mauritian"
-        },
-        {
-            "id": 119,
-            "name": "Mexican"
-        },
-        {
-            "id": 120,
-            "name": "Micronesian"
-        },
-        {
-            "id": 121,
-            "name": "Moldovan"
-        },
-        {
-            "id": 122,
-            "name": "Monacan"
-        },
-        {
-            "id": 123,
-            "name": "Mongolian"
-        },
-        {
-            "id": 124,
-            "name": "Moroccan"
-        },
-        {
-            "id": 125,
-            "name": "Mosotho"
-        },
-        {
-            "id": 126,
-            "name": "Motswana"
-        },
-        {
-            "id": 127,
-            "name": "Mozambican"
-        },
-        {
-            "id": 128,
-            "name": "Namibian"
-        },
-        {
-            "id": 129,
-            "name": "Nauruan"
-        },
-        {
-            "id": 130,
-            "name": "Nepalese"
-        },
-        {
-            "id": 131,
+            "id": 208,
             "name": "New Zealander"
         },
         {
-            "id": 132,
-            "name": "Nicaraguan"
-        },
-        {
-            "id": 133,
-            "name": "Nigerian"
-        },
-        {
-            "id": 134,
-            "name": "Nigerien"
-        },
-        {
-            "id": 135,
-            "name": "North Korean"
-        },
-        {
-            "id": 136,
-            "name": "Northern Irish"
-        },
-        {
-            "id": 137,
-            "name": "Norwegian"
-        },
-        {
-            "id": 138,
-            "name": "Omani"
-        },
-        {
-            "id": 139,
-            "name": "Pakistani"
-        },
-        {
-            "id": 140,
-            "name": "Palauan"
-        },
-        {
-            "id": 141,
-            "name": "Panamanian"
-        },
-        {
-            "id": 142,
-            "name": "Papua New Guinean"
-        },
-        {
-            "id": 143,
-            "name": "Paraguayan"
-        },
-        {
-            "id": 144,
-            "name": "Peruvian"
-        },
-        {
-            "id": 145,
-            "name": "Polish"
-        },
-        {
-            "id": 146,
-            "name": "Portuguese"
-        },
-        {
-            "id": 147,
-            "name": "Qatari"
-        },
-        {
-            "id": 148,
-            "name": "Romanian"
-        },
-        {
-            "id": 149,
-            "name": "Russian"
-        },
-        {
-            "id": 150,
-            "name": "Rwandan"
-        },
-        {
-            "id": 151,
-            "name": "Saint Lucian"
-        },
-        {
-            "id": 152,
-            "name": "Salvadoran"
-        },
-        {
-            "id": 153,
-            "name": "Samoan"
-        },
-        {
-            "id": 154,
-            "name": "San Marinese"
-        },
-        {
-            "id": 155,
-            "name": "Sao Tomean"
-        },
-        {
-            "id": 156,
-            "name": "Saudi"
-        },
-        {
-            "id": 157,
-            "name": "Scottish"
-        },
-        {
-            "id": 158,
-            "name": "Senegalese"
-        },
-        {
-            "id": 159,
-            "name": "Serbian"
-        },
-        {
-            "id": 160,
-            "name": "Seychellois"
-        },
-        {
-            "id": 161,
-            "name": "Sierra Leonean"
-        },
-        {
-            "id": 162,
-            "name": "Singaporean"
-        },
-        {
-            "id": 163,
-            "name": "Slovakian"
-        },
-        {
-            "id": 164,
-            "name": "Slovenian"
-        },
-        {
-            "id": 165,
-            "name": "Solomon Islander"
-        },
-        {
-            "id": 166,
-            "name": "Somali"
-        },
-        {
-            "id": 167,
-            "name": "South African"
-        },
-        {
-            "id": 168,
-            "name": "South Korean"
-        },
-        {
-            "id": 169,
-            "name": "Spanish"
-        },
-        {
-            "id": 170,
-            "name": "Sri Lankan"
-        },
-        {
-            "id": 171,
-            "name": "Sudanese"
-        },
-        {
-            "id": 172,
-            "name": "Surinamer"
-        },
-        {
-            "id": 173,
-            "name": "Swazi"
-        },
-        {
-            "id": 174,
-            "name": "Swedish"
-        },
-        {
-            "id": 175,
-            "name": "Swiss"
-        },
-        {
-            "id": 176,
-            "name": "Syrian"
-        },
-        {
-            "id": 177,
-            "name": "Taiwanese"
-        },
-        {
-            "id": 178,
-            "name": "Tajik"
-        },
-        {
-            "id": 179,
-            "name": "Tanzanian"
-        },
-        {
-            "id": 180,
-            "name": "Thai"
-        },
-        {
-            "id": 181,
-            "name": "Togolese"
-        },
-        {
-            "id": 182,
-            "name": "Tongan"
-        },
-        {
-            "id": 183,
-            "name": "Trinidadian or Tobagonian"
-        },
-        {
-            "id": 184,
-            "name": "Tunisian"
-        },
-        {
-            "id": 185,
-            "name": "Turkish"
-        },
-        {
-            "id": 186,
-            "name": "Tuvaluan"
-        },
-        {
-            "id": 187,
-            "name": "Ugandan"
-        },
-        {
-            "id": 188,
-            "name": "Ukrainian"
-        },
-        {
-            "id": 189,
-            "name": "Uruguayan"
-        },
-        {
-            "id": 190,
-            "name": "Uzbekistani"
-        },
-        {
-            "id": 191,
-            "name": "Venezuelan"
-        },
-        {
-            "id": 192,
-            "name": "Vietnamese"
-        },
-        {
-            "id": 193,
-            "name": "Welsh"
-        },
-        {
-            "id": 194,
-            "name": "Yemenite"
-        },
-        {
-            "id": 195,
-            "name": "Zambian"
-        },
-        {
-            "id": 196,
-            "name": "Zimbabwean"
+            "id": 212,
+            "name": "Other"
         }
     ],
     "currencies": [
@@ -5341,7 +4891,7 @@
         },
         {
             "code": "EUR",
-            "currency": "EURO",
+            "currency": "Euro",
             "id": 4
         },
         {
@@ -5398,20 +4948,20 @@
             "category": "Ability to save"
         },
         {
-            "id": 1,
-            "category": "Accreditation"
-        },
-        {
             "id": 3,
             "category": "Facilities"
         },
         {
             "id": 2,
-            "category": "Memberships"
+            "category": "Leadership"
         },
         {
             "id": 4,
-            "category": "Professional development"
+            "category": "Lifestyle"
+        },
+        {
+            "id": 1,
+            "category": "Student Behaviour"
         }
     ],
     "relocationAllowances": [
@@ -5464,7 +5014,7 @@
         },
         {
             "id": 6,
-            "attraction": "Airport"
+            "attraction": "international airport"
         },
         {
             "id": 7,
@@ -5472,23 +5022,23 @@
         },
         {
             "id": 8,
-            "attraction": "shopping centre"
+            "attraction": "Shopping centre"
         },
         {
             "id": 9,
-            "attraction": "cinema"
+            "attraction": "Cinema"
         },
         {
             "id": 10,
-            "attraction": "theatre"
+            "attraction": "Theatre"
         },
         {
             "id": 11,
-            "attraction": "museums"
+            "attraction": "Museums"
         },
         {
             "id": 12,
-            "attraction": "art galleries"
+            "attraction": "Art galleries"
         }
     ],
     "schoolTypes": [
@@ -5637,9 +5187,9 @@
             "name": "Other Manager"
         },
         {
-            "id": 13,
-            "type": 1,
-            "name": "Other Position"
+            "id": null,
+            "type": null,
+            "name": null
         },
         {
             "id": 20,

@@ -58,7 +58,6 @@ thSchoolDashboardAppModule.factory('initService', function ($http, $q, $qDecorat
 
     //additional hard-coded list data
     o.lists.months = [{ id: 1, name: 'January'}, { id: 2, name: 'February'}, { id: 3, name: 'March'}, { id: 4, name: 'April'}, { id: 5, name: 'May'}, { id: 6, name: 'June'}, { id: 7, name: 'July'}, { id: 8, name: 'August'}, { id: 9, name: 'September'}, { id: 10, name: 'October'}, { id: 11, name: 'November'}, { id: 12, name: 'December'}];
-    o.lists.teacherNationalities = [{"id":1,"name":"American"},{"id":2,"name":"Australian"},{"id":3,"name":"British"},{"id":4,"name":"Canadian"},{"id":5,"name":"Continental European"},{"id":6,"name":"Irish"},{"id":7,"name":"Local"},{"id":8,"name":"New Zealanders"},{"id":9,"name":"Other"},{"id":10,"name":"South African"}];
     o.lists.internationalCurrencySymbols = { EUR: '\u20AC', USD: '$', AUD: '$', GBP: '\u00A3', JPY: '\u00A5' };
     return $q;
   };
@@ -79,10 +78,10 @@ thSchoolDashboardAppModule.factory('initService', function ($http, $q, $qDecorat
     o.genderRations = _.sortBy(o.genderRations, 'ratio');
     o.languages = _.sortBy(o.languages, 'name');
     o.months = _.sortBy(o.months, 'val');
+    o.nationalities = _.sortBy(o.nationalities, 'name');
     o.pensionSchemes = _.sortBy(o.pensionSchemes, 'name');
     o.religiousAffiliations = _.sortBy(o.religiousAffiliations, 'affiliation');
     o.relocationAllowances = _.sortBy(o.relocationAllowances, 'allowance');
-    o.teacherNationalities = _.sortBy(o.teacherNationalities, '(blank)');
     return o;
   };
   //
@@ -193,7 +192,7 @@ thSchoolDashboardAppModule.factory('initService', function ($http, $q, $qDecorat
     });
 
     //special tweaks 2 (post-decoration)
-    var templateData = { school: school, city: city };
+    var templateData = { school: school, city: city, uploadToken: o.schoolData.uploadToken };
     _.each(o.hierarchy.sectionsIndex, function(section) { //all sections in hierarchy
       saveTemplates(section);
       applyTemplates(section, templateData);
@@ -251,7 +250,7 @@ thSchoolDashboardAppModule.factory('initService', function ($http, $q, $qDecorat
   var saveTemplates = function(o) {
     saveTemplate(o, 'title');
     saveTemplate(o, 'tip');
-    if (o.type === 'text') saveTemplate(o, 'val');
+    if (o.type === 'text' || o.type === 'html') saveTemplate(o, 'val');
   };
 
   var applyTemplates = function(o, templateData) {

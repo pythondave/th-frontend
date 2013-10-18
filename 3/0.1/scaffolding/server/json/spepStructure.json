@@ -280,7 +280,7 @@
               "type": "fromFew",
               "title": "Main teacher nationalities",
               "icon": "globe",
-              "listName": "teacherNationalities",
+              "listName": "nationalities",
               "listColumn": "name"
             },
             {
@@ -307,7 +307,7 @@
               "type": "fromFew",
               "title": "Teaching languages",
               "icon": "comments-alt",
-              "listName": "languages",
+              "listName": "teachingLanguages",
               "listColumn": "name"
             },
             {
@@ -333,11 +333,6 @@
               "icon": "facetime-video"
             },
             {
-              "type": "text",
-              "style": "color: red;",
-              "val": "WIP - File upload (with OV)"
-            },
-            {
               "weight": 1,
               "wait": 1,
               "systemName": "facilities",
@@ -347,14 +342,17 @@
               "listName": "facilities",
               "listColumn": "facility"
             },
-            {
+            { 
               "__NOTE": "*** WIP change fileUpload weights back to 1 (there are 3 fileUpload fields)",
               "weight": 0,
               "wait": 1,
-              "systemName": "images",
+              "systemName": "profilePicture",
               "type": "fileUpload",
               "title": "{{school.nickname}}'s profile photo",
-              "icon": "camera"
+              "icon": "camera",
+              "fileTypes": "image/jpeg,image/png,image/gif",
+              "templates": { "uploadUrl": "/school/media/upload/{{school.id}}/13/{{uploadToken}}", "deleteUrl": "/school/media/delete/{{uploadToken}}/" },
+              "maxFiles": 1
             },
             {
               "weight": 0,
@@ -362,7 +360,10 @@
               "systemName": "images",
               "type": "fileUpload",
               "title": "Additional photos",
-              "icon": "picture"
+              "icon": "picture",
+              "fileTypes":"image/jpeg,image/png,image/gif",
+              "templates":{ "uploadUrl": "/school/media/upload/{{school.id}}/1/{{uploadToken}}", "deleteUrl": "/school/media/delete/{{uploadToken}}/" },
+              "maxFiles": 2
             },
             {
               "weight": 1,
@@ -385,10 +386,13 @@
             {
               "weight": 0,
               "wait": 1,
-              "systemName": "images",
+              "systemName": "logo",
               "type": "fileUpload",
               "title": "{{school.nickname}}'s logo",
-              "icon": "apple"
+              "icon": "apple",
+              "fileTypes":"image/jpeg,image/png,image/gif",
+              "templates": { "uploadUrl": "/school/media/upload/{{school.id}}/12/{{uploadToken}}", "deleteUrl": "/school/media/delete/{{uploadToken}}/" },
+              "maxFiles": 1
             }
           ]
         },
@@ -438,7 +442,7 @@
               "type": "fromFew",
               "title": "Teacher nationalities accepted",
               "icon": "globe",
-              "listName": "teacherNationalities",
+              "listName": "nationalities",
               "listColumn": "name"
             },
             {
@@ -459,7 +463,7 @@
             },
             {
               "systemName": "website",
-              "type": "urlEdit",
+              "type": "textEdit",
               "title": "Website",
               "icon": "link",
               "showUrlTitle": false
@@ -566,11 +570,11 @@
               "icon": "money",
               "description": "How much of their salary could a single teacher comfortably save?",
               "valueTips": [
-                "Ability to save more than US$20,000 per year",
-                "Ability to save between US$15,000 and $20,000 per year",
-                "Ability to save between US$10,000 and $15,000 per year",
+                "Ability to save less than US$5,000 per year",
                 "Ability to save between US$5,000 and $10,000 per year",
-                "Ability to save less than US$5,000 per year"
+                "Ability to save between US$10,000 and $15,000 per year",
+                "Ability to save between US$15,000 and $20,000 per year",
+                "Ability to save more than US$20,000 per year"
               ],
               "max": 5
             }
@@ -666,16 +670,6 @@
             {
               "weight": 1,
               "wait": 2000,
-              "systemType": "schoolBenefit",
-              "benefitId": 105,
-              "type": "numberEdit",
-              "subType": "money",
-              "title": "National average income per person per year (in {{school.currencyName}})",
-              "icon": "money"
-            },
-            {
-              "weight": 1,
-              "wait": 2000,
               "systemName": "contractLength",
               "type": "slider",
               "title": "Contract Period",
@@ -764,7 +758,8 @@
               "__NOTE": "*** WIP a proper systemName is needed here",
               "weight": 1,
               "wait": 2000,
-              "systemName": "wipAnnualProfessionalDevelopmentBudgetPerTeacher",
+              "benefitId": 9,
+              "systemType": "schoolBenefit",
               "type": "slider",
               "subType": "money",
               "items": [ { "val": 1, "description": "0 - 499"}, { "val": 2, "description": "500 - 999"}, { "val": 3, "description": "1000+"} ],
@@ -1003,8 +998,8 @@
             {
               "weight": 1,
               "wait": 2000,
-              "systemType": "city",
-              "systemName": "population",
+              "systemType": "cityLivingCost",
+              "livingCostId": 8,
               "type": "numberEdit",
               "title": "Population",
               "icon": "group"
@@ -1018,16 +1013,15 @@
               "title": "Language",
               "icon": "comments",
               "limit": 1,
-              "listName": "languages",
+              "listName": "worldLanguages",
               "listColumn": "name"
             },
             {
               "weight": 1,
               "wait": 1,
-              "systemType": "city",
               "systemName": "attractions",
               "type": "fromFew",
-              "title": "Attractions and activities within a two-hour drive of {{city.name}}",
+              "title": "Attractions and activities within a two hour drive of {{school.nickname}}",
               "icon": "camera",
               "listName": "attractions",
               "listColumn": "attraction"
@@ -1043,11 +1037,21 @@
               "title": "Cost of living",
               "icon": "money"
             },
-            {
+             {
               "weight": 1,
               "wait": 2000,
               "systemType": "cityLivingCost",
               "livingCostId": 1,
+              "type": "numberEdit",
+              "subType": "money",
+              "title": "National average income per person per year (in {{city.internationalCurrencyName}})",
+              "icon": "money"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemType": "cityLivingCost",
+              "livingCostId": 2,
               "type": "numberEdit",
               "subType": "money",
               "title": "Typical monthly rent for a two-bedroom flat (in {{city.internationalCurrencyName}})",
@@ -1057,7 +1061,7 @@
               "weight": 1,
               "wait": 2000,
               "systemType": "cityLivingCost",
-              "livingCostId": 2,
+              "livingCostId": 3,
               "type": "numberEdit",
               "subType": "money",
               "title": "Average cost of a litre of petrol / gas (in {{city.internationalCurrencyName}})",
@@ -1067,7 +1071,7 @@
               "weight": 1,
               "wait": 2000,
               "systemType": "cityLivingCost",
-              "livingCostId": 3,
+              "livingCostId": 10,
               "type": "numberEdit",
               "subType": "money",
               "title": "Typical cost of a coffee in a cafe (in {{city.internationalCurrencyName}})",
@@ -1176,7 +1180,7 @@
               "weight": 1,
               "wait": 3000,
               "systemType": "city",
-              "systemName": "touristAttractions",
+              "systemName": "keyAttractions",
               "type": "textEdit",
               "title": "Tourist attractions",
               "icon": "camera",
@@ -1195,9 +1199,24 @@
               "icon": "cogs"
             },
             {
-              "type": "text",
-              "val": "WIP (with AR/AT)",
-              "style": "color: red;"
+              "type": "html",
+              "val": "<div style='width: 70%'><br/>Thanks for completing {{school.name}}'s profile page. We hope it will make {{school.nickname}} stand out and help you find many inspiring teachers.<br/><br/>There are no up-front fees - you would only pay if you place one of our teachers.<br/><br/></div>"
+            },
+            {
+              "weight": 0,
+              "wait": 1,
+              "systemName": "wipWouldYouLikeMoreDetailsOfOurRecruitmentServices",
+              "type": "fromFew",
+              "title": "Would you like more details of our recruitment services?",
+              "icon": "info",
+              "limit": 1,
+              "listName": "yesNo",
+              "listColumn": "name",
+              "hideHr": true
+            },
+            {
+              "type": "html",
+              "val": "<div style='width: 70%'><br/>Please share with other schools that would benefit from a free profile page on Teacherhorizons.<br/><br/>Many thanks!<br/><br/><a href='{{school.alias}}' target='_blank'><button style='margin: 0 0 0 45%' class='btn btn-info btn-large'><span style='margin: 0 3px 0 -3px;'><i class='icon-eye-open' style='font-size: 18px;'></i></span>View my profile</button></a></div>"
             }
           ]
         }

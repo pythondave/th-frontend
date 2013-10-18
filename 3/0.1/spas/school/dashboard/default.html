@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css">
 
   <!--local stylesheets-->
+    <!--remove http://beta.teacherhorizons.com from the links below in production *** TODO - remove the need for this -->
+  <link rel="stylesheet" href="http://beta.teacherhorizons.com/static/css/jquery.fileupload-ui.css">
   <link rel="stylesheet" href="../../../style/custom-bootstrap.css">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -71,6 +73,15 @@
       <script src="controllers.js"></script>
     <!--directives-->
       <script src="../../../shared/directives.js"></script>
+
+    <!--uploader - *** TODO - consider refactoring so less reliant on jQuery (keep an eye on angular upload solutions, with a view to possibly switching to one when they become mature enough with enough browser support) -->
+      <!--remove http://beta.teacherhorizons.com from the links below in production *** TODO - remove the need for this -->
+    <script src="http://beta.teacherhorizons.com/static/js/jquery.iframe-transport.js"></script>
+    <script src="http://beta.teacherhorizons.com/static/tpp-editor/lib/jquery/jquery-ui.js"></script>
+    <script src="http://beta.teacherhorizons.com/static/js/jquery.fileupload.js"></script>
+    <script src="http://beta.teacherhorizons.com/static/js/jquery.fileupload-process.js"></script>
+    <script src="http://beta.teacherhorizons.com/static/js/jquery.fileupload-validate.js"></script>
+    <script src="http://beta.teacherhorizons.com/static/js/jquery.fileupload-ui.js"></script>
 
   <!--prototype only scripts (comment out/remove in production-->
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular-mocks.js"></script>

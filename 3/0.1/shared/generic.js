@@ -227,7 +227,7 @@ thGenericModule.factory('listFunctionsService', function () {
 
   o.toggleLimitedListItem = function(listItems, item, options) {
     //returns true if the listItems were changed
-    options = _.defaults({}, options, { limit: 10, markerAttributeName: 'isSelected' });
+    options = _.defaults({}, options, { limit: 99, markerAttributeName: 'isSelected' });
     var numSelected = _.filter(listItems, options.markerAttributeName).length;
     if (item.isSelected) { item.isSelected = false; return true; } //deselecting is always okay
     if (options.limit === 1) { _.setAll(listItems, options.markerAttributeName, false); numSelected = 0; } //reset for limit 1

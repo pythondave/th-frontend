@@ -19,6 +19,7 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
     header: { weight: 0 },
     list: { weight: 0 },
     text: { weight: 0 },
+    html: { weight: 0 },
     dateEdit: { wait: 1 },
     emailEdit: { wait: 2000 },
     fileUpload: { wait: 1 },
@@ -159,7 +160,7 @@ thContentItemsModule.directive('contentItem', function ($compile) {
   var devTemp = ''; //'<div>model.val: {{model.val}}; model.absoluteWeight: {{model.absoluteWeight}}</div>'; //use to show some value during development
   var contentItemHeader = '<div content-item-header model="model"></div>';
   var getStandardContentItem = function(contentItemType) {
-    return '<div class="content-item content-item-{{model.systemName}}">' + devTemp + contentItemHeader + '<div ' + contentItemType + ' model="model"><span style="color: red;">WIP (' + contentItemType + ')</span></div><hr/></div>';
+    return '<div class="content-item content-item-{{model.systemName}}">' + devTemp + contentItemHeader + '<div ' + contentItemType + ' model="model"><span style="color: red;">WIP (' + contentItemType + ')</span></div><span ng-hide="model.hideHr"><hr/></span></div>';
   };
 
   var templates = {
@@ -184,7 +185,7 @@ thContentItemsModule.directive('contentItem', function ($compile) {
   var linker = function(scope, element, attrs) {
     var model = scope.model;
     if (!model) return;
-    var html = model.html || templates[model.type] || '<div>' + contentItemHeader + '<div style="color: red">Content item type \'{{model.type}}\' not found<hr/></div></div>';
+    var html = (model.type === 'html' && model.val) || model.html || templates[model.type] || '<div>' + contentItemHeader + '<div style="color: red">Content item type \'{{model.type}}\' not found<hr/></div></div>';
     element.html(html).show();
     $compile(element.contents())(scope);
   };
