@@ -342,22 +342,14 @@
     },
     {
       "group": "Cities",
-      "url": "/school/service/add-city-link",
-      "description": "Adds a new link to a city",
+      "url": "/school/service/process-city-link",
+      "description": "Adds a new link to a city OR makes a change to a city's link",
       "sprintAdded": 3, "sprintLastUpdated": 3,
       "queries": [
         {
           "dataToPost": { "token": "abc", "cityId": 123, "url": "www.london.com", "name": "London hotels", "category": 1 },
           "description": "Adds url www.london.com to the links of cityId 123"
-        }
-      ]
-    },
-    {
-      "group": "Cities",
-      "url": "/school/service/process-city-link",
-      "description": "Make a change to a city's link",
-      "sprintAdded": 3, "sprintLastUpdated": 3,
-      "queries": [
+        },
         {
           "dataToPost": { "token": "abc", "cityId": 123, "linkId": 6, "name": "London hotels and more" },
           "description": "Changes the name of a link to 'London hotels and more'"

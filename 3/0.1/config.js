@@ -58,7 +58,6 @@ thConfigModule.constant('configService', function() {
       processCity: '/school/service/process-city',
       processCityLivingCost: '/school/service/process-city-living-cost',
       processCityLink: '/school/service/process-city-link',
-      addCityLink: '/school/service/add-city-link',
 
     //route error handling
       invalidSchoolDashboardUrlRedirect: 'error.html'

@@ -64,7 +64,7 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
     var ci = this;
     var dataToPost = this.getDataToPost();
     serverService.sendToServer(this.systemType, dataToPost).then(function(response) {
-      if (ci.type === 'urlEdit' && !ci.fixedData.linkId) { ci.fixedData.linkId = response.data.id; } //*** TODO make 'linkId' dynamic; TODO if the server takes longer than 2 seconds to add, we could end up adding twice
+      if (ci.type === 'urlEdit' && !ci.fixedData.linkId) { ci.fixedData.linkId = response.data.linkId; } //*** TODO if the server takes longer than 2 seconds to add, we could end up adding twice
       if (ci.isDirty) return; //re-dirtied since process started, so can't finish off yet
       if (ci.onChangeCallback) ci.onChangeCallback();
       ci.isBeingProcessed = false;

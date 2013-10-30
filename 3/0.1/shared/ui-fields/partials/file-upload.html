@@ -1,9 +1,9 @@
 <div class="files-wrapper" ng-mouseenter="mouseenter()" ng-mouseleave="mouseleave()">
   <div ng-class="model.getClass()" class="list-wrapper">
-    <div ng-show="model.val">
+    <div ng-show="model.val.length>0">
       <ul>
         <li style="margin: 10px 0" ng-repeat="file in model.val">
-          <img title="{{file.name}}" ng-src="{{file.resource}}" />
+          <img title="{{file.reference}}" ng-src="{{file.resource}}" />
           <button style="margin: 0 0 0 20px;" class="btn btn-delete-file" ng-click="deleteFile(file, $index)">Delete</button>
         </li>
       </ul>

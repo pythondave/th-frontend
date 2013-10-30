@@ -455,7 +455,7 @@ thSchoolDashboardAppModule.factory('serverService', function ($rootScope, $timeo
 
     var url = urls[systemType];
 
-    if (systemType === 'cityLink' && !dataToPost.linkId) url = configService.requests.urls.addCityLink;
+    if (systemType === 'cityLink' && !dataToPost.linkId) url = configService.requests.urls.processCityLink;
 
     var successCallback = function(response) {
       o.sentToServer.push(url + '?' + $.param(dataToPost));

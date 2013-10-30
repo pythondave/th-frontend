@@ -448,8 +448,9 @@ thMockServerModule.run(function($httpBackend, $resource, $q, $timeout, $http,
     var params = deserializeParams(data);
     return [200, json['city' + params.cityId]];
   };
-  var addCityLinkResponse = function(method, url, data, headers) {
-    var json = { "id": _.random(10, 1000) };
+  var processCityLinkResponse = function(method, url, data, headers) {
+    var params = deserializeParams(data);
+    var json = params.linkId === '' ? { "linkId": _.random(10, 1000) } : 'processed';
     return [200, json];
   };
 
@@ -490,8 +491,7 @@ thMockServerModule.run(function($httpBackend, $resource, $q, $timeout, $http,
     $httpBackend.whenPOST('/school/service/city').respond(cityResponse);
     $httpBackend.whenPOST('/school/service/process-city').respond(200, 'processed');
     $httpBackend.whenPOST('/school/service/process-city-living-cost').respond(200, 'processed');
-    $httpBackend.whenPOST('/school/service/add-city-link').respond(addCityLinkResponse);
-    $httpBackend.whenPOST('/school/service/process-city-link').respond(200, 'processed');
+    $httpBackend.whenPOST('/school/service/process-city-link').respond(processCityLinkResponse);
 
   //dummy
     $httpBackend.whenPOST('dummy').respond(200, 'processed');
