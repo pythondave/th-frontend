@@ -124,7 +124,7 @@ thSchoolDashboardAppModule.factory('initService', function ($http, $q, $qDecorat
     school.nickname = derivedSchoolNickname();
     city.countryId = _.find(o.lists.cities, { id: city.id }).country;
     city.country = _.find(o.lists.countries, { id: city.countryId });
-    city.internationalCurrencyName = _.find(o.lists.currencies, { id: city.internationalCurrency || 3 }).code;
+    city.internationalCurrencyName = _.find(o.lists.currencies, { id: city.country.currency || 3 }).code;
     city.internationalCurrencySymbol = internationalCurrencySymbols[city.internationalCurrencyName];
 
     //transform some data for easier access

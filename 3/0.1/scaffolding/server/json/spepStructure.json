@@ -462,6 +462,7 @@
               "icon": "envelope"
             },
             {
+              "weight": 1,
               "systemName": "website",
               "type": "textEdit",
               "title": "Website",
