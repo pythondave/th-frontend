@@ -331,8 +331,9 @@ thUiFieldsModule.directive('textEdit', function(configService, $timeout) {
     scope: { model: '=' },
     link: function(scope, element, attr, ctrl) {
       var input1 = element[0].children[0], input2 = element[0].children[1];
+      var editIconTipFunction = scope.model.editIconTipFunction || function(val) { return (val ? 'Click to edit text' : 'Click to add text'); };
       scope.$watch('model.val', function(newVal, oldVal) {
-        scope.model.editIconTip = (newVal ? 'Click to edit text' : 'Click to add text');
+        scope.model.editIconTip = editIconTipFunction(newVal);
         scope.model.isValid = true;
         if (newVal !== oldVal) scope.model.update();
       });
@@ -365,6 +366,8 @@ thUiFieldsModule.directive('urlEdit', function(configService, $timeout) {
 
       scope.model.showEditIcon = true;
       scope.model.isNotValidTip = 'This doesn\'t appear to be a valid URL. Please change it so it can be saved.';
+      scope.model.urlTitle.placeholder = 'Website name';
+      scope.model.urlTitle.editIconTipFunction = function(val) { return (val ? 'Click to edit website name' : 'Click to add website name'); };
 
       scope.model.urlTitle.update = function() {
         scope.model.update();
