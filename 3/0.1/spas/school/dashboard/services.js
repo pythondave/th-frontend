@@ -316,7 +316,7 @@ thSchoolDashboardAppModule.factory('initService', function ($http, $q, $qDecorat
   o.init = function(schoolId) {
     //returns a (promise of a) presentation model (essentially by combining models with presentation structures)
     o.schoolId = schoolId;
-    var ms = (configService.mode < 3 ? 500 : 0);
+    var ms = (configService.mode < 3 ? 3000 : 0);
     return $q.delay(ms).then(getAndSetServerData).then(combineModelsAndPresentationStructures, handleError);
   };
 
