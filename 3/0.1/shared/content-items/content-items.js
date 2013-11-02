@@ -32,7 +32,8 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
     slider: { wait: 2000 },
     textEdit: { wait: 3000 }, //longer because has no validation and can be more data
     timeEdit: { wait: 2000 },
-    urlEdit: { wait: 2000 }
+    urlEdit: { wait: 2000 },
+    videoUrlEdit: { wait: 2000 }
   };
 
   o.ContentItem = function (initialVals) {
@@ -77,7 +78,7 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
   o.ContentItem.prototype.getIsValid = function(val) {
     if (val === '' || val === undefined) return true;
     if (this.type === 'dateEdit') { return true; } //*** WIP
-    if (this.type === 'emailEdit') return _.isProbablyValidEmail(val);
+    if (this.type === 'emailEdit') return _.isProbablyValidEmailFormat(val);
     if (this.type === 'fileUpload') { return true; } //*** WIP
     if (this.type === 'fromFew') { return true; } //*** WIP
     if (this.type === 'fromMany') { return true; } //*** WIP
@@ -93,7 +94,9 @@ thContentItemsModule.factory('contentItemService', function ($timeout, serverSer
     if (this.type === 'textEdit') { return true; } //*** WIP
     if (this.type === 'timeEdit') { return true; } //*** WIP
     if (this.type === 'urlEdit') {
-      return _.isProbablyValidUrl(val) || val === ''; }
+      return _.isValidUrlFormat(val) || val === ''; }
+    if (this.type === 'videoUrlEdit') {
+      return _.isValidVideoUrlFormat(val) || val === ''; }
   };
 
   o.ContentItem.prototype.init = function(newVal, newVal2) {
@@ -179,7 +182,8 @@ thContentItemsModule.directive('contentItem', function ($compile) {
     slider: getStandardContentItem('slider'),
     textEdit: getStandardContentItem('text-edit'),
     timeEdit: getStandardContentItem('time-edit'),
-    urlEdit: getStandardContentItem('url-edit')
+    urlEdit: getStandardContentItem('url-edit'),
+    videoUrlEdit: getStandardContentItem('video-url-edit')
   };
 
   var linker = function(scope, element, attrs) {

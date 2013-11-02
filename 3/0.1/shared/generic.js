@@ -83,14 +83,14 @@ thGenericModule.run(function($rootScope) {
         }
       });
     },
-    isProbablyValidEmail: function(s) {
-      //returns true if s is probably a valid email
+    isProbablyValidEmailFormat: function(s) {
+      //returns true if s is probably a valid email format
       //'probably' because 'definitely' is apparently not really possible
-      //see also: http://www.regular-expressions.info/email.html and http://en.wikipedia.org/wiki/Email_address          
+      //see also: http://www.regular-expressions.info/email.html and http://en.wikipedia.org/wiki/Email_address
       var reg = new RegExp(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/);
       return reg.test(s);
     },
-    isProbablyValidUrl: function(s) {
+    isValidUrlFormat: function(s) {
       var reg = new RegExp(/https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,}/);
       return reg.test(s);
     },
@@ -118,7 +118,31 @@ thGenericModule.run(function($rootScope) {
     getFirstOwnPropertyName: function(o, propertyNamesArray) {
       return _.find(propertyNamesArray, function(propertyName) { return o.hasOwnProperty(propertyName); });
     },
-    getFirstOwnProperty: function(o, propertyNamesArray) { return o[_.getFirstOwnPropertyName(o, propertyNamesArray)]; }
+    getFirstOwnProperty: function(o, propertyNamesArray) { return o[_.getFirstOwnPropertyName(o, propertyNamesArray)]; },
+
+    //video functions
+    getYouTubeId: function(s) {
+      if (!s) return;
+      var regex = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      var match = s.match(regex);
+      return (match && match[2].length == 11 ? match[2] : undefined);
+    },
+    getVimeoId: function(s) {
+      if (!s) return;
+      if (s.slice(0, 25) === '//player.vimeo.com/video/') return (_.isDigitsOnly(s.slice(25)) ? s.slice(25) : undefined);
+      var regex = /https?:\/\/(?:www\.)?vimeo.com\/(?:channels\/|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/;
+      var match = s.match(regex);
+      return (match ? match[3] : undefined);
+    },
+    getVideoEmbedUrl: function(s) {
+      var embedUrl;
+      var youTubeId = _.getYouTubeId(s); if (youTubeId) embedUrl = 'http://www.youtube.com/embed/' + youTubeId;
+      var vimeoId = _.getVimeoId(s); if (vimeoId) embedUrl = '//player.vimeo.com/video/' + vimeoId;
+      return embedUrl;
+    },
+    isValidVideoUrlFormat: function(s) {
+      return (!!_.getVideoEmbedUrl(s));
+    },
   });
 });
 

@@ -64,6 +64,8 @@
         "schoolDaysPerYear": 180,
         "flightAllowance": 3,
         "relocationAllowance": 2,
+        "logo": [{"id":2320,"resource":"http://beta.teacherhorizons.com/static/media/schools/209/images/27503.jpg","reference":"OBS.jpg","type":12}],
+        "profilePicture": [{"id":2297,"resource":"http://beta.teacherhorizons.com/static/media/schools/209/images/27478.jpg","reference":"crown-and-greyhound.jpg","type":13}],
         "accreditations": [
             3,
             5
@@ -169,7 +171,7 @@
         ],
         "annualTeacherTurnover": 50,
         "location": "41.2530,-8.5707",
-        "urlPromotionalVideo": "http://yahoo.com/myvideo",
+        "promoVideoUrl": "http://www.youtube.com/embed/rjhIzemLdos",
         "recruitmentStartMonth": 3,
         "minYearsExperience": 5,
         "teacherNationalitiesAccepted": [

@@ -15,6 +15,7 @@ var thUiFieldsModule = angular.module('thUiFieldsModule', ['thConfigModule']);
   textEdit
   timeEdit
   urlEdit
+  videoUrlEdit
 
   fieldFormat
   restrictInput
@@ -382,6 +383,32 @@ thUiFieldsModule.directive('urlEdit', function(configService, $timeout) {
         scope.model.href = getHref(scope.model.val);
         scope.model.editIconTip = (newVal ? 'Click to edit URL' : 'Click to add URL');
         if (newVal === oldVal) return;
+        scope.model.update();
+      });
+
+      scope.$watch('model.isEditMode', function(isUrlEditMode) {
+        if (isUrlEditMode) $timeout(function() { input.focus(); });
+      });
+    }
+  };
+});
+
+thUiFieldsModule.directive('videoUrlEdit', function(configService, $timeout) {
+  return {
+    restrict: 'A',
+    replace: true,
+    templateUrl: configService.root + '/shared/ui-fields/partials/video-url-edit.html',
+    scope: { model: '=' },
+    link: function(scope, element, attr, ctrl) {
+      var input = element[0].children[1];
+
+      scope.model.showEditIcon = true;
+      scope.model.isNotValidTip = 'This doesn\'t appear to be a valid video URL. Please change it so it can be saved.';
+
+      scope.$watch('model.val', function(newVal, oldVal) {
+        scope.model.editIconTip = (newVal ? 'Click to edit video URL' : 'Click to add URL');
+        if (newVal === oldVal) return;
+        scope.model.val = _.getVideoEmbedUrl(newVal);
         scope.model.update();
       });
 

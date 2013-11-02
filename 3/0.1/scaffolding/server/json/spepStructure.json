@@ -343,11 +343,11 @@
               "listColumn": "facility"
             },
             { 
-              "__NOTE": "*** WIP change fileUpload weights back to 1 (there are 3 fileUpload fields)",
-              "weight": 0,
+              "weight": 1,
               "wait": 1,
               "systemName": "profilePicture",
               "type": "fileUpload",
+              "tip": "Choose a great image of your school. It will appear at the top of your profile page and on search results.",
               "title": "{{school.nickname}}'s profile photo",
               "icon": "camera",
               "fileTypes": "image/jpeg,image/png,image/gif",
@@ -355,7 +355,7 @@
               "maxFiles": 1
             },
             {
-              "weight": 0,
+              "weight": 1,
               "wait": 1,
               "systemName": "images",
               "type": "fileUpload",
@@ -370,24 +370,25 @@
               "wait": 1,
               "systemName": "location",
               "type": "locationEdit",
-              "tip": "Click the map to put a marker of where you are. You can zoom in and out and drag-and-drop the marker. If you click 'Set to my approximate location', your browser may ask you for to confirm that's okay.",
+              "tip": "Click the map to put a marker of where you are. You can zoom in and out and drag-and-drop the marker. If you click 'Set to my approximate location', your browser may ask you to confirm that's okay.",
               "title": "{{school.nickname}}'s location",
               "icon": "map-marker"
             },
             {
               "weight": 1,
               "wait": 2000,
-              "systemName": "urlPromotionalVideo",
-              "type": "urlEdit",
+              "systemName": "promoVideoUrl",
+              "type": "videoUrlEdit",
               "title": "{{school.nickname}}'s promotional video",
-              "icon": "facetime-video",
-              "showUrlTitle": false
+              "tip": "Video is a great way to get teachers inspired about your school. To add your video, first ensure it's on YouTube or Vimeo. Then simply copy the URL and paste it below. If you would like a video made, please email Alex - alexreynolds@teacherhorizons.com",
+              "icon": "facetime-video"
             },
             {
-              "weight": 0,
+              "weight": 1,
               "wait": 1,
               "systemName": "logo",
               "type": "fileUpload",
+              "tip": "For best results, use a logo with a white background - ideally in a square format.",
               "title": "{{school.nickname}}'s logo",
               "icon": "apple",
               "fileTypes":"image/jpeg,image/png,image/gif",
@@ -411,8 +412,9 @@
               "systemName": "recruitmentStartMonth",
               "type": "fromMany",
               "limit": 1,
-              "title": "Recruitment start month",
               "icon": "calendar",
+              "title": "Recruitment start month",
+              "tip": "Enter the month you usually begin your recruitment process. This will allow us to offer support should you wish for it.",
               "listName": "months"
             },
             {
@@ -420,8 +422,9 @@
               "wait": 1,
               "systemName": "acceptedTeacherQualifications",
               "type": "fromFew",
-              "title": "Minimum qualifications accepted",
               "icon": "signal",
+              "title": "Minimum qualifications accepted",
+              "tip": "What qualifications must applicants have acquired?",
               "listName": "educationLevels",
               "listColumn": "name"
             },
@@ -430,8 +433,9 @@
               "wait": 2000,
               "systemName": "minYearsExperience",
               "type": "slider",
-              "title": "Minimum experience required",
               "icon": "road",
+              "title": "Minimum experience required",
+              "tip": "How many years post-qualification must applicants have taught for?",
               "max": 10,
               "suffix": " years"
             },
@@ -441,6 +445,7 @@
               "systemName": "teacherNationalitiesAccepted",
               "type": "fromFew",
               "title": "Teacher nationalities accepted",
+              "tip": "List the nationalities of teachers you can employ / obtain work permits for",
               "icon": "globe",
               "listName": "nationalities",
               "listColumn": "name"
@@ -451,6 +456,7 @@
               "systemName": "leadRecruitmentContactName",
               "type": "textEdit",
               "title": "Lead recruitment contact name",
+              "tip": "NB - this is for internal purposes and will not be published",
               "icon": "user"
             },
             {
@@ -459,6 +465,7 @@
               "systemName": "leadRecruitmentContactEmail",
               "type": "emailEdit",
               "title": "Lead recruitment contact email address",
+              "tip": "NB - this is for internal purposes and will not be published",
               "icon": "envelope"
             },
             {
@@ -475,6 +482,7 @@
               "systemName": "workIncentive",
               "type": "textEdit",
               "title": "Why work at {{school.nickname}}?",
+              "tip": "This is a chance to really sell your school. Consider why it's a great place to work and what stands it apart from other schools in the region.",
               "icon": "microphone",
               "maxLength": 1000
             }
@@ -614,6 +622,7 @@
               "systemName": "currency",
               "type": "fromFew",
               "title": "International working currency",
+              "tip": "Select the major currency that is most suited to your school and most recognised by the teachers you are seeking to employ (e.g. dollars for North American teachers)",
               "icon": "money",
               "limit": 1,
               "listName": "currencies",
@@ -626,6 +635,7 @@
               "type": "numberEdit",
               "subType": "money",
               "title": "Typical gross annual salary (before tax and deductions) of a newly qualified teacher with no management responsibilities (new arrival, in {{school.currencyName}})",
+              "tip": "This is will be displayed as a range to give you more flexibility with deciding salaries for individuals. Only registered teachers can see this information.",
               "icon": "check-empty"
             },
             {
@@ -645,6 +655,7 @@
               "type": "numberEdit",
               "subType": "money",
               "title": "Typical gross annual salary (before tax and deductions) of a teacher with no management responsibilities at top of the pay scale (in {{school.currencyName}})",
+              "tip": "This is will be displayed as a range to give you more flexibility with deciding salaries for individuals. Only registered teachers can see this information.",
               "icon": "sign-blank"
             },
             {
