@@ -119,7 +119,7 @@ thAdminDashboardAppModule.controller('JobMenuCtrl', function($scope, $timeout, $
       applicationsService.addApplication({ jobId: $stateParams.jobId, teacherId: response.teacher.id });
     };
 
-    _.extend(opts, { templateUrl: configService.root + '/jobs/job/addCandidate.html', controller: 'JobAddCandidateController' });
+    _.extend(opts, { templateUrl: configService.adminDashboardRoot + '/jobs/job/addCandidate.html', controller: 'JobAddCandidateController' });
     $dialog.dialog(opts).open().then(afterClose);
   };
 
@@ -172,6 +172,7 @@ thAdminDashboardAppModule.controller('JobCtrl', function($scope, $stateParams, $
         var d = $scope.processData;
         $scope.processTeacher(d.application.teacher, d.dataToPost); //currently only used to process a teacher's adminNote
         d.application.dirty = false;
+        $scope.$digest();
       }, 2000);
     }
     application.dirty = true;

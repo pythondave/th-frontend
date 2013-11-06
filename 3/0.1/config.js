@@ -8,6 +8,7 @@ thConfigModule.constant('configService', function() {
 
   o.loginUrl = './user/logon';
   o.root = '/th-frontend/3/0.1'; //*** TODO: refactor when functionality becomes available in angular (see https://github.com/angular/angular.js/issues/2805)
+  o.adminDashboardRoot = o.root + '/spas/admin/dashboard';
 
   var requestUrlRoot = '/admin/service/';
 
@@ -42,6 +43,7 @@ thConfigModule.constant('configService', function() {
 
     //app data
       spepStructure: '/school-dashboard/service/spep-structure',
+      adminSpepStructure: '/admin-dashboard/service/admin-school-structure',
 
     //lists
       lists: '/school/service/lists',

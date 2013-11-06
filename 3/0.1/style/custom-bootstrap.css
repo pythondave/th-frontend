@@ -271,26 +271,26 @@ input[type="color"],
   background-color: #282737; /*+*/
 }
 
-.label,
-.badge {
+.label /*,
+ .badge */ {
   padding: 2px 4px;
   font-size: 11px;
   color: #ffffff;
   background-color: #999999;
 }
 
-.label-important,
-.badge-important {
+.label-important /*,
+.badge-important */ {
   background-color: #468847;
 }
 
-.label-warning,
-.badge-warning {
+.label-warning /*,
+.badge-warning */ {
   background-color: #f9c022;
 }
 
-.label-success,
-.badge-success {
+.label-success /*,
+.badge-success */ {
   background-color: #ffc730;
 }
 

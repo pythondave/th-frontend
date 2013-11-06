@@ -82,35 +82,73 @@ thAdminDashboardAppModule.controller('SchoolsCtrl', function($scope, schoolsServ
 
 
 //School
-thAdminDashboardAppModule.controller('SchoolMenuCtrl', function($scope, $timeout, $window) {
+thAdminDashboardAppModule.controller('SchoolMenuCtrl', function($scope, $timeout, $window, configService, serverService) {
   $scope.back = function() { $timeout(function() { $window.history.back(); }); };
+
+  $scope.mode = configService.mode;
+  $scope.serverService = serverService;
 });
 
-thAdminDashboardAppModule.controller('SchoolCtrl', function($scope, $q, $http, configService, schoolService) {
+thAdminDashboardAppModule.controller('SchoolCtrl', function($scope, $q, $http, $stateParams, configService, schoolService, contentItemService) {
+  var o = {};
 
-  var f1 = function() { //queries which are independent of each other
+  var getServerData = function() {
     var urls = configService.requests.urls;
     var getFromServer = function(url, data) {
       if (!url) return;
       return $http.post(url, data, configService.requests.postConfig);
     };
     var serverQueries = [
-      getFromServer('/TEMP/admin-school-structure')
+      getFromServer(urls.lists),
+      getFromServer(urls.school, { schoolId: $stateParams.schoolId }),
+      getFromServer(urls.adminSpepStructure)
     ];
 
     return $q.all(serverQueries);
   };
-  f1().then(function(response) {
-    console.log(response);
-  });
 
-/*
-  $q.all([ //load all the data then set the filters
-    schoolService.getAndSetData()
-  ]).then(function(response) {
-    console.log(response);
-  });
-*/
+  var setServerData = function(response) {
+    if (!response || !response[0].data || !response[1].data) return $q.reject('no list or school data');
+
+    o.lists = sortLists(response[0].data);
+    o.schoolData = response[1].data;
+    o.structure = response[2].data.sections[0].sections[0];
+  };
+
+  var sortLists = function(o) {
+    o.currencies = _.sortBy(o.currencies, 'currency');
+    return o;
+  };
+
+  var combineModelsAndPresentationStructures = function() {
+    var school = o.schoolData.school;
+
+    var derivedSchoolNickname = function() {
+      if (school.nickname) return school.nickname;
+      if (school.name && school.name.length <= 10) return school.name;
+      if (school.initials) return school.initials;
+      if (school.name) return school.name.match(/\b\w/g).join('');
+      return '?';
+    };
+
+    _.each(o.structure.contentItems, function(ci, index) { //ensure each contentItems member is a contentItem
+      if (ci instanceof contentItemService.ContentItem) return;
+      var newCi = new contentItemService.ContentItem(ci);
+      o.structure.contentItems[index] = newCi;
+    });
+    $scope.contentItems = o.structure.contentItems;
+
+    //decorate structure with possible value lists and values from the source data
+    _.each(o.structure.contentItems, function(ci) {
+      if (ci.listName) { ci.items = _.cloneDeep(o.lists[ci.listName]); }
+      if (ci.systemType && ci.systemType.slice(0, 6) === 'school') ci.fixedData = { schoolId: school.id, token: o.schoolData.token };
+      var val = school[ci.systemName], val2;
+      if (ci.type === 'urlEdit') { val2 = (ci.serverObject ? ci.serverObject.name : ci.urlTitle); }
+      ci.init(val, val2);
+    });
+  };
+
+  getServerData().then(setServerData).then(combineModelsAndPresentationStructures);
 });
 
 
@@ -119,4 +157,39 @@ thAdminDashboardAppModule.controller('AddSchoolController', function($scope, con
     var o = { doIt: doIt, teacher: $scope.teacher };
     dialog.close(o);
   };
+});
+
+
+thAdminDashboardAppModule.factory('serverService', function ($rootScope, $timeout, $http, configService) {
+  //serverService: use to post data to the server
+
+  var o = {};
+  o.sentToServer = [];
+
+  o.sendToServer = function(systemType, dataToPost) {
+    var urls = {
+      school: configService.requests.urls.processSchool,
+      schoolRating: configService.requests.urls.processSchoolRating,
+      schoolBenefit: configService.requests.urls.processSchoolBenefit,
+      city: configService.requests.urls.processCity,
+      cityLivingCost: configService.requests.urls.processCityLivingCost,
+      cityLink: configService.requests.urls.processCityLink,
+      undefined: 'dummy'
+    };
+
+    var url = urls[systemType];
+
+    if (systemType === 'cityLink' && !dataToPost.linkId) url = configService.requests.urls.processCityLink;
+
+    var successCallback = function(response) {
+      o.sentToServer.push(url + '?' + $.param(dataToPost));
+      $rootScope.$emit('serverService.responseReceived');
+      return response;
+    };
+    var postToServer = $http.post(url, dataToPost, configService.requests.postConfig).then(successCallback);
+
+    return postToServer;
+  };
+
+  return o;
 });

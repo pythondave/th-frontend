@@ -11,7 +11,7 @@ thAdminDashboardAppModule.controller('NavBarCtrl', function($scope, $state) {
     { name: 'teachers', title: 'Teachers' },
     { name: 'jobs', title: 'Jobs' },
     { name: 'applications', title: 'Applications' },
-    { name: 'schools', title: 'Schools' },
+    //{ name: 'schools', title: 'Schools' },
     { name: 'settings', title: 'Settings' }
   ];
   $scope.$on('$stateChangeSuccess', function() {
@@ -20,7 +20,7 @@ thAdminDashboardAppModule.controller('NavBarCtrl', function($scope, $state) {
 });
 
 //states (routes) - ref: https://github.com/angular-ui/ui-router
-thAdminDashboardAppModule.config(function($stateProvider) {
+thAdminDashboardAppModule.config(function($stateProvider, configService) {
   $stateProvider
     .state('teachers', {
       url: '/teachers',
@@ -50,6 +50,7 @@ thAdminDashboardAppModule.config(function($stateProvider) {
         'container-main': { templateUrl: 'applications/default.html', controller: 'ApplicationsCtrl' }
       }
     })
+    /*
     .state('schools', {
       url: '/schools',
       views: {
@@ -57,10 +58,12 @@ thAdminDashboardAppModule.config(function($stateProvider) {
         'container-main': { templateUrl: 'schools/default.html', controller: 'SchoolsCtrl' }
       }
     })
+    */
     .state('school', {
       url: '/schools/:schoolId',
       views: {
-        'container-left': { templateUrl: 'schools/school/menu.html', controller: 'SchoolMenuCtrl' },
+        'container-left': { templateUrl: 'schools/school/menu.html', controller: 'SchoolMenuCtrl',
+          resolve: { modeReady: configService.setModeToDevIfDemoAndLocal } },
         'container-main': { templateUrl: 'schools/school/default.html', controller: 'SchoolCtrl' }
       }
     })

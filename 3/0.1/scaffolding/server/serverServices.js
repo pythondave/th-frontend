@@ -461,7 +461,7 @@ thMockServerModule.run(function($httpBackend, $resource, $q, $timeout, $http,
     $httpBackend.whenPOST('/school-dashboard/service/spep-notes-structure').respond(function() { return [200, json.spepNotesStructure]; });
     $httpBackend.whenPOST('/shared/service/content-item-showcase-structure').respond(function() { return [200, json.contentItemShowcaseStructure]; });
 
-    $httpBackend.whenPOST('/TEMP/admin-school-structure').respond(function() { return [200, json.adminSchoolStructure]; });
+    $httpBackend.whenPOST('/admin-dashboard/service/admin-school-structure').respond(function() { return [200, json.adminSchoolStructure]; });
 
   //teachers
     $httpBackend.whenPOST('/admin/service/teachers').respond(teachersResponse);

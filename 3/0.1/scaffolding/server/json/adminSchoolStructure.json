@@ -1,118 +1,124 @@
 {
-  "title": "Admin WIP",
-  "icon": "beaker",
+  "title": "Schools",
   "sections": [
     {
-      "title": "{{school.nickname}}",
-      "icon": "info",
+      "title": "School",
       "sections": [
         {
-          "title": "Main",
-          "icon": "key",
+          "title": "School",
+          "icon": "circle",
           "contentItems": [
             {
-              "type": "header",
-              "title": "Main",
-              "icon": "key"
-            },
-            {
-              "type": "text",
-              "style": "color: red;",
-              "val": "WIP - will be in the ADMIN dashboard rather than the school dashboard."
-            },
-            {
+              "systemType": "school",
               "systemName": "name",
               "type": "textEdit",
               "title": "School name",
-              "icon": ""
+              "icon": "circle"
             },
             {
+              "systemType": "school",
               "systemName": "address1",
               "type": "textEdit",
               "title": "Address 1",
-              "icon": ""
+              "icon": "location-arrow"
             },
             {
-              "systemName": "address1",
+              "systemType": "school",
+              "systemName": "address2",
               "type": "textEdit",
               "title": "Address 2",
-              "icon": ""
+              "icon": "location-arrow"
             },
             {
-              "systemName": "address1",
+              "systemType": "school",
+              "systemName": "address3",
               "type": "textEdit",
               "title": "Address 3",
-              "icon": ""
+              "icon": "location-arrow"
             },
             {
+              "systemType": "school",
               "systemName": "website",
               "type": "urlEdit",
               "title": "Website",
-              "icon": "",
+              "icon": "link",
               "showUrlTitle": false
             },
             {
+              "systemType": "school",
               "systemName": "phone",
               "type": "textEdit",
               "title": "Telephone number",
-              "icon": ""
+              "icon": "phone"
             },
             {
+              "systemType": "school",
               "systemName": "leadRecruitmentContactName",
               "type": "textEdit",
               "title": "Lead recruitment contact name",
-              "icon": ""
+              "icon": "user"
             },
             {
+              "systemType": "school",
               "systemName": "leadRecruitmentContactEmail",
               "type": "textEdit",
               "subType": "email",
               "title": "Lead recruitment contact email",
-              "icon": ""
+              "icon": "envelope"
             },
             {
+              "systemType": "school",
               "systemName": "password",
               "type": "textEdit",
               "title": "Password",
-              "icon": ""
+              "icon": "lock"
             },
             {
+              "systemType": "school",
               "systemName": "nickname",
               "type": "textEdit",
               "title": "School nickname",
-              "icon": ""
+              "icon": "circle-blank"
             },
             {
-              "systemName": "approvedByTeacherhorizons",
-              "type": "fromFew",
-              "title": "Approved by Teacherhorizons",
-              "icon": "",
-              "limit": 1,
-              "listName": "yesNo",
-              "listColumn": "name"
-            },
-            {
+              "systemType": "school",
               "systemName": "visitedByTeacherhorizons",
               "type": "fromFew",
               "title": "Visited by Teacherhorizons",
-              "icon": "",
+              "icon": "building",
               "limit": 1,
               "listName": "yesNo",
               "listColumn": "name"
             },
             {
-              "systemName": "",
+              "systemType": "school",
+              "systemName": "approvedByTeacherhorizons",
+              "type": "fromFew",
+              "title": "Approved by Teacherhorizons",
+              "icon": "thumbs-up",
+              "limit": 1,
+              "listName": "yesNo",
+              "listColumn": "name"
+            },
+            {
+              "systemType": "school",
+              "systemName": "***WIPCostOfLivingIndex",
               "type": "textEdit",
               "title": "Cost of living index",
-              "icon": ""
+              "icon": "money"
             },
             {
-              "systemName": "",
+              "wait": 1,
+              "systemName": "profilePicture",
               "type": "fileUpload",
-              "title": "{{school.nickname}}'s profile photo",
-              "icon": ""
+              "title": "Profile photo",
+              "icon": "camera",
+              "fileTypes": "image/jpeg,image/png,image/gif",
+              "templates": { "uploadUrl": "/school/media/upload/{{school.id}}/13/{{uploadToken}}", "deleteUrl": "/school/media/delete/{{uploadToken}}/" },
+              "maxFiles": 1
             },
             {
+              "systemType": "school",
               "systemName": "currency",
               "type": "fromFew",
               "title": "International working currency",
@@ -122,6 +128,7 @@
               "listColumn": "currency"
             },
             {
+              "systemType": "city",
               "systemType": "cityLink",
               "category": 0,
               "type": "urlEdit",

@@ -367,12 +367,15 @@ thUiFieldsModule.directive('urlEdit', function(configService, $timeout) {
 
       scope.model.showEditIcon = true;
       scope.model.isNotValidTip = 'This doesn\'t appear to be a valid URL. Please change it so it can be saved.';
-      scope.model.urlTitle.placeholder = 'Website name';
-      scope.model.urlTitle.editIconTipFunction = function(val) { return (val ? 'Click to edit website name' : 'Click to add website name'); };
 
-      scope.model.urlTitle.update = function() {
-        scope.model.update();
-      };
+      if (scope.model.urlTitle) {
+        scope.model.urlTitle.placeholder = 'Website name';
+        scope.model.urlTitle.editIconTipFunction = function(val) { return (val ? 'Click to edit website name' : 'Click to add website name'); };
+
+        scope.model.urlTitle.update = function() {
+          scope.model.update();
+        };
+      }
 
       var getHref = function(url) {
         if (!url) return;

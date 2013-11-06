@@ -56,6 +56,7 @@ body { padding: 60px 0 40px 0; }
   /* td */
   .table td { padding: 2px; font-size: 12px; }
   .table .td-center { text-align: center; }
+  .table .td-middle { vertical-align: middle; }
   .table .td-left { text-align: left; }
   /* tooltip */
   .tooltip-inner { text-shadow: none; }
@@ -77,9 +78,9 @@ body { padding: 60px 0 40px 0; }
   .warning-hover:hover { background-color: #f89406; }
   .info-hover:hover { background-color: #3a87ad; }
   .important-hover:hover { background-color: #b94a48; }
-  .icon-chevron-up, .icon-chevron-down { opacity: 0.2; filter:alpha(opacity=20); }
+  .icon-chevron-up, .icon-chevron-down { font-size: 14px; font-weight: bold; opacity: 0.2; filter:alpha(opacity=20); }
   .icon-chevron-up:hover, .icon-chevron-down:hover { opacity: 0.7; filter:alpha(opacity=70); }
-  .icon-ok-hack { background-image: url(glyphicons-halflings-green.png); }
+  .icon-ok-hack { color: #468847; font-size: 14px; font-weight: bold; }
   .typeahead .active { cursor: pointer; }
   .entity-info .title { display: inline-block; width: 100px; font-size: 11px; font-weight: bold; vertical-align: top; }
 
