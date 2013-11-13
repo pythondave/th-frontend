@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="thAdminDashboardAppModule">
+
+<head>
+  <!--external stylesheets hosted on cdns-->
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="../../style/style.css">
+  <link rel="stylesheet" href="../../style/custom-bootstrap.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body style="width: 960px; margin: 0 auto; padding: 0;">
+  <div style="background-color: rgba(131, 171, 197, 0.25); display: inline-block;">
+    <div ng-include="'header.html'"></div>
+    <div style="margin: 7px 0;">
+      <div ui-view="container-left" class="rounded5px" style="width: 270px; float: left; margin: 0 5px 10px 5px; padding: 10px; background-color: white;"></div>
+      <div ui-view="container-main" style="width: 630px; float: left; margin: 0 5px 0 0; padding: 0;"></div>
+    </div>
+    <div ng-include="'footer.html'" style="clear: both;"></div>
+  </div>
+  
+  <!--external scripts-->
+    <!--jquery-->
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!--lodash (rather than underscore)-->
+      <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.0.0/lodash.min.js"></script>
+    <!--twitter bootstrap-->
+      <!--<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script> avg issue => replaced with line below-->
+      <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <!--angular (official)-->
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+      <script src="//cdn.jsdelivr.net/angularjs/1.1.2/angular-resource.min.js"></script>
+    <!--angular (community)-->
+      <!--<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.2.0/ui-bootstrap-tpls.js"></script> replaced with line below-->
+      <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.js"></script>
+      <!--<script src="http://angular-ui.github.io/ui-router/build/angular-ui-states.min.js"></script> stopped working => replaced with line below-->
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.0/angular-ui-router.min.js"></script>
+
+  <!--local scripts-->
+    <!--main-->
+      <script src="app.js"></script>
+      <script src="../../config.js"></script>
+    <!--shared modules-->
+      <script src="../../shared/ui-fields/ui-fields.js"></script>
+      <script src="../../shared/content-items/content-items.js"></script>
+
+    <!--services-->
+      <!--jobs-->
+        <script src="jobs/jobServices.js"></script>
+      <!--shared-->
+        <script src="../../shared/generic.js"></script>
+        <script src="../../shared/services/listService.js"></script>
+        <script src="../../shared/services/alertServices.js"></script>
+        <script src="../../shared/services/filterServices.js"></script>
+        <script src="../../shared/services/schoolServices.js"></script>
+        <script src="../../shared/services/basicListServices.js"></script>
+        <script src="../../shared/services/scoreServices.js"></script>
+    <!--controllers-->
+      <script src="jobs/jobControllers.js"></script>
+    <!--directives-->
+      <script src="../../shared/directives.js"></script>
+
+  <!--prototype only scripts-->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular-mocks.js"></script>
+  <script src="../../scaffolding/server/serverServices.js"></script>
+</body>
+
+</html>
