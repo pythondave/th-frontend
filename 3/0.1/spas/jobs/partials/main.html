@@ -1,0 +1,26 @@
+<div ng-if="!jobs" style="margin: 10px;">
+  <img src="../../style/spinner1.gif" alt="spinner" />
+</div>
+
+<div ng-repeat="j in jobs" class="rounded5px" style="margin: 0 0 5px 0; background-color: white; min-height: 170px;">
+  <div style="padding: 10px; clear both;">
+    <div style="width: 390px; float: left; display: inline-block;">
+      <span style="color: #3487be; font-weight: bold; font-size: 18px; margin-bottom: 7px;">{{j.title}}</span>
+      <span style="font-weight: bold; font-size: 15px; display: block; margin: 7px 0;">{{j.location.city.name}}, {{j.location.city.country.name}}</span>
+      <span style="font-weight: bold; display: block; margin: 7px 0;">{{j.subject.name}}, {{j.position.name}}</span>
+      <span style="display: block; margin: 7px 0;">{{j.furtherInfo | truncate:100}}</span>
+      <span style="font-weight: bold; display: block; margin: 7px 0; color: silver;">
+        <span>Start date: {{j.startDate | date:'d MMM yyyy'}}</span>
+        <span style="margin-left: 20px;">Apply before: {{j.deadline | date:'d MMM yyyy'}}</span>
+      </span>
+    </div>
+    <div style="width: 210px; display: inline-block; margin-left: 10px; text-align: center;">
+      <div style="height: 120px;" >
+        <img class="rounded5px" style="width: 160px; margin: auto;" ng-src="{{j.image}}"></img>
+      </div>
+      <a href="{{j.url}}" target="job{{j.id}}">
+        <button class="rounded5px btn-apply" ng-click="jobClick(j)">Full details and apply!</button>
+      </a>
+    </div>
+  </div>
+</div>

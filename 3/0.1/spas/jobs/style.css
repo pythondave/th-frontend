@@ -12,6 +12,8 @@
   background-color: #f9c022;
 }
 
+.filter select { font-size: 12px; }
+
 /* cope with small browser differences */
 html {overflow-y: scroll;}
 .btn:focus, input[type="text"]:focus, a:focus, select:focus { outline: none; }

@@ -1,4 +1,4 @@
-thAdminDashboardAppModule.factory('jobsService', function($http, $rootScope, configService, listService) {
+thJobsAppModule.factory('jobsService', function($http, $rootScope, configService, listService) {
   //initialise
   var o = {};
   o.list = new listService.List();
@@ -44,24 +44,6 @@ thAdminDashboardAppModule.factory('jobsService', function($http, $rootScope, con
     paths = paths || ['numApplied', 'numPutForward', 'numShortlisted', 'numInterviewed', 'numOffersMade', 'isAccepted', 'numRejected'];
     _(paths).each(function(path) { totals[path] = o.list.sum(path); }).value();
     return totals;
-  };
-
-  return o;
-});
-
-thAdminDashboardAppModule.factory('jobService', function($http, configService) {
-  //initialise
-  var o = {};
-
-  //get data
-  o.getAndSetData = function(dataToPost) {
-    if (!dataToPost.jobId) return;
-    var getDataFromServer = $http.post(configService.requests.urls.job, dataToPost, configService.requests.postConfig);
-    var setData = function(response) {
-      o.job = response.data.job;
-      return response;
-    };
-    return getDataFromServer.then(setData);
   };
 
   return o;

@@ -312,9 +312,11 @@ thMockServerModule.run(function($httpBackend, $resource, $q, $timeout, $http,
   //json files (these are loaded to local variables so that when the normal request comes through, they're ready to go - this was tricky to figure out in the first place)
   var json = {};
   json.filenames = [ 'lists', 'school101', 'school1234', 'city146', 'city25',
-    'spepStructure', 'spepNotesStructure', 'contentItemShowcaseStructure', 'adminSchoolStructure' ];
+    'spepStructure', 'spepNotesStructure', 'contentItemShowcaseStructure', 'adminSchoolStructure',
+    'jobsAppLists', 'jobs'
+  ];
 
-  _.forEach(json.filenames, function(filename) {
+  _.each(json.filenames, function(filename) {
     $http
       .get('/th-frontend/3/0.1/scaffolding/server/json/' + filename + '.json')
       .then(function(response) { json[filename] = response.data; });
@@ -350,9 +352,39 @@ thMockServerModule.run(function($httpBackend, $resource, $q, $timeout, $http,
 
   //jobs
   var jobProperties = ['id', 'dateCreated', 'subject', 'role', 'schoolName', 'country', 'numApplied', 'numPutForward', 'numShortlisted', 'numInterviewed', 'numOffersMade', 'isAccepted', 'numRejected'];
+
+  var jobsAppJobsResponse = function(params) {
+    var numberOfFilters = _.size(params)-1;
+    var o = _.clone(json.jobs, true);
+
+    var numberOfRecords = (function() {
+      if (numberOfFilters > 3) return 0;
+      if (numberOfFilters === 3) return 1;
+      if (numberOfFilters === 2) return _.random(1, 3);
+      if (numberOfFilters === 1) return _.random(0, 30);
+      if (numberOfFilters === 0) return _.random(100, 200);
+    })();
+
+    for (var i = 0; i < numberOfRecords/json.jobs.jobs.length; i++) { //create at least enough dummy data
+      o.jobs = o.jobs.concat(_.clone(json.jobs.jobs, true));
+    }
+    o.jobs.length = numberOfRecords; //remove dummy data which isn't needed
+
+    var isLessThan80Percent = (Math.random() < 0.5); //randomly assign
+    _.forEach(o.jobs, function(job) {
+      if (isLessThan80Percent) delete job.url;
+      if (params.subject) job.subject = _.parseInt(params.subject);
+      if (params.position) job.position = _.parseInt(params.position);
+    });
+
+    return o;
+  };
+
   var jobsResponse = function(method, url, data, headers) {
     //params
     var params = deserializeParams(data);
+    if (params.app === 'jobs') return [200, jobsAppJobsResponse(params)];
+
     delete params.type; //ignore for mock purposes (for now) as this only affects a few data values (and not size/structure)
     var paramCount = _.keys(params).length;
     var length;
@@ -481,6 +513,7 @@ thMockServerModule.run(function($httpBackend, $resource, $q, $timeout, $http,
     $httpBackend.whenPOST('/admin/service/school-names').respond(200, schoolNames);
   //lists
     $httpBackend.whenPOST('/school/service/lists').respond(listsResponse);
+    $httpBackend.whenPOST('/jobs/service/lists').respond(function() { return [200, json.jobsAppLists]; });
   //schools
     $httpBackend.whenPOST('/school/service/schools').respond(schoolsResponse);
     $httpBackend.whenPOST('/school/service/school').respond(schoolResponse);

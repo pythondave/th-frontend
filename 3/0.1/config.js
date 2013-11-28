@@ -47,6 +47,7 @@ thConfigModule.constant('configService', function() {
 
     //lists
       lists: '/school/service/lists',
+      jobsAppLists: '/jobs/service/lists',
 
     //schools
       schools: '/school/service/schools',
