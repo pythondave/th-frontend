@@ -145,14 +145,18 @@ thGenericModule.run(function($rootScope) {
     },
 
     //date functions
-    toDateString: function(date, format) {
-      format = format || 'yyyy-mm-dd';
-      var yyyy = date.getFullYear().toString();
-      var mm = (date.getMonth()+1).toString(); // getMonth() is zero-based
-      var dd  = date.getDate().toString();
+    toDateString: function(date, template) {
+      if (!_.isDate(date)) return;
+      template = template || '{{yyyy}}-{{mm}}-{{dd}}';
 
-      if (format === 'yyyy-mm-dd') return yyyy + '-' + (mm[1]?mm:'0'+mm[0]) + '-' + (dd[1]?dd:'0'+dd[0]);
-      return 'date format not supported';
+      var o = {};
+      o.yyyy = date.getFullYear().toString();
+      o.m = (date.getMonth()+1).toString(); // getMonth() is zero-based
+      o.d  = date.getDate().toString();
+      o.mm = o.m[1]?o.m:'0'+o.m[0];
+      o.dd = o.d[1]?o.d:'0'+o.d[0];
+
+      return _.template(template, o);
     }
   });
 });

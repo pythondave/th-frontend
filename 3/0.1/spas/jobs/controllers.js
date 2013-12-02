@@ -29,14 +29,18 @@ thJobsAppModule.factory('jobsFilterService', function($state, $rootScope) {
     o.synchToParam('position');
     o.synchToParam('location');
     o.synchToParam('system');
+    o.start.val = _.isNull($state.params.start) ? undefined : new Date($state.params.start);
   };
 
   o.addFilterWatch = function(filterName) {
+    var toUrlValue = function(x) { //takes a value and translates it to a format appropriate for the url
+      if (_.isUndefined(x) || _.isNull(x)) return;
+      if (_.isDate(x)) return _.toDateString(x);
+      if (x.id) return x.id;
+    };
+
     $rootScope.$watch('filters.' + filterName + '.val', function(newValue, oldValue) {
-      var params = {}; params[filterName] = (newValue || {}).id;
-      if (_.isDate(newValue)) {
-        params[filterName] = _.toDateString(newValue);
-      }
+      var params = {}; params[filterName] = toUrlValue(newValue);
       $state.go('jobs.query', params);
     });
   };
@@ -117,5 +121,5 @@ thJobsAppModule.controller('Ctrl', function($scope, $rootScope, $http, $modal, c
 });
 
 thJobsAppModule.controller('ModalCtrl', function($scope, $modalInstance) {
-  $scope.ok = $modalInstance.close;
+  $scope.close = $modalInstance.close;
 });
