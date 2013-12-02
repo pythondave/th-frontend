@@ -1,4 +1,10 @@
 /* *** TODO: make DRY with school/dashboard/style.css; */
+.filter input[type="text"] { font-size: 12px; padding: 3px 9px; width: 220px; }
+.filter input[type="text"]::-webkit-input-placeholder { color: #555555; }
+.filter input[type="text"]:-ms-input-placeholder { color: #555555; } /* ie */
+.filter input[type="text"]:-moz-placeholder { color: #555555; opacity: 1; }
+.filter input[type="text"]::-moz-placeholder { color: #555555; opacity: 1;  } /* Firefox 19+ */
+
 .rounded5px {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -25,44 +31,3 @@ html {overflow-y: scroll;}
 .modal-body .btn-warning { color: #ffffff; }
 .modal-body .btn-warning:hover { color: #282737; }
 
-/* content-items */
-.content-item .files-wrapper li { list-style-type: none }
-
-.content-item { display: block; }
-.content-item-icon { display: inline-block; width: 20px; }
-.content-item-title { display: inline-block; margin: 3px 0; font-weight: bold; }
-.content-item-tip {}
-.content-item-description { clear: both; display: block; margin: 3px 0; }
-.content-item-value-tip { display: block; }
-.content-item-icons span { margin-left: 5px; cursor: pointer; }
-.content-item .icon-remove { margin: 0; }
-.level3-view .header { color: #3487be; }
-
-.content-item-icon .icon-percent:before { content: "%"; font-weight: bold } /* simple addition in font awesome style */
-
-hr { margin: 10px 0; }
-
-.content-item-header .popover { max-width: 400px; }
-.popover { z-index: 2000; }
-.from-many .popover { margin-left: 11px; }
-.text-edit-small .icon-remove { margin-left: -20px; }
-.text-edit-small .popover { margin-left: -8px; }
-.text-edit-large .icon-remove { margin-left: 3px; }
-
-.nav-arrow-container .popover { width: 185px; }
-
-.rating-edit .icon-star, .rating-edit .icon-star-empty { color: #fcd25a; font-size: 20px; }
-.rating-edit .icon-star:hover, .rating-edit .icon-star-empty:hover { color: #f9c022; }
-
-.control-group .span1 { width: 40px !important; } /* timepicker hack *** TODO: investigate; */
-
-.flag { padding-right: 3px; }
-
-.content-item .hidden { display: none !important; }
-/* /content-items */
-
-/* progress bar - *** TODO */
-.progress-bar-container { margin: 0 0 0 20px; }
-.progress-bar { height: 11px; margin:9px 0; background:url(http://www.teacherhorizons.com/static/images/content/percentage-complete-sprite.png) left top no-repeat; width:174px; overflow:hidden; }
-.progress-bar-complete { background:url(http://www.teacherhorizons.com/static/images/content/percentage-complete-sprite.png) left -30px no-repeat; height:25px; width: 0; }
-/* /progress bar */

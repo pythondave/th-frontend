@@ -34,7 +34,6 @@ thJobsAppModule.factory('initService', function ($http, $q, $qDecoratorService, 
         data.subjects = _.sortBy(data.subjects, 'name');
         data.positions = _.sortBy(data.positions, 'name');
         data.locations = _.sortBy(data.locations, 'name');
-        data.curriculums = _.sortBy(data.curriculums, 'name');
         data.systems = _.sortBy(data.systems, 'system');
       };
       var setDataFromServer = function(response) {
@@ -70,7 +69,7 @@ thJobsAppModule.config(function($stateProvider, $urlRouterProvider, configServic
       }
     })
     .state('jobs.query', {
-      url: '/?subject&position&location&curriculum&system'
+      url: '/?subject&position&location&system&start'
     });
 });
 

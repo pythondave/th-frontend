@@ -10,14 +10,13 @@ thJobsAppModule.factory('jobsFilterService', function($state, $rootScope) {
     { name: 'subject' },
     { name: 'position' },
     { name: 'location' },
-    { name: 'curriculum' },
     { name: 'system' }
   ];
   o.subject = {};
   o.position = {};
   o.location = {};
-  o.curriculum = {};
   o.system = {};
+  o.start = {};
 
   o.synchToParam = function(filterName, listName, parameterName) {
     listName = listName || filterName + 's';
@@ -29,13 +28,15 @@ thJobsAppModule.factory('jobsFilterService', function($state, $rootScope) {
     o.synchToParam('subject');
     o.synchToParam('position');
     o.synchToParam('location');
-    o.synchToParam('curriculum');
     o.synchToParam('system');
   };
 
   o.addFilterWatch = function(filterName) {
     $rootScope.$watch('filters.' + filterName + '.val', function(newValue, oldValue) {
       var params = {}; params[filterName] = (newValue || {}).id;
+      if (_.isDate(newValue)) {
+        params[filterName] = _.toDateString(newValue);
+      }
       $state.go('jobs.query', params);
     });
   };
@@ -44,14 +45,13 @@ thJobsAppModule.factory('jobsFilterService', function($state, $rootScope) {
     o.addFilterWatch('subject');
     o.addFilterWatch('position');
     o.addFilterWatch('location');
-    o.addFilterWatch('curriculum');
     o.addFilterWatch('system');
+    o.addFilterWatch('start');
 
     o.lists = lists;
     o.subject.data = o.lists.subjects;
     o.position.data = o.lists.positions;
     o.location.data = o.lists.locations;
-    o.curriculum.data = o.lists.curriculums;
     o.system.data = o.lists.systems;
   };
 

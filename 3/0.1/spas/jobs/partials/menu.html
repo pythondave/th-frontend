@@ -26,13 +26,6 @@
   <i class="icon-remove" ng-hide="!filters.location.val" ng-click="filters.location.val=undefined"></i>
 </div>
 <div class="filter">
-  <span>Curriculum</span>
-  <select ng-model="filters.curriculum.val" ng-options="x.name for x in filters.curriculum.data">
-    <option value="">What curriculum would you like?</option>
-  </select>
-  <i class="icon-remove" ng-hide="!filters.curriculum.val" ng-click="filters.curriculum.val=undefined"></i>
-</div>
-<div class="filter">
   <span>Academic system</span>
   <select ng-model="filters.system.val" ng-options="x.system for x in filters.system.data">
     <option value="">What system would you like?</option>
@@ -41,7 +34,6 @@
 </div>
 <div class="filter">
   <span>Start date</span>
-  <select>
-    <option value="">When is the earliest you can start?</option>
-  </select>
+  <input type="text" placeholder="When is the earliest you can start?" datepicker-popup="EEE d MMM yyyy" ng-model="filters.start.val" is-open="opened" min="minDate" show-weeks="false" close-text="Close" />
+  <i class="icon-remove" style="margin: -3px 0 0 -25px;" ng-hide="!filters.start.val" ng-click="filters.start.val=undefined"></i>
 </div>
