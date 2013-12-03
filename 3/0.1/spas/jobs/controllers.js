@@ -1,68 +1,6 @@
-//Jobs
-
-thJobsAppModule.factory('jobsFilterService', function($state, $rootScope) {
-  //jobsFilterService: provides data and functions for the job filters
-  //*** TODO: consider consolidating this with the html into a 'filter' directive
-  //*** TODO: refactor so DRY
-  var o = {};
-
-  o.config = [
-    { name: 'subject' },
-    { name: 'position' },
-    { name: 'location' },
-    { name: 'system' }
-  ];
-  o.subject = {};
-  o.position = {};
-  o.location = {};
-  o.system = {};
-  o.start = {};
-
-  o.synchToParam = function(filterName, listName, parameterName) {
-    listName = listName || filterName + 's';
-    parameterName = parameterName || filterName;
-    o[filterName].val = _.find(o.lists[listName], { 'id': _.parseInt($state.params[parameterName]) });
-  };
-
-  o.synchToParams = function() {
-    o.synchToParam('subject');
-    o.synchToParam('position');
-    o.synchToParam('location');
-    o.synchToParam('system');
-    o.start.val = _.isNull($state.params.start) ? undefined : new Date($state.params.start);
-  };
-
-  o.addFilterWatch = function(filterName) {
-    var toUrlValue = function(x) { //takes a value and translates it to a format appropriate for the url
-      if (_.isUndefined(x) || _.isNull(x)) return;
-      if (_.isDate(x)) return _.toDateString(x);
-      if (x.id) return x.id;
-    };
-
-    $rootScope.$watch('filters.' + filterName + '.val', function(newValue, oldValue) {
-      var params = {}; params[filterName] = toUrlValue(newValue);
-      $state.go('jobs.query', params);
-    });
-  };
-
-  o.init = function(lists) {
-    o.addFilterWatch('subject');
-    o.addFilterWatch('position');
-    o.addFilterWatch('location');
-    o.addFilterWatch('system');
-    o.addFilterWatch('start');
-
-    o.lists = lists;
-    o.subject.data = o.lists.subjects;
-    o.position.data = o.lists.positions;
-    o.location.data = o.lists.locations;
-    o.system.data = o.lists.systems;
-  };
-
-  $rootScope.filters = o;
-
-  return o;
-});
+/*
+  Contains: MenuCtrl, MainCtrl, ModalCtrl
+*/
 
 thJobsAppModule.controller('MenuCtrl', function($scope, $rootScope, jobsFilterService, init) {
   jobsFilterService.init(init.lists.data);
@@ -76,7 +14,7 @@ thJobsAppModule.controller('MenuCtrl', function($scope, $rootScope, jobsFilterSe
   });
 });
 
-thJobsAppModule.controller('Ctrl', function($scope, $rootScope, $http, $modal, configService, init) {
+thJobsAppModule.controller('MainCtrl', function($scope, $rootScope, $http, $modal, $window, configService, init) {
   var subjects = init.lists.data.subjects;
   var positions = init.lists.data.positions;
 
@@ -108,8 +46,12 @@ thJobsAppModule.controller('Ctrl', function($scope, $rootScope, $http, $modal, c
   });
 
   $scope.jobClick = function(job) {
-    if (job.url) { return; } //url exists no modal needed
+    if (job.url) { //url exists => open in new tab
+      $window.open(job.url, 'job' + job.id);
+      return;
+    }
 
+    //url doesn't exist => open a modal
     var opts = { backdrop: true, keyboard: true, backdropFade: true, backdropClick: true };
     _.extend(opts, {
       templateUrl: 'partials/modal.html',

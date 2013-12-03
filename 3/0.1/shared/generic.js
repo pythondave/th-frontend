@@ -161,6 +161,18 @@ thGenericModule.run(function($rootScope) {
   });
 });
 
+thGenericModule.filter('truncate', function () {
+  //truncates a string to maxLength (without splitting a word), adding an ellipsis where necessary
+  return function (s, maxLength, ellipsis) {
+    maxLength = maxLength || 10;
+    ellipsis = ellipsis || '...';
+
+    if (s.length - ellipsis.length <= maxLength) return s;
+    s = s.slice(0, maxLength-ellipsis.length);
+    return s.slice(0, Math.min(s.length, s.lastIndexOf(' '))) + ellipsis;
+  };
+});
+
 thGenericModule.factory('hierarchyFunctionsService', function () {
   //hierarchyFunctionsService: use to create a more self-aware hierarchy
   //e.g. can use this service to add the following properties to each item in the hierarchy:

@@ -1,50 +1,99 @@
-thJobsAppModule.factory('jobsService', function($http, $rootScope, configService, listService) {
-  //initialise
+/*
+  Contains: initService, jobsFilterService
+*/
+
+thJobsAppModule.factory('initService', function ($http, $q, $qDecoratorService, configService) {
+  //initService: code which is typically run only when the application is first loaded
   var o = {};
-  o.list = new listService.List();
-  o.list.setSortOrderPaths(['-subject', 'role']);
+  $qDecoratorService.decorate($q);
 
-  //get data
-  o.getAndSetData = function(dataToPost) {
-    o.list.setData([]); //instantly clear current data
-    o.dataPosted = dataToPost;
-
-    var getDataFromServer = $http.post(configService.requests.urls.jobs, dataToPost, configService.requests.postConfig);
-    var setData = function(response) {
-      o.list.setData(response.data.jobs);
-      o.setDerivedData();
-      $rootScope.$broadcast('jobsChanged'); //more than one controller needs to know
+  o.init = function() {
+    //loads lists for the filters
+    var getAndSetServerData = function() {
+      var getJobsAppLists = function() {
+        return $http.post(configService.requests.urls.jobsAppLists, undefined, configService.requests.postConfig);
+      };
+      var sortData = function(data) {
+        data.subjects = _.sortBy(data.subjects, 'name');
+        data.positions = _.sortBy(data.positions, 'name');
+        data.locations = _.sortBy(data.locations, 'name');
+        data.systems = _.sortBy(data.systems, 'system');
+      };
+      var setDataFromServer = function(response) {
+        if (!response[0].data && configService.mode < 3) { return $q.delay(1000).then(o.init); }//no data and mock server being used, so wait and then try again to give time for mock json files to be loaded *** TODO: move this to within the mock server somehow
+        var lists = response[0], data = lists.data;
+        data.systems = data.academicSystems; //simpler alias, used throughout
+        sortData(data);
+        return { lists: lists };
+      };
+      return $q.all([getJobsAppLists()]).then(setDataFromServer);
     };
-    return getDataFromServer.then(setData);
+    return getAndSetServerData();
   };
 
-  o.setDerivedData = function() {
-    _(o.list.data).each(function(j) {
-      if (j.dateCreated) j.daysSinceCreated = (new Date() - new Date(j.dateCreated))/1000/60/60/24;
+  return o;
+});
+
+thJobsAppModule.factory('jobsFilterService', function($state, $rootScope) {
+  //jobsFilterService: provides data and functions for the job filters
+  //*** TODO: consider consolidating this with the html into a 'filter' directive
+  //*** TODO: refactor so more DRY
+  var o = {};
+
+  o.config = [
+    { name: 'subject' },
+    { name: 'position' },
+    { name: 'location' },
+    { name: 'system' }
+  ];
+  o.subject = {};
+  o.position = {};
+  o.location = {};
+  o.system = {};
+  o.start = {};
+
+  o.synchToParam = function(filterName, listName, parameterName) {
+    listName = listName || filterName + 's';
+    parameterName = parameterName || filterName;
+    o[filterName].val = _.find(o.lists[listName], { 'id': _.parseInt($state.params[parameterName]) });
+  };
+
+  o.synchToParams = function() {
+    o.synchToParam('subject');
+    o.synchToParam('position');
+    o.synchToParam('location');
+    o.synchToParam('system');
+    o.start.val = _.isNull($state.params.start) ? undefined : new Date($state.params.start);
+  };
+
+  o.addFilterWatch = function(filterName) {
+    var toUrlValue = function(x) { //takes a value and translates it to a format appropriate for the url
+      if (_.isUndefined(x) || _.isNull(x)) return;
+      if (_.isDate(x)) return _.toDateString(x);
+      if (x.id) return x.id;
+    };
+
+    $rootScope.$watch('filters.' + filterName + '.val', function(newValue, oldValue) {
+      var params = {}; params[filterName] = toUrlValue(newValue);
+      $state.go('jobs.query', params);
     });
   };
 
-  //filter
-  o.filter = function(values) {
-    if (!o.list) return;
-    var re = new RegExp(values.search, 'i');
-    o.list.filteredData = _(o.list.data).filter(function(o) {
-      return ((!values.search || re.test(_.arrayOfValues(o).join('|'))) &&
-              (!values.subject || o.subject === values.subject) &&
-              (!values.role || o.role === values.role) &&
-              (!values.schoolName || o.schoolName === values.schoolName) &&
-              (!values.country || o.country === values.country));
-    }).value();
-    $rootScope.$broadcast('jobsChanged');
+  o.init = function(lists) {
+    o.addFilterWatch('subject');
+    o.addFilterWatch('position');
+    o.addFilterWatch('location');
+    o.addFilterWatch('system');
+    o.addFilterWatch('start');
+
+    o.lists = lists;
+    o.subject.data = o.lists.subjects;
+    o.position.data = o.lists.positions;
+    o.location.data = o.lists.locations;
+    o.system.data = o.lists.systems;
   };
 
-  //totals
-  o.getTotals = function(paths) {
-    var totals = {};
-    paths = paths || ['numApplied', 'numPutForward', 'numShortlisted', 'numInterviewed', 'numOffersMade', 'isAccepted', 'numRejected'];
-    _(paths).each(function(path) { totals[path] = o.list.sum(path); }).value();
-    return totals;
-  };
+  $rootScope.filters = o;
 
   return o;
 });
