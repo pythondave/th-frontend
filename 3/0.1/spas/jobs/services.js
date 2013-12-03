@@ -20,7 +20,7 @@ thJobsAppModule.factory('initService', function ($http, $q, $qDecoratorService, 
         data.systems = _.sortBy(data.systems, 'system');
       };
       var setDataFromServer = function(response) {
-        if (!response[0].data && configService.mode < 3) { return $q.delay(1000).then(o.init); }//no data and mock server being used, so wait and then try again to give time for mock json files to be loaded *** TODO: move this to within the mock server somehow
+        if (!response[0].data && configService.mode < 3) { return $q.delay(1000).then(o.init); } //no data and mock server being used, so wait and then try again to give time for mock json files to be loaded *** TODO: move this to within the mock server somehow
         var lists = response[0], data = lists.data;
         data.systems = data.academicSystems; //simpler alias, used throughout
         sortData(data);

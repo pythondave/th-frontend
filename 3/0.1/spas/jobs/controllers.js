@@ -34,6 +34,7 @@ thJobsAppModule.controller('MainCtrl', function($scope, $rootScope, $http, $moda
     });
 
     $scope.jobs = _.sortBy(jobs, ['startDate', 'subject', 'position']);
+    $scope.userType = response.data.type;
   };
 
   $scope.$on('$stateChangeStart', function() {
@@ -46,22 +47,24 @@ thJobsAppModule.controller('MainCtrl', function($scope, $rootScope, $http, $moda
   });
 
   $scope.jobClick = function(job) {
-    if (job.url) { //url exists => open in new tab
-      $window.open(job.url, 'job' + job.id);
+    if ($scope.userType === 1) { //admin or teacher with profile >= 80% => open in new tab
+      $window.open(job.url, 'job' + job.id); //Note: job.url is assumed to exist
       return;
     }
 
-    //url doesn't exist => open a modal
+    //not userType 1 => open a modal
     var opts = { backdrop: true, keyboard: true, backdropFade: true, backdropClick: true };
     _.extend(opts, {
       templateUrl: 'partials/modal.html',
-      controller: 'ModalCtrl'
+      controller: 'ModalCtrl',
+      resolve: { userType: function() { return $scope.userType; } }
     });
 
     $modal.open(opts);
   };
 });
 
-thJobsAppModule.controller('ModalCtrl', function($scope, $modalInstance) {
+thJobsAppModule.controller('ModalCtrl', function($scope, $modalInstance, userType) {
+  $scope.userType = userType;
   $scope.close = $modalInstance.close;
 });

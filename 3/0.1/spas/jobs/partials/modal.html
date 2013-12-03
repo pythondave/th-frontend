@@ -4,11 +4,11 @@
 <div class="modal-body" style="height: 200px;">
   <div style="margin-bottom: 8px;">
     <p>The details of our opportunities are protected.</p>
-    <p>To access this information, please complete your profile to 80%.</p>
+    <p>To access this information, please <span ng-if="userType==3"><a href="/me">sign in</a> and </span>complete your profile to 80%.</p>
     <p>It will take just a few minutes and will open a lifetime of opportunities!</p>
   </div>
   <div style="margin: 25px 0 0 0; text-align: center;">
-    <button onclick="location.href='../../todo/default.html'" class="rounded15px btn-yellow" style="width: 400px; height: 80px; font-size: 25px;">Complete my profile</button>
+    <button onclick="location.href='/me'" class="rounded15px btn-yellow" style="width: 400px; height: 80px; font-size: 25px;">Complete my profile</button>
   </div>
 </div>
 <div class="modal-footer">

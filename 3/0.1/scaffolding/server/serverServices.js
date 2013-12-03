@@ -370,9 +370,9 @@ thMockServerModule.run(function($httpBackend, $resource, $q, $timeout, $http,
     }
     o.jobs.length = numberOfRecords; //remove dummy data which isn't needed
 
-    var isLessThan80Percent = (Math.random() < 0.5); //randomly assign
+    o.type = _.random(1, 3);
     _.forEach(o.jobs, function(job) {
-      if (isLessThan80Percent) delete job.url;
+      if (o.type !== 1) delete job.url;
       if (params.subject) job.subject = _.parseInt(params.subject);
       if (params.position) job.position = _.parseInt(params.position);
     });

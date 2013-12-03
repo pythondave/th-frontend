@@ -1,4 +1,8 @@
 {
+    "__Note1": "type 1 => full access - applies to admins and teachers with profile >= 80%",
+    "__Note2": "type 2 => restricted - applies to teachers with profile < 80%",
+    "__Note3": "type 3 => anonymous - applies for public users",
+    "__Note4": "jobs url is returned only for type 1",
     "type": 1,
     "jobs": [
         {
