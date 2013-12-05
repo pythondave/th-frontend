@@ -2,6 +2,10 @@
   <img src="../../style/spinner1.gif" alt="spinner" />
 </div>
 
+<div ng-if="jobs.length==0" style="margin: 20px;">
+  No jobs match your search - try removing one of the filters to make your search slightly less specific.
+</div>
+
 <div ng-repeat="j in jobs" class="job rounded5px">
   <div style="padding: 10px; clear both;" ng-click="jobClick(j)">
     <div style="width: 390px; float: left; display: inline-block;">
