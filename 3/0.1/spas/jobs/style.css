@@ -10,6 +10,16 @@
   border-radius: 15px;
 }
 
+.img-container {
+  position: relative;
+}
+.img-container img {
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+  margin: auto; width: auto; height: auto;
+}
+
+
 /* job */
 .job { margin: 0 0 5px 0; background-color: white; min-height: 170px; cursor: pointer; }
 .job:hover { background-color: #FFFFDC; }
