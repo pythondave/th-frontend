@@ -1228,7 +1228,7 @@
             },
             {
               "type": "html",
-              "val": "<div style='width: 70%'><br/>Please share with other schools that would benefit from a free profile page on Teacherhorizons.<br/><br/>Many thanks!<br/><br/><a href='{{school.alias}}' target='_blank'><button style='margin: 0 0 0 45%' class='btn btn-info btn-large'><span style='margin: 0 3px 0 -3px;'><i class='icon-eye-open' style='font-size: 18px;'></i></span>View my profile</button></a></div>"
+              "val": "<div style='margin: 20px 0;'><div style='width: 70%;'>Please share with other schools that would benefit from a free profile page on Teacherhorizons.<br/><br/>Many thanks!</div><div style='margin: 5px 90px;'><div style='margin: 10px; float: left;'><a href='{{school.alias}}' target='_blank'><button style='' class='btn btn-info btn-large'><span style='margin: 0 3px 0 -3px;'><i class='icon-eye-open' style='font-size: 18px;'></i></span>View my profile</button></a></div><div style='margin: 10px; float: left;'><a href='{{school.alias}}/jobs' target='_blank'><button style='margin: 0 0 0 0' class='btn btn-info btn-large'><span style='margin: 0 3px 0 -3px;'><i class='icon-envelope' style='font-size: 18px;'></i></span>Post vacancies</button></a></div></div></div><div style='clear: both; height: 10px;'></div>"
             }
           ]
         }
