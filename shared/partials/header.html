@@ -1,0 +1,87 @@
+<div id="header">
+  <input type="checkbox" id="main-nav-check"/>
+  <div id="menu">
+    <label for="main-nav-check" class="toggle icon-cross" onclick="" title="Close"></label>
+    <ul>
+      <li><a href="http://www.teacherhorizons.com/">Home</a></li>
+
+      <li>
+        <a href="http://localhost:82/wordpress/teaching-abroad">Teaching abroad</a>
+        <label for="teaching-abroad" class="toggle-sub icon-right" onclick=""></label>
+        <input type="checkbox" id="teaching-abroad" class="sub-nav-check"/>
+        <ul id="teaching-abroad-sub" class="sub-nav">
+          <li class="sub-heading">Teaching abroad<label for="teaching-abroad" class="toggle icon-left" onclick="" title="Back"></label></li>
+          <li><a href="http://localhost:82/wordpress/teaching-abroad">Job-seeking advice</a></li>
+          <li><a href="http://localhost:82/wordpress/settling-in-to-teaching-abroad">General advice</a></li>
+          <li><a href="http://localhost:82/wordpress/salaries-and-benefits-in-international-schools">Salaries and packages</a></li>
+          <li><a href="http://localhost:82/wordpress/opportunities-for-professional-development-teaching-abroad">Professional development</a></li>
+          <li><a href="http://localhost:82/wordpress/applying-to-international-school-jobs-with-teacherhorizons">Using Teacherhorizons</a></li>
+          <li><a href="http://localhost:82/wordpress/">Our blog</a></li>
+          <li><a href="http://localhost:82/wordpress/networks">Networks</a></li>
+        </ul>
+      </li>
+
+      <li><a href="http://localhost:82/wordpress/about">About</a>
+        <label for="about" class="toggle-sub icon-right" onclick=""></label>
+        <input type="checkbox" id="about" class="sub-nav-check"/>
+        <ul id="about-sub" class="sub-nav">
+          <li class="sub-heading">About<label for="about" class="toggle icon-left" onclick="" title="Back"></label></li>
+          <li><a href="http://localhost:82/wordpress/about">About</a></li>
+          <li><a href="http://localhost:82/wordpress/why-use-teacherhorizons">Why use Teacherhorizons?</a></li>
+          <li><a href="http://localhost:82/wordpress/contact">Contact</a></li>
+          <li><a href="http://localhost:82/wordpress/the-team">The team</a></li>
+          <li><a href="http://localhost:82/wordpress/happy-teachers">Happy teachers</a></li>
+          <li><a href="http://localhost:82/wordpress/competitions">Competitions</a></li>
+          <li><a href="http://localhost:82/wordpress/applying-to-international-school-jobs-with-teacherhorizons">Applying to jobs</a></li>
+          <li><a href="http://localhost:82/wordpress/faq-for-teachers">FAQ for teachers</a></li>
+          <li><a href="http://localhost:82/wordpress/terms-and-conditions-for-teachers">Terms and conditions for teachers</a></li>
+        </ul>
+      </li>
+
+      <li><a href="http://localhost:82/wordpress/faq-for-schools">Recruiters</a>
+        <label for="faq-for-schools" class="toggle-sub icon-right" onclick=""></label>
+        <input type="checkbox" id="faq-for-schools" class="sub-nav-check"/>
+        <ul id="faq-for-schools-sub" class="sub-nav">
+          <li class="sub-heading">Recruiters<label for="faq-for-schools" class="toggle icon-left" onclick="" title="Back"></label></li>
+          <li><a href="http://localhost:82/wordpress/faq-for-schools">FAQ for schools</a></li>
+          <li><a href="http://localhost:82/wordpress/services-for-international-schools">Services for international schools</a></li>
+          <li><a href="http://localhost:82/wordpress/testimonials">Testimonials</a></li>
+          <li><a href="http://localhost:82/wordpress/the-team">The team</a></li>
+          <li><a href="http://localhost:82/wordpress/terms-and-conditions-for-schools">Terms and conditions for schools</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <div class="fb-like" data-href="https://www.facebook.com/Teacherhorizons" data-width="5em" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+      </li>
+
+      <li ng-if="true"><a href="#">My account</a>
+        <label for="account" class="toggle-sub icon-right" onclick=""></label>
+        <input type="checkbox" id="account" class="sub-nav-check"/>
+        <ul id="account-sub" class="sub-nav">
+          <li class="sub-heading">My account<label for="account" class="toggle icon-left" onclick="" title="Back"></label></li>
+          <li><a href="/th-frontend/spa/admin/default.html#/teachers">Dashboard</a></li>
+          <li><a href="/th-frontend/spa/admin/candidates/default.html#/">Candidates</a></li>
+          <li><a href="/th-frontend/spa/jobs/default.html#/">Vacancies</a></li>
+          <li><a href="/th-frontend/spa/admin/default.html#/applications">Applications</a></li>
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </li>
+
+      <li ng-if="false"><a href="http://www.teacherhorizons.com/user/logon">Sign in</a></li>
+    </ul>
+  </div>
+
+
+  <div id="container">
+    <header class="header" role="banner">
+      <a href="http://www.teacherhorizons.com"><img src="/th-frontend/shared/images/logo.png" style="position:absolute; top: 0.3em; left:1em; width: 12em;; height: 3em; border:0" alt="Home" title="Home"></a>
+      <span style="position:absolute; top:1.175em; left:5em; color:#fff"></span>
+      <span class="icons">
+        <label for="main-nav-check" class="icon icon-menu" onclick="" title="Menu"></label>
+      </span>
+    </header>
+  </div>
+
+  <div id="fb-root"></div>
+</div>

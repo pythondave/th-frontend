@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html id="ng-app" ng-app="thJobsAppModule">
+
+<head>
+  <title>Jobs</title>
+  <link rel="icon" href="../../shared/images/favicon.ico">
+
+  <!--external stylesheets hosted on cdns-->
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css">
+
+  <link rel="stylesheet" href="../../shared/style/style.css">
+  <link rel="stylesheet" href="../../shared/style/custom-bootstrap.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body style="width: 960px; margin: 0 auto; padding: 0;">
+  <div style="background-color: #E5E9FD; display: inline-block;">
+    <div ng-include="'partials/header.html'"></div>
+    <div style="margin: 7px 0;">
+      <div ui-view="container-left" class="rounded5px" style="width: 270px; float: left; margin: 0 5px 10px 5px; padding: 10px; background-color: white;"></div>
+      <div ui-view="container-main" style="width: 630px; float: left; margin: 0 5px 0 0; padding: 0;"></div>
+    </div>
+    <div ng-include="'partials/footer.html'" style="clear: both;"></div>
+  </div>
+  
+  <!--external scripts-->
+    <!--jquery-->
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!--lodash (rather than underscore)-->
+      <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.0.0/lodash.min.js"></script>
+    <!--twitter bootstrap-->
+      <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <!--angular (official)-->
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+      <script src="//cdn.jsdelivr.net/angularjs/1.1.2/angular-resource.min.js"></script>
+    <!--angular (community)-->
+      <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.7.0.js"></script> <!--*** TODO: needs to be minimised - either locally or find a cdn-->
+      <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/2.1.0/es5-shim.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.0/angular-ui-router.min.js"></script>
+
+  <!--local scripts-->
+    <!--main-->
+      <script src="app.js"></script>
+      <script src="../../config.js"></script>
+    <!--shared modules-->
+      <script src="../../shared/ui-fields/ui-fields.js"></script>
+      <script src="../../shared/content-items/content-items.js"></script>
+
+    <!--services-->
+      <script src="services.js"></script>
+      <!--shared-->
+        <script src="../../shared/generic.js"></script>
+        <script src="../../shared/services/listService.js"></script>
+        <script src="../../shared/services/filterServices.js"></script>
+    <!--controllers-->
+      <script src="controllers.js"></script>
+    <!--directives-->
+      <script src="../../shared/directives.js"></script>
+
+  <!--prototype only scripts-->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular-mocks.js"></script>
+  <script src="../../scaffolding/server/serverServices.js"></script>
+</body>
+
+</html>

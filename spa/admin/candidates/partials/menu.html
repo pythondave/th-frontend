@@ -1,0 +1,119 @@
+<div class="filter">
+  <input type="text" ng-model="filters.search.val" placeholder="Search"></input>
+  <i class="icon-cross" ng-hide="!filters.search.val" ng-click="filters.search.val=undefined"></i>
+</div>
+
+<div style="color: #247bda; font-weight: bold; font-size: 1em; margin: 5px 0 10px 5px;">
+  <span ng-if="numberOfCandidates==0">No candidates matches</span>
+  <span ng-if="numberOfCandidates==1">{{numberOfCandidates}} candidate match</span>
+  <span ng-if="numberOfCandidates>1">{{numberOfCandidates}} candidate matches</span>
+</div>
+
+<div class="filter">
+  <span>Subjects</span>
+  <div select-from-many list="filters.subjects.data" field="filters.subjects" multiple placeholder="Subjects"></div>
+</div>
+
+<div class="filter">
+  <span>Roles</span>
+  <div select-from-many list="filters.roles.data" field="filters.roles" multiple placeholder="Roles"></div>
+</div>
+
+<div class="filter">
+  <span>Nationalities</span>
+  <div select-from-many list="filters.nationalities.data" field="filters.nationalities" multiple placeholder="Nationalities"></div>
+</div>
+
+<div class="filter">
+  <span>Curriculum experience</span>
+  <div select-from-many list="filters.curriculumExperience.data" field="filters.curriculumExperience" multiple placeholder="Curriculum experience"></div>
+</div>
+
+<div class="filter">
+  <span>Minimum experience</span>
+  <div slider model="filters.minimumExperience"></div>
+  <i class="icon-cross" ng-hide="!filters.minimumExperience.val" ng-click="filters.minimumExperience.index=0; "></i>
+</div>
+
+<div class="filter filter-checkbox">
+  <span>International school experience</span>
+  <div>
+    <input type="checkbox" ng-model="filters.internationalSchoolExperience.val" ng-true-value="1" ng-false-value=""></input>
+  </div>
+  <i class="icon-cross" ng-hide="!filters.internationalSchoolExperience.val" ng-click="filters.internationalSchoolExperience.val=undefined"></i>
+</div>
+
+<div class="filter">
+  <span>Available from</span>
+  <input type="text" placeholder="Available from" datepicker-popup="EEE d MMM yyyy" ng-model="filters.availableFrom.val" is-open="filters.availableFrom.open" min="minDate" show-weeks="false" close-text="Close" ></input>
+  <i class="icon-cross" ng-hide="!filters.availableFrom.val" ng-click="filters.availableFrom.val=undefined"></i>
+</div>
+
+<div class="filter">
+  <span>Date registered</span>
+  <input type="text" placeholder="Date registered" datepicker-popup="EEE d MMM yyyy" ng-model="filters.dateRegistered.val" is-open="filters.dateRegistered.open" min="minDate" show-weeks="false" close-text="Close" ></input>
+  <i class="icon-cross" ng-hide="!filters.dateRegistered.val" ng-click="filters.dateRegistered.val=undefined"></i>
+</div>
+
+<div class="filter">
+  <span>Average reference score</span>
+  <div slider model="filters.averageReferenceScore"></div>
+  <i class="icon-cross" ng-hide="!filters.averageReferenceScore.val" ng-click="filters.averageReferenceScore.index=0; "></i>
+</div>
+
+<div class="filter">
+  <span>Adviser score</span>
+  <div slider model="filters.adviserScore"></div>
+  <i class="icon-cross" ng-hide="!filters.adviserScore.val" ng-click="filters.adviserScore.index=0; "></i>
+</div>
+
+<div class="filter">
+  <span>Year of birth</span>
+  <select ng-model="filters.yearOfBirth.val" ng-options="x.name for x in filters.yearOfBirth.data" ng-style="{ color: ( filters.yearOfBirth.val ? '' : '#aaa' ) }">
+    <option value="" disabled selected style="display: none">Year of birth</option>
+  </select>
+  <i class="icon-cross" ng-hide="!filters.yearOfBirth.val" ng-click="filters.yearOfBirth.val=undefined"></i>
+</div>
+
+<div class="filter">
+  <span>Marital status</span>
+  <div select-from-many list="filters.maritalStatus.data" field="filters.maritalStatus" multiple placeholder="Marital status"></div>
+</div>
+
+<div class="filter">
+  <span>Number of dependent children</span>
+  <select ng-model="filters.numberOfDependentChildren.val" ng-options="x.name for x in filters.numberOfDependentChildren.data" ng-style="{ color: ( filters.numberOfDependentChildren.val ? '' : '#aaa' ) }">
+    <option value="" disabled selected style="display: none">Number of dependent children</option>
+  </select>
+  <i class="icon-cross" ng-hide="!filters.numberOfDependentChildren.val" ng-click="filters.numberOfDependentChildren.val=undefined"></i>
+</div>
+
+<div class="filter">
+  <span>Education levels completed</span>
+  <div select-from-many list="filters.eduationLevelsCompleted.data" field="filters.eduationLevelsCompleted" multiple placeholder="Education levels completed"></div>
+</div>
+
+<div class="filter">
+  <span>Location</span>
+  <select ng-model="filters.location.val" ng-options="x.name for x in filters.location.data" ng-style="{ color: ( filters.location.val ? '' : '#aaa' ) }">
+    <option value="" disabled selected style="display: none">Location</option>
+  </select>
+  <i class="icon-cross" ng-hide="!filters.location.val" ng-click="filters.location.val=undefined"></i>
+</div>
+
+<div class="filter filter-checkbox">
+  <span>Approved</span>
+  <div>
+    <input type="checkbox" ng-model="filters.approved.val" ng-true-value="1" ng-false-value=""></input>
+  </div>
+  <i class="icon-cross" ng-hide="!filters.approved.val" ng-click="filters.approved.val=undefined"></i>
+</div>
+
+<div class="filter filter-checkbox">
+  <span>CV</span>
+  <div>
+    <input type="checkbox" ng-model="filters.cv.val" ng-true-value="1" ng-false-value=""></input>
+  </div>
+  <i class="icon-cross" ng-hide="!filters.cv.val" ng-click="filters.cv.val=undefined"></i>
+</div>
+

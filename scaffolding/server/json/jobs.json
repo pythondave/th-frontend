@@ -1,0 +1,181 @@
+{
+    "__Note1": "type 1 => full access - applies to admins and teachers with profile >= 80%",
+    "__Note2": "type 2 => restricted - applies to teachers with profile < 80%",
+    "__Note3": "type 3 => anonymous - applies for public users",
+    "__Note4": "jobs url is returned only for type 1",
+    "type": 1,
+    "jobs": [
+        {
+            "id": 841,
+            "subject": 37,
+            "position": 20,
+            "startDate": "2014-01-01",
+            "deadline": "2013-12-25",
+            "furtherInfo": "Successful Applicants will:\r\n•\tIdentify with the unique vision of Escola Global\r\n•\tBe a fluent native English speaker who is proficient/committed to learning Spanish (other languages are also desirable)\r\n•\tBe an outstanding classroom practitioner, with at least two years experience and have worked with English National Curriculum\r\n•\tBe passionate, flexible and innovative \r\n•\tBe a team player with excellent communication and inter-personal skills\r\n•\tBe reflective and committed to school improvement and professional development  \r\n",
+            "title": "Primary KS2 teacher",
+            "url": "/Europe/Spain/Palma_de_Mallorca/Escola_Global/jobs#841",
+            "image": "/static/media/schools/323/images/2767.jpg",
+            "location": {
+                "city": {
+                    "id": 575,
+                    "name": "Palma de Mallorca",
+                    "country": {
+                        "id": 64,
+                        "name": "Spain",
+                        "continent": {
+                            "id": 4,
+                            "name": "Europe"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": 842,
+            "subject": 37,
+            "position": 20,
+            "startDate": "2014-01-01",
+            "deadline": "2013-12-25",
+            "furtherInfo": "Successful Applicants will:\r\n•\tIdentify with the unique vision of Escola Global\r\n•\tBe a fluent native English speaker who is proficient/committed to learning Spanish (other languages are also desirable)\r\n•\tBe an outstanding classroom practitioner, with at least two years experience and have worked with English National Curriculum\r\n•\tBe passionate, flexible and innovative \r\n•\tBe a team player with excellent communication and inter-personal skills\r\n•\tBe reflective and committed to school improvement and professional development  \r\n",
+            "title": "Primary KS2 teacher",
+            "url": "/Europe/Spain/Palma_de_Mallorca/Escola_Global/jobs#842",
+            "location": {
+                "city": {
+                    "id": 575,
+                    "name": "Palma de Mallorca",
+                    "country": {
+                        "id": 64,
+                        "name": "Spain",
+                        "continent": {
+                            "id": 4,
+                            "name": "Europe"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": 843,
+            "subject": 37,
+            "position": 20,
+            "startDate": "2014-01-01",
+            "deadline": "2013-12-25",
+            "furtherInfo": "Successful Applicants will:\r\n•\tIdentify with the unique vision of Escola Global\r\n•\tBe a fluent native English speaker who is proficient/committed to learning Spanish (other languages are also desirable)\r\n•\tBe an outstanding classroom practitioner, with at least two years experience and have worked with English National Curriculum\r\n•\tBe passionate, flexible and innovative \r\n•\tBe a team player with excellent communication and inter-personal skills\r\n•\tBe reflective and committed to school improvement and professional development  \r\n",
+            "title": "Primary KS2 teacher",
+            "url": "/Europe/Spain/Palma_de_Mallorca/Escola_Global/jobs#843",
+            "image": "/static/media/schools/209/images/27503.jpg",
+            "location": {
+                "city": {
+                    "id": 575,
+                    "name": "Palma de Mallorca",
+                    "country": {
+                        "id": 64,
+                        "name": "Spain",
+                        "continent": {
+                            "id": 4,
+                            "name": "Europe"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": 1017,
+            "subject": 23,
+            "position": 1,
+            "startDate": "2014-01-02",
+            "deadline": "2013-12-25",
+            "furtherInfo": "The International School Moshi is looking for a strong Mathematics teacher with experience of teaching Mathematics to both Standard and Higher level of the IBDP to begin in January 2014 * This position may be considered for one of a teaching couple to fill both this vacancy and that of Boarding Parent. If interested in the position(s), please contact Alexis Toye on alexistoye@teacherhorizons.com",
+            "title": "Mathematics teacher",
+            "url": "/Africa/Tanzania/Moshi/International_School_Moshi/jobs#1017",
+            "image": "/static/media/schools/2898/images/27539.jpg",
+            "location": {
+                "city": {
+                    "id": 407,
+                    "name": "Moshi",
+                    "country": {
+                        "id": 69,
+                        "name": "Tanzania",
+                        "continent": {
+                            "id": 1,
+                            "name": "Africa"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": 1018,
+            "subject": 23,
+            "position": 1,
+            "startDate": "2014-01-01",
+            "deadline": "2013-12-25",
+            "furtherInfo": "The International School Moshi is looking for a strong Mathematics teacher with experience of teaching Mathematics to both Standard and Higher level of the IBDP to begin in January 2014 * This position may be considered for one of a teaching couple to fill both this vacancy and that of Boarding Parent. If interested in the position(s), please contact Alexis Toye on alexistoye@teacherhorizons.com",
+            "title": "Mathematics teacher",
+            "url": "/Africa/Tanzania/Moshi/International_School_Moshi/jobs#1018",
+            "image": "/static/media/schools/209/images/27538.jpg",
+            "location": {
+                "city": {
+                    "id": 407,
+                    "name": "Moshi",
+                    "country": {
+                        "id": 69,
+                        "name": "Tanzania",
+                        "continent": {
+                            "id": 1,
+                            "name": "Africa"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": 1019,
+            "subject": 37,
+            "position": 13,
+            "startDate": "2014-01-01",
+            "deadline": "2013-12-25",
+            "furtherInfo": "The International School Moshi is looking for a Boarding Parent for their IBDP Girls' Boarding House (16- 20 year-olds) with possible part-time counsellor responsibilities for the right candidate * This position may be considered for one of a teaching couple to fill both this vacancy and that of Mathematics teacher. If interested in the position(s), please contact Alexis Toye on alexistoye@teacherhorizons.com",
+            "title": "Boarding Parent (40% FTE)",
+            "url": "/Africa/Tanzania/Moshi/International_School_Moshi/jobs#1019",
+            "location": {
+                "city": {
+                    "id": 407,
+                    "name": "Moshi",
+                    "country": {
+                        "id": 69,
+                        "name": "Tanzania",
+                        "continent": {
+                            "id": 1,
+                            "name": "Africa"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": 1020,
+            "subject": 37,
+            "position": 13,
+            "startDate": "2014-01-01",
+            "deadline": "2013-12-25",
+            "furtherInfo": "The International School Moshi is looking for a Boarding Parent for their IBDP Girls' Boarding House (16- 20 year-olds) with possible part-time counsellor responsibilities for the right candidate * This position may be considered for one of a teaching couple to fill both this vacancy and that of Mathematics teacher. If interested in the position(s), please contact Alexis Toye on alexistoye@teacherhorizons.com",
+            "title": "Boarding Parent (40% FTE)",
+            "url": "/Africa/Tanzania/Moshi/International_School_Moshi/jobs#1020",
+            "location": {
+                "city": {
+                    "id": 407,
+                    "name": "Moshi",
+                    "country": {
+                        "id": 69,
+                        "name": "Tanzania",
+                        "continent": {
+                            "id": 1,
+                            "name": "Africa"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

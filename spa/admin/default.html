@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html ng-app="thAdminDashboardAppModule">
+
+<head>
+  <title>Admin</title>
+  <link rel="icon" href="../../shared/images/favicon.ico">
+
+  <!--external stylesheets hosted on cdns-->
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css">
+
+  <!--local stylesheets-->
+    <!--remove http://beta.teacherhorizons.com from the links below in production *** TODO - remove the need for this -->
+  <link rel="stylesheet" href="http://beta.teacherhorizons.com/static/css/jquery.fileupload-ui.css">
+  <link rel="stylesheet" href="../../shared/style/style.css">
+  <link rel="stylesheet" href="../../shared/style/custom-bootstrap.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body ng-controller="KeyboardEventCtrl" keyboard-event>
+  <div ng-controller="NavBarCtrl" ng-include="navBarUrl" class="ng-cloak"></div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div ui-view="container-left" class="ng-cloak container-left span4"></div>
+      <div ui-view="container-main" class="ng-cloak span8"></div>
+    </div>
+  </div>
+  
+  <!--external scripts-->
+    <!--jquery-->
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!--lodash (rather than underscore)-->
+      <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.0.0/lodash.min.js"></script>
+    <!--twitter bootstrap-->
+      <!--<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script> avg issue => replaced with line below-->
+      <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <!--angular (official)-->
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+      <script src="//cdn.jsdelivr.net/angularjs/1.1.2/angular-resource.min.js"></script>
+    <!--angular (community)-->
+      <!--<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.2.0/ui-bootstrap-tpls.js"></script> replaced with line below-->
+      <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.js"></script>
+      <!--<script src="http://angular-ui.github.io/ui-router/build/angular-ui-states.min.js"></script> stopped working => replaced with line below-->
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.0/angular-ui-router.min.js"></script>
+
+  <!--local scripts-->
+    <!--main-->
+      <script src="app.js"></script>
+      <script src="../../config.js"></script>
+    <!--shared modules-->
+      <script src="../../shared/ui-fields/ui-fields.js"></script>
+      <script src="../../shared/content-items/content-items.js"></script>
+
+    <!--services-->
+      <!--teachers-->
+        <script src="teachers/teacherServices.js"></script>
+      <!--jobs-->
+        <script src="jobs/jobServices.js"></script>
+      <!--applications-->
+        <script src="applications/applicationServices.js"></script>
+      <!--schools-->
+        <script src="schools/schoolServices.js"></script>
+      <!--settings-->
+        <script src="settings/settingServices.js"></script>
+      <!--shared-->
+        <script src="../../shared/generic.js"></script>
+        <script src="../../shared/services/listService.js"></script>
+        <script src="../../shared/services/alertServices.js"></script>
+        <script src="../../shared/services/filterServices.js"></script>
+        <script src="../../shared/services/schoolServices.js"></script>
+        <script src="../../shared/services/basicListServices.js"></script>
+        <script src="../../shared/services/scoreServices.js"></script>
+    <!--controllers-->
+      <script src="teachers/teacherControllers.js"></script>
+      <script src="applications/applicationControllers.js"></script>
+      <script src="jobs/jobControllers.js"></script>
+      <script src="schools/schoolControllers.js"></script>
+      <script src="settings/settingControllers.js"></script>
+    <!--directives-->
+      <script src="../../shared/directives.js"></script>
+
+    <!--uploader - *** TODO - consider refactoring so less reliant on jQuery (keep an eye on angular upload solutions, with a view to possibly switching to one when they become mature enough with enough browser support) -->
+      <!--remove http://beta.teacherhorizons.com from the links below in production *** TODO - remove the need for this -->
+    <script src="http://beta.teacherhorizons.com/static/js/jquery.iframe-transport.js"></script>
+    <script src="http://beta.teacherhorizons.com/static/tpp-editor/lib/jquery/jquery-ui.js"></script>
+    <script src="http://beta.teacherhorizons.com/static/js/jquery.fileupload.js"></script>
+    <script src="http://beta.teacherhorizons.com/static/js/jquery.fileupload-process.js"></script>
+    <script src="http://beta.teacherhorizons.com/static/js/jquery.fileupload-validate.js"></script>
+    <script src="http://beta.teacherhorizons.com/static/js/jquery.fileupload-ui.js"></script>
+
+  <!--prototype only scripts-->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular-mocks.js"></script>
+  <script src="../../scaffolding/server/serverServices.js"></script>
+</body>
+
+</html>

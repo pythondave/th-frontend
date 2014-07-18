@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <h3>Please complete your profile</h3>
+</div>
+<div class="modal-body" style="height: 200px;">
+  <div style="margin-bottom: 8px;">
+    <p>The details of our opportunities are protected.</p>
+    <p>To access this information, please <span ng-if="userType==3"><a href="/me">sign in</a> and </span>complete your profile to 80%.</p>
+    <p>It will take just a few minutes and will open a lifetime of opportunities!</p>
+  </div>
+  <div style="margin: 25px 0 0 0; text-align: center;">
+    <button onclick="location.href='/me'" class="rounded5px btn-yellow" style="width: 200px; height: 40px; font-size: 18px; margin-top: 10px;">Complete my profile</button>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn" ng-click="close()">Cancel</button>
+</div>

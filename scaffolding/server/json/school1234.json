@@ -1,0 +1,192 @@
+{
+    "__note": "Full",
+    "type": 1,
+    "uploadToken": "0adbb0ee55c97e656ebdbe62b27ce265",
+    "token": "5afd5cf43ad092f70e6d1e1286e05ade",
+    "school": {
+        "id": 1234,
+        "city": 146,
+        "type": 1,
+        "religiousAffiliation": 8,
+        "genderRatio": 1,
+        "currency": 3,
+        "pensionScheme": 1,
+        "fundingType": 1,
+        "name": "American School of Durango",
+        "active": 1,
+        "alias": "/Central_America/Mexico/Durango/American_School_of_Durango",
+        "address1": "Francisco Sarabia #416 ",
+        "address2": "some place",
+        "address3": "some bigger place",
+        "website": "www.cadurango.edu.mx/",
+        "email": "colegio_americano@cadurango.edu.mx",
+        "phone": "(618) 813-36-36",
+        "startTime": "8:00 a.m.",
+        "endTime": "2:15 p.m.",
+        "newYearMonth": 8,
+        "headTeacher": "Mr. Joseph Castillejo",
+        "studentsCoverLessons": 0,
+        "hpwExtraCurricular": 2,
+        "hpwWeekDayLessons": 30,
+        "hpwWeekendLessons": 0,
+        "intStudentsTotal": 493,
+        "intStudentsPreSchool": 122,
+        "intStudentsPrimary": 222,
+        "intStudentsSecondary": 149,
+        "intAvgStudentsPreSchool": 20,
+        "intAvgStudentsPrimary": 18,
+        "intAvgStudentsSecondary": 18,
+        "pintStudents": 10,
+        "pintStaff": 10,
+        "pintCintWhiteBoards": 100,
+        "intCpRooms": 3,
+        "acceptsTeflTeachers": 0,
+        "payBoe": 1,
+        "cpd": "",
+        "contractLength": 2,
+        "fhipCountry": 1,
+        "workIncentive": "There are many benefits connected with the two-year contracts of employment with the American School of Durango. Contract days: 185 days of school for students and 200 days for teachers and staff.  Your salary will be equally divided and paid over a full twelve-month period, so there are no long gaps where you will not be paid.  We have an excellent holiday schedule giving teachers and staff ample time to visit the many historic sights and destinations of Mexico or go home to the US or Canada.  \r\nWhat we are looking for are good motivated teachers to help us grow and build for the future.\r\nThe real bonus of the school is the kids – they are great!  ",
+        "selectiveYear": 1,
+        "acClassRoom": 3,
+        "supportOffered": "",
+        "verifiedBySchool": 1,
+        "completionLevel": 75,
+        "initials": "ASOD",
+        "nickname": "ABCD",
+        "grossSalaryJnr": 12345,
+        "grossSalarySnr": 23456,
+        "taxRateJnr": 12,
+        "taxRateSnr": 23,
+        "tyssingle": 1234,
+        "teacherSalaryFcover": 1,
+        "teacherSs": 0,
+        "wipAnnualProfessionalDevelopmentBudgetPerTeacher": 2,
+        "schoolDaysPerYear": 180,
+        "flightAllowance": 3,
+        "relocationAllowance": 2,
+        "password": "do we want to expose this here?",
+        "approvedByTeacherhorizons": 1,
+        "visitedByTeacherhorizons": 0,
+        "logo": [{"id":2320,"resource":"http://beta.teacherhorizons.com/static/media/schools/209/images/27503.jpg","reference":"OBS.jpg","type":12}],
+        "profilePicture": [{"id":2297,"resource":"http://beta.teacherhorizons.com/static/media/schools/209/images/27478.jpg","reference":"crown-and-greyhound.jpg","type":13}],
+        "accreditations": [
+            3,
+            5
+        ],
+        "curriculumTypes": [
+            3,
+            5,
+            7,
+            9
+        ],
+        "facilities": [
+            2,
+            5,
+            8
+        ],
+        "acceptedTeacherQualifications": [
+            2,
+            4,
+            6,
+            8
+        ],
+        "benefits": [
+            { "id": 1, "value": 45 },
+            { "id": 2, "value": 1 },
+            { "id": 3, "value": 3 },
+            { "id": 4, "value": 0 },
+            { "id": 6, "value": 1 },
+            { "id": 7, "value": 7 },
+            { "id": 8, "value": 0 },
+            { "id": 9, "value": 2 },
+
+            { "id": 105, "value": 5 }
+        ],
+        "languages": [
+            2,
+            4,
+            6
+        ],
+        "academicSystems": [
+            2,3,4
+        ],
+        "jobs": [
+            {
+                "id": 926,
+                "subject": 32,
+                "position": 1,
+                "startDate": "2013-08-14",
+                "deadline": "2013-07-24",
+                "furtherInfo": "A General Science Middle to High School teacher is needed ASAP to teach at this vibrant school in Mexico. IB experience preferred. Please contact alexistoye@teacherhorizons.com if you are interested.",
+                "netSalary": 0,
+                "taxRate": 0,
+                "contractLength": 0,
+                "title": "Science teacher, Middle/High School"
+            },
+            {
+                "id": 982,
+                "subject": 39,
+                "position": 6,
+                "startDate": "2013-08-26",
+                "deadline": "2013-07-24",
+                "furtherInfo": "To apply for this position or request more information please contact John Regan on johnregan@teacherhorizons.com",
+                "netSalary": 0,
+                "taxRate": 0,
+                "contractLength": 0,
+                "title": "Head of Elementary"
+            }
+        ],
+        "images": [
+            {
+                "__note": "http://beta.teacherhorizons.com at the start of resource is for prototype demo only",
+                "id": 2229,
+                "resource": "http://beta.teacherhorizons.com/static/media/schools/3176/images/13285.jpg",
+                "reference": "Durango.jpg"
+            },
+            {
+                "id": 2230,
+                "resource": "http://beta.teacherhorizons.com/static/media/schools/3176/images/13286.jpg",
+                "reference": "durango1.JPG"
+            }
+        ],
+        "ratings": [
+            { "id": 1, "value": 3 },
+            { "id": 2, "value": 5 },
+            { "id": 3, "value": 1 },
+            { "id": 4, "value": 2 },
+            { "id": 5, "value": 4 }
+        ],
+        "yearFounded": 1873,
+        "educationLevels": [
+            1,
+            2,
+            3
+        ],
+        "intStudentsPost16": 5,
+        "intAvgStudentsPost16": 3,
+        "intStaff": 12,
+        "pOverseasStaff": 20,
+        "intOverseasTeachers": 123,
+        "mainTeacherNationalities": [
+            205,
+            209,
+            210
+        ],
+        "annualTeacherTurnover": 50,
+        "location": "41.2530,-8.5707",
+        "promoVideoUrl": "http://www.youtube.com/embed/rjhIzemLdos",
+        "recruitmentStartMonth": 3,
+        "minYearsExperience": 5,
+        "teacherNationalitiesAccepted": [
+            207,
+            206,
+            208,
+            209
+        ],
+        "leadRecruitmentContactName": "Cuco Valdez",
+        "leadRecruitmentContactEmail": "ok@ok.biz",
+        "pensionTeacherContrib": 10,
+        "pensionSchoolContrib": 30,
+        "fhipSchool": 0
+    }
+}

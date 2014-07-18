@@ -1,0 +1,40 @@
+<button class="btn btn-primary" ng-click="back();"><< Back</button>
+
+<div>
+  <div ng-show="mode===1" style="font-size: 11px; word-wrap: break-word;">
+    <hr/>
+    <b>Links</b>
+    <br/>
+
+    Structure:
+    <a href="/th-frontend/3/0.1/scaffolding/server/json/adminSchoolStructure.json" target="_blank">adminSchoolStructure.json</a>
+    <br/>
+    
+    Common:
+    <a href="/th-frontend/3/0.1/scaffolding/server/json/lists.json" target="_blank">lists.json</a>
+    <br/>
+
+    Example 1 (full):
+    <a href="/th-frontend/3/0.1/scaffolding/server/json/school1234.json" target="_blank">school1234.json</a>
+    <br/>
+
+    Example 2 (minimum): <a href="/th-frontend/3/0.1/scaffolding/server/json/school101.json" target="_blank">school101.json</a>
+    <br/>
+
+    API: <a href="/th-frontend/3/0.1/scaffolding/api/api.json" target="_blank">json</a> | 
+    <a href="/th-frontend/3/0.1/scaffolding/api/default.html" target="_blank">viewer</a>
+
+    <br/>
+    Samples: 
+    <a href="http://beta.teacherhorizons.com/Europe/Portugal/Porto/Oporto_British_School" target="_blank">OBS (beta)</a> | 
+    <a href="http://www.teacherhorizons.com/Asia/China/Suzhou/Dulwich_College_Suzhou" target="_blank">DCS (live)</a>
+
+    <hr/>
+    <b>Server log</b>
+    <button class="btn btn-small" ng-click="serverService.sentToServer = []"
+      style ="padding: 0px 3px; margin: -3px 0 0 5px; width: 40px; display: inline;"}>Clear</button>
+    <ul>
+      <li ng-repeat="x in serverService.sentToServer track by $index">{{x}}</li>
+    </ul>
+  </div>
+</div>

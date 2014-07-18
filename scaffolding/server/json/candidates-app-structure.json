@@ -1,0 +1,33 @@
+{
+  "wip": "
+Subjects    Multiple
+Roles   Multiple
+Nationalities   Multiple
+Curriculum experienced    Multiple
+Minimum experience    Slider
+International school experience   Single (checkbox)
+Available from    Calendar
+Date registered   Calendar
+Average reference score   Slider
+Adviser score   Slider
+Year of birth   Single
+Marital status    Multiple
+Number of dependent children (maximum)    Single
+Education levels completed    Multiple
+Location    Single
+Approved    Single (checkbox)
+CV    Single (checkbox)",
+
+  "filters": {
+    "list": [
+      {
+        "name": "Search",
+        "type": "text"
+      },
+      {
+        "name": "Roles",
+        "type": "multiple"
+      }
+    ]
+  }
+}

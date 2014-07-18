@@ -1,0 +1,71 @@
+<h3>Development dashboard</h3>
+
+<h4>Demos</h4>
+<ul>
+  <li ng-repeat="d in data.demos.list | exists:'name'">
+    <a ng-href="{{d.url}}" target="_blank">{{d.name}}</a>
+</ul>
+
+<h4>Projects</h4>
+<ul>
+  <li ng-repeat="p in data.projects.list | exists:'name'">{{p.name}}
+    <span ng-if="p.shortName"> ({{p.shortName}})</span>
+    <span ng-if="p.notes"> - {{p.notes}}</span>
+</ul>
+
+<h4>Business resources</h4>
+<ul>
+  <li ng-repeat="r in data.businessResources.list | exists:'name'">
+    <a ng-href="{{r.url}}" target="_blank">{{r.name}}</a>
+</ul>
+
+<h4>Colours</h4>
+<label>
+  <input id="show-hex" type="checkbox" ng-model="data.colours.showHex" style="margin: -2.4px 5px 0 10px;"></input>Show hex
+</label>
+<ul>
+  <li ng-repeat="c in data.colours.list | exists:'name'">
+    <span style="width: 5em; display: inline-block;" ng-show="data.colours.showHex">{{c.hex}}</span>
+    <span style="padding: 0.1em 0.5em; margin: 0.2em;" ng-style="{ backgroundColor: c.hex }"></span>
+    <span> {{c.name}}</span>
+    <span ng-if="c.description"> - {{c.description}}</span>
+</ul>
+
+<h4>Development resources</h4>
+<ul>
+  <li ng-repeat="r in data.developmentResources.list | exists:'url'">
+    <a ng-href="{{r.url}}" target="_blank">{{r.name || r.url}}</a>
+</ul>
+
+<h4>To do</h4>
+<ul>
+  <li ng-repeat="t in data.todos.list">{{t}}
+</ul>
+
+<h4>Sprint updates</h4>
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Sprint</th>
+      <th>Update</th>
+      <th>Date</th>
+      <th>Use Cases</th>
+      <th>API</th>
+      <th>Demo</th>
+      <th>Code</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="u in data.sprintUpdates.list" ng-class="{ warning: u.status=='2', error: u.status=='3' }" | exists:'sprint'>
+      <td>{{u.sprint}}</td>
+      <td>{{u.update}}</td>
+      <td>{{u.date}}</td>
+      <td><a ng-if="u.useCases" ng-href="{{u.useCases}}" target="_blank">{{u.id}}</a></td>
+      <td><a ng-if="u.api" ng-href="{{u.api}}" target="_blank">{{u.id}}</a></td>
+      <td><a ng-if="u.demo" ng-href="{{u.demo}}" target="_blank">{{u.id}}</a></td>
+      <td><a ng-if="u.code" ng-href="{{u.code}}" target="_blank">{{u.id}}</a></td>
+      <td>{{u.notes}}</td>
+    </tr>
+  </tbody>
+</table>

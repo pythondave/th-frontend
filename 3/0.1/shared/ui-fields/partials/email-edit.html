@@ -1,8 +1,0 @@
-<div class="email-edit">
-  <input ng-show="model.isEditMode" type="text" ng-model="model.val" style="width: 250px;"
-    ng-blur="model.isEditMode=false" restrict-input="{type: 'validEmailCharsOnly'}" placeholder="example@school.com"></input>
-
-  <span ng-show="!model.isEditMode" style="cursor: pointer" ng-click="model.isEditMode=true" tooltip="Click to edit email">{{model.val}}</span>
-
-  <span content-item-icons model="model"></span>
-</div>

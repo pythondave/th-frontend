@@ -1,0 +1,39 @@
+<div style="color: #3487be; font-weight: bold; font-size: 16px; margin: 5px 0 10px 5px;">
+  <span ng-if="numberOfJobs==0">No jobs match your search</span>
+  <span ng-if="numberOfJobs==1">{{numberOfJobs}} job matches your search</span>
+  <span ng-if="numberOfJobs>1">{{numberOfJobs}} jobs match your search</span>
+</div>
+
+<div class="filter">
+  <span>Subject</span>
+  <select ng-model="filters.subject.val" ng-options="x.name for x in filters.subject.data">
+    <option value="">What subject would you like to teach?</option>
+  </select>
+  <i class="icon-cross" ng-hide="!filters.subject.val" ng-click="filters.subject.val=undefined"></i>
+</div>
+<div class="filter">
+  <span>Position</span>
+  <select ng-model="filters.position.val" ng-options="x.name for x in filters.position.data">
+    <option value="">What position would you like?</option>
+  </select>
+  <i class="icon-cross" ng-hide="!filters.position.val" ng-click="filters.position.val=undefined"></i>
+</div>
+<div class="filter">
+  <span>Location</span>
+  <select ng-model="filters.location.val" ng-options="x.name for x in filters.location.data">
+    <option value="">Where would you like to live?</option>
+  </select>
+  <i class="icon-cross" ng-hide="!filters.location.val" ng-click="filters.location.val=undefined"></i>
+</div>
+<div class="filter">
+  <span>Academic system</span>
+  <select ng-model="filters.system.val" ng-options="x.system for x in filters.system.data">
+    <option value="">What system would you like?</option>
+  </select>
+  <i class="icon-cross" ng-hide="!filters.system.val" ng-click="filters.system.val=undefined"></i>
+</div>
+<div class="filter">
+  <span>Start date</span>
+  <input type="text" placeholder="When is the earliest you can start?" datepicker-popup="EEE d MMM yyyy" ng-model="filters.start.val" is-open="opened" min="minDate" show-weeks="false" close-text="Close" ></input>
+  <i class="icon-cross" ng-hide="!filters.start.val" ng-click="filters.start.val=undefined"></i>
+</div>

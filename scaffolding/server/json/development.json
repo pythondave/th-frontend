@@ -1,0 +1,148 @@
+{
+  "description": "Development info",
+  "todos": {
+    "description": "",
+    "list": [
+      "Extend this app so it looks a bit nicer",
+      "Extend this app so there are sub-pages - e.g. project page, demo page, sprint page etc."
+    ]
+  },
+  "demos": {
+    "description": "",
+    "list": [
+      { "name": "Admin dashboard", "url": "../spa/admin/default.html#/teachers" },
+      { "name": "Candidates", "url": "../spa/admin/candidates/default.html#/" },
+      { "name": "Homepage", "url": "http://localhost:81/temp/homepage.html" },      
+      { "name": "Jobs", "url": "../spa/zz-jobs/default.html#/" },
+      { "name": "Jobs restyled", "url": "../spa/jobs/default.html#/" },
+      { "name": "School dashboard", "url": "../spa/school/dashboard/default.html#/" },
+      { "name": "TPPs", "url": "http://beta.teacherhorizons.com/edit/teachers/122444/myprofile#/1/1",
+        "zz-url": "*** TODO: Use this when have time to get working... http://localhost/th/4/tpp/default.html" },
+      { "name": "WordPress", "url": "http://localhost:82/wordpress/" },
+      { "name": "", "url": "" },
+      { "name": "", "url": "" },
+      { "name": "", "url": "" }
+    ]
+  },
+  "projects": {
+    "description": "",
+    "list": [
+      { "shortName": "TPPs", "name": "Teacher profile pages" },
+      { "name": "Admin dashboard" },
+      { "shortName": "SPEPs", "name": "School profile edit pages" },
+      { "name": "Jobs" },
+      { "name": "Homepage", "notes": "Including first stab at longer-term generic design" },
+      { "name": "WordPress", "notes": "Including next iteration of longer-term generic design" },
+      { "name": "Candidate filter", "notes": "Including next iteration of longer-term generic design" },
+      { "name": "" },
+      { "name": "" },
+      { "name": "" }
+    ]
+  },
+  "businessResources": {
+    "description": "",
+    "list": [
+      { "name": "Statecharts", "url": "https://docs.google.com/file/d/0B2lp-6640HhpRVpKRTRiQWQyVUE/view", "description": "" },
+      { "name": "Working processes wiki page", "url": "https://github.com/pythondave/th-frontend/wiki/Working-processes", "description": "" },
+      { "name": "Candidate filter design", "url": "https://docs.google.com/spreadsheets/d/12asw17DH79h6EYu1OPO-97qHKw9esHqq152kE8rhGm8/edit?usp=gmail#gid=0", "description": "" }      
+    ]
+  },
+  "colours": {
+    "list": [
+      { "hex": "#fcd25a", "name": "standard-yellow" },
+      { "hex": "#fbc428", "name": "standard-yellow-hover", "description": "10% darker than yellow" },
+      { "hex": "#247bda", "name": "standard-blue" },
+      { "hex": "#282737", "name": "dark-blue", "description": "deprecated?" },
+      { "hex": "#38b439", "name": "traffic-light-green", "description": "" },
+      { "hex": "#e77e00", "name": "traffic-light-yellow", "description": "i.e. amber" },
+      { "hex": "#d04046", "name": "traffic-light-red", "description": "" },
+      { "hex": "#aaa", "name": "gray", "description": "placeholder text colour" },
+      { "hex": "", "name": "", "description": "" },
+      { "hex": "", "name": "", "description": "" }
+    ]
+  },
+  "developmentResources": {
+    "description": "",
+    "list": [
+      { "name": "angularjs", "url": "https://angularjs.org/", "description": "" },
+      { "name": "", "url": "http://lodash.com/", "description": "" },
+      { "name": "", "url": "http://www.bootply.com/", "description": "" },
+      { "name": "", "url": "http://getbootstrap.com/", "description": "" },
+      { "name": "", "url": "http://www.sublimetext.com/", "description": "" },
+      { "name": "", "url": "https://github.com/", "description": "" },
+      { "name": "", "url": "http://lesscss.org/", "description": "" },
+      { "name": "", "url": "https://github.com/timdouglas/sublime-less2css", "description": "" },
+      { "name": "", "url": "https://sublime.wbond.net/packages/MarkdownEditing", "description": "" },
+      { "name": "", "url": "http://fontastic.me/", "description": "" },
+      { "name": "", "url": "https://wordpress.org/", "description": "" },
+      { "name": "", "url": "http://www.bootstrapcdn.com/", "description": "" },
+      { "name": "", "url": "http://www.cdnjs.com/", "description": "" },
+      { "name": "", "url": "http://www.jsdelivr.com/", "description": "" },
+      { "name": "", "url": "https://developers.facebook.com/", "description": "" },
+      { "name": "", "url": "http://en.wikipedia.org/wiki/Google_APIs", "description": "" },
+      { "name": "", "url": "https://github.com/angular-ui/ui-router", "description": "" },
+      { "name": "", "url": "http://fortawesome.github.io/Font-Awesome/", "description": "" },
+      { "name": "", "url": "http://www.getpaint.net/", "description": "" },
+      { "name": "", "url": "http://www.google.com/design/spec/material-design/", "description": "" },
+      { "name": "", "url": "https://material.angularjs.org/#/", "description": "" },
+      { "name": "", "url": "https://github.com/angular/material", "description": "" },
+      { "name": "", "url": "http://fonts.googleapis.com/css?family=Nunito", "description": "" },
+      { "name": "", "url": "http://onetdev.com/blog/working-with-less-less-hat-sublime-text/", "description": "" },
+      { "name": "", "url": "", "description": "" },
+      { "name": "", "url": "", "description": "" },
+      { "name": "", "url": "", "description": "" },
+      { "name": "", "url": "", "description": "" },
+      { "name": "", "url": "", "description": "" },
+      { "name": "", "url": "", "description": "" },
+      { "name": "placehold.it", "url": "http://placehold.it/150x150", "description": "Use for image placeholders" }
+    ]
+  },
+  "sprintUpdates": {
+    "description": "",
+    "list": [
+      { "sprint": "1", "update": "0.1", "date": "23 Apr 2013",
+        "useCases": "", "api": "",
+        "demo": "http://run.plnkr.co/plunks/Dg0cpuWJLK3HotKIMXmH/", "code": "",
+        "notes": "TH admin dashboard - Sprint milestone: end of phase 1" },
+      { "sprint": "1", "update": "0.2", "date": "11 May 2013",
+        "useCases": "", "api": "",
+        "demo": "/th-admin/1/0.2/default.html",
+        "code": "//github.com/pythondave/th-admin/tree/gh-pages/1/0.2",
+        "notes": "TH admin dashboard - Sprint milestone: end of phase 2" },
+      { "sprint": "1", "update": "0.3", "date": "20 May 2013", "status": "2",
+        "useCases": "", "api": "",
+        "demo": "/th-admin/1/0.3/default.html",
+        "code": "//github.com/pythondave/th-admin/tree/gh-pages/1/0.3",
+        "notes": "TH admin dashboard - End-of-sprint prototype" },
+      { "sprint": "2", "update": "0.1", "date": "25 May 2013",
+        "useCases": "", "api": "",
+        "demo": "/th-admin/2/0.1/default.html#/teachers",
+        "code": "//github.com/pythondave/th-admin/tree/gh-pages/2/0.1",
+        "notes": "TH admin dashboard - ~end of phase 1" },
+      { "sprint": "2", "update": "0.2", "date": "3 Jun 2013",
+        "useCases": "",
+        "api": "/th-admin/2/0.2/server/api/default.html",
+        "demo": "/th-admin/2/0.2/default.html#/teachers",
+        "code": "//github.com/pythondave/th-admin/tree/gh-pages/2/0.2",
+        "notes": "TH admin dashboard - 80% through phase 2" },
+      { "sprint": "2", "update": "0.3", "date": "10 Jun 2013",
+        "useCases": "",
+        "api": "/th-admin/2/0.3/server/api/default.html",
+        "demo": "/th-admin/2/0.3/default.html#/teachers",
+        "code": "//github.com/pythondave/th-admin/tree/gh-pages/2/0.3",
+        "notes": "TH admin dashboard - 85% through phase 2" },
+      { "sprint": "2", "update": "0.4", "date": "16 Jun 2013",
+        "useCases": "/th-admin/2/0.4/scaffolding/useCases/default.html",
+        "api": "/th-admin/2/0.4/scaffolding/api/default.html",
+        "demo": "/th-admin/2/0.4/default.html#/teachers",
+        "code": "//github.com/pythondave/th-admin/tree/gh-pages/2/0.4",
+        "notes": "TH admin dashboard - End of phase 2" },
+      { "sprint": "3", "update": "0.1", "date": "12 Aug 2013", "status": "3",
+        "useCases": "/th-frontend/scaffolding/useCases/default.html",
+        "api": "/th-frontend/scaffolding/api/default.html",
+        "demo": "/th-frontend/spas/school/dashboard/default.html",
+        "code": "//github.com/pythondave/th-frontend/tree/gh-pages",
+        "notes": "TH SPEPs - rough layout and widget types" }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+<div ng-if="!jobs" style="margin: 10px;">
+  <img src="../../shared/images/spinner1.gif" alt="spinner" />
+</div>
+
+<div ng-if="jobs.length==0" style="margin: 20px;">
+  No jobs match your search - try removing one of the filters to make your search slightly less specific.
+</div>
+
+<div ng-repeat="j in jobs" class="job rounded5px">
+  <div style="padding: 10px; clear both;" ng-click="jobClick(j)">
+    <div style="width: 390px; float: left; display: inline-block;">
+      <span class="job-title">{{j.title}}</span>
+      <span style="font-weight: bold; font-size: 15px; display: block; margin: 7px 0;">{{j.location.city.name}}, {{j.location.city.country.name}}</span>
+      <span style="font-weight: bold; display: block; margin: 7px 0;">{{j.subject.name}}, {{j.position.name}}</span>
+      <span style="display: block; margin: 7px 0;">{{j.furtherInfo | truncate:100}}</span>
+      <span style="font-weight: bold; display: block; margin: 7px 0; color: silver;">
+        <span>Start date: {{j.startDate | date:'d MMM yyyy'}}</span>
+        <span style="margin-left: 20px;">Apply before: {{j.deadline | date:'d MMM yyyy'}}</span>
+      </span>
+    </div>
+    <div style="width: 210px; display: inline-block; margin-left: 10px; text-align: center;">
+      <div class="img-container" style="height: 120px;" >
+        <img class="rounded5px" style="max-width: 160px; max-height: 120px;" ng-src="{{j.image}}"></img>
+      </div>
+      <button class="rounded5px btn-apply">Full details and apply!</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html ng-app="thSchoolDashboardAppModule">
+
+<head>
+  <!--[if lte IE 8]> <script type="text/javascript"> window.location = "old-browser.html"; </script> <![endif]-->
+
+  <title>School</title>
+  <link rel="icon" href="../../../shared/images/favicon.ico">
+
+  <!--
+  *** NOTE: need to stick to twitter bootstrap 2.3.1 for now until angular-ui catches up
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc1/css/bootstrap.min.css">
+  -->
+  <!--external stylesheets hosted on cdns-->
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css">
+
+  <!--local stylesheets-->
+    <!--remove http://beta.teacherhorizons.com from the links below in production *** TODO - remove the need for this -->
+  <link rel="stylesheet" href="http://beta.teacherhorizons.com/static/css/jquery.fileupload-ui.css">
+  <link rel="stylesheet" href="../../../shared/style/custom-bootstrap.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div ui-view class="container">
+    <div style="width: 40%; min-width: 200px; margin:50px auto;">
+      <p style="color: silver; font-size: 30px;">Loading...</p>
+      <div style="width: 40%; min-width: 50px; margin: 30px auto;">
+        <img src="../../../shared/images/spinner2.gif" alt="spinner" />
+      </div>
+      <p>As a team of former Heads and leaders of international schools, we are building a community of inspiring teachers to connect with the best schools around the world.</p>
+      <p>This may take a minute to load in some countries on your first visit.</p>
+    </div>
+  </div>
+
+  <!--external scripts hosted on cdns-->
+    <!--jquery-->
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!--lodash-->
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.0.0/lodash.min.js"></script>
+    <!--twitter bootstrap *** See note at top
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script> -->
+    <!--angular (official)-->
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+      <script src="http://cdn.jsdelivr.net/angularjs/1.1.2/angular-resource.min.js"></script>
+    <!--angular (community)-->
+      <!--<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.5.0.js"></script> (hosted locally)-->
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.0/angular-ui-router.min.js"></script>
+    <!--google maps-->
+      <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+  <!--external scripts hosted locally-->
+    <!--angular (community)-->
+      <script src="lib/bootstrap-custom/datepicker/ui-bootstrap-custom-tpls-0.6.0.js"></script> <!--see readme in this folder-->
+      <script src="lib/bootstrap-custom/other/ui-bootstrap-custom-tpls-0.5.0.min.js"></script>
+
+  <!--local scripts-->
+    <!--main-->
+      <script src="app.js"></script>
+      <script src="../../../config.js"></script>
+    <!--shared modules-->
+      <script src="../../../shared/ui-fields/ui-fields.js"></script>
+      <script src="../../../shared/content-items/content-items.js"></script>
+
+    <!--services-->
+      <!--schools-->
+        <script src="services.js"></script>
+      <!--shared-->
+        <script src="../../../shared/generic.js"></script>
+        <script src="../../../shared/services/listService.js"></script>
+        <script src="../../../shared/services/alertServices.js"></script>
+        <script src="../../../shared/services/filterServices.js"></script>
+        <script src="../../../shared/services/schoolServices.js"></script>
+        <script src="../../../shared/services/basicListServices.js"></script>
+        <script src="../../../shared/services/scoreServices.js"></script>
+    <!--controllers-->
+      <script src="controllers.js"></script>
+    <!--directives-->
+      <script src="../../../shared/directives.js"></script>
+
+    <!--uploader - *** TODO - consider refactoring so less reliant on jQuery (keep an eye on angular upload solutions, with a view to possibly switching to one when they become mature enough with enough browser support) -->
+      <!--remove http://beta.teacherhorizons.com from the links below in production *** TODO - remove the need for this -->
+    <script src="http://beta.teacherhorizons.com/static/js/jquery.iframe-transport.js"></script>
+    <script src="http://beta.teacherhorizons.com/static/tpp-editor/lib/jquery/jquery-ui.js"></script>
+    <script src="http://beta.teacherhorizons.com/static/js/jquery.fileupload.js"></script>
+    <script src="http://beta.teacherhorizons.com/static/js/jquery.fileupload-process.js"></script>
+    <script src="http://beta.teacherhorizons.com/static/js/jquery.fileupload-validate.js"></script>
+    <script src="http://beta.teacherhorizons.com/static/js/jquery.fileupload-ui.js"></script>
+
+  <!--prototype only scripts (comment out/remove in production-->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular-mocks.js"></script>
+  <script src="../../../scaffolding/server/serverServices.js"></script>
+</body>
+
+</html>

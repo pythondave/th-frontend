@@ -1,0 +1,926 @@
+{
+  "weight": 0,
+  "title": "Generic showcase",
+  "icon": "trophy",
+  "sections": [
+    {
+      "title": "About",
+      "tip": "The section tells you about the 'generic showcase' section",
+      "icon": "book",
+      "sections": [
+        {
+          "title": "Introduction",
+          "icon": "lightbulb",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Introduction",
+              "icon": "lightbulb"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The 'generic showcase' section shows what is possible. This is useful during analysis and development.",
+              "icon": "trophy"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "See the 'edit content items' section for examples of each edit content item (date-edit, email-edit, from-few, etc.).",
+              "icon": "pencil"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "See the 'other content items' section for examples of other content items (text, file-upload, etc.).",
+              "icon": "asterisk"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The 'generic showcase' section will be removed during deployment.",
+              "icon": "trophy"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Edit content items",
+      "icon": "pencil",
+      "sections": [
+        {
+          "title": "Date-edit",
+          "icon": "calendar",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Date-edit",
+              "icon": "calendar"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The date-edit content item can be used for entering and editing a date."
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "dateEdit1",
+              "type": "dateEdit",
+              "title": "Basic date-edit content item",
+              "tip": "Click the date to edit",
+              "val": "4 September 2013"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "dateEdit2",
+              "type": "dateEdit",
+              "title": "Date-edit content item with no initial value",
+              "tip": "Click the date icon to edit"
+            }
+          ]
+        },
+        {
+          "title": "Email-edit",
+          "icon": "envelope",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Email-edit",
+              "icon": "envelope"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The email-edit content item can be used for entering and editing an email."
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "emailEdit1",
+              "type": "emailEdit",
+              "title": "Basic email-edit content item",
+              "tip": "...",
+              "val": "dave@google.com"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "emailEdit2",
+              "type": "emailEdit",
+              "title": "Email-edit content item with no initial value",
+              "tip": "..."
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "emailEdit3",
+              "type": "emailEdit",
+              "title": "Email-edit content item with invalid initial value",
+              "tip": "...",
+              "val": "unfinished@somewhere"
+            }
+          ]
+        },
+        {
+          "title": "From-few",
+          "icon": "ellipsis-horizontal",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "From-few",
+              "icon": "ellipsis-horizontal"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The from-few content item can be used for selecting one or more values from a few values."
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "fromFew1",
+              "type": "fromFew",
+              "limit": 1,
+              "title": "Basic from-few content item (limit of 1)",
+              "listColumn": "name",
+              "val": 2,
+              "items": [
+                {
+                  "id": 1,
+                  "name": "Apple"
+                },
+                {
+                  "id": 2,
+                  "name": "Banana",
+                  "isSelected": true
+                },
+                {
+                  "id": 3,
+                  "name": "Orange"
+                },
+                {
+                  "id": 4,
+                  "name": "Pear"
+                }
+              ]
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "fromFew2",
+              "type": "fromFew",
+              "limit": 3,
+              "title": "From-few content item with limit of 3",
+              "listColumn": "name",
+              "val": "1,3",
+              "items": [
+                {
+                  "id": 1,
+                  "name": "Apple"
+                },
+                {
+                  "id": 2,
+                  "name": "Banana"
+                },
+                {
+                  "id": 3,
+                  "name": "Orange"
+                },
+                {
+                  "id": 4,
+                  "name": "Pear"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "From-many",
+          "icon": "list",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "From-many",
+              "icon": "list"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The from-many content item can be used for selecting one or more values from a large number of values."
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "fromMany1",
+              "type": "fromMany",
+              "limit": 1,
+              "title": "Basic from-many content item",
+              "listColumn": "name",
+              "items": [
+                {
+                  "id": 1,
+                  "name": "Apple"
+                },
+                {
+                  "id": 2,
+                  "name": "Banana",
+                  "isSelected": true
+                },
+                {
+                  "id": 3,
+                  "name": "Orange"
+                },
+                {
+                  "id": 4,
+                  "name": "Pear"
+                }
+              ],
+              "val": 2
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "fromMany1",
+              "type": "fromMany",
+              "limit": 1,
+              "showClear": true,
+              "title": "From-many content item with clear",
+              "listColumn": "name",
+              "items": [
+                {
+                  "id": 1,
+                  "name": "Apple"
+                },
+                {
+                  "id": 2,
+                  "name": "Banana",
+                  "isSelected": true
+                },
+                {
+                  "id": 3,
+                  "name": "Orange"
+                },
+                {
+                  "id": 4,
+                  "name": "Pear"
+                }
+              ],
+              "val": 3
+            }
+          ]
+        },
+        {
+          "title": "Location-edit",
+          "icon": "map-marker",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Location-edit",
+              "icon": "map-marker"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The location-edit content item can be used for selecting a location in the world."
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "locationEdit1",
+              "type": "locationEdit",
+              "title": "Basic location-edit content item"
+            }
+          ]
+        },
+        {
+          "title": "Money-edit",
+          "icon": "money",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Money-edit",
+              "icon": "money"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "WIP - No longer needed for the SPEP project (types fromMany and number can be used instead)",
+              "style": "color: red;"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The money-edit content item can be used for entering and editing a currency and amount combination."
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "WIP - this will have a mechanism for selecting both a currency and an amount",
+              "style": "color: red;"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "moneyEdit1",
+              "type": "moneyEdit",
+              "title": "Basic money-edit content item",
+              "tip": "...",
+              "currency": {
+                "val": 3,
+                "items": [
+                  {
+                    "id": 1,
+                    "name": "USD"
+                  },
+                  {
+                    "id": 2,
+                    "name": "GBP"
+                  },
+                  {
+                    "id": 3,
+                    "name": "Euro"
+                  }
+                ]
+              },
+              "amount": {
+                "val": 12.34
+              }
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "moneyEdit2",
+              "type": "moneyEdit",
+              "title": "Money-edit content item with no initial values",
+              "tip": "...",
+              "currency": {
+                "items": [
+                  {
+                    "id": 1,
+                    "name": "USD"
+                  },
+                  {
+                    "id": 2,
+                    "name": "GBP"
+                  },
+                  {
+                    "id": 3,
+                    "name": "Euro"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "title": "Number-edit",
+          "icon": "sort-by-order",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Number-edit",
+              "icon": "sort-by-order"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The number-edit content item can be used for entering and editing number text."
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "numberEdit1",
+              "type": "numberEdit",
+              "title": "Basic number-edit content item",
+              "tip": "Click number to edit. Click away from number to finish.",
+              "val": "123"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "numberEdit2",
+              "type": "numberEdit",
+              "title": "Number-edit content item with no initial value",
+              "tip": "Click edit icon to edit. Click away to finish."
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "numberEdit3",
+              "type": "numberEdit",
+              "title": "Number-edit content item with large value",
+              "val": "12345678"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "numberEdit4",
+              "type": "numberEdit",
+              "title": "Number-edit content item with full works",
+              "icon": "music",
+              "tip": "This is a tip",
+              "description": "This is a description",
+              "val": "234"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "numberEdit5",
+              "type": "numberEdit",
+              "title": "Number-edit content item with decimal allowed (up to 2 d.p.)",
+              "icon": "bell",
+              "val": "234.56",
+              "allowDecimals": true
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "numberEdit7",
+              "type": "numberEdit",
+              "subType": "money",
+              "title": "Number-edit content item for GBP",
+              "val": "123",
+              "currencySymbol": "£"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "numberEdit7",
+              "type": "numberEdit",
+              "subType": "money",
+              "title": "Number-edit content item for USD",
+              "val": "123",
+              "currencySymbol": "$"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "numberEdit7",
+              "type": "numberEdit",
+              "subType": "money",
+              "title": "Number-edit content item for EUR",
+              "val": "123",
+              "currencySymbol": "€"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "numberEdit7",
+              "type": "numberEdit",
+              "subType": "money",
+              "title": "Number-edit content item for JPY",
+              "val": "123",
+              "currencySymbol": "¥"
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "numberEdit8",
+              "type": "numberEdit",
+              "subType": "plain",
+              "title": "Number-edit content item for year in range 1500-2013",
+              "val": "1823",
+              "min": 1500,
+              "max": 2013
+            }
+          ]
+        },
+        {
+          "title": "Rating-edit",
+          "icon": "star",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Rating-edit",
+              "icon": "star"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The rating-edit content item can be used for entering and editing a rating."
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "ratingEdit1",
+              "type": "ratingEdit",
+              "title": "Basic rating-edit content item",
+              "max": 5,
+              "val": 3
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "ratingEdit2",
+              "type": "ratingEdit",
+              "title": "Rating-edit content item with no value",
+              "max": 5
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "ratingEdit3",
+              "type": "ratingEdit",
+              "title": "Rating-edit content item size 7",
+              "max": 7,
+              "val": 6
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "ratingEdit4",
+              "type": "ratingEdit",
+              "title": "Rating-edit content item with icon and clear",
+              "icon": "umbrella",
+              "max": 5,
+              "val": 4,
+              "showClear": true
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "ratingEdit5",
+              "type": "ratingEdit",
+              "title": "Rating-edit content item with tip",
+              "tip": "This is a tip",
+              "max": 5,
+              "val": 2
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "ratingEdit6",
+              "type": "ratingEdit",
+              "title": "Rating-edit content item with description",
+              "max": 5,
+              "val": 4,
+              "description": "This is a description"
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "ratingEdit7",
+              "type": "ratingEdit",
+              "title": "Rating-edit content item with value tips",
+              "max": 5,
+              "val": 3,
+              "valueTips": [
+                "1-star tip",
+                "2-star tip",
+                "This is the tip for 3 stars",
+                "Tip for 4 stars",
+                "5-star tip"
+              ]
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "ratingEdit8",
+              "type": "ratingEdit",
+              "title": "Standard rating-edit content item",
+              "icon": "thumbs-up",
+              "tip": "This is a tip",
+              "max": 5,
+              "val": 4
+            },
+            {
+              "weight": 1,
+              "wait": 1,
+              "systemName": "ratingEdit9",
+              "type": "ratingEdit",
+              "title": "Rating-edit content item with full works",
+              "icon": "music",
+              "tip": "This is a tip",
+              "max": 5,
+              "val": 2,
+              "description": "This is a description",
+              "valueTips": [
+                "1-star tip",
+                "2-star tip",
+                "This is the tip for 3 stars",
+                "Tip for 4 stars",
+                "5-star tip"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Slider",
+          "icon": "resize-horizontal",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Slider",
+              "icon": "resize-horizontal"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The slider content item can be used for entering and editing a value along a scale."
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "slider1",
+              "type": "slider",
+              "title": "Basic slider content item",
+              "val": 3,
+              "items": [
+                {
+                  "val": 0
+                },
+                {
+                  "val": 1
+                },
+                {
+                  "val": 2
+                },
+                {
+                  "val": 3
+                },
+                {
+                  "val": 4
+                }
+              ]
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "slider2",
+              "type": "slider",
+              "title": "Slider non-integers",
+              "val": "Cherry",
+              "items": [
+                {
+                  "val": "Apple"
+                },
+                {
+                  "val": "Banana"
+                },
+                {
+                  "val": "Cherry"
+                },
+                {
+                  "val": "Date"
+                },
+                {
+                  "val": "Elderberry"
+                }
+              ]
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "slider3",
+              "type": "slider",
+              "title": "Slider 0-100",
+              "val": 30
+            }
+          ]
+        },
+        {
+          "title": "Text-edit",
+          "icon": "font",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Text-edit",
+              "icon": "font"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "WIP - maxLength needs a bit of tweaking; could also easily add characters used and/or remaining"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The text-edit content item can be used for entering and editing general text."
+            },
+            {
+              "weight": 1,
+              "wait": 3000,
+              "systemName": "textEdit1",
+              "type": "textEdit",
+              "title": "Basic text-edit content item",
+              "tip": "Click text to edit. Click away from text to finish.",
+              "val": "Hello world"
+            },
+            {
+              "weight": 1,
+              "wait": 3000,
+              "systemName": "textEdit2",
+              "type": "textEdit",
+              "title": "Text-edit content item with no initial value",
+              "tip": "Click edit icon to edit. Click away to finish."
+            },
+            {
+              "weight": 1,
+              "wait": 3000,
+              "systemName": "textEdit3",
+              "type": "textEdit",
+              "title": "Text-edit content item with full works",
+              "icon": "music",
+              "tip": "This is a tip",
+              "description": "This is a description",
+              "val": "Hello world"
+            },
+            {
+              "weight": 1,
+              "wait": 3000,
+              "systemName": "textEdit4",
+              "type": "textEdit",
+              "title": "Text-edit content item for long text",
+              "maxLength": 1000,
+              "val": "Hello world"
+            }
+          ]
+        },
+        {
+          "title": "Time-edit",
+          "icon": "time",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Time-edit",
+              "icon": "time"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "WIP - Not needed for the SPEP project",
+              "style": "color: red;"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The time-edit content item can be used for entering and editing a time."
+            },
+            {
+              "weight": 1,
+              "wait": 2000,
+              "systemName": "timeEdit1",
+              "type": "timeEdit",
+              "title": "Basic time-edit content item"
+            }
+          ]
+        },
+        {
+          "title": "URL-edit",
+          "icon": "external-link",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "URL-edit",
+              "icon": "external-link"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The url-edit content item can be used for entering and editing the name and value of a url."
+            },
+            {
+              "weight": 0,
+              "systemName": { "title": "titleSystemName", "url": "urlSystemName" },
+              "type": "urlEdit",
+              "title": "Basic url-edit content item",
+              "tip": "Click to edit. Click away to finish.",
+              "val": "www.google.com",
+              "urlTitle": "Hello world"
+            },
+            {
+              "type": "urlEdit",
+              "title": "Url-edit content item with no initial values"
+            },
+            {
+              "type": "urlEdit",
+              "title": "Url-edit content item with no title",
+              "urlTitle": "Hidden title",
+              "val": "http://pythondave.github.io/th-frontend/3/0.1/spas/school/dashboard/default.html#/1234/1/1/1",
+              "showUrlTitle": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Other content items",
+      "icon": "asterisk",
+      "sections": [
+        {
+          "title": "Header",
+          "icon": "bookmark",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Header",
+              "icon": "bookmark"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The header content item can be used for displaying a heading."
+            },
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "This is a header content item",
+              "icon": "food"
+            }
+          ]
+        },
+        {
+          "title": "List",
+          "icon": "list-ul",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "List",
+              "icon": "list-ul"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The header content item can be used for displaying a list."
+            },
+            {
+              "weight": 0,
+              "type": "list",
+              "title": "This is a list content item.",
+              "items": [
+                "Item 1",
+                "Item 2"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Text",
+          "icon": "font",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "Text",
+              "icon": "font"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The header content item can be used for displaying text."
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "This is a text content item."
+            }
+          ]
+        },
+        {
+          "title": "File-upload",
+          "icon": "upload",
+          "contentItems": [
+            {
+              "weight": 0,
+              "type": "header",
+              "title": "File-upload",
+              "icon": "upload"
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "The file-upload content item can be used for uploading a file."
+            },
+            {
+              "weight": 0,
+              "type": "text",
+              "val": "WIP",
+              "style": "color: red;"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Section with no icon, tip, or sub-sections"
+    }
+  ]
+}

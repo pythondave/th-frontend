@@ -1,0 +1,52 @@
+{
+  "candidates": [
+    {
+      "id": 371,
+      "fullName": "Forename Surname",
+      "photo": 0,
+      "nationality": 30,
+      "currentRole": 20,
+      "currentSubjects": [20,21],
+      "averageReferenceScore": 82,
+      "availability": 1,
+      "percentageComplete": 84,
+      "adviserScore": 7
+    },
+    {
+      "id": 1001,
+      "fullName": "Ana Maria Lusanta",
+      "photo": 43231,
+      "nationality": 31,
+      "currentRole": 1,
+      "currentSubjects": [22],
+      "averageReferenceScore": 91,
+      "availability": 2,
+      "percentageComplete": 78,
+      "adviserScore": 8
+    },
+    {
+      "id": 1002,
+      "fullName": "David Spooner",
+      "photo": 0,
+      "nationality": 32,
+      "currentRole": 1,
+      "currentSubjects": [23],
+      "averageReferenceScore": 81,
+      "availability": 3,
+      "percentageComplete": 88,
+      "adviserScore": 6
+    },
+    {
+      "id": 1002,
+      "fullName": "John Evans",
+      "photo": 51532,
+      "nationality": 133,
+      "currentRole": 1,
+      "currentSubjects": [24],
+      "averageReferenceScore": 77,
+      "availability": 1,
+      "percentageComplete": 60,
+      "adviserScore": 9
+    }
+  ]
+}

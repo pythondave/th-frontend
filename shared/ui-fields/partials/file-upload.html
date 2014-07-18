@@ -1,0 +1,28 @@
+<div class="files-wrapper" ng-mouseenter="mouseenter()" ng-mouseleave="mouseleave()">
+  <div ng-class="model.getClass()" class="list-wrapper">
+    <div ng-show="model.val.length>0">
+      <ul>
+        <li style="margin: 10px 0" ng-repeat="file in model.val">
+          <img title="{{file.reference}}" ng-src="{{file.resource}}" />
+          <button style="margin: 0 0 0 20px;" class="btn btn-delete-file" ng-click="deleteFile(file, $index)">Delete</button>
+        </li>
+      </ul>
+      <br/>
+    </div>
+    <div class="fileinput-container" ng-show="model.maxFiles > model.val.length">
+      <span class="btn btn-primary fileinput-button" ng-class="{'btn-primary-processing':processing}" ng-disabled="processing">
+      <i class="icon-plus icon-white"></i>
+      <span>Upload</span>
+        <input class="uploaderInput" type="file" name="file" accept="{{model.fileTypes}}" />
+      </span>
+      <span class="alert-error" ng-show="model.error">{{model.error}}</span>
+      <br/>
+      <br/>
+
+      <!-- The global progress bar -->
+      <div class="progress progress-success progress-striped">
+        <div class="bar"></div>
+      </div>
+    </div>
+  </div>
+</div>

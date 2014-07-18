@@ -1,0 +1,45 @@
+<div>
+  <div ng-if="!candidates" style="margin: 10px; height: 400em;">
+    <img src="../../../shared/images/spinner1.gif" alt="spinner" />
+  </div>
+
+  <div ng-if="candidates.length==0" style="min-height: 3em; padding: 5px;" class="hentry">
+    No candidates match your search - try removing one of the filters to make your search slightly less specific.
+  </div>
+
+  <div ng-repeat="c in candidates" class="candidate rounded5px">
+    <div style="padding: 10px; clear both;" ng-click="candidateClick(c)">
+      <div style="width: 390px; float: left; display: inline-block;">
+        <div class="candidate-fullName">{{c.fullName}}</div>
+        <div style="font-weight: bold;">{{c.nationality.name}}</div>
+        <div>
+          <span>Adviser's score: </span>
+          <span style="font-weight: bold;">{{c.adviserScore}}</span>
+        </div>
+        <div>
+          <span>Av refs: </span>
+          <span style="font-weight: bold;">{{c.averageReferenceScore}}%</span>
+        </div>
+        <div>
+          <span>Current subject(s): </span>
+          <span style="font-weight: bold;">
+            <span ng-repeat="s in c.currentSubjects">
+              {{s.name}}<span ng-if="!$last">,</span>
+            </span>
+          <span>
+        </div>
+        <div>
+          <span>Current role: </span>
+          <span style="font-weight: bold;">{{c.currentRole.name}}</span>
+        </div>
+      </div>
+      <div style="width: 210px; display: inline-block; margin-left: 10px; text-align: center;">
+        <div class="img-container" style="height: 140px; ">
+          <img class="rounded15px" style="max-width: 100px; max-height: 120px; border-width: 5px; border-style: solid; "
+             ng-style="{ borderColor: ['','#38b439', '#e77e00', '#d04046'][c.availability] }" ng-src="{{c.photo}}" ng-show="c.photo"></img>
+        </div>
+        <div>{{c.percentageComplete}}% complete</div>
+      </div>
+    </div>
+  </div>
+</div>

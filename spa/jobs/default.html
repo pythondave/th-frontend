@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html id="ng-app" ng-app="thJobsAppModule">
+
+<head>
+
+  <title>Jobs</title>
+  <link rel="icon" href="../../shared/images/favicon.ico">
+
+  <!--external stylesheets hosted on cdns-->
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css">
+
+  <link rel="stylesheet" href="https://fontastic.s3.amazonaws.com/tytHcMrsPwht8QY8QBu8PT/icons.css">
+  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Nunito'>
+
+  <!-- link rel="stylesheet" href="../../shared/style/style.css" -->
+  <!-- link rel="stylesheet" href="../../shared/style/custom-bootstrap.css" -->
+  <link rel="stylesheet" href="../../shared/style/bones-style.css">
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+  <header id="header" ng-include="'../../shared/partials/header.html'"></header>
+  <div id="content" class="wrap">
+    <div id="inner-content" class="cf">
+      <div class="m-all t-1of3 d-2of7 cf">
+        <div ui-view="container-left" style="min-height:40em; padding: 0.8em;" class="hentry"></div>
+      </div>
+      <div class="m-all t-2of3 d-5of7 cf">
+        <div ui-view="container-main"></div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer" role="contentinfo" ng-include="'../../shared/partials/footer.html'"></footer>
+
+  <!--external scripts-->
+    <!--jquery-->
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!--lodash (rather than underscore)-->
+      <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.0.0/lodash.min.js"></script>
+    <!--twitter bootstrap-->
+      <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <!--angular (official)-->
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+      <script src="//cdn.jsdelivr.net/angularjs/1.1.2/angular-resource.min.js"></script>
+    <!--angular (community)-->
+      <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.7.0.js"></script> <!--*** TODO: needs to be minimised - either locally or find a cdn-->
+      <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/2.1.0/es5-shim.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.0/angular-ui-router.min.js"></script>
+
+  <!--local scripts-->
+    <!--main-->
+      <script src="app.js"></script>
+      <script src="../../config.js"></script>
+    <!--shared modules-->
+      <script src="../../shared/ui-fields/ui-fields.js"></script>
+      <script src="../../shared/content-items/content-items.js"></script>
+
+    <!--services-->
+      <script src="services.js"></script>
+      <!--shared-->
+        <script src="../../shared/generic.js"></script>
+        <script src="../../shared/services/listService.js"></script>
+        <script src="../../shared/services/filterServices.js"></script>
+    <!--controllers-->
+      <script src="controllers.js"></script>
+    <!--directives-->
+      <script src="../../shared/directives.js"></script>
+
+  <!--prototype only scripts-->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular-mocks.js"></script>
+  <script src="../../scaffolding/server/serverServices.js"></script>
+
+  <!-- Facebook - WIP - *** TODO - move and get working with partials
+  <script>
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.0&status=0";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+   -->
+</body>
+
+</html>

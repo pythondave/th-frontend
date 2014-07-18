@@ -1,9 +1,0 @@
-<div class="url-edit">
-  <div ng-if="model.showUrlTitle !== false" text-edit model="model.urlTitle"></div>
-
-  <a ng-show="!model.isEditMode" type="text" target="_blank" href="{{model.href}}" tooltip="{{model.urlTitle.val}}">{{model.val}}</a>
-
-  <input ng-show="model.isEditMode" type="text" ng-model="model.val" ng-blur="model.isEditMode=false" placeholder="www.example.com" style="min-width: 400px; width: 50%"></input>
-
-  <span content-item-icons model="model"></span>
-</div>

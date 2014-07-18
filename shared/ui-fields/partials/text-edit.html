@@ -1,0 +1,17 @@
+<div class="text-edit" ng-class="model.maxLength > 80 ? 'text-edit-large' : 'text-edit-small'">
+  <input ng-show="model.isEditMode && (!model.maxLength || model.maxLength <= 80)" type="text"
+    ng-model="model.val" ng-blur="model.isEditMode=false" placeholder="{{model.placeholder || 'Type something...'}}" maxlength="{{model.maxLength || 80}}"></input>
+
+  <textarea ng-show="model.isEditMode && model.maxLength > 80" rows="5" cols="150" style="width: 80%;"
+    ng-model="model.val" ng-blur="model.isEditMode=false" placeholder="{{model.placeholder || 'Type something...'}}" maxlength="{{model.maxLength}}"></textarea>
+
+  <span ng-show="!model.isEditMode" style="cursor: pointer" ng-click="model.isEditMode=true" tooltip="{{model.editIconTip || 'Click to edit text'}}">{{model.val}}</span>
+
+  <span ng-show="model.showClear && model.isEditMode && model.val" style="" ng-mousedown="model.val=undefined">
+    <span popover="Click to clear text" popover-trigger="mouseenter">
+      <i class="icon-remove"></i>
+    </span>
+  </span>
+
+  <span content-item-icons model="model"></span>
+</div>
